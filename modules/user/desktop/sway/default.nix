@@ -1,9 +1,14 @@
 { pkgs, config, lib, ... }:
 let
-  theme = import ../colors/gruvbox-dark.nix;
-  wallpaper = "~/nixos/modules/home-manager/images/wallpapers/solar_system.png";
+  theme = import ../../colors/gruvbox-dark.nix;
+  wallpaper = "~/nixos/modules/user/images/wallpapers/solar_system.png";
 in
 {
+  home.packages = [ 
+    # pkgs.sway 
+    pkgs.swaylock 
+    pkgs.swayidle 
+  ];
 
   wayland = {
     windowManager = {

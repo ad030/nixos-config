@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/home-manager
+    ../../modules/user
   ];
 
   home = {
@@ -75,24 +75,6 @@
     
   };
 
-  xdg.desktopEntries = {
-    signal = {
-      categories = [
-        # main category
-        "Network"
-        # additional categories
-        "InstantMessaging"
-        "Chat"
-      ];
-
-      exec = "signal-desktop --password-store=gnome-libsecret";
-      genericName = "Private messaging app";
-
-      name = "Signal";
-      terminal = false;
-
-    };
-  };
 
 
 }

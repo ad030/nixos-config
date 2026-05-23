@@ -1,8 +1,10 @@
 { pkgs, ... }:
 let 
-  colors = import ../colors/gruvbox-dark.nix;
+  colors = import ../../colors/gruvbox-dark.nix;
 in
 {
+  home.packages = [ pkgs.waybar ];
+
   programs = {
     waybar = {
 
