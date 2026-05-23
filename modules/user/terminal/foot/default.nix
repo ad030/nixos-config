@@ -16,16 +16,16 @@ in
 
         colors = {
           alpha = "0.80";
-          background = "${theme.bg0}";
-          foreground = "${theme.fg1}"; 
-          regular0 = "${theme.bg0}";
+          background = "282828";
+          foreground = "ebdbb2"; 
+          regular0 = "282828";
           regular1 = "cc241d";
           regular2 = "98971a";
           regular3 = "d79921";
           regular4 = "458588";
           regular5 = "b16286";
           regular6 = "689d6a";
-          regular7 = "${theme.fg4}"; # "a89984";
+          regular7 = "a89984";
           bright0 = "928374";
           bright1 = "fb4934";
           bright2 = "b8bb26";

@@ -13,19 +13,9 @@
       ripgrep
       lua-language-server
 
-      signal-desktop
-
-      # window managers/compositors
-      # niri 
-
       obsidian # note taking app
 
-      # for sway
-      swaylock
-      swayidle
-      waybar
-
-      nemo
+      nemo # file manager
     ];
 
     pointerCursor = {
@@ -37,7 +27,6 @@
     };
 
   };
-
 
   nix = {
     settings.experimental-features = [
@@ -74,7 +63,5 @@
     };
     
   };
-
-
 
 }

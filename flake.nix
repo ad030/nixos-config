@@ -10,15 +10,15 @@
     };
     niri = {
       url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, niri, noctalia, ... } @ inputs: {
 
     nixosConfigurations = {
 
@@ -37,6 +37,11 @@
 	      extraSpecialArgs = { inherit inputs; };
               backupFileExtension = "backup";
               users.ad030 = import ./hosts/nixos-laptop/home.nix;
+
+              sharedModules = [
+                niri.homeModules.niri
+                noctalia.homeModules.default
+              ];
             };
 	  }
         ];
