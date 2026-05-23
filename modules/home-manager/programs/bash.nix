@@ -1,6 +1,6 @@
 { ... }:
 let 
-  nixos_config_file = "~/nixos-config/configuration.nix";
+  nixos_flake = "~/nixos/configuration.nix";
 in
 {
   programs = {
@@ -19,8 +19,8 @@ in
               ll="ls -l";
               ls="ls --color=tty";
 
-              # for reloading nixos config
-              nrs = "sudo nixos-rebuild switch --file ${nixos_config_file}";
+              # for reloading nixos config using flake
+              nrs = "sudo nixos-rebuild switch --impure --flake ${nixos_flake}";
       };
     };
   };

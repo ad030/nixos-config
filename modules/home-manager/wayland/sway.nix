@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   theme = import ../colors/gruvbox-dark.nix;
-  wallpaper = "~/nixos-config/home/images/wallpapers/solar_system.png";
+  wallpaper = "~/nixos/modules/home-manager/images/wallpapers/solar_system.png";
 in
 {
 

@@ -2,12 +2,7 @@
 
 {
   imports = [
-    ./programs/neovim.nix
-    ./programs/bash.nix
-    ./programs/rofi.nix
-    ./programs/foot.nix
-    ./programs/waybar.nix
-    ./wayland/sway.nix
+    ../../modules/home-manager
   ];
 
   home = {

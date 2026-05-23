@@ -10,7 +10,7 @@ in
     imports =
       [ 
                         # Include the results of the hardware scan.
-                        ./hardware-configuration.nix
+                        /etc/nixos/hardware-configuration.nix
 
                         # home manager
                         (import "${home-manager}/nixos")
@@ -101,7 +101,11 @@ in
 		};
 		
 		# Enable the OpenSSH daemon.
-		openssh.enable = true;
+                openssh = {
+                  enable = true;
+                  settings.PermitRootLogin = "no";
+                  settings.PasswordAuthentication = false;
+                };
 
 		thermald.enable = true;
 		tlp = {
@@ -236,7 +240,7 @@ in
 	home-manager.useUserPackages = true;
 	home-manager.useGlobalPkgs = true;
 	home-manager.backupFileExtension = "backup";
-	home-manager.users.ad030 = import ./home/home.nix;
+	home-manager.users.ad030 = import ./home.nix;
 
         # fonts
         fonts.packages = with pkgs; [
