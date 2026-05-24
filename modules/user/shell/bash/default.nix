@@ -5,6 +5,13 @@ in
 {
   programs.bash = {
     enable = true;
+    enableCompletion = true;
+
+    # profileExtra = ''
+    #   eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize)
+    #   export SSH_AUTH_SOCK="/run/user/1000/keyring/ssh";
+    # '';
+    
     shellAliases = {
       # make file commands interactive
       rm = "rm -iv";
@@ -19,5 +26,6 @@ in
       # for reloading nixos config using flake
       nrs = "sudo nixos-rebuild switch --flake ${nixos_flake_dir}";
     };
+
   };
 }

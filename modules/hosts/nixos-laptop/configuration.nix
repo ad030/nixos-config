@@ -167,6 +167,7 @@
 
     niri.enable = true;
 
+    # ssh.startAgent = true;
     # gnupg.agent = {
     #   enable = true;
     #   enableSSHSupport = true;

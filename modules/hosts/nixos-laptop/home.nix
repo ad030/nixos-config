@@ -28,6 +28,8 @@
 
   };
 
+  services.ssh-agent.enable = true;
+
   nix = {
     settings.experimental-features = [
       # enable nix flakes
@@ -61,7 +63,11 @@
       package = pkgs.nerd-fonts.meslo-lg;
       size = 12;
     };
-    
+  };
+
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
   };
 
 }
