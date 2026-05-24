@@ -7,9 +7,9 @@ in
     enable = true;
     shellAliases = {
       # make file commands interactive
-      rm = "rm -i";
-      cp = "cp -i";
-      mv = "mv -i";
+      rm = "rm -iv";
+      cp = "cp -iv";
+      mv = "mv -iv";
 
       # for listing directory contents
       l="ls -alh";
