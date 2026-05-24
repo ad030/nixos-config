@@ -43,14 +43,20 @@
         variant = "";
       };
 
-
       desktopManager = {
-      #   cinnamon.enable = true;
-      #   xfce.enable = true;
-      #   lxqt.enable = true;
-    };
+        # cinnamon.enable = true;
+        # xfce.enable = true;
+        lxqt.enable = true;
 
-  };
+        # idk how to make this wayland shit work
+        # lxqt.extraPackages = with pkgs; [ 
+        #   lxqt.lxqt-wayland-session 
+        #   kdePackages.kwin
+        #   labwc
+        # ];
+      };
+
+    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -70,8 +76,8 @@
 
     # desktop environment
     desktopManager = {
-    #   plasma6.enable = true;
-  };
+      #   plasma6.enable = true;
+    };
 
     # Enable CUPS to print documents.
     printing.enable = true;

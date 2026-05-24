@@ -3,7 +3,6 @@ let
   theme = import ../../colors/gruvbox-dark.nix;
 in
 {
-  home.packages = [ pkgs.foot ];
   programs = {
     foot = {
       enable = true;
@@ -14,7 +13,7 @@ in
           font = "Meslo LGM Nerd Font Mono:size=14";
         };
 
-        colors = {
+        colors-dark = {
           alpha = "0.80";
           background = "282828";
           foreground = "ebdbb2"; 

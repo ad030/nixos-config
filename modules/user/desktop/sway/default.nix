@@ -5,7 +5,6 @@ let
 in
 {
   home.packages = [ 
-    # pkgs.sway 
     pkgs.swaylock 
     pkgs.swayidle 
   ];
