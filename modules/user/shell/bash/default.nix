@@ -17,8 +17,7 @@ in
       ls="ls --color=tty";
 
       # for reloading nixos config using flake
-      # needs impure because hardware-configuration.nix is in /etc/nixos
-      nrs = "sudo nixos-rebuild switch --impure --flake ${nixos_flake_dir}";
+      nrs = "sudo nixos-rebuild switch --flake ${nixos_flake_dir}";
     };
   };
 }
