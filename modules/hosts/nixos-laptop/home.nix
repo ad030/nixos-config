@@ -2,13 +2,13 @@
 
 {
   imports = [
-    ../../modules/user
+    ../../user
   ];
 
   home = {
     username = "ad030";
     homeDirectory = "/home/ad030";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
     packages = with pkgs; [
       ripgrep
       lua-language-server

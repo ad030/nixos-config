@@ -4,10 +4,10 @@
   home.packages = [ pkgs.niri ];
 
   programs.niri = {
-    enable = true;
+    enable = false;
     settings = {
       binds = lib.mkOptionDefault {
-        "Mod+Enter".action.spawn = "foot"; 
+        "Mod+Return".action.spawn = "foot"; 
       };
       layout = {
         gaps = 2;

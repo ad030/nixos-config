@@ -3,7 +3,7 @@
 {
   imports = [ 
     ./sway
-    # ./niri
+    ./niri
     ./rofi
     ./waybar
   ];
