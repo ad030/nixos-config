@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../user
+    ../../programs
   ];
 
   home = {
@@ -25,10 +25,9 @@
       gtk.enable = true;
       x11.enable = true;
     };
-
   };
 
-  services.ssh-agent.enable = true;
+  # services.ssh-agent.enable = true;
 
   nix = {
     settings.experimental-features = [

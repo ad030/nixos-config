@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 let
-  theme = import ../../colors/gruvbox-dark.nix;
-  wallpaper = "~/nixos/modules/user/images/wallpapers/solar_system.png";
+  theme = import ../../../themes/gruvbox.nix { inherit lib; };
+  wallpaper = "~/nixos/images/wallpapers/solar_system.png";
 in
 {
   home.packages = [ 
@@ -37,7 +37,7 @@ in
 
             gaps = {
               smartGaps = true;
-              smartBorders = "off";
+              smartBorders = "on";
               inner = 2;
               outer = 2;
             };
@@ -50,44 +50,7 @@ in
               border = 1;
             };
 
-            colors = { 
-              focused = {
-                border = theme.fg0;
-                background = theme.bg0;
-                text = theme.fg0;
-                indicator = theme.purple;
-                childBorder = theme.fg0;
-              };
-              unfocused = {
-                border = theme.fg4;
-                background = theme.bg0;
-                text = theme.bg4;
-                indicator = theme.purple;
-                childBorder = theme.bg4;
-              };
-              # same as unfocused
-              focusedInactive = {
-                border = theme.fg4;
-                background = theme.bg0;
-                text = theme.bg4;
-                indicator = theme.purple;
-                childBorder = theme.bg4;
-              };
-              urgent = {
-                border = theme.red;
-                background = theme.red;
-                text = theme.bg0;
-                indicator = theme.purple;
-                childBorder = theme.red;
-              };
-              placeholder = {
-                border = theme.green;
-                background = theme.bg0;
-                text = theme.fg0;
-                indicator = theme.purple;
-                childBorder = theme.green;
-              };
-            };
+            colors = theme.sway; 
 
             defaultWorkspace = "workspace number 1";
 

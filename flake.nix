@@ -16,13 +16,26 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia-shell";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+    # dank material shell
+    # dms = {
+    #   url = "github:AvengeMedia/DankMaterialShell/stable";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
   };
 
-  outputs = { self, nixpkgs-unstable, home-manager-unstable, niri, noctalia, ... } @ inputs: {
+  outputs = inputs @ { 
+    self, 
+    nixpkgs-unstable, 
+    home-manager-unstable, 
+    niri, 
+    # noctalia, 
+    # dms,
+    ... 
+  }: {
 
     nixosConfigurations = {
 
@@ -40,11 +53,12 @@
               useGlobalPkgs = true;
 	      extraSpecialArgs = { inherit inputs; };
               backupFileExtension = "backup";
-              users.ad030 = import ./modules/hosts/nixos-laptop/home.nix;
+              users.ad030 = import ./modules/users/ad030;
 
               sharedModules = [
                 niri.homeModules.niri
-                noctalia.homeModules.default
+                # noctalia.homeModules.default
+                # dms.homeModules.dank-material-shell
               ];
             };
           }

@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let 
-  colors = import ../../colors/gruvbox-dark.nix;
+  theme = import ../../../themes/gruvbox.nix { inherit lib; };
 in
 {
   home.packages = [ pkgs.waybar ];
@@ -98,8 +98,8 @@ in
           border-radius: 0;
           font-family: MesloLGM Nerd Font;
           font-size: 16px;
-          background-color: ${colors.bg0};
-          color: ${colors.fg0};
+          background-color: ${theme.palette.dark0};
+          color: ${theme.palette.light0};
         }
 
         #workspaces button:hover {
@@ -110,7 +110,7 @@ in
         }
 
         #workspaces button.focused {
-          box-shadow: inset 0 -2px ${colors.fg0};
+          box-shadow: inset 0 -2px ${theme.palette.light0};
         }
       ''; # end style
 

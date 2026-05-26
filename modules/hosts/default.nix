@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./default
     ./nixos-laptop
   ];
 }

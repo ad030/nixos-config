@@ -165,7 +165,7 @@
       xwayland.enable = true;
     };
 
-    niri.enable = true;
+    niri.enable = false;
 
     # ssh.startAgent = true;
     # gnupg.agent = {
