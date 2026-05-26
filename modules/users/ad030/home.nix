@@ -16,6 +16,7 @@
       obsidian # note taking app
 
       nemo # file manager
+      texliveBasic
     ];
 
     pointerCursor = {
@@ -26,7 +27,6 @@
       x11.enable = true;
     };
   };
-
 
   nix = {
     settings.experimental-features = [
@@ -66,7 +66,11 @@
   services = {
     gnome-keyring = {
       enable = true;
-      components = [ "pkcs11" "secrets" "ssh" ];
+      components = [
+        "pkcs11"
+        "secrets"
+        "ssh"
+      ];
     };
     ssh-agent.enable = true;
   };

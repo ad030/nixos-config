@@ -13,7 +13,6 @@
     ./rofi
 
     ./niri
-    # ./dank-material-shell
 
     ./signal
   ];
