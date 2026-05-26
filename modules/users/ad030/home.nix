@@ -27,7 +27,6 @@
     };
   };
 
-  # services.ssh-agent.enable = true;
 
   nix = {
     settings.experimental-features = [
@@ -64,9 +63,12 @@
     };
   };
 
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "pkcs11" "secrets" "ssh" ];
+  services = {
+    gnome-keyring = {
+      enable = true;
+      components = [ "pkcs11" "secrets" "ssh" ];
+    };
+    ssh-agent.enable = true;
   };
 
 }
