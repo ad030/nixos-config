@@ -36,7 +36,7 @@
       {
         plugin = gruvbox-nvim;
         type = "lua";
-        config = "vim.cmd.colorscheme('gruvbox')";
+        config = builtins.readFile ./plugins/gruvbox.lua;
       }
 
       which-key-nvim
