@@ -17,8 +17,6 @@ in
   wayland = {
     windowManager = {
       sway = {
-        enable = true;
-
         checkConfig = false;
 
         wrapperFeatures.gtk = true;
@@ -29,6 +27,13 @@ in
           # menu = "rofi -modi \"window,drun,run\" -show drun";
           # menu = "vicinae toggle";
           menu = "fuzzel";
+
+          input = {
+            "*" = {
+              xkb_layout = "us";
+              xkb_options = "terminate:ctrl_alt_bksp";
+            };
+          };
 
           output = {
             "*" = {
@@ -80,6 +85,11 @@ in
 
           keybindings = lib.mkOptionDefault {
             "${modifier}+Shift+r" = "reload";
+            XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
+            XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
+            XF86AudioMute = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            XF86AudioLowerVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+            XF86AudioRaiseVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
           };
 
         }; # end config

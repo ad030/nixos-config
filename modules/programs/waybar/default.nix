@@ -1,119 +1,124 @@
 { pkgs, lib, ... }:
-let 
+let
   theme = import ../../../themes/gruvbox.nix { inherit lib; };
 in
 {
-  home.packages = [ pkgs.waybar ];
+  programs.waybar = {
 
-  programs = {
-    waybar = {
+    settings = {
+      main = {
+        layer = "top";
+        position = "top";
+        height = 34;
 
-      enable = true;
+        modules-left = [ "sway/workspaces" ];
+        modules-center = [ "clock" ];
+        modules-right = [
+          "network"
+          "backlight"
+          "pulseaudio"
+          "battery"
+        ];
 
-      settings = {
-        main = {
-          layer = "top";
-          position = "top";
-          height = 34;
+        "sway/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+          format = "{icon}";
 
-          modules-left = [ "sway/workspaces" ];
-          modules-center = [ "clock" ];
-          modules-right = [ "network" "backlight" "pulseaudio" "battery" ];
+          # format-icons = {
+          #   focused = "X";
+          # };
+        };
 
-          "sway/workspaces" = {
-            disable-scroll = true;
-            all-outputs = true;
-            format = "{icon}";
+        clock = {
+          format = "{:%a %Y-%m-%d %H:%M}";
 
-            # format-icons = {
-            #   focused = "X";
-            # };
+          tooltip = true;
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+
+          calendar = {
+            mode = "month";
+            iso8601 = "true";
           };
 
-          clock = {
-            format = "{:%a %Y-%m-%d %H:%M}";
+          interval = 60;
+          max-length = 25;
+        };
 
-            tooltip = true;
-            tooltip-format = "<tt><small>{calendar}</small></tt>";
-
-            calendar = {
-              mode = "month";
-              iso8601 = "true";
-            };
-
-            interval = 60;
-            max-length = 25;
+        battery = {
+          states = {
+            full = 95;
+            warning = 30;
+            critical = 15;
           };
 
-          battery = {
-            states = {
-              full = 95;
-              warning = 30;
-              critical = 15;
-            };
-
-            format = "[{icon} {capacity}%]";
-            format-charging = "[{icon} {capacity}%]";
-            format-icons = { 
-              charging = ""; 
-              default = ["" "" "" "" ""];
-            };
-            max-length = 25;
+          format = "[{icon} {capacity}%]";
+          format-charging = "[{icon} {capacity}%]";
+          format-icons = {
+            charging = "";
+            default = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
           };
+          max-length = 25;
+        };
 
-          pulseaudio = {
-            format = "[{icon} {volume}%]";
-            format-muted = "[{icon} M]";
-            format-icons = [ "" ];
+        pulseaudio = {
+          format = "[{icon} {volume}%]";
+          format-muted = "[{icon} MUTED]";
+          format-icons = [ "" ];
 
-            tooltip = false;
+          tooltip = false;
+        };
+
+        network = {
+          format = "[{ifname}]";
+          format-wifi = "[{icon} {signalStrength}%]";
+          format-alt = "[{essid} {ipaddr}]";
+          format-disconnected = "[{icon} No connection]";
+
+          tooltip = false;
+
+          format-icons = {
+            wifi = "";
+            disconnected = "";
           };
+        };
 
-          network = {
-            format = "[{ifname}]";
-            format-wifi = "[{icon} {signalStrength}%]";
-            format-alt = "[{essid} {ipaddr}]";
-            format-disconnected = "[{icon} No connection]";
+        backlight = {
+          format = "[{icon} {percent}%]";
+          format-icons = [ "" ];
 
-            tooltip = false;
+          tooltip = false;
+        };
 
-            format-icons = {
-              wifi = "";
-              disconnected = "";
-            };
-          };
+      }; # end main bar
+    }; # end settings
 
-          backlight = {
-            format = "[{icon} {percent}%]";
-            format-icons = [ "" ];
+    style = ''
+      * {
+        border-radius: 0;
+        font-family: MesloLGM Nerd Font;
+        font-size: 16px;
+        background-color: ${theme.palette.dark0};
+        color: ${theme.palette.light0};
+      }
 
-            tooltip = false;
-          };
+      #workspaces button:hover {
+        box-shadow: none;
+        text-shadow: none;
+        background: none;
+        transition: none;
+      }
 
-        }; # end main bar
-      }; # end settings
+      #workspaces button.focused {
+        box-shadow: inset 0 -2px ${theme.palette.light0};
+      }
+    ''; # end style
 
-      style = ''
-        * {
-          border-radius: 0;
-          font-family: MesloLGM Nerd Font;
-          font-size: 16px;
-          background-color: ${theme.palette.dark0};
-          color: ${theme.palette.light0};
-        }
-
-        #workspaces button:hover {
-          box-shadow: none;
-          text-shadow: none;
-          background: none;
-          transition: none;
-        }
-
-        #workspaces button.focused {
-          box-shadow: inset 0 -2px ${theme.palette.light0};
-        }
-      ''; # end style
-
-    }; # end waybar 
-  }; # end programs
+  }; # end programs.waybar
 } # end nix file

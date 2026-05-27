@@ -130,8 +130,12 @@
     fastfetch
     tmux
 
+    libnotify
+    mako
+
     pavucontrol
     pamixer
+    wireplumber
     bluez
     bluez-tools
 

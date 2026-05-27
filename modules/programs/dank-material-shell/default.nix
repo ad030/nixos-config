@@ -5,9 +5,7 @@
     source = ./settings.json;
   };
 
-  programs.dank-material-shell = { 
-    enable = false;
-
+  programs.dank-material-shell = {
     # settings = {
     #   theme = "dark";
     #   dynamicTheming = true;

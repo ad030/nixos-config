@@ -4,53 +4,55 @@
   # home.packages = [ pkgs.niri ];
 
   programs.niri = {
-    enable = true;
     settings = {
       binds = lib.mkOptionDefault {
         "Mod+Return" = {
-          action.spawn = "foot"; 
+          action.spawn = "foot";
           hotkey-overlay = {
             title = "Open terminal";
           };
         };
         "Mod+Shift+E" = {
-          action.quit.skip-confirmation = false; 
+          action.quit.skip-confirmation = false;
           hotkey-overlay = {
             title = "Quit Niri";
           };
         };
         "Mod+Shift+Q" = {
-          action.close-window = [];
+          action.close-window = [ ];
           hotkey-overlay = {
             title = "Close window";
           };
         };
         "Mod+D" = {
-          action.spawn = ["rofi" "-modi" "'window,drun,run'" "-show" "drun"];
+          action.spawn = [
+            "fuzzel"
+            "toggle"
+          ];
           hotkey-overlay = {
             title = "Open launcher";
           };
         };
 
-        "Mod+Shift+Slash".action.show-hotkey-overlay = [];
+        "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
-        "Mod+O".action.toggle-overview = [];
-        "Mod+C".action.center-column = [];
-        "Mod+W".action.toggle-column-tabbed-display = [];
+        "Mod+O".action.toggle-overview = [ ];
+        "Mod+C".action.center-column = [ ];
+        "Mod+W".action.toggle-column-tabbed-display = [ ];
 
-        "Mod+H".action.focus-column-left = [];
-        "Mod+J".action.focus-window-down = [];
-        "Mod+K".action.focus-window-up = [];
-        "Mod+L".action.focus-column-right = [];
+        "Mod+H".action.focus-column-left = [ ];
+        "Mod+J".action.focus-window-down = [ ];
+        "Mod+K".action.focus-window-up = [ ];
+        "Mod+L".action.focus-column-right = [ ];
 
-        "Mod+Shift+H".action.move-column-left = [];
-        "Mod+Shift+J".action.move-window-down = [];
-        "Mod+Shift+K".action.move-window-up = [];
-        "Mod+Shift+L".action.move-column-right = [];
+        "Mod+Shift+H".action.move-column-left = [ ];
+        "Mod+Shift+J".action.move-window-down = [ ];
+        "Mod+Shift+K".action.move-window-up = [ ];
+        "Mod+Shift+L".action.move-column-right = [ ];
 
-        "Mod+Shift+U".action.focus-workspace-down = [];
-        "Mod+Shift+I".action.focus-workspace-up = [];
- 
+        "Mod+Shift+U".action.focus-workspace-down = [ ];
+        "Mod+Shift+I".action.focus-workspace-up = [ ];
+
         "Mod+1".action.focus-workspace = 1;
         "Mod+2".action.focus-workspace = 2;
         "Mod+3".action.focus-workspace = 3;
@@ -62,16 +64,16 @@
         "Mod+9".action.focus-workspace = 9;
         "Mod+0".action.focus-workspace = 10;
 
-        "Mod+Shift+1".action.move-column-to-workspace = 1; 
-        "Mod+Shift+2".action.move-column-to-workspace = 2; 
-        "Mod+Shift+3".action.move-column-to-workspace = 3; 
-        "Mod+Shift+4".action.move-column-to-workspace = 4; 
-        "Mod+Shift+5".action.move-column-to-workspace = 5; 
-        "Mod+Shift+6".action.move-column-to-workspace = 6; 
-        "Mod+Shift+7".action.move-column-to-workspace = 7; 
-        "Mod+Shift+8".action.move-column-to-workspace = 8; 
-        "Mod+Shift+9".action.move-column-to-workspace = 9; 
-        "Mod+Shift+0".action.move-column-to-workspace = 10; 
+        "Mod+Shift+1".action.move-column-to-workspace = 1;
+        "Mod+Shift+2".action.move-column-to-workspace = 2;
+        "Mod+Shift+3".action.move-column-to-workspace = 3;
+        "Mod+Shift+4".action.move-column-to-workspace = 4;
+        "Mod+Shift+5".action.move-column-to-workspace = 5;
+        "Mod+Shift+6".action.move-column-to-workspace = 6;
+        "Mod+Shift+7".action.move-column-to-workspace = 7;
+        "Mod+Shift+8".action.move-column-to-workspace = 8;
+        "Mod+Shift+9".action.move-column-to-workspace = 9;
+        "Mod+Shift+0".action.move-column-to-workspace = 10;
       };
       layout = {
         gaps = 2;

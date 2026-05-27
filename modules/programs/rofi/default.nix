@@ -1,33 +1,26 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.rofi ];
+  programs.rofi = {
 
-  programs = {
-    rofi = {
-      enable = true;
+    theme = "gruvbox-dark";
+    terminal = "foot";
 
-      theme = "gruvbox-dark";
-      terminal = "foot";
+    modes = [
+      "window"
+      "drun"
+      "run"
+    ];
 
-      modes = [
-        "window"
-        "drun"
-        "run"
-      ];
+    font = "Meslo LGM Regular 14";
 
-      font = "Meslo LGM Regular 14";
+    location = "center";
 
-      location = "center";
-
-      extraConfig = {
-        icon-theme = "Papirus";
-        show-icons = true;
-        drun-display-format = "{icon} {name}";
-      };
-
+    extraConfig = {
+      icon-theme = "Papirus";
+      show-icons = true;
+      drun-display-format = "{icon} {name}";
     };
 
   };
-
 }

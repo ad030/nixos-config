@@ -9,6 +9,7 @@
     username = "ad030";
     homeDirectory = "/home/ad030";
     stateVersion = "26.05";
+
     packages = with pkgs; [
       ripgrep
       lua-language-server
@@ -23,6 +24,7 @@
       libreoffice
       # zathura
       kdePackages.okular
+      ani-cli
     ];
 
     pointerCursor = {
@@ -81,4 +83,23 @@
     ssh-agent.enable = true;
   };
 
+  ## ENABLE PROGRAMS HERE
+  programs = {
+    neovim.enable = true;
+
+    bash.enable = true;
+    foot.enable = true;
+
+    niri.enable = true;
+
+    fuzzel.enable = true;
+    waybar.enable = true;
+
+    tmux.enable = true;
+  };
+
+  ## WINDOW MANAGERS
+  wayland.windowManager = {
+    sway.enable = true;
+  };
 }
