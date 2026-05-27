@@ -5,8 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-  [ 
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -21,7 +20,6 @@
   };
 
   networking.hostName = "nixos-laptop"; # Define your hostname.
-
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -49,8 +47,8 @@
         lxqt.enable = true;
 
         # idk how to make this wayland shit work
-        # lxqt.extraPackages = with pkgs; [ 
-        #   lxqt.lxqt-wayland-session 
+        # lxqt.extraPackages = with pkgs; [
+        #   lxqt.lxqt-wayland-session
         #   kdePackages.kwin
         #   labwc
         # ];
@@ -60,7 +58,6 @@
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
-
 
     # display manager
     displayManager = {
@@ -127,6 +124,7 @@
     curl
     git
     bash
+    python314
 
     htop
     fastfetch
@@ -154,7 +152,7 @@
     firefox.enable = true;
 
     # foot terminal emulator
-    foot = { 
+    foot = {
       enable = true;
       enableBashIntegration = true;
     };
@@ -179,34 +177,33 @@
     rtkit.enable = true;
     pam = {
       services = {
-        swaylock = {};
+        swaylock = { };
       };
     };
   };
 
   nix.settings = {
     experimental-features = [
-    # enable nix flakes
-    "nix-command"
-    "flakes"
-  ];
+      # enable nix flakes
+      "nix-command"
+      "flakes"
+    ];
 
-  substituters = [
-    "https://cache.nixos.org"
-    "https://niri.cachix.org"
-    "https://vicinae.cachix.org"
-  ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://niri.cachix.org"
+      "https://vicinae.cachix.org"
+    ];
 
-  trusted-public-keys = [
-    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-    "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-  ];
-};
-
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+    ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users = { 
+  users = {
     mutableUsers = false;
 
     users = {
@@ -218,18 +215,20 @@
         isNormalUser = true;
         shell = pkgs.bash;
         description = "ad030";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
         packages = with pkgs; [
-                #  thunderbird
-              ];
-              hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
-            };
-          };
-        };
+          #  thunderbird
+        ];
+        hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
+      };
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -243,7 +242,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-      # home manager stuff
+  # home manager stuff
 
   # fonts
   fonts.packages = with pkgs; [
@@ -260,8 +259,7 @@
     nerd-fonts.meslo-lg
   ];
 
-
-  # power management 
+  # power management
   powerManagement.enable = true;
 
   # This value determines the NixOS release from which the default

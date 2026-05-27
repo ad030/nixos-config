@@ -14,9 +14,16 @@
       lua-language-server
 
       obsidian # note taking app
-
       nemo # file manager
-      texliveBasic
+      tmux
+
+      (texliveBasic.withPackages (ps: [ ps.latexmk ]))
+      biber
+      python314Packages.pylatexenc
+
+      libreoffice
+      # zathura
+      kdePackages.okular
     ];
 
     pointerCursor = {
