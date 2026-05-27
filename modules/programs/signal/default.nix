@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
   home.packages = [ pkgs.signal-desktop ];
@@ -13,11 +13,13 @@
         "Chat"
       ];
 
-      # use gnome-libsecret for secrets backend
+      # use specific secrets backend
       exec = "signal-desktop --password-store=gnome-libsecret";
-      genericName = "Private messaging app";
+      # exec = "signal-desktop --password-store=plaintext";
 
       name = "Signal";
+      genericName = "Private messaging app";
+
       terminal = false;
 
     };

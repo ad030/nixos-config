@@ -17,5 +17,6 @@
     ./niri
 
     ./signal
+    ./keepassxc
   ];
 }

@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -73,7 +78,7 @@
 
     # desktop environment
     desktopManager = {
-      #   plasma6.enable = true;
+      plasma6.enable = true;
     };
 
     # Enable CUPS to print documents.
@@ -113,42 +118,60 @@
 
     # secrets service
     # passSecretService.enable = true;
-    gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = lib.mkForce false;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    curl
-    git
-    bash
-    python314
+  environment = {
+    systemPackages = with pkgs; [
+      vim
+      wget
+      curl
+      git
+      bash
+      python314
 
-    keepassxc
+      keepassxc
 
-    htop
-    fastfetch
-    tmux
+      htop
+      fastfetch
+      tmux
 
-    libnotify
-    mako
+      libnotify
+      mako
 
-    pavucontrol
-    pamixer
-    wireplumber
-    bluez
-    bluez-tools
+      pavucontrol
+      pamixer
+      wireplumber
+      bluez
+      bluez-tools
 
-    lxqt.pcmanfm-qt
-    papirus-icon-theme
-    feh
+      lxqt.pcmanfm-qt
+      papirus-icon-theme
+      feh
 
-    # nix programming; language server, formatter
-    nil
-    nixfmt
-  ];
+      # nix programming; language server, formatter
+      nil
+      nixfmt
+    ];
+
+    plasma6.excludePackages = with pkgs; [
+      kdePackages.elisa # Music player
+      kdePackages.kdepim-runtime # Akonadi agents
+      kdePackages.kmahjongg
+      kdePackages.kmines
+      kdePackages.konversation # IRC client
+      kdePackages.kpat # Solitaire
+      kdePackages.ksudoku
+      kdePackages.ktorrent
+      kdePackages.kwallet
+      kdePackages.kwallet-pam
+      kdePackages.kwalletmanager
+      kdePackages.ksshaskpass
+    ];
+
+  };
 
   programs = {
     neovim = {

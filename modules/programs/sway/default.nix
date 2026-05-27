@@ -7,6 +7,7 @@
 let
   theme = import ../../../themes/gruvbox.nix { inherit lib; };
   wallpaper = "~/nixos/images/wallpapers/solar_system.png";
+  modifier = "Mod4";
 in
 {
   imports = [
@@ -20,16 +21,24 @@ in
   wayland = {
     windowManager = {
       sway = {
+        systemd.enable = true;
+
         checkConfig = false;
 
         wrapperFeatures.gtk = true;
 
-        config = rec {
-          modifier = "Mod4"; # super key
+        config = {
+          modifier = modifier; # super key
           terminal = "foot";
           # menu = "rofi -modi \"window,drun,run\" -show drun";
-          # menu = "vicinae toggle";
           menu = "fuzzel";
+
+          startup = [
+            {
+              command = "keepassxc";
+              always = true;
+            }
+          ];
 
           input = {
             "*" = {
@@ -72,6 +81,12 @@ in
                   app_id = ".*";
                 };
               }
+              {
+                command = "move scratchpad && notify-send 'KeePassXC opened in scratchpad'";
+                criteria = {
+                  app_id = "org.keepass.KeePassXC";
+                };
+              }
             ];
           };
 
@@ -94,6 +109,8 @@ in
             XF86AudioMute = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             XF86AudioLowerVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
             XF86AudioRaiseVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+            "${modifier}+minus" = "scratchpad show";
+            "${modifier}+Shift+minus" = "move scratchpad";
           };
 
         }; # end config

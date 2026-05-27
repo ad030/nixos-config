@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -73,19 +78,20 @@
   };
 
   services = {
-    gnome-keyring = {
-      enable = true;
-      components = [
-        "pkcs11"
-        "secrets"
-        "ssh"
-      ];
-    };
     ssh-agent.enable = true;
+    gnome-keyring = {
+      enable = lib.mkForce false;
+      # components = [
+      #   "pkcs11"
+      #   "secrets"
+      #   "ssh"
+      # ];
+    };
   };
 
   ## ENABLE PROGRAMS HERE
   programs = {
+    keepassxc.enable = true;
     neovim.enable = true;
 
     bash.enable = true;
