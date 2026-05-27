@@ -126,6 +126,8 @@
     bash
     python314
 
+    keepassxc
+
     htop
     fastfetch
     tmux
