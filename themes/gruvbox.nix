@@ -57,15 +57,15 @@ in
 
   sway = {
     focused = {
-      border = palette.light0;
-      background = palette.dark0;
-      text = palette.light0;
+      border = palette.light1;
+      background = palette.dark1;
+      text = palette.light1;
       indicator = palette.bright_purple;
       childBorder = palette.light0;
     };
     unfocused = {
       border = palette.light4;
-      background = palette.dark0;
+      background = palette.dark1;
       text = palette.dark4;
       indicator = palette.bright_purple;
       childBorder = palette.dark4;
@@ -74,7 +74,7 @@ in
     # same as unfocused
     focusedInactive = {
       border = palette.light4;
-      background = palette.dark0;
+      background = palette.dark1;
       text = palette.dark4;
       indicator = palette.bright_purple;
       childBorder = palette.dark4;
@@ -82,14 +82,14 @@ in
     urgent = {
       border = palette.bright_red;
       background = palette.bright_red;
-      text = palette.dark0;
+      text = palette.dark1;
       indicator = palette.bright_purple;
       childBorder = palette.bright_red;
     };
     placeholder = {
       border = palette.bright_green;
-      background = palette.dark0;
-      text = palette.light0;
+      background = palette.dark1;
+      text = palette.light1;
       indicator = palette.bright_purple;
       childBorder = palette.bright_green;
     };
@@ -97,9 +97,9 @@ in
 
   foot = {
     alpha = "0.80";
-    background = remove_hashtag_prefix palette.dark0;
+    background = remove_hashtag_prefix palette.dark1;
     foreground = remove_hashtag_prefix palette.light1;
-    regular0 = remove_hashtag_prefix palette.dark0;
+    regular0 = remove_hashtag_prefix palette.dark1;
     regular1 = remove_hashtag_prefix palette.neutral_red;
     regular2 = remove_hashtag_prefix palette.neutral_green;
     regular3 = remove_hashtag_prefix palette.neutral_yellow;

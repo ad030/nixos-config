@@ -104,13 +104,14 @@ in
         border-radius: 0;
         font-family: MesloLGM Nerd Font;
         font-size: 16px;
-        background-color: ${theme.palette.dark0};
-        color: ${theme.palette.light0};
+        background-color: ${theme.palette.dark1};
+        color: ${theme.palette.light1};
       }
 
-      #workspaces button:hover {
+      button:hover {
         box-shadow: none;
         text-shadow: none;
+        border-color: transparent;
         background: none;
         transition: none;
       }
