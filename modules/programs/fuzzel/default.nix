@@ -1,10 +1,19 @@
 { pkgs, lib, ... }:
-
+let
+  theme = import ../../../themes/gruvbox.nix { inherit lib; };
+in
 {
-  home.packages = [ pkgs.fuzzel ];
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        terminal = "${pkgs.foot}/bin/foot";
+        layer = "overlay";
+        font = "MesloLGM Nerd Font:size=12";
+      };
 
-  programs.fuzzel.settings = {
+      colors = theme.fuzzel;
 
+    };
   };
 }
-
