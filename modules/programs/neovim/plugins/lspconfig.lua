@@ -88,5 +88,5 @@ vim.lsp.enable({
 	"ts_ls",
 	"pyright",
 	"jdtls",
-	"sleek",
+	"nil_ls",
 })

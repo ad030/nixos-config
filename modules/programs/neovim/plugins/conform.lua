@@ -33,14 +33,6 @@ require("conform").setup({
 				"-m",
 			},
 		},
-
-		["prettierd"] = {
-			env = {
-				PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
-					vim.fn.stdpath("config") .. "/utils/formatter-config/.prettierrc.json"
-				),
-			},
-		},
 	},
 
 	formatters_by_ft = {
@@ -68,7 +60,9 @@ require("conform").setup({
 
 		c = { "clang-format" },
 
-		-- sql = { "sleek" },
+		cpp = { "clang-format" },
+
+		sql = { "sleek" },
 
 		tex = { "latexindent" },
 

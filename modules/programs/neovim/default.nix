@@ -15,6 +15,7 @@
     '';
 
     extraPackages = with pkgs; [
+      ## UTILITIES FOR PLUGINS
       xclip
       wl-clipboard
       tree-sitter
@@ -27,6 +28,7 @@
       stylua
       black
       isort
+      sleek
       texlivePackages.latexindent
       prettierd
       pyright
@@ -85,19 +87,20 @@
       {
         plugin = mini-statusline;
         type = "lua";
-        config = ''
-          require("mini.statusline").setup({
-          use_icons = vim.g.have_nerd_font,
-          section_location = function()
-                return "%2l:%-2v"
-          end,
-          })
-        '';
+        config = builtins.readFile ./plugins/vimtex.lua;
       }
 
       nvim-treesitter.withAllGrammars
 
       vim-nix
+
+      {
+        plugin = vimtex;
+        type = "lua";
+        config = builtins.readFile ./plugins/vimtex.lua;
+      }
+
+      render-markdown-nvim
     ];
 
   };
