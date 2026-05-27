@@ -14,9 +14,11 @@ in
         modules-left = [ "sway/workspaces" ];
         modules-center = [ "clock" ];
         modules-right = [
-          "network"
+          "cpu"
+          "memory"
           "backlight"
-          "pulseaudio"
+          "wireplumber"
+          "network"
           "battery"
         ];
 
@@ -64,29 +66,72 @@ in
               ""
             ];
           };
-          max-length = 25;
+          max-length = 10;
+        };
+
+        cpu = {
+          format = "[{icon} {usage}%]";
+          format-icons = [ "" ];
+
+          interval = 10;
+
+          max-length = 10;
+        };
+
+        memory = {
+          format = "[{icon} {percentage}%]";
+          format-icons = [ "" ];
+
+          interval = 30;
+
+          max-length = 10;
+
         };
 
         pulseaudio = {
           format = "[{icon} {volume}%]";
           format-muted = "[{icon} Muted]";
-          format-icons = [ "" ];
+          # format-source = "[{icon} {source_volume}]";
+          # format-source-muted = "[{icon} Muted]";
+          # tooltip-format = "{format_source}";
+
+          format-icons = {
+            source = "";
+            source-muted = "";
+            default = [ "" ];
+          };
 
           tooltip = false;
+
+          max-length = 10;
+        };
+
+        wireplumber = {
+          format = "[{icon} {volume}%]";
+          format-muted = "[{icon} Muted]";
+          # format-source = "[ {source_volume}]";
+          # format-source-muted = "[ Muted]";
+          tooltip-format = " {source_volume}%";
+
+          format-icons = [ "" ];
+
+          tooltip = true;
+
+          max-length = 10;
         };
 
         network = {
           format = "[{ifname}]";
           format-wifi = "[{icon} {signalStrength}%]";
-          format-alt = "[{essid}]";
           format-disconnected = "[{icon} No connection]";
-
-          tooltip = false;
-
+          tooltip-format-wifi = "{essid}\n{ipaddr}";
           format-icons = {
             wifi = "";
             disconnected = "";
           };
+
+          tooltip = true;
+
         };
 
         backlight = {
@@ -117,7 +162,7 @@ in
       }
 
       #workspaces button.focused {
-        box-shadow: inset 0 -2px ${theme.palette.light0};
+        box-shadow: inset 0 -2px ${theme.palette.light1};
       }
     ''; # end style
 
