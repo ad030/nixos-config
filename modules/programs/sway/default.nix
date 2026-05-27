@@ -10,7 +10,7 @@ let
 in
 {
   imports = [
-    ./wl-clipboard.nix
+    ./wl-screenshot.nix
   ];
   home.packages = with pkgs; [
     swaylock
