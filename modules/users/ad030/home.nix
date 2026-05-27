@@ -25,6 +25,7 @@
       # zathura
       kdePackages.okular
       ani-cli
+      jellyfin-desktop
     ];
 
     pointerCursor = {
