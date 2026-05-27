@@ -69,7 +69,7 @@ in
 
         pulseaudio = {
           format = "[{icon} {volume}%]";
-          format-muted = "[{icon} MUTED]";
+          format-muted = "[{icon} Muted]";
           format-icons = [ "" ];
 
           tooltip = false;
@@ -78,7 +78,7 @@ in
         network = {
           format = "[{ifname}]";
           format-wifi = "[{icon} {signalStrength}%]";
-          format-alt = "[{essid} {ipaddr}]";
+          format-alt = "[{essid}]";
           format-disconnected = "[{icon} No connection]";
 
           tooltip = false;
