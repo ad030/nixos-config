@@ -1,76 +1,129 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   theme = import ../../../themes/gruvbox.nix { inherit lib; };
   wallpaper = "~/nixos/images/wallpapers/solar_system.png";
 in
 {
-  home.packages = [ 
-    pkgs.swaylock 
-    pkgs.swayidle 
+  home.packages = with pkgs; [
+    swaylock
+    swayidle
   ];
 
   wayland = {
     windowManager = {
-        sway = {
-          enable = true;
+      sway = {
+        enable = true;
 
-          checkConfig = false;
+        checkConfig = false;
 
-          wrapperFeatures.gtk = true;
+        wrapperFeatures.gtk = true;
 
-          config = rec {
-            modifier = "Mod4"; # super key
-            terminal = "foot";
-            menu = "rofi -modi \"window,drun,run\" -show drun";
+        config = rec {
+          modifier = "Mod4"; # super key
+          terminal = "foot";
+          # menu = "rofi -modi \"window,drun,run\" -show drun";
+          # menu = "vicinae toggle";
+          menu = "fuzzel";
 
-            output = {
-              "*" = {
-                bg = "${wallpaper} fill";
-              };
+          output = {
+            "*" = {
+              bg = "${wallpaper} fill";
             };
+          };
 
-            seat = {
-              "*" = {
-                xcursor_theme = "${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}";
-              };
+          seat = {
+            "*" = {
+              xcursor_theme = "${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}";
             };
+          };
 
-            gaps = {
-              smartGaps = true;
-              smartBorders = "on";
-              inner = 2;
-              outer = 2;
-            };
+          gaps = {
+            smartGaps = true;
+            smartBorders = "on";
+            inner = 2;
+            outer = 2;
+          };
 
-            bars = [
-              { command = "waybar"; } # use waybar instead of swaybar
-            ]; 
+          bars = [
+            { command = "waybar"; } # use waybar instead of swaybar
+          ];
 
-            window = {
-              border = 1;
-            };
+          window = {
+            border = 1;
 
-            colors = theme.sway; 
+            commands = [
+              {
+                command = "inhibit_idle fullscreen";
+                criteria = {
+                  class = ".*";
+                  app_id = ".*";
+                };
+              }
+            ];
+          };
 
-            defaultWorkspace = "workspace number 1";
+          colors = theme.sway;
 
-            focus.followMouse = false;
+          defaultWorkspace = "workspace number 1";
 
-            fonts = {
-              names = [ "MesloLGM Nerd Font Mono" ];
-              size = 14.0;
-            };
+          focus.followMouse = false;
 
-            keybindings = lib.mkOptionDefault {
-              "${modifier}+Shift+r" = "reload";
-            };
+          fonts = {
+            names = [ "MesloLGM Nerd Font Mono" ];
+            size = 14.0;
+          };
 
-          }; # end config
+          keybindings = lib.mkOptionDefault {
+            "${modifier}+Shift+r" = "reload";
+          };
 
-        }; # end sway
+        }; # end config
 
-      }; # end windowManager
+      }; # end sway
 
-    }; # end wayland
+    }; # end windowManager
+
+  }; # end wayland
+
+  services.swayidle =
+    let
+      lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
+      display = status: "${pkgs.sway}/bin/swaymsg 'output * power ${status}'";
+    in
+    {
+      enable = true;
+      timeouts = [
+        {
+          timeout = 240;
+          command = "${pkgs.libnotify}/bin/notify-send 'Locking in 60 seconds' -t 5000";
+        }
+        {
+          timeout = 300;
+          command = lock;
+        }
+        {
+          timeout = 310;
+          command = display "off";
+          resumeCommand = display "on";
+        }
+        {
+          timeout = 360;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
+
+      events = {
+        before-sleep = (display "off") + "; " + lock;
+        lock = (display "off") + "; " + lock;
+        after-resume = display "on";
+        unlock = display "on";
+      };
+
+    }; # end services.swayidle
 
 } # end nix file

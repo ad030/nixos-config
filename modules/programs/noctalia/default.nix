@@ -1,4 +1,5 @@
-{ self, inputs, ... }: {
+{ self, pkgs, inputs, ... }: 
 
-  packages.
+{
+  programs.noctalia.settings = builtins.parseJson (builtins.readFile ./noctalia.json);
 };
