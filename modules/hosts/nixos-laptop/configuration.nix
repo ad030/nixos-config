@@ -128,6 +128,7 @@
 
     htop
     fastfetch
+    tmux
 
     pavucontrol
     pamixer

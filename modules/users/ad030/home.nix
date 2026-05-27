@@ -15,7 +15,6 @@
 
       obsidian # note taking app
       nemo # file manager
-      tmux
 
       (texliveBasic.withPackages (ps: [ ps.latexmk ]))
       biber
