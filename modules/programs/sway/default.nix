@@ -9,6 +9,9 @@ let
   wallpaper = "~/nixos/images/wallpapers/solar_system.png";
 in
 {
+  imports = [
+    ./wl-clipboard.nix
+  ];
   home.packages = with pkgs; [
     swaylock
     swayidle
@@ -85,6 +88,7 @@ in
 
           keybindings = lib.mkOptionDefault {
             "${modifier}+Shift+r" = "reload";
+            "${modifier}+Shift+s" = "exec wl-screenshot";
             XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
             XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
             XF86AudioMute = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
