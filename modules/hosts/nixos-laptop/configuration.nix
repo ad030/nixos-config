@@ -49,7 +49,7 @@
       desktopManager = {
         # cinnamon.enable = true;
         # xfce.enable = true;
-        lxqt.enable = true;
+        # lxqt.enable = true;
 
         # idk how to make this wayland shit work
         # lxqt.extraPackages = with pkgs; [
@@ -165,6 +165,8 @@
       kdePackages.kpat # Solitaire
       kdePackages.ksudoku
       kdePackages.ktorrent
+
+      # fuck you bitch
       kdePackages.kwallet
       kdePackages.kwallet-pam
       kdePackages.kwalletmanager
