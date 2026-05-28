@@ -11,7 +11,10 @@ in
         position = "top";
         height = 34;
 
-        modules-left = [ "sway/workspaces" ];
+        modules-left = [
+          "sway/workspaces"
+          "sway/scratchpad"
+        ];
         modules-center = [ "clock" ];
         modules-right = [
           "cpu"
@@ -23,13 +26,18 @@ in
         ];
 
         "sway/workspaces" = {
+          format = "[{index}]";
           disable-scroll = true;
           all-outputs = true;
-          format = "{icon}";
+        };
 
-          # format-icons = {
-          #   focused = "X";
-          # };
+        "sway/scratchpad" = {
+          format = "[{icon}:{count}]";
+          format-empty = "[{icon}:{count}]";
+          show-empty = true;
+          format-icons = [ "S" ];
+          tooltip = true;
+          tooltip-format = "{app}: {title}";
         };
 
         clock = {
@@ -148,9 +156,27 @@ in
       * {
         border-radius: 0;
         font-family: MesloLGM Nerd Font;
+        color: ${theme.palette.light1};
         font-size: 16px;
+      }
+
+      window#waybar {
         background-color: ${theme.palette.dark1};
         color: ${theme.palette.light1};
+      }
+
+      #clock,
+      #battery,
+      #cpu,
+      #workspaces,
+      #scratchpad,
+      #memory,
+      #backlight,
+      #wireplumber,
+      #network {
+        background-color: ${theme.palette.dark1};
+        color: ${theme.palette.light1};
+        margin: 0 2px;
       }
 
       button:hover {
@@ -161,7 +187,12 @@ in
         transition: none;
       }
 
+      #workspaces button {
+        padding: 0 8px;
+      }
+
       #workspaces button.focused {
+        background-color: ${theme.palette.dark4};
         box-shadow: inset 0 -2px ${theme.palette.light1};
       }
     ''; # end style
