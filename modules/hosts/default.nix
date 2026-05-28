@@ -1,0 +1,8 @@
+{ ... }:
+
+{
+  imports = [
+    ./default
+    ./nixos-laptop
+  ];
+}
