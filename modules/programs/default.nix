@@ -12,7 +12,7 @@
     ./waybar
     ./rofi
     ./fuzzel
-    ./vicinae
+    # ./vicinae
 
     ./niri
 

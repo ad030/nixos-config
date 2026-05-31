@@ -16,6 +16,7 @@
       url = "github:sodiboo/niri-flake";
       # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
     # noctalia = {
     #   url = "github:noctalia-dev/noctalia-shell";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -26,15 +27,15 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
 
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # vicinae = {
+    #   url = "github:vicinaehq/vicinae";
+    #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+    #
+    # vicinae-extensions = {
+    #   url = "github:vicinaehq/extensions";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
   };
 
   outputs =
@@ -43,8 +44,8 @@
       nixpkgs-unstable,
       home-manager-unstable,
       niri,
-      vicinae,
-      vicinae-extensions,
+      # vicinae,
+      # vicinae-extensions,
       # noctalia,
       # dms,
       ...
@@ -71,7 +72,7 @@
 
                 sharedModules = [
                   niri.homeModules.niri
-                  vicinae.homeManagerModules.default
+                  # vicinae.homeManagerModules.default
 
                   # noctalia.homeModules.default
                   # dms.homeModules.dank-material-shell
