@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+
+  flake.modules.homeManager 
+  { pkgs, ... }:
 
 {
   home.packages = [ pkgs.signal-desktop ];
@@ -25,4 +28,5 @@
     };
   };
 
+};
 }
