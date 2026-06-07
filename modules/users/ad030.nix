@@ -6,16 +6,7 @@
 
 {
 
-  flake.homeConfigurations.ad030 = {
-    username = "ad030";
-    homeDirectory = "/home/ad030";
-    stateVersion = "26.05";
-    modules = [
-      self.flake.homeManager.ad030
-    ];
-  };
-
-  flake.modules.homeManager.ad030 =
+  flake.homeConfigurations.ad030 =
     {
       config,
       pkgs,
@@ -23,7 +14,17 @@
       ...
     }:
     {
+      imports = with self.modules.homeManager; [
+        core
+        desktop
+        dev
+        apps
+      ];
+
       home = {
+        username = "ad030";
+        homeDirectory = "/home/ad030";
+        stateVersion = "26.05";
 
         packages = with pkgs; [
           ripgrep
@@ -97,22 +98,6 @@
           #   "ssh"
           # ];
         };
-      };
-
-      ## ENABLE PROGRAMS HERE
-      programs = {
-        keepassxc.enable = true;
-        neovim.enable = true;
-
-        bash.enable = true;
-        foot.enable = true;
-
-        niri.enable = true;
-
-        fuzzel.enable = true;
-        waybar.enable = true;
-
-        tmux.enable = true;
       };
 
       ## WINDOW MANAGERS

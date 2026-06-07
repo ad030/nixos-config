@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  self,
   config,
   pkgs,
   lib,
@@ -13,6 +14,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./users.nix
   ];
 
   # Bootloader.
@@ -237,29 +239,6 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users = {
-    mutableUsers = false;
-
-    users = {
-      root = {
-        # disable root login
-        hashedPassword = "!";
-      };
-      ad030 = {
-        isNormalUser = true;
-        shell = pkgs.bash;
-        description = "ad030";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-        ];
-        packages = [
-          #  pkgs.thunderbird
-        ];
-        hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
-      };
-    };
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

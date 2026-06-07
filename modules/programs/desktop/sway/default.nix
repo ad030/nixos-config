@@ -1,3 +1,4 @@
+{ self, inputs, ... }:
 {
   flake.modules.homeManager.sway =
     {
@@ -7,13 +8,13 @@
       ...
     }:
     let
-      theme = import ../../../themes/gruvbox.nix { inherit lib; };
+      theme = self.themes.gruvbox-dark;
       wallpaper = "~/nixos/images/wallpapers/solar_system.png";
       modifier = "Mod4";
     in
     {
       imports = [
-        ./wl-screenshot.nix
+        # ./wl-screenshot.nix
       ];
       home.packages = with pkgs; [
         swaylock
@@ -23,6 +24,7 @@
       wayland = {
         windowManager = {
           sway = {
+            enable = true;
             systemd.enable = true;
 
             checkConfig = false;
@@ -69,7 +71,7 @@
               };
 
               bars = [
-                { command = "waybar"; } # use waybar instead of swaybar
+                { command = lib.getExe config.programs.waybar.package; } # use waybar instead of swaybar
               ];
 
               window = {

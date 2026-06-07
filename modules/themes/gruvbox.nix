@@ -1,10 +1,10 @@
 ## GRUVBOX THEME
 { self, inputs, ... }:
 let
-  lib = inputs.nixpkgs.lib;
+  lib = inputs.nixpkgs-stable.lib;
 in
 {
-  flake.modules.homeManager.gruvbox-dark =
+  flake.themes.gruvbox-dark =
     let
       palette = {
         dark0_hard = "#1d2021";

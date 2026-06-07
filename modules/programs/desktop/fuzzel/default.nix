@@ -1,12 +1,19 @@
 {
+  self,
+  inputs,
+  config,
+  ...
+}:
+{
   flake.modules.homeManager.fuzzel =
 
     { pkgs, lib, ... }:
     let
-      theme = import ../../../themes/gruvbox.nix { inherit lib; };
+      theme = self.themes.gruvbox-dark;
     in
     {
       programs.fuzzel = {
+        enable = true;
         settings = {
           main = {
             terminal = "${pkgs.foot}/bin/foot";

@@ -1,11 +1,23 @@
 {
+  self,
+  inputs,
+  config,
+  ...
+}:
+{
   flake.modules.homeManager.foot =
-    { pkgs, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      theme = import ../../../themes/gruvbox.nix { inherit lib; };
+      theme = self.themes.gruvbox-dark;
     in
     {
       programs.foot = {
+        enable = true;
 
         settings = {
           main = {

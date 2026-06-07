@@ -1,3 +1,4 @@
+{ self, inputs, ... }:
 {
   flake.modules.homeManager.waybar =
     {
@@ -7,15 +8,17 @@
       ...
     }:
     let
-      theme = import ../../../themes/gruvbox.nix { inherit lib; };
+      theme = self.themes.gruvbox-dark;
     in
     {
+
       services = {
         blueman-applet.enable = true;
         network-manager-applet.enable = true;
       };
 
       programs.waybar = {
+        enable = true;
         settings = {
           main = {
             layer = "top";
