@@ -1,9 +1,9 @@
 {
   description = "A very basic flake";
 
-  nixConfig = {
-    abort-on-warn = true;
-  };
+  # nixConfig = {
+  #   abort-on-warn = true;
+  # };
 
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -50,9 +50,7 @@
     # };
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   # inputs@{
   #   self,
