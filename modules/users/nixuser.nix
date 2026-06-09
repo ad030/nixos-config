@@ -6,7 +6,7 @@
 
 {
 
-  flake.homeUsers.ad030 =
+  flake.homeUsers.nixuser =
     {
       config,
       pkgs,
@@ -24,8 +24,8 @@
       ];
 
       home = {
-        username = "ad030";
-        homeDirectory = "/home/ad030";
+        username = "nixuser";
+        homeDirectory = "/home/nixuser";
         stateVersion = "26.05";
 
         packages = with pkgs; [

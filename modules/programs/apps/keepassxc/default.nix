@@ -2,12 +2,13 @@
   flake.modules.homeManager.keepassxc =
 
     { pkgs, ... }:
-
     {
       programs.keepassxc = {
         enable = true;
+
         autostart = true;
         settings = {
+
           FdoSecrets = {
             Enabled = true;
             ConfirmAccessItem = false;
