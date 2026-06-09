@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  self,
   config,
   pkgs,
   lib,
@@ -13,20 +12,16 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./hardware.nix
+    ./bootloader.nix
     ./users.nix
+    ./fonts.nix
+    ./display-manager.nix
+    ./desktop-manager.nix
   ];
 
   # Bootloader.
   boot.consoleLogLevel = 3;
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 10;
-    };
-    efi.canTouchEfiVariables = true;
-    timeout = lib.mkDefault 10;
-  };
 
   networking.hostName = "laptop0"; # Define your hostname.
 
@@ -69,21 +64,8 @@
     libinput.enable = true;
 
     # display manager
-    displayManager = {
-      ly = {
-        enable = true;
-        settings = {
-          numlock = false;
-          bigclock = "en";
-          vimode = true;
-        };
-      };
-    };
 
     # desktop environment
-    desktopManager = {
-      plasma6.enable = true;
-    };
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -258,19 +240,6 @@
   # home manager stuff
 
   # fonts
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-
-    font-awesome_4
-    font-awesome_5
-    font-awesome_6
-
-    # nerd fonts
-    nerd-fonts.fira-mono
-    nerd-fonts.meslo-lg
-  ];
 
   # power management
   powerManagement.enable = true;

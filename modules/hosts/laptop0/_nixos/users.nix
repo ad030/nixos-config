@@ -1,5 +1,6 @@
+# home manager stuff is imported in <hostname>/default.nix
+
 {
-  inputs,
   config,
   pkgs,
   ...
