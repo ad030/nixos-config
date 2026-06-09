@@ -17,7 +17,6 @@ in
     ]
     # home manager users
     ++ (with config.flake.homeUsers; [
-      { home-manager.users.ad030 = ad030; }
       { home-manager.users.nixuser = nixuser; }
     ]);
     specialArgs = { inherit self inputs; };
