@@ -108,11 +108,14 @@
               keybindings = lib.mkOptionDefault {
                 "${modifier}+Shift+r" = "reload";
                 "${modifier}+Shift+s" = "exec wl-screenshot";
-                XF86MonBrightnessDown = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
-                XF86MonBrightnessUp = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
-                XF86AudioMute = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-                XF86AudioLowerVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
-                XF86AudioRaiseVolume = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+                "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
+                "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
+                "${modifier}+XF86AudioMute" =
+                  "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+                "${modifier}+XF86AudioLowerVolume" =
+                  "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+                "${modifier}+XF86AudioRaiseVolume" =
+                  "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
                 "${modifier}+minus" = "scratchpad show";
                 "${modifier}+Shift+minus" = "move scratchpad";
               };
