@@ -27,7 +27,7 @@
           ls = "ls --color=tty";
 
           # for reloading nixos config using flake
-          nrs = "sudo nixos-rebuild switch --flake ${nixos_config_dir}";
+          nrs = "sudo nixos-rebuild switch";
         };
 
       };
