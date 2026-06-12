@@ -9,13 +9,14 @@
     }:
     let
       theme = self.themes.gruvbox-dark;
-      wallpaper = "~/nixos/images/wallpapers/solar_system.png";
+      wallpaper = "~/nixos-config/images/wallpapers/solar_system.png";
       modifier = "Mod4";
     in
     {
       imports = [
-        # ./wl-screenshot.nix
+        self.modules.homeManager.wl-screenshot
       ];
+
       home.packages = with pkgs; [
         swaylock
         swayidle

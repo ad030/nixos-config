@@ -1,7 +1,11 @@
 { self, inputs, ... }:
 {
   flake.modules.homeManager.wl-screenshot =
-    { pkgs, ... }:
+    {
+      config,
+      pkgs,
+      ...
+    }:
     let
       basename = "$(date +%Y-%m-%d_%H%M%S).png";
       screenshot_dir = "$HOME/Pictures/Screenshots";
