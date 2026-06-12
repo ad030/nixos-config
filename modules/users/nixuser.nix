@@ -30,10 +30,10 @@
 
         packages = with pkgs; [
           ripgrep
-          lua-language-server
 
           obsidian # note taking app
           nemo # file manager
+          mpv # media player
 
           (texliveBasic.withPackages (ps: [ ps.latexmk ]))
           biber

@@ -5,7 +5,7 @@
 
     {
       programs.neovim = {
-	      enable = true;
+        enable = true;
         withRuby = false;
         withPython3 = true;
 
@@ -23,6 +23,7 @@
           fd
 
           ## FORMATTERS AND LSPS
+          lua-language-server
           luajitPackages.lua-lsp
           clang-tools
           nixfmt

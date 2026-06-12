@@ -20,15 +20,14 @@
     ./desktop-manager.nix
     ./nix.nix
     ./cache.nix
+    ./networking.nix
+    ./nfs.nix
   ];
 
   # Bootloader.
   boot.consoleLogLevel = 3;
 
   networking.hostName = "laptop0"; # Define your hostname.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
