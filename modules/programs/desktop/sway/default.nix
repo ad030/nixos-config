@@ -29,7 +29,7 @@
             enable = true;
             systemd.enable = true;
 
-            checkConfig = false;
+            checkConfig = true;
 
             wrapperFeatures.gtk = true;
 
@@ -67,6 +67,7 @@
               window = {
                 border = 1;
                 titlebar = false;
+                commands = [ ];
               };
 
               gaps = {

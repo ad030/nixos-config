@@ -8,7 +8,7 @@
       programs.waybar.style = ''
         * {
           border-radius: 0;
-          font-family: MesloLGM Nerd Font;
+          font-family: "MesloLGM Nerd Font", "Font Awesome 5 Free";
           color: ${theme.palette.light1};
           font-size: 16px;
         }

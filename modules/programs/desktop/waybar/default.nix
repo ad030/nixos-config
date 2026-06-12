@@ -28,6 +28,7 @@
             modules-center = [ "clock" ];
             modules-right = [
               "sway/scratchpad"
+              "idle_inhibitor"
               "cpu"
               "memory"
               "backlight"
@@ -35,6 +36,14 @@
               "network"
               "battery"
             ];
+
+            idle_inhibitor = {
+              format = "[{icon}]";
+              format-icons = {
+                activated = "";
+                deactivated = "";
+              };
+            };
 
             "sway/window" = {
               format = "{title}";
