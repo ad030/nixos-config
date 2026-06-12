@@ -9,7 +9,8 @@
     }:
     let
       theme = self.themes.gruvbox-dark;
-      wallpaper = "~/nixos-config/images/wallpapers/solar_system.png";
+      # wallpaper = "~/nixos-config/images/wallpapers/solar_system.png";
+      wallpaper = self.images.solar-system;
       modifier = "Mod4";
     in
     {
@@ -35,7 +36,6 @@
             config = {
               modifier = modifier; # super key
               terminal = "foot";
-              # menu = "rofi -modi \"window,drun,run\" -show drun";
               menu = "fuzzel";
 
               startup = [
@@ -64,6 +64,11 @@
                 };
               };
 
+              window = {
+                border = 1;
+                titlebar = false;
+              };
+
               gaps = {
                 smartGaps = true;
                 smartBorders = "on";
@@ -74,26 +79,6 @@
               bars = [
                 { command = lib.getExe config.programs.waybar.package; } # use waybar instead of swaybar
               ];
-
-              window = {
-                border = 1;
-
-                commands = [
-                  {
-                    command = "inhibit_idle fullscreen";
-                    criteria = {
-                      class = ".*";
-                      app_id = ".*";
-                    };
-                  }
-                  {
-                    command = "move scratchpad && notify-send 'KeePassXC opened in scratchpad'";
-                    criteria = {
-                      app_id = "org.keepass.KeePassXC";
-                    };
-                  }
-                ];
-              };
 
               colors = theme.sway;
 

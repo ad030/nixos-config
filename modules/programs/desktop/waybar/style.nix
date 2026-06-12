@@ -16,6 +16,8 @@
         window#waybar {
           background-color: ${theme.palette.dark1};
           color: ${theme.palette.light1};
+          padding-bottom: 1px;
+          border-bottom: 1px solid ${theme.palette.light1};
         }
 
         #clock,
@@ -29,7 +31,7 @@
         #network {
           background-color: ${theme.palette.dark1};
           color: ${theme.palette.light1};
-          margin: 0 2px;
+          margin: 2px;
         }
 
         tooltip {

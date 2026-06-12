@@ -24,10 +24,10 @@
 
             modules-left = [
               "sway/workspaces"
-              "sway/scratchpad"
             ];
             modules-center = [ "clock" ];
             modules-right = [
+              "sway/scratchpad"
               "cpu"
               "memory"
               "backlight"
@@ -36,16 +36,21 @@
               "battery"
             ];
 
+            "sway/window" = {
+              format = "{title}";
+              max-length = 50;
+            };
+
             "sway/workspaces" = {
-              format = "[{index}]";
+              format = "{index}";
               disable-scroll = true;
               all-outputs = true;
             };
 
             "sway/scratchpad" = {
               format = "[{icon}:{count}]";
-              format-empty = "[{icon}:{count}]";
-              show-empty = true;
+              format-empty = "";
+              show-empty = false;
               format-icons = [ "S" ];
               tooltip = true;
               tooltip-format = "{app}: {title}";
