@@ -33,7 +33,10 @@
 
           obsidian # note taking app
           nemo # file manager
-          mpv # media player
+
+          # media players
+          mpv
+          vlc
 
           (texliveBasic.withPackages (ps: [ ps.latexmk ]))
           biber
