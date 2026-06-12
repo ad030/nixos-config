@@ -3,7 +3,7 @@
 
     { ... }:
     let
-      nixos_config_dir = "~/nixos";
+      nixos-config-dir = "$HOME/nixos-config";
     in
     {
       programs.bash = {
@@ -28,6 +28,7 @@
 
           # for reloading nixos config using flake
           nrs = "sudo nixos-rebuild switch";
+          nc = "cd ${nixos-config-dir}";
         };
 
       };
