@@ -101,43 +101,47 @@ in
 
       foot = {
         alpha = "0.80";
-        background = remove_hashtag_prefix palette.dark1;
-        foreground = remove_hashtag_prefix palette.light1;
-        regular0 = remove_hashtag_prefix palette.dark1;
-        regular1 = remove_hashtag_prefix palette.neutral_red;
-        regular2 = remove_hashtag_prefix palette.neutral_green;
-        regular3 = remove_hashtag_prefix palette.neutral_yellow;
-        regular4 = remove_hashtag_prefix palette.neutral_blue;
-        regular5 = remove_hashtag_prefix palette.neutral_purple;
-        regular6 = remove_hashtag_prefix palette.neutral_aqua;
-        regular7 = remove_hashtag_prefix palette.light4;
-        bright0 = remove_hashtag_prefix palette.gray_245;
-        bright1 = remove_hashtag_prefix palette.bright_red;
-        bright2 = remove_hashtag_prefix palette.bright_green;
-        bright3 = remove_hashtag_prefix palette.bright_yellow;
-        bright4 = remove_hashtag_prefix palette.bright_blue;
-        bright5 = remove_hashtag_prefix palette.bright_purple;
-        bright6 = remove_hashtag_prefix palette.bright_aqua;
-        bright7 = remove_hashtag_prefix palette.light1;
+      }
+      // builtins.mapAttrs remove_hashtag_prefix {
+        background = palette.dark1;
+        foreground = palette.light1;
+        regular0 = palette.dark1;
+        regular1 = palette.neutral_red;
+        regular2 = palette.neutral_green;
+        regular3 = palette.neutral_yellow;
+        regular4 = palette.neutral_blue;
+        regular5 = palette.neutral_purple;
+        regular6 = palette.neutral_aqua;
+        regular7 = palette.light4;
+        bright0 = palette.gray_245;
+        bright1 = palette.bright_red;
+        bright2 = palette.bright_green;
+        bright3 = palette.bright_yellow;
+        bright4 = palette.bright_blue;
+        bright5 = palette.bright_purple;
+        bright6 = palette.bright_aqua;
+        bright7 = palette.light1;
       };
 
-      fuzzel = {
-        background = append_alpha (remove_hashtag_prefix palette.dark1);
-        text = append_alpha (remove_hashtag_prefix palette.light1);
-        message = append_alpha (remove_hashtag_prefix palette.light1);
-        prompt = append_alpha (remove_hashtag_prefix palette.light1);
+      fuzzel = builtins.mapAttrs append_alpha (
+        builtins.mapAttrs remove_hashtag_prefix {
+          background = palette.dark1;
+          text = palette.light1;
+          message = palette.light1;
+          prompt = palette.light1;
 
-        placeholder = append_alpha (remove_hashtag_prefix palette.light1);
-        input = append_alpha (remove_hashtag_prefix palette.light1);
-        match = append_alpha (remove_hashtag_prefix palette.light1);
+          placeholder = palette.light1;
+          input = palette.light1;
+          match = palette.light1;
 
-        selection = append_alpha (remove_hashtag_prefix palette.bright_green);
-        selection_text = append_alpha (remove_hashtag_prefix palette.light1);
-        selection_match = append_alpha (remove_hashtag_prefix palette.light1);
+          selection = palette.bright_green;
+          selection_text = palette.light1;
+          selection_match = palette.light1;
 
-        counter = append_alpha (remove_hashtag_prefix palette.light1);
-        border = append_alpha (remove_hashtag_prefix palette.light1);
+          counter = palette.light1;
+          border = palette.light1;
 
-      };
+        }
+      );
     };
 }
