@@ -52,9 +52,6 @@ in
         faded_aqua = "#427b58";
         faded_orange = "#af3a03";
       };
-      append_alpha = rgb: "${rgb}ff";
-      prepend_alpha = rgb: "ff${rgb}";
-      remove_hashtag_prefix = rgb: (lib.removePrefix "#" rgb);
     in
     {
       inherit palette;
@@ -102,7 +99,7 @@ in
       foot = {
         alpha = "0.80";
       }
-      // builtins.mapAttrs remove_hashtag_prefix {
+      // builtins.mapAttrs (_: rgb: lib.removePrefix "#" rgb) {
         background = palette.dark1;
         foreground = palette.light1;
         regular0 = palette.dark1;
@@ -123,25 +120,24 @@ in
         bright7 = palette.light1;
       };
 
-      fuzzel = builtins.mapAttrs append_alpha (
-        builtins.mapAttrs remove_hashtag_prefix {
-          background = palette.dark1;
-          text = palette.light1;
-          message = palette.light1;
-          prompt = palette.light1;
+      # strip hashtag prefix and append alpha value (ff)
+      fuzzel = builtins.mapAttrs (_: rgb: "${lib.removePrefix "#" rgb}ff") ({
+        background = palette.dark1;
+        text = palette.light1;
+        message = palette.light1;
+        prompt = palette.light1;
 
-          placeholder = palette.light1;
-          input = palette.light1;
-          match = palette.light1;
+        placeholder = palette.light1;
+        input = palette.light1;
+        match = palette.light1;
 
-          selection = palette.bright_green;
-          selection_text = palette.light1;
-          selection_match = palette.light1;
+        selection = palette.bright_green;
+        selection_text = palette.light1;
+        selection_match = palette.light1;
 
-          counter = palette.light1;
-          border = palette.light1;
+        counter = palette.light1;
+        border = palette.light1;
 
-        }
-      );
+      });
     };
 }
