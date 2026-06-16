@@ -20,6 +20,9 @@
         desktop
         dev
 
+        flatpak
+        gaming
+
         signal-desktop
         keepassxc
       ];

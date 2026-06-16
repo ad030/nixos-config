@@ -22,101 +22,98 @@
         swayidle
       ];
 
-      # get sway working on nvidia
-      home.sessionVariables.NIXOS_OZONE_WL = lib.mkForce 0;
-      wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
+      home.sessionVariables = {
+        NIXOS_OZONE_WL = lib.mkForce 0; # for use on nvidia
+        XDG_DATA_DIRS = lib.mkForce "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"; # for flatpaks
+      };
 
-      wayland = {
-        windowManager = {
-          sway = {
-            enable = true;
-            systemd.enable = true;
+      wayland.windowManager.sway = {
+        enable = true;
+        systemd.enable = true;
 
-            checkConfig = true;
+        checkConfig = true;
 
-            wrapperFeatures.gtk = true;
+        wrapperFeatures.gtk = true;
 
-            config = {
-              modifier = modifier; # super key
-              terminal = "foot";
-              menu = "fuzzel";
+        extraOptions = [ "--unsupported-gpu" ]; # for use on nvidia
 
-              startup = [
-                {
-                  command = "keepassxc";
-                  always = true;
-                }
-              ];
+        config = {
+          modifier = modifier; # super key
+          terminal = "foot";
+          menu = "fuzzel";
 
-              input = {
-                "*" = {
-                  xkb_layout = "us";
-                  xkb_options = "terminate:ctrl_alt_bksp";
-                };
-              };
+          startup = [
+            {
+              command = "keepassxc";
+              always = true;
+            }
+          ];
 
-              output = {
-                "*" = {
-                  bg = "${wallpaper} fill";
-                };
-              };
+          input = {
+            "*" = {
+              xkb_layout = "us";
+              xkb_options = "terminate:ctrl_alt_bksp";
+            };
+          };
 
-              seat = {
-                "*" = {
-                  xcursor_theme = "${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}";
-                };
-              };
+          output = {
+            "*" = {
+              bg = "${wallpaper} fill";
+            };
+          };
 
-              window = {
-                border = 1;
-                titlebar = false;
-                commands = [ ];
-              };
+          seat = {
+            "*" = {
+              xcursor_theme = "${config.gtk.cursorTheme.name} ${toString config.gtk.cursorTheme.size}";
+            };
+          };
 
-              gaps = {
-                smartGaps = true;
-                smartBorders = "on";
-                inner = 2;
-                outer = 2;
-              };
+          window = {
+            border = 1;
+            titlebar = false;
+            commands = [ ];
+          };
 
-              bars = [
-                { command = lib.getExe config.programs.waybar.package; } # use waybar instead of swaybar
-              ];
+          gaps = {
+            smartGaps = true;
+            smartBorders = "on";
+            inner = 2;
+            outer = 2;
+          };
 
-              colors = theme.sway;
+          bars = [
+            { command = lib.getExe config.programs.waybar.package; } # use waybar instead of swaybar
+          ];
 
-              defaultWorkspace = "workspace number 1";
+          colors = theme.sway;
 
-              focus.followMouse = false;
+          defaultWorkspace = "workspace number 1";
 
-              fonts = {
-                names = [ "MesloLGM Nerd Font Mono" ];
-                size = 14.0;
-              };
+          focus.followMouse = false;
 
-              keybindings = lib.mkOptionDefault {
-                "${modifier}+Shift+r" = "reload";
-                "${modifier}+Shift+s" = "exec wl-screenshot";
-                "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
-                "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
-                "${modifier}+XF86AudioMute" =
-                  "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-                "${modifier}+XF86AudioLowerVolume" =
-                  "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
-                "${modifier}+XF86AudioRaiseVolume" =
-                  "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
-                "${modifier}+minus" = "scratchpad show";
-                "${modifier}+Shift+minus" = "move scratchpad";
-              };
+          fonts = {
+            names = [ "MesloLGM Nerd Font Mono" ];
+            size = 14.0;
+          };
 
-            }; # end config
+          keybindings = lib.mkOptionDefault {
+            "${modifier}+Shift+r" = "reload";
+            "${modifier}+Shift+s" = "exec wl-screenshot";
+            "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
+            "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
+            "${modifier}+XF86AudioMute" =
+              "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            "${modifier}+XF86AudioLowerVolume" =
+              "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+            "${modifier}+XF86AudioRaiseVolume" =
+              "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+            "${modifier}+minus" = "scratchpad show";
+            "${modifier}+Shift+minus" = "move scratchpad";
+          };
 
-          }; # end sway
+        }; # end config
 
-        }; # end windowManager
-
-      }; # end wayland
+      }; # end wayland.windowManager.sway
 
       services.swayidle =
         let

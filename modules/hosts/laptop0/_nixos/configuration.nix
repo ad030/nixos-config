@@ -64,9 +64,8 @@
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
 
-    # display manager
-
-    # desktop environment
+    # use flatpak declaratively
+    flatpak.enable = true;
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -99,9 +98,6 @@
         STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
       };
     };
-
-    # enable flatpak package manager
-    flatpak.enable = false;
 
     # secrets service
     # passSecretService.enable = true;

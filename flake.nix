@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    d-flatpak = {
+      url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    };
+
     # niri = {
     #   url = "github:sodiboo/niri-flake";
     #   # inputs.nixpkgs.follows = "nixpkgs-unstable";

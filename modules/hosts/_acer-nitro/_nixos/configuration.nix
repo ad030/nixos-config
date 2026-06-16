@@ -99,9 +99,6 @@
       };
     };
 
-    # enable flatpak package manager
-    flatpak.enable = false;
-
     # secrets service
     # passSecretService.enable = true;
     gnome.gnome-keyring.enable = lib.mkForce false;
