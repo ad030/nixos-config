@@ -22,6 +22,10 @@
         swayidle
       ];
 
+      # get sway working on nvidia
+      home.sessionVariables.NIXOS_OZONE_WL = lib.mkForce 0;
+      wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
+
       wayland = {
         windowManager = {
           sway = {
@@ -31,8 +35,6 @@
             checkConfig = true;
 
             wrapperFeatures.gtk = true;
-
-            extraOptions = [ "--unsupported-gpu" ];
 
             config = {
               modifier = modifier; # super key
