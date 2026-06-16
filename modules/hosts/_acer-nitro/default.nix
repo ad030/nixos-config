@@ -5,6 +5,7 @@
   ...
 }:
 let
+  hostname = "acer-nitro";
   nixpkgs = inputs.nixpkgs-unstable;
 in
 {
@@ -12,7 +13,7 @@ in
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix
-      { networking.hostName = "acer-nitro"; }
+      { networking.hostName = hostname; }
     ]
     # nixos modules
     ++ (with config.flake.modules.nixos; [

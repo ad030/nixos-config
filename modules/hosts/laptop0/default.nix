@@ -5,6 +5,7 @@
   ...
 }:
 let
+  hostname = "laptop0";
   nixpkgs = inputs.nixpkgs-unstable;
 in
 {
@@ -13,7 +14,7 @@ in
     modules = [
       ./_nixos/configuration.nix
       {
-        networking.hostName = "laptop0";
+        networking.hostName = hostname;
       }
     ]
     # nixos modules
