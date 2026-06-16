@@ -12,9 +12,13 @@ in
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix
-      config.flake.modules.nixos.home-manager
       { _module.args = { inherit self inputs; }; }
     ]
+    # nixos modules
+    ++ (with config.flake.modules.nixos; [
+      home-manager
+      desktop
+    ])
     # home manager users
     ++ (with config.flake.homeUsers; [
       { home-manager.users.nixuser = nixuser; }

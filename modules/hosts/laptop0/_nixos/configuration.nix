@@ -22,6 +22,7 @@
     ./cache.nix
     ./networking.nix
     ./nfs.nix
+    ./gaming.nix
   ];
 
   # Bootloader.

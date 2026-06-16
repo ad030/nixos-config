@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.dg =
+  flake.modules.homeManager.xdg =
     {
       config,
       pkgs,
@@ -10,14 +10,14 @@
       home = {
         packages = [ pkgs.xdg-utils ];
         preferXdgDirectories = true;
-      };
 
+      };
       xdg = {
         enable = true;
         userDirs.enable = true;
+        mimeApps.enable = pkgs.stdenv.hostPlatform.isLinux;
       };
 
-      mimeApps.enable = pkgs.stdenv.hostPlatform.isLinux;
     };
 
 }

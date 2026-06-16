@@ -16,6 +16,7 @@
     {
       imports = with self.modules.homeManager; [
         core
+        xdg
         desktop
         dev
 
@@ -35,8 +36,8 @@
           nemo # file manager
 
           # media players
-          mpv
-          vlc
+          # mpv
+          # vlc
 
           (texliveBasic.withPackages (ps: [ ps.latexmk ]))
           biber
