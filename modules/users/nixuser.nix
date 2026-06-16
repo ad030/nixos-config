@@ -35,6 +35,8 @@
           obsidian # note taking app
           nemo # file manager
 
+          papirus-icon-theme
+
           # media players
           # mpv
           # vlc
@@ -107,8 +109,6 @@
       };
 
       ## WINDOW MANAGERS
-      wayland.windowManager = {
-        sway.enable = true;
-      };
+      wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
     };
 }

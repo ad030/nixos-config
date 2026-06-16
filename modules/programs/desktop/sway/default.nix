@@ -9,7 +9,6 @@
     }:
     let
       theme = self.themes.gruvbox-dark;
-      # wallpaper = "~/nixos-config/images/wallpapers/solar_system.png";
       wallpaper = self.images.solar-system;
       modifier = "Mod4";
     in
@@ -32,6 +31,8 @@
             checkConfig = true;
 
             wrapperFeatures.gtk = true;
+
+            extraOptions = [ "--unsupported-gpu" ];
 
             config = {
               modifier = modifier; # super key

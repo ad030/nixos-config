@@ -12,9 +12,7 @@ in
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix
-      {
-        networking.hostName = "laptop0";
-      }
+      { networking.hostName = "acer-nitro"; }
     ]
     # nixos modules
     ++ (with config.flake.modules.nixos; [

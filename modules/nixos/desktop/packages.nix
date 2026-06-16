@@ -7,6 +7,9 @@
         imagemagick
         mpv
         vlc
+        feh
+
+        fastfetch
       ];
 
     };

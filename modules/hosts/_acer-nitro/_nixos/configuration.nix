@@ -18,7 +18,6 @@
     ./fonts.nix
     ./display-manager.nix
     ./desktop-manager.nix
-    ./window-manager.nix
     ./nix.nix
     ./cache.nix
     ./networking.nix
@@ -126,6 +125,12 @@
     };
 
     # sway wl compositor
+    sway = {
+      enable = true;
+      xwayland.enable = true;
+    };
+
+    niri.enable = false;
 
     # ssh.startAgent = true;
     # gnupg.agent = {
