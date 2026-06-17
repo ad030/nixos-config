@@ -9,6 +9,7 @@
         git
         bash
         python314
+        jq
         htop
 
         # used for secrets backend

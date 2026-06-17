@@ -13,15 +13,15 @@ in
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix
-      {
-        networking.hostName = hostname;
-      }
+      { networking.hostName = hostname; }
+      { nixpkgs.config.allowUnfree = true; }
     ]
     # nixos modules
     ++ (with config.flake.modules.nixos; [
       core
       desktop
       home-manager
+      flatpak
     ])
     # home manager users
     ++ (with config.flake.homeUsers; [

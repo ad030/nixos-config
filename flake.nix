@@ -21,6 +21,10 @@
       url = "github:in-a-dil-emma/declarative-flatpak/latest";
     };
 
+    # nix-flatpak = {
+    #   url = "github:gmodena/nix-flatpak/?ref=latest";
+    # };
+
     # niri = {
     #   url = "github:sodiboo/niri-flake";
     #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -41,7 +45,7 @@
     #   url = "github:vicinaehq/vicinae";
     #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
-    #
+
     # vicinae-extensions = {
     #   url = "github:vicinaehq/extensions";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";

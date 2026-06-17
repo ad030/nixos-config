@@ -5,7 +5,7 @@
   ...
 }:
 let
-  hostname = "acer-nitro";
+  hostname = "home0";
   nixpkgs = inputs.nixpkgs-unstable;
 in
 {
