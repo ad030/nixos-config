@@ -1,11 +1,16 @@
 { config, ... }:
 {
-  flake.modules.homeManager.desktop.imports = with config.flake.modules.homeManager; [
-    sway
-    hyprland
+  flake.modules.homeManager.desktop.imports =
+    with config.flake.modules.homeManager;
+    [
+      sway
+      hyprland
 
-    waybar
-    fuzzel
-    foot
-  ];
+      waybar
+      fuzzel
+      foot
+    ]
+    ++ [
+      ./packages.nix
+    ];
 }

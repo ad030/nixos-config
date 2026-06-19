@@ -20,6 +20,7 @@ in
     ++ (with config.flake.modules.nixos; [
       core
       desktop
+      gaming
       home-manager
       flatpak
     ])

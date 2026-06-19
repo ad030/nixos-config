@@ -23,7 +23,6 @@
           "networkmanager"
           "wheel"
         ];
-        packages = [ ];
         hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
       };
     };

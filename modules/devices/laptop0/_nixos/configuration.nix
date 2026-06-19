@@ -13,17 +13,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware.nix
-    ./bootloader.nix
     ./users.nix
-    ./fonts.nix
-    ./display-manager.nix
-    ./desktop-manager.nix
-    ./window-manager.nix
-    ./nix.nix
-    ./cache.nix
     ./networking.nix
     ./nfs.nix
-    ./gaming.nix
   ];
 
   # Bootloader.
