@@ -12,5 +12,6 @@
     nix-settings
     core-packages
     fonts
+    ssh
   ];
 }
