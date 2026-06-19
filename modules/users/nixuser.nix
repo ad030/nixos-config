@@ -5,8 +5,7 @@
 }:
 
 {
-
-  flake.homeUsers.nixuser =
+  flake.hmUsers.nixuser =
     {
       config,
       pkgs,
@@ -14,16 +13,16 @@
       ...
     }:
     {
-      imports = with self.modules.homeManager; [
+      imports = with self.modules.hm; [
         core
-        xdg
         desktop
         dev
-
-        flatpak
         gaming
 
+        apps
+
         signal-desktop
+        vesktop
         keepassxc
       ];
 
@@ -33,26 +32,14 @@
         stateVersion = "26.05";
 
         packages = with pkgs; [
-          ripgrep
-
           obsidian # note taking app
           nemo # file manager
 
           papirus-icon-theme
 
-          # media players
-          # mpv
-          # vlc
-
           (texliveBasic.withPackages (ps: [ ps.latexmk ]))
           biber
           python314Packages.pylatexenc
-
-          libreoffice
-          # zathura
-          kdePackages.okular
-          ani-cli
-          jellyfin-desktop
         ];
 
         pointerCursor = {
@@ -62,14 +49,6 @@
           gtk.enable = true;
           x11.enable = true;
         };
-      };
-
-      nix = {
-        settings.experimental-features = [
-          # enable nix flakes
-          "nix-command"
-          "flakes"
-        ];
       };
 
       gtk = {
@@ -103,11 +82,6 @@
         ssh-agent.enable = true;
         gnome-keyring = {
           enable = lib.mkForce false;
-          # components = [
-          #   "pkcs11"
-          #   "secrets"
-          #   "ssh"
-          # ];
         };
       };
 
