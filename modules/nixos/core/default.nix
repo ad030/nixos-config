@@ -8,7 +8,6 @@
   flake.modules.nixos.core.imports = with config.flake.modules.nixos; [
     bootloader
     network
-    display-manager
     package-caches
     nix-settings
     core-packages
