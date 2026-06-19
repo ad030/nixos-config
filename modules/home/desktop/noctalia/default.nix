@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.hm.noctalia =
+  flake.modules.homeManager.noctalia =
     {
       pkgs,
       ...

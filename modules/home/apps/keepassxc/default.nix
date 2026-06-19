@@ -1,5 +1,5 @@
 {
-  flake.modules.hm.keepassxc =
+  flake.modules.homeManager.keepassxc =
 
     {
       config,

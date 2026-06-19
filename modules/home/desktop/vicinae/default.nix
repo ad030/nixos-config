@@ -1,5 +1,5 @@
 {
-  flake.modules.hm.vicinae =
+  flake.modules.homeManager.vicinae =
     {
       self,
       pkgs,

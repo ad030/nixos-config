@@ -13,7 +13,7 @@
       ...
     }:
     {
-      imports = with self.modules.hm; [
+      imports = with self.modules.homeManager; [
         core
         desktop
         dev

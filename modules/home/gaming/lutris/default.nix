@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.hm.lutris =
+  flake.modules.homeManager.lutris =
     { pkgs, ... }:
     {
       # programs.lutris = {

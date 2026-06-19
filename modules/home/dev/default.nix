@@ -6,7 +6,7 @@
 }:
 
 {
-  flake.modules.hm.dev.imports = with config.flake.modules.hm; [
+  flake.modules.homeManager.dev.imports = with config.flake.modules.homeManager; [
     neovim
     tmux
   ];

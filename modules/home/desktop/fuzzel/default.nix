@@ -5,7 +5,7 @@
   ...
 }:
 {
-  flake.modules.hm.fuzzel =
+  flake.modules.homeManager.fuzzel =
 
     { pkgs, lib, ... }:
     let

@@ -5,7 +5,7 @@
   ...
 }:
 {
-  flake.modules.hm.foot =
+  flake.modules.homeManager.foot =
     {
       config,
       pkgs,

@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.waybar =
+  flake.modules.homeManager.waybar =
     {
       pkgs,
       lib,

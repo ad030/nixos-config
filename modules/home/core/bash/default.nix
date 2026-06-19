@@ -1,5 +1,5 @@
 {
-  flake.modules.hm.bash =
+  flake.modules.homeManager.bash =
 
     { ... }:
     let

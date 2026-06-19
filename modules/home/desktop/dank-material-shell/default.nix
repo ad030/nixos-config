@@ -1,5 +1,5 @@
 {
-  flake.modules.hm.dank-material-shell =
+  flake.modules.homeManager.dank-material-shell =
     { pkgs, ... }:
 
     {

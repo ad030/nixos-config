@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.sway =
+  flake.modules.homeManager.sway =
     {
       pkgs,
       config,
@@ -14,7 +14,7 @@
     in
     {
       imports = [
-        self.modules.hm.wl-screenshot
+        self.modules.homeManager.wl-screenshot
       ];
 
       home.packages = with pkgs; [

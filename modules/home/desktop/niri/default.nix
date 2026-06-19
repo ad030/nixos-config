@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.niri =
+  flake.modules.homeManager.niri =
     { pkgs, lib, ... }:
     {
       # home.packages = [ pkgs.niri ];

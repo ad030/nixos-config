@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.tmux =
+  flake.modules.homeManager.tmux =
     { pkgs, ... }:
 
     {

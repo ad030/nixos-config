@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.hm.desktop =
+  flake.modules.homeManager.desktop =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [

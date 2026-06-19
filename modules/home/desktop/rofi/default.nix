@@ -1,5 +1,5 @@
 {
-  flake.modules.hm.rofi = {
+  flake.modules.homeManager.rofi = {
     programs.rofi = {
 
       theme = "gruvbox-dark";

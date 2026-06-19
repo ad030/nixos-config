@@ -4,10 +4,11 @@
   ...
 }:
 {
-  imports = with self.modules.hm; [
-    flatpak
-  ];
-  flake.modules.hm.sober = {
+
+  flake.modules.homeManager.sober = {
+    imports = with self.modules.homeManager; [
+      flatpak
+    ];
     services.flatpak.packages = [ "flathub:app/org.vinegarhq.Sober/x86_64/stable" ];
   };
 }

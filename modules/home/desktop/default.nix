@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  flake.modules.hm.desktop.imports = with config.flake.modules.hm; [
+  flake.modules.homeManager.desktop.imports = with config.flake.modules.homeManager; [
     sway
     hyprland
 

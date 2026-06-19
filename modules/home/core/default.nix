@@ -1,7 +1,6 @@
 { config, ... }:
-
 {
-  flake.modules.hm.core.imports = with config.flake.modules.hm; [
+  flake.modules.homeManager.core.imports = with config.flake.modules.homeManager; [
     bash
     nix
     xdg

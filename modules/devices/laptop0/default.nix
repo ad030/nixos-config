@@ -9,7 +9,7 @@ let
   nixpkgs = inputs.nixpkgs-unstable;
 in
 {
-  flake.nixosConfigurations.laptop0 = nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix

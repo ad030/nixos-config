@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.waybar =
+  flake.modules.homeManager.waybar =
     let
       theme = self.themes.gruvbox-dark;
     in

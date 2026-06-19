@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.wl-screenshot =
+  flake.modules.homeManager.wl-screenshot =
     {
       config,
       pkgs,

@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.hm.core = {
+  flake.modules.homeManager.nix = {
     nix = {
       settings.experimental-features = [
         # enable nix flakes

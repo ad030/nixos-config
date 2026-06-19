@@ -1,8 +1,8 @@
 { self, inputs, ... }:
 {
-  flake.modules.hm.flatpak = {
+  flake.modules.homeManager.flatpak = {
     imports = [
-      inputs.d-flatpak.hm.default
+      inputs.d-flatpak.homeModules.default
       # inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ];
     services.flatpak.remotes = {
