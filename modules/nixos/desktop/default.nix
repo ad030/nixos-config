@@ -10,5 +10,6 @@
     display-manager
     window-manager
     desktop-packages
+    home-manager
   ];
 }

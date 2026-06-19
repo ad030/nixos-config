@@ -7,6 +7,7 @@
 let
   hostname = "laptop0";
   nixpkgs = inputs.nixpkgs-unstable;
+  systemUsers = [ "nixuser" ];
 in
 {
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {

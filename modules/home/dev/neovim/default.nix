@@ -4,6 +4,10 @@
     { pkgs, ... }:
 
     {
+      home.packages = with pkgs; [
+        ripgrep
+      ];
+
       programs.neovim = {
         enable = true;
         withRuby = false;
@@ -17,7 +21,6 @@
 
         extraPackages = with pkgs; [
           ## UTILITIES FOR PLUGINS
-          ripgrep
           xclip
           wl-clipboard
           tree-sitter

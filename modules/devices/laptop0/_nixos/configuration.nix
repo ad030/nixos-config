@@ -37,20 +37,6 @@
         layout = "us";
         variant = "";
       };
-
-      desktopManager = {
-        # cinnamon.enable = true;
-        # xfce.enable = true;
-        # lxqt.enable = true;
-
-        # idk how to make this wayland shit work
-        # lxqt.extraPackages = with pkgs; [
-        #   lxqt.lxqt-wayland-session
-        #   kdePackages.kwin
-        #   labwc
-        # ];
-      };
-
     };
 
     # Enable touchpad support (enabled default in most desktopManager).
@@ -66,13 +52,6 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-    };
-
-    # Enable the OpenSSH daemon.
-    openssh = {
-      enable = true;
-      settings.PermitRootLogin = "no";
-      settings.PasswordAuthentication = false;
     };
 
     thermald.enable = true;
@@ -93,9 +72,6 @@
     gnome.gnome-keyring.enable = lib.mkForce false;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-
   programs = {
     neovim = {
       enable = true;
@@ -109,8 +85,6 @@
       enable = true;
       enableBashIntegration = true;
     };
-
-    # sway wl compositor
 
     # ssh.startAgent = true;
     # gnupg.agent = {
@@ -129,26 +103,11 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-
-  # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
 
   # List services that you want to enable:
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # home manager stuff
-
-  # fonts
 
   # power management
   powerManagement.enable = true;
