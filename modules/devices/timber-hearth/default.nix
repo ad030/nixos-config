@@ -5,7 +5,7 @@
   ...
 }:
 let
-  hostname = "laptop0";
+  hostname = "timber-hearth";
   nixpkgs = inputs.nixpkgs-unstable;
   systemUsers = [ "nixuser" ];
 in
