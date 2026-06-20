@@ -27,8 +27,8 @@ in
     ])
     # users in nixos configuration
     ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers)
+    # user configs in home manager
     ++ [
-      # user configs in home manager
       {
         home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
       }
