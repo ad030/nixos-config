@@ -1,22 +1,25 @@
 {
   self,
   inputs,
+  config,
   ...
 }:
 let
   username = "solanum";
 in
 {
-  flake.nixosUsers.${username} =
-    { config, pkgs, ... }:
+  flake.modules.nixos."users-${username}" =
+    { pkgs, ... }:
     {
-      isNormalUser = true;
-      shell = pkgs.bash;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
-      hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
+      users.users.${username} = {
+        isNormalUser = true;
+        shell = pkgs.bash;
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+        hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
+      };
     };
 
   flake.hmUsers.${username} =

@@ -7,7 +7,7 @@ let
   username = "root";
 in
 {
-  flake.nixosUsers.${username} = {
+  flake.modules.nixos."users-${username}" = {
     hashedPassword = "!"; # disable root login
   };
 }
