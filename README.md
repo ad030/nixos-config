@@ -1,10 +1,12 @@
 # My NixOS Configuration
 
-Shamelessly copied 99% of this from [GaetanLepage's configuration](https://github.com/GaetanLepage/nix-config).
+Shamelessly copied 99% of this from
+[GaetanLepage's configuration](https://github.com/GaetanLepage/nix-config).
 
 ## Devices
 
-Each device gets its hostname from planets in the game Outer Wilds (2019).
+Each device gets its hostname from planets in the 2019 video game _Outer Wilds_.
+Users are also named after characters from the game.
 
 | Hostname         | Description           |
 | ---------------- | --------------------- |
