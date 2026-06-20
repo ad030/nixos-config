@@ -20,18 +20,16 @@ in
     # nixos modules
     ++ (with config.flake.modules.nixos; [
       core
+      home-manager
       desktop
       gaming
-      home-manager
       flatpak
     ])
     # home manager users
-    ++ (with config.flake.hmUsers; [
+    ++ [
       {
-        home-manager.users = {
-          nixuser = nixuser;
-        };
+        home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
       }
-    ]);
+    ];
   };
 }
