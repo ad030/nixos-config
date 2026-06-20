@@ -42,19 +42,15 @@ require("conform").setup({
 
 		python = { "isort", "black" },
 
-		javascript = { "prettierd" },
-
-		typescript = { "prettierd" },
-
 		css = { "prettierd" },
 
 		html = { "prettierd" },
-
-		json = { "prettierd" },
-
 		yaml = { "prettierd" },
 
-		markdown = { "prettierd" },
+		javascript = { "deno_fmt" },
+		typescript = { "deno_fmt" },
+		json = { "deno_fmt" },
+		markdown = { "deno_fmt" },
 
 		csharp = { "clang-format" },
 
