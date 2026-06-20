@@ -49,14 +49,10 @@ in
         stateVersion = "26.05";
 
         packages = with pkgs; [
-          obsidian # note taking app
           nemo # file manager
 
           papirus-icon-theme
 
-          (texliveBasic.withPackages (ps: [ ps.latexmk ]))
-          biber
-          python314Packages.pylatexenc
         ];
 
         pointerCursor = {

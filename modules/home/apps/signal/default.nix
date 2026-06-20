@@ -1,5 +1,4 @@
 {
-
   flake.modules.homeManager.signal-desktop =
     { pkgs, ... }:
 
@@ -22,6 +21,7 @@
 
           name = "Signal";
           genericName = "Private messaging app";
+          icon = "signal-desktop";
 
           terminal = false;
 
