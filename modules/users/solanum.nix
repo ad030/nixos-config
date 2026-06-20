@@ -3,9 +3,23 @@
   inputs,
   ...
 }:
-
+let
+  username = "solanum";
+in
 {
-  flake.hmUsers.nixuser =
+  flake.nixosUsers.${username} =
+    { config, pkgs, ... }:
+    {
+      isNormalUser = true;
+      shell = pkgs.bash;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+      hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
+    };
+
+  flake.hmUsers.${username} =
     {
       config,
       pkgs,
@@ -27,8 +41,8 @@
       ];
 
       home = {
-        username = "nixuser";
-        homeDirectory = "/home/nixuser";
+        username = username;
+        homeDirectory = "/home/${username}";
         stateVersion = "26.05";
 
         packages = with pkgs; [

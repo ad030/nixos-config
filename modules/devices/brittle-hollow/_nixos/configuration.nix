@@ -13,7 +13,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware.nix
-    ./users.nix
     ./networking.nix
     ./nfs.nix
   ];
