@@ -23,12 +23,13 @@
         package = null;
         portalPackage = null;
 
+        # this shit does not work because home manager hasn't updated for lua configuration yet
         settings = {
           bind =
             let
               mod = "SUPER";
-              mkBind = keys: command: "hl.bind(${keys}, ${command})";
-              exec_cmd = command: "hl.dsp.exec_cmd(${command})";
+              mkBind = keys: command: "hl.bind('${keys}', ${command})";
+              exec_cmd = command: "hl.dsp.exec_cmd('${command}')";
             in
             [
               (mkBind "${mod} + D" (exec_cmd "${lib.getExe pkgs.fuzzel}"))

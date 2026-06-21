@@ -8,7 +8,7 @@
   flake.modules.nixos.desktop.imports = with config.flake.modules.nixos; [
     desktop-manager
     display-manager
-    window-manager
+    compositor
     desktop-packages
     home-manager
   ];

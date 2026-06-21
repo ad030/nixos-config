@@ -1,40 +1,91 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  ...
+}:
 {
   flake.modules.homeManager.niri =
-    { pkgs, lib, ... }:
     {
-      # home.packages = [ pkgs.niri ];
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    {
+      imports = [
+        inputs.niri.homeModules.niri
+        self.modules.homeManager.wl-screenshot
+      ];
+
+      home.packages = with pkgs; [
+        swaybg
+      ];
 
       programs.niri = {
         settings = {
-          binds = lib.mkOptionDefault {
+          spawn-at-startup =
+            let
+              wallpaper = self.images.solar-system;
+            in
+            [
+              {
+                argv = [ "${lib.getExe pkgs.waybar}" ];
+              }
+              {
+                argv = [
+                  "${lib.getExe pkgs.foot}"
+                  "--server"
+                ];
+              }
+              {
+                argv = [
+                  "${lib.getExe pkgs.swaybg}"
+                  "-m"
+                  "fill"
+                  "-i"
+                  wallpaper
+                ];
+              }
+            ];
+
+          binds = {
             "Mod+Return" = {
-              action.spawn = "foot";
+              action.spawn = "footclient";
               hotkey-overlay = {
                 title = "Open terminal";
               };
             };
             "Mod+Shift+E" = {
               action.quit.skip-confirmation = false;
-              hotkey-overlay = {
-                title = "Quit Niri";
-              };
+              hotkey-overlay.title = "Quit Niri";
             };
             "Mod+Shift+Q" = {
               action.close-window = [ ];
-              hotkey-overlay = {
-                title = "Close window";
-              };
+              hotkey-overlay.title = "Close focused window";
             };
             "Mod+D" = {
               action.spawn = [
-                "fuzzel"
-                "toggle"
+                "${lib.getExe pkgs.fuzzel}"
               ];
-              hotkey-overlay = {
-                title = "Open launcher";
-              };
+              hotkey-overlay.title = "Open launcher";
             };
+
+            "Mod+F" = {
+              action.fullscreen-window = [ ];
+            };
+
+            "Mod+Shift+S" = {
+              action.spawn-sh = [ "wl-screenshot" ];
+            };
+            # "Print" = {
+            #   action.screenshot = [ "show-pointer=false" ];
+            # };
+            # "Ctrl+Print" = {
+            #   action.screenshot-screen = [ "show-pointer=false" ];
+            # };
+            # "Alt+Print" = {
+            #   action.screenshot-window = [ "show-pointer=true" ];
+            # };
 
             "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
@@ -43,17 +94,14 @@
             "Mod+W".action.toggle-column-tabbed-display = [ ];
 
             "Mod+H".action.focus-column-left = [ ];
-            "Mod+J".action.focus-window-down = [ ];
-            "Mod+K".action.focus-window-up = [ ];
+            "Mod+J".action.focus-window-or-workspace-down = [ ];
+            "Mod+K".action.focus-window-or-workspace-up = [ ];
             "Mod+L".action.focus-column-right = [ ];
 
             "Mod+Shift+H".action.move-column-left = [ ];
-            "Mod+Shift+J".action.move-window-down = [ ];
-            "Mod+Shift+K".action.move-window-up = [ ];
+            "Mod+Shift+J".action.move-window-down-or-to-workspace-down = [ ];
+            "Mod+Shift+K".action.move-window-up-or-to-workspace-up = [ ];
             "Mod+Shift+L".action.move-column-right = [ ];
-
-            "Mod+Shift+U".action.focus-workspace-down = [ ];
-            "Mod+Shift+I".action.focus-workspace-up = [ ];
 
             "Mod+1".action.focus-workspace = 1;
             "Mod+2".action.focus-workspace = 2;
@@ -77,6 +125,7 @@
             "Mod+Shift+9".action.move-column-to-workspace = 9;
             "Mod+Shift+0".action.move-column-to-workspace = 10;
           };
+
           layout = {
             gaps = 2;
             focus-ring = {

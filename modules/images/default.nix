@@ -1,3 +1,4 @@
+# generate flake.images.<wallpaper> for each image file in ./_wallpapers/
 {
   self,
   inputs,
