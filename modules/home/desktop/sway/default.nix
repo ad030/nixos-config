@@ -99,8 +99,8 @@
           keybindings = lib.mkOptionDefault {
             "${modifier}+Shift+r" = "reload";
             "${modifier}+Shift+s" = "exec wl-screenshot";
-            "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 4%-";
-            "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +4%";
+            "${modifier}+XF86MonBrightnessDown" = "exec ${lib.getExe pkgs.brightnessctl} set 4%-";
+            "${modifier}+XF86MonBrightnessUp" = "exec ${lib.getExe pkgs.brightnessctl} set +4%";
             "${modifier}+XF86AudioMute" =
               "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             "${modifier}+XF86AudioLowerVolume" =
