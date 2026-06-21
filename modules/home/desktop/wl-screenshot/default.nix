@@ -8,17 +8,22 @@
     }:
     let
       basename = "$(date +%Y-%m-%d_%H%M%S).png";
-      screenshot_dir = "$HOME/Pictures/Screenshots";
+      screenshots_dir = "$HOME/Pictures/Screenshots";
+      file = "${screenshots_dir}/${basename}";
+
       wl-screenshot = pkgs.writeShellScriptBin "wl-screenshot" ''
-        mkdir -p ${screenshot_dir}
-        grim -g "$(slurp)" - | tee ${screenshot_dir}/${basename} | wl-copy --paste-once
+        mkdir -p ${screenshots_dir}
+        grim -g "$(slurp)" - | swappy -f - -o ${file} && \
+          wl-copy --paste-once < ${file}
       '';
     in
     {
       home.packages = with pkgs; [
         slurp
         grim
+        swappy
         wl-clipboard
+
         wl-screenshot
       ];
     };
