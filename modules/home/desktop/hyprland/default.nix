@@ -28,33 +28,12 @@
         # use lua config available since hyprland 0.55
         configType = "lua";
 
-        settings = {
-          bind =
-            let
-              mod = "SUPER";
-              lua_exp = lib.generators.mkLuaInline;
-              mkBind = keys: command: "'${keys}', ${command}";
-              exec_cmd = command: "hl.dsp.exec_cmd('${command}')";
-            in
-            [
-              (mkBind "${mod} + D" (exec_cmd "${lib.getExe pkgs.fuzzel}"))
-              (mkBind "${mod} + ENTER" (exec_cmd "${lib.getExe pkgs.foot}"))
-              (mkBind "${mod} + SHIFT + S" (exec_cmd "wl-screenshot"))
+        # configuring hyprland lua in home manager stinks booty
+        # just import everything from another file
+        extraConfig = ''
+          ${import ./_modules/binds.nix { inherit pkgs lib; }}
+        '';
 
-              # (mkBind "${mod} + XF86MonBrightnessDown" (exec_cmd "${lib.getExe pkgs.brightnessctl} set 4%-"))
-              # (mkBind "${mod} + XF86MonBrightnessUp" (exec_cmd "${lib.getExe pkgs.brightnessctl} set +4%"))
-              #
-              # (mkBind "${mod} + XF86AudioMute" (
-              #   exec_cmd "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-              # ))
-              # (mkBind "${mod} + XF86AudioRaiseVolume" (
-              #   exec_cmd "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%+"
-              # ))
-              # (mkBind "${mod} + XF86AudioLowerVolume" (
-              #   exec_cmd "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-"
-              # ))
-            ];
-        };
       };
     };
 }
