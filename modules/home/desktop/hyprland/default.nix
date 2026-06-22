@@ -30,9 +30,16 @@
 
         # configuring hyprland lua in home manager stinks booty
         # just import everything from another file
-        extraConfig = ''
-          ${import ./_modules/binds.nix { inherit pkgs lib; }}
-        '';
+        extraConfig =
+          let
+            rf = builtins.readFile;
+          in
+          ''
+            ${rf ./_modules/monitor.lua}
+            ${rf ./_modules/env.lua}
+            ${rf ./_modules/anim.lua}
+            ${import ./_modules/binds.nix { inherit pkgs lib; }}
+          '';
 
       };
     };

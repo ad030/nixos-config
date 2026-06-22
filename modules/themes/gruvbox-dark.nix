@@ -61,14 +61,14 @@ in
           border = palette.light1;
           background = palette.dark1;
           text = palette.light1;
-          indicator = palette.bright_purple;
+          indicator = palette.neutral_purple;
           childBorder = palette.light0;
         };
         unfocused = {
           border = palette.light4;
           background = palette.dark1;
           text = palette.dark4;
-          indicator = palette.bright_purple;
+          indicator = palette.neutral_purple;
           childBorder = palette.dark4;
         };
 
@@ -77,22 +77,22 @@ in
           border = palette.light4;
           background = palette.dark1;
           text = palette.dark4;
-          indicator = palette.bright_purple;
+          indicator = palette.neutral_purple;
           childBorder = palette.dark4;
         };
         urgent = {
-          border = palette.bright_red;
-          background = palette.bright_red;
+          border = palette.neutral_red;
+          background = palette.neutral_red;
           text = palette.dark1;
-          indicator = palette.bright_purple;
-          childBorder = palette.bright_red;
+          indicator = palette.neutral_purple;
+          childBorder = palette.neutral_red;
         };
         placeholder = {
-          border = palette.bright_green;
+          border = palette.neutral_green;
           background = palette.dark1;
           text = palette.light1;
-          indicator = palette.bright_purple;
-          childBorder = palette.bright_green;
+          indicator = palette.neutral_purple;
+          childBorder = palette.neutral_green;
         };
       };
 
@@ -111,12 +111,12 @@ in
         regular6 = palette.neutral_aqua;
         regular7 = palette.light4;
         bright0 = palette.gray_245;
-        bright1 = palette.bright_red;
-        bright2 = palette.bright_green;
-        bright3 = palette.bright_yellow;
-        bright4 = palette.bright_blue;
-        bright5 = palette.bright_purple;
-        bright6 = palette.bright_aqua;
+        bright1 = palette.neutral_red;
+        bright2 = palette.neutral_green;
+        bright3 = palette.neutral_yellow;
+        bright4 = palette.neutral_blue;
+        bright5 = palette.neutral_purple;
+        bright6 = palette.neutral_aqua;
         bright7 = palette.light1;
       };
 
@@ -131,13 +131,30 @@ in
         input = palette.light1;
         match = palette.light1;
 
-        selection = palette.bright_green;
+        selection = palette.neutral_green;
         selection_text = palette.light1;
         selection_match = palette.light1;
 
         counter = palette.light1;
         border = palette.light1;
-
       });
+
+      niri = {
+        border = {
+          active = {
+            color = palette.light1;
+          };
+          inactive = {
+            color = palette.dark1;
+          };
+          urgent = {
+            color = palette.neutral_red;
+          };
+        };
+        focus-ring = {
+        };
+        shadow = {
+        };
+      };
     };
 }

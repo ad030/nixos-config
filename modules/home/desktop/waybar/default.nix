@@ -20,14 +20,14 @@
           main = {
             layer = "top";
             position = "top";
-            height = 34;
+            height = 40;
 
             modules-left = [
-              "sway/workspaces"
+              "niri/workspaces"
+              # "sway/workspaces"
             ];
-            modules-center = [ "clock" ];
             modules-right = [
-              "sway/scratchpad"
+              # "sway/scratchpad"
               "idle_inhibitor"
               "cpu"
               "memory"
@@ -35,10 +35,11 @@
               "wireplumber"
               "network"
               "battery"
+              "clock"
             ];
 
             idle_inhibitor = {
-              format = "[{icon}]";
+              format = "{icon}";
               format-icons = {
                 activated = "";
                 deactivated = "";
@@ -57,7 +58,7 @@
             };
 
             "sway/scratchpad" = {
-              format = "[{icon}:{count}]";
+              format = "{icon}:{count}";
               format-empty = "";
               show-empty = false;
               format-icons = [ "S" ];
@@ -65,11 +66,17 @@
               tooltip-format = "{app}: {title}";
             };
 
+            "niri/workspaces" = {
+              format = "{value}";
+              all-outputs = false;
+              disable-click = false;
+            };
+
             clock = {
-              format = "{:%a %Y-%m-%d %H:%M}";
+              format = "{:%Y-%m-%d %H:%M}";
 
               tooltip = true;
-              tooltip-format = "<tt><small>{calendar}</small></tt>";
+              tooltip-format = "{:%A, %B %e}";
 
               calendar = {
                 mode = "month";
@@ -87,8 +94,8 @@
                 critical = 15;
               };
 
-              format = "[{icon} {capacity}%]";
-              format-charging = "[{icon} {capacity}%]";
+              format = "{icon} {capacity}%";
+              format-charging = "{icon} {capacity}%";
               format-icons = {
                 charging = "";
                 default = [
@@ -103,7 +110,7 @@
             };
 
             cpu = {
-              format = "[{icon} {usage}%]";
+              format = "{icon} {usage}%";
               format-icons = [ "" ];
 
               interval = 10;
@@ -112,7 +119,7 @@
             };
 
             memory = {
-              format = "[{icon} {percentage}%]";
+              format = "{icon} {percentage}%";
               format-icons = [ "" ];
 
               interval = 30;
@@ -122,8 +129,8 @@
             };
 
             pulseaudio = {
-              format = "[{icon} {volume}%]";
-              format-muted = "[{icon} Muted]";
+              format = "{icon} {volume}%";
+              format-muted = "{icon} Muted";
               # format-source = "[{icon} {source_volume}]";
               # format-source-muted = "[{icon} Muted]";
               # tooltip-format = "{format_source}";
@@ -140,8 +147,8 @@
             };
 
             wireplumber = {
-              format = "[{icon} {volume}%]";
-              format-muted = "[{icon} Muted]";
+              format = "{icon} {volume}%";
+              format-muted = "{icon} Muted";
               # format-source = "[ {source_volume}]";
               # format-source-muted = "[ Muted]";
               tooltip-format = " {source_volume}%";
@@ -154,9 +161,9 @@
             };
 
             network = {
-              format = "[{ifname}]";
-              format-wifi = "[{icon} {signalStrength}%]";
-              format-disconnected = "[{icon} No connection]";
+              format = "{ifname}";
+              format-wifi = "{icon} {signalStrength}%";
+              format-disconnected = "{icon} No connection";
               tooltip-format-wifi = "{essid}\n{ipaddr}";
               format-icons = {
                 wifi = "";
@@ -167,7 +174,7 @@
             };
 
             backlight = {
-              format = "[{icon} {percent}%]";
+              format = "{icon} {percent}%";
               format-icons = [ "" ];
 
               tooltip = false;

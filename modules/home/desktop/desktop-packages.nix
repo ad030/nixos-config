@@ -12,7 +12,8 @@
         kdePackages.okular # pdf viewer
 
         ani-cli # watch anime
-        jellyfin-desktop # media server
+        strawberry # music player
+        jellyfin-desktop # access media server
 
         obsidian # notetaking
         freetube # youtube frontend

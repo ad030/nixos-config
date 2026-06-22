@@ -14,10 +14,8 @@
         }
 
         window#waybar {
-          background-color: ${theme.palette.dark1};
+          background-color: transparent;
           color: ${theme.palette.light1};
-          padding-bottom: 1px;
-          border-bottom: 1px solid ${theme.palette.light1};
         }
 
         #clock,
@@ -27,11 +25,14 @@
         #scratchpad,
         #memory,
         #backlight,
+        #idle_inhibitor,
         #wireplumber,
         #network {
           background-color: ${theme.palette.dark1};
           color: ${theme.palette.light1};
           margin: 2px;
+          padding: 4px;
+          border: 1px solid ${theme.palette.light1};
         }
 
         tooltip {
@@ -49,12 +50,13 @@
 
         #workspaces button {
           padding: 0 8px;
+          margin: 0 1px;
         }
 
         #workspaces button.focused {
           background-color: ${theme.palette.dark4};
-          box-shadow: inset 0 -2px ${theme.palette.light1};
         }
       '';
     };
+  # box-shadow: inset 0 -2px ${theme.palette.light1};
 }

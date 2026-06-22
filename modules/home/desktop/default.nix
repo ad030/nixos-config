@@ -4,7 +4,7 @@
     desktop-packages
     sway
     niri
-    hyprland
+    # hyprland
 
     waybar
     fuzzel
