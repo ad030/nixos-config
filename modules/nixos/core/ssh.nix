@@ -6,5 +6,10 @@
       settings.PermitRootLogin = "no";
       settings.PasswordAuthentication = false;
     };
+
+    programs.ssh = {
+      startAgent = true;
+      enableAskPassword = true;
+    };
   };
 }
