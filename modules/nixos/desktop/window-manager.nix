@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.compositor =
+  flake.modules.nixos.window-manager =
     {
       config,
       pkgs,
