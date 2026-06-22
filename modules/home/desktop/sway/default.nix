@@ -9,7 +9,7 @@
     }:
     let
       theme = self.themes.gruvbox-dark;
-      wallpaper = self.images.solar-system;
+      wallpaper = self.images.ow-archaeologist-cover;
       modifier = "Mod4";
     in
     {

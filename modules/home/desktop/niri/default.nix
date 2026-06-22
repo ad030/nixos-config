@@ -26,7 +26,7 @@
 
           spawn-at-startup =
             let
-              wallpaper = self.images.solar-system;
+              wallpaper = self.images.ow-archaeologist-cover;
             in
             [
               {
