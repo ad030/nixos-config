@@ -13,7 +13,7 @@
 
       programs = {
         sway = {
-          enable = true;
+          enable = false;
           xwayland.enable = true;
         };
 
