@@ -21,9 +21,9 @@
       url = "github:in-a-dil-emma/declarative-flatpak/latest";
     };
 
-    # niri = {
-    #   url = "github:sodiboo/niri-flake";
-    # };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+    };
 
     # noctalia = {
     #   url = "github:noctalia-dev/noctalia-shell";
