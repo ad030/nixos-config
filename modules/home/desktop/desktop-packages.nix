@@ -11,6 +11,10 @@
         libreoffice # office suite
         kdePackages.okular # pdf viewer
 
+        # image viewers
+        feh
+        swayimg
+
         ani-cli # watch anime
         strawberry # music player
         jellyfin-desktop # access media server
