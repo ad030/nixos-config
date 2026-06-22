@@ -31,7 +31,7 @@
           background-color: ${theme.palette.dark1};
           color: ${theme.palette.light1};
           margin: 2px;
-          padding: 4px;
+          padding: 4px 12px;
           border: 1px solid ${theme.palette.light1};
         }
 
@@ -50,7 +50,7 @@
 
         #workspaces button {
           padding: 0 8px;
-          margin: 0 1px;
+          margin: 0 2px;
         }
 
         #workspaces button.focused {
