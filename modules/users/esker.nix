@@ -1,3 +1,5 @@
+# user for server machines
+
 {
   self,
   inputs,
