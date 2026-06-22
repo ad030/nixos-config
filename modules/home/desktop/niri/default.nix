@@ -71,6 +71,11 @@
             };
 
             "Mod+F" = {
+              # action.maximize-window-to-edges = [ ];
+              action.maximize-column = [ ];
+            };
+
+            "Mod+Shift+F" = {
               action.fullscreen-window = [ ];
             };
 

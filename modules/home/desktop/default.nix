@@ -3,7 +3,7 @@
   flake.modules.homeManager.desktop.imports = with config.flake.modules.homeManager; [
     desktop-packages
     sway
-    # niri
+    niri
     # hyprland
 
     waybar

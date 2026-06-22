@@ -18,10 +18,14 @@
         };
 
         niri = {
-          enable = false;
+          enable = true;
         };
 
-        hyprland.enable = false;
+        hyprland = {
+          enable = false;
+          withUWSM = true;
+          xwayland.enable = true;
+        };
       };
     };
 }
