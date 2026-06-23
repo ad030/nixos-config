@@ -12,7 +12,7 @@
     programs.niri.settings = {
       binds = {
         "Mod+Return" = {
-          action.spawn = "${lib.getExe' pkgs.foot "footclient"}";
+          action.spawn = [ "${lib.getExe' pkgs.foot "footclient"}" ];
           hotkey-overlay = {
             title = "Open terminal";
           };
@@ -26,7 +26,7 @@
           hotkey-overlay.title = "Close focused window";
         };
         "Mod+D" = {
-          action.spawn = "${lib.getExe pkgs.fuzzel}";
+          action.spawn = [ "${lib.getExe pkgs.fuzzel}" ];
           hotkey-overlay.title = "Open launcher";
         };
 
@@ -40,35 +40,75 @@
         };
 
         "Mod+Shift+S" = {
-          action.spawn-sh = [ "wl-screenshot" ];
+          action.spawn = [ "wl-screenshot" ];
         };
 
         "Mod+XF86MonBrightnessDown" = {
-          action.spawn = "${lib.getExe pkgs.brightnessctl} set 4%-";
+          action.spawn = [
+            "${lib.getExe pkgs.brightnessctl}"
+            "set"
+            "4%-"
+          ];
         };
 
+        # "Mod+F3" = {
+        #   action.spawn = [
+        #     "${lib.getExe pkgs.brightnessctl}"
+        #     "set"
+        #     "4%-"
+        #   ];
+        # };
+
         "Mod+XF86MonBrightnessUp" = {
-          action.spawn = "${lib.getExe pkgs.brightnessctl} set +4%";
+          action.spawn = [
+            "${lib.getExe pkgs.brightnessctl}"
+            "set"
+            "+4%"
+          ];
         };
 
         "Mod+XF86AudioMute" = {
-          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          action.spawn = [
+            "${lib.getExe' pkgs.wireplumber "wpctl"}"
+            "set-mute"
+            "@DEFAULT_AUDIO_SINK@"
+            "toggle"
+          ];
         };
         "Mod+XF86AudioRaiseVolume" = {
-          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+          action.spawn = [
+            "${lib.getExe' pkgs.wireplumber "wpctl"}"
+            "set-volume"
+            "@DEFAULT_AUDIO_SINK@"
+            "4%+"
+          ];
         };
         "Mod+XF86AudioLowerVolume" = {
-          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+          action.spawn = [
+            "${lib.getExe' pkgs.wireplumber "wpctl"}"
+            "set-volume"
+            "@DEFAULT_AUDIO_SINK@"
+            "4%-"
+          ];
         };
 
         "Mod+XF86AudioPrev" = {
-          action.spawn = "${lib.getExe pkgs.playerctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          action.spawn = [
+            "${lib.getExe pkgs.playerctl}"
+            "previous"
+          ];
         };
         "Mod+XF86AudioPlay" = {
-          action.spawn = "${lib.getExe pkgs.playerctl} set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+          action.spawn = [
+            "${lib.getExe pkgs.playerctl}"
+            "play-pause"
+          ];
         };
         "Mod+XF86AudioNext" = {
-          action.spawn = "${lib.getExe pkgs.playerctl} set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+          action.spawn = [
+            "${lib.getExe pkgs.playerctl}"
+            "next"
+          ];
         };
 
         "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
