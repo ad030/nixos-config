@@ -7,9 +7,17 @@
     }:
 
     {
-      environment.systemPackages = with pkgs; [
-        sddm-astronaut
-      ];
+      environment.systemPackages =
+        let
+          sddm-astronaut = (
+            pkgs.sddm-astronaut.override {
+              embeddedTheme = "black_hole";
+            }
+          );
+        in
+        [
+          sddm-astronaut
+        ];
 
       services.displayManager = {
         sddm = {
@@ -17,17 +25,7 @@
           wayland.enable = true;
 
           theme = "sddm-astronaut-theme";
-          extraPackages = [ pkgs.sddm-astronaut ];
         };
-
-        # ly = {
-        #   enable = true;
-        #   settings = {
-        #     numlock = false;
-        #     bigclock = "en";
-        #     vimode = true;
-        #   };
-        # };
       };
     };
 }
