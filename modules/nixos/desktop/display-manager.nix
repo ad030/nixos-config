@@ -25,6 +25,11 @@
           wayland.enable = true;
 
           theme = "sddm-astronaut-theme";
+
+          # the theme will not load without this
+          extraPackages = [
+            pkgs.sddm-astronaut # this bit is needed!!!
+          ];
         };
       };
     };
