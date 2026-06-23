@@ -7,6 +7,8 @@
   flake.modules.nixos.reverse-proxy = {
     services.nginx = {
       enable = true;
+
+      recommendedProxySettings = true;
     };
   };
 }
