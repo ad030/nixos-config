@@ -65,10 +65,6 @@
         STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
       };
     };
-
-    # secrets service
-    # passSecretService.enable = true;
-    gnome.gnome-keyring.enable = lib.mkForce false;
   };
 
   programs = {
@@ -92,12 +88,12 @@
     # };
   };
 
-  # for pipewire
   security = {
     rtkit.enable = true;
     pam = {
       services = {
         swaylock = { };
+        hyprlock = { };
       };
     };
   };

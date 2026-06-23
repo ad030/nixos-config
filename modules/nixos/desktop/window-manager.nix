@@ -1,3 +1,4 @@
+{ self, inputs, ... }:
 {
   flake.modules.nixos.window-manager =
     {
@@ -7,9 +8,9 @@
       ...
     }:
     {
-      # environment.systemPackages = with pkgs; [
-      #   kitty
-      # ];
+      imports = [
+        self.modules.nixos.idle-lock
+      ];
 
       programs = {
         sway = {

@@ -15,10 +15,12 @@
       imports = [
         inputs.niri.homeModules.niri
         self.modules.homeManager.wl-screenshot
+        self.modules.homeManager.idle-daemon
       ];
 
       home.packages = with pkgs; [
         swaybg
+        swayidle
       ];
 
       programs.niri = {
@@ -45,6 +47,12 @@
                   "fill"
                   "-i"
                   wallpaper
+                ];
+              }
+              {
+                argv = [
+                  "${lib.getExe pkgs.swayidle}"
+                  "-w"
                 ];
               }
             ];

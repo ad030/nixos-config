@@ -119,41 +119,5 @@
 
       }; # end wayland.windowManager.sway
 
-      services.swayidle =
-        let
-          lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
-          display = status: "${pkgs.sway}/bin/swaymsg 'output * power ${status}'";
-        in
-        {
-          enable = true;
-          timeouts = [
-            {
-              timeout = 240;
-              command = "${pkgs.libnotify}/bin/notify-send 'Locking in 60 seconds' -t 5000";
-            }
-            {
-              timeout = 300;
-              command = lock;
-            }
-            {
-              timeout = 310;
-              command = display "off";
-              resumeCommand = display "on";
-            }
-            {
-              timeout = 360;
-              command = "${pkgs.systemd}/bin/systemctl suspend";
-            }
-          ];
-
-          events = {
-            before-sleep = (display "off") + "; " + lock;
-            lock = (display "off") + "; " + lock;
-            after-resume = display "on";
-            unlock = display "on";
-          };
-
-        }; # end services.swayidle
-
     };
 }

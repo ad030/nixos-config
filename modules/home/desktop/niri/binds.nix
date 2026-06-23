@@ -8,7 +8,7 @@
     programs.niri.settings = {
       binds = {
         "Mod+Return" = {
-          action.spawn = "${lib.getExe pkgs.foot}";
+          action.spawn = "${lib.getExe' pkgs.foot "footclient"}";
           hotkey-overlay = {
             title = "Open terminal";
           };
@@ -39,15 +39,23 @@
           action.spawn-sh = [ "wl-screenshot" ];
         };
 
-        # "Print" = {
-        #   action.screenshot = [ "show-pointer=false" ];
-        # };
-        # "Ctrl+Print" = {
-        #   action.screenshot-screen = [ "show-pointer=false" ];
-        # };
-        # "Alt+Print" = {
-        #   action.screenshot-window = [ "show-pointer=true" ];
-        # };
+        "Mod+XF86MonBrightnessDown" = {
+          action.spawn = "${lib.getExe pkgs.brightnessctl} set 4%-";
+        };
+
+        "Mod+XF86MonBrightnessUp" = {
+          action.spawn = "${lib.getExe pkgs.brightnessctl} set +4%";
+        };
+
+        "Mod+XF86AudioMute" = {
+          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        };
+        "Mod+XF86AudioRaiseVolume" = {
+          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+        };
+        "Mod+XF86AudioLowerVolume" = {
+          action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+        };
 
         "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
