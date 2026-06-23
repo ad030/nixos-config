@@ -5,6 +5,10 @@
 }:
 {
   flake.modules.homeManager.niri = { pkgs, lib, ... }: {
+    home.packages = with pkgs; [
+      playerctl
+    ];
+
     programs.niri.settings = {
       binds = {
         "Mod+Return" = {
@@ -57,6 +61,16 @@
           action.spawn = "${lib.getExe' pkgs.wireplumber "wpctl"} set-volume @DEFAULT_AUDIO_SINK@ 4%-";
         };
 
+        "Mod+XF86AudioPrev" = {
+          action.spawn = "${lib.getExe pkgs.playerctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        };
+        "Mod+XF86AudioPlay" = {
+          action.spawn = "${lib.getExe pkgs.playerctl} set-volume @DEFAULT_AUDIO_SINK@ 4%+";
+        };
+        "Mod+XF86AudioNext" = {
+          action.spawn = "${lib.getExe pkgs.playerctl} set-volume @DEFAULT_AUDIO_SINK@ 4%-";
+        };
+
         "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
         "Mod+O".action.toggle-overview = [ ];
@@ -94,10 +108,6 @@
         "Mod+Shift+8".action.move-window-to-workspace = 8;
         "Mod+Shift+9".action.move-window-to-workspace = 9;
         "Mod+Shift+0".action.move-window-to-workspace = 10;
-
-        # scratchpad functionality
-        "Mod+Minus".action.focus-workspace = "scratchpad";
-        "Mod+Shift+Minus".action.move-window-to-workspace = "scratchpad";
       };
     };
   };
