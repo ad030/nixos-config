@@ -28,6 +28,7 @@
             ];
             modules-right = [
               # "sway/scratchpad"
+              # "mpris"
               "idle_inhibitor"
               "cpu"
               "memory"
@@ -178,6 +179,10 @@
               format-icons = [ "" ];
 
               tooltip = false;
+            };
+
+            mpris = {
+              format = "{artist} - {title} [{position}/{length}]";
             };
 
           }; # end main bar

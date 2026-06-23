@@ -21,6 +21,7 @@
         #clock,
         #battery,
         #cpu,
+        #mpris,
         #workspaces,
         #scratchpad,
         #memory,
