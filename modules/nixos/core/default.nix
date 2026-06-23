@@ -14,5 +14,7 @@
     fonts
     users-settings
     ssh
+    security
+    secrets
   ];
 }

@@ -65,10 +65,6 @@
         STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
       };
     };
-
-    # secrets service
-    # passSecretService.enable = true;
-    gnome.gnome-keyring.enable = lib.mkForce false;
   };
 
   programs = {
@@ -84,22 +80,11 @@
       enable = true;
       enableBashIntegration = true;
     };
-
-    # ssh.startAgent = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
   };
 
   # for pipewire
   security = {
     rtkit.enable = true;
-    pam = {
-      services = {
-        swaylock = { };
-      };
-    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
