@@ -7,9 +7,6 @@
       settings.PasswordAuthentication = false;
     };
 
-    programs.ssh = {
-      startAgent = true;
-      enableAskPassword = true;
-    };
+    programs.ssh.startAgent = false; # use gnome-keyring ssh-agent
   };
 }
