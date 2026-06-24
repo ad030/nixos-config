@@ -13,9 +13,7 @@
       binds = {
         "Mod+Return" = {
           action.spawn = [ "${lib.getExe' pkgs.foot "footclient"}" ];
-          hotkey-overlay = {
-            title = "Open terminal";
-          };
+          hotkey-overlay.title = "Open terminal";
         };
         "Mod+Shift+E" = {
           action.quit.skip-confirmation = false;
@@ -41,6 +39,7 @@
 
         "Mod+Shift+S" = {
           action.spawn = [ "wl-screenshot" ];
+          hotkey-overlay.title = "Take screenshot";
         };
 
         "Mod+XF86MonBrightnessDown" = {
@@ -49,6 +48,7 @@
             "set"
             "4%-"
           ];
+          hotkey-overlay.title = "Lower screen brightness";
         };
 
         # "Mod+F3" = {
@@ -65,6 +65,7 @@
             "set"
             "+4%"
           ];
+          hotkey-overlay.title = "Raise screen brightness";
         };
 
         "Mod+XF86AudioMute" = {
@@ -74,7 +75,9 @@
             "@DEFAULT_AUDIO_SINK@"
             "toggle"
           ];
+          hotkey-overlay.title = "Mute audio";
         };
+
         "Mod+XF86AudioRaiseVolume" = {
           action.spawn = [
             "${lib.getExe' pkgs.wireplumber "wpctl"}"
@@ -82,6 +85,7 @@
             "@DEFAULT_AUDIO_SINK@"
             "4%+"
           ];
+          hotkey-overlay.title = "Raise volume";
         };
         "Mod+XF86AudioLowerVolume" = {
           action.spawn = [
@@ -90,6 +94,7 @@
             "@DEFAULT_AUDIO_SINK@"
             "4%-"
           ];
+          hotkey-overlay.title = "Lower volume";
         };
 
         "Mod+XF86AudioPrev" = {
@@ -97,18 +102,23 @@
             "${lib.getExe pkgs.playerctl}"
             "previous"
           ];
+          hotkey-overlay.title = "Play previous song";
         };
+
         "Mod+XF86AudioPlay" = {
           action.spawn = [
             "${lib.getExe pkgs.playerctl}"
             "play-pause"
           ];
+          hotkey-overlay.title = "Play/pause current song";
         };
+
         "Mod+XF86AudioNext" = {
           action.spawn = [
             "${lib.getExe pkgs.playerctl}"
             "next"
           ];
+          hotkey-overlay.title = "Play next song";
         };
 
         "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
