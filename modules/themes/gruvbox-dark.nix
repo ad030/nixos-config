@@ -97,7 +97,7 @@ in
       };
 
       foot = {
-        alpha = "0.80";
+        alpha = "1.00";
       }
       // builtins.mapAttrs (_: rgb: lib.removePrefix "#" rgb) {
         background = palette.dark1;

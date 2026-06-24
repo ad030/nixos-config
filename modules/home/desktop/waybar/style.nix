@@ -3,6 +3,7 @@
   flake.modules.homeManager.waybar =
     let
       theme = self.themes.gruvbox-dark;
+      alpha = "1.00";
     in
     {
       programs.waybar.style = ''
@@ -29,7 +30,7 @@
         #idle_inhibitor,
         #wireplumber,
         #network {
-          background-color: ${theme.palette.dark1};
+          background-color: alpha(${theme.palette.dark1}, ${alpha});
           color: ${theme.palette.light1};
           margin: 2px;
           padding: 4px 12px;
@@ -37,7 +38,7 @@
         }
 
         tooltip {
-          background-color: ${theme.palette.dark1};
+          background-color: alpha(${theme.palette.dark1}, ${alpha});
           border: 1px solid ${theme.palette.light1};
         }
 
@@ -55,7 +56,7 @@
         }
 
         #workspaces button.focused {
-          background-color: ${theme.palette.dark4};
+          background-color: alpha(${theme.palette.dark4}, ${alpha});
         }
       '';
     };
