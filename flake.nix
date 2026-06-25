@@ -25,26 +25,10 @@
       url = "github:sodiboo/niri-flake";
     };
 
-    # noctalia = {
-    #   url = "github:noctalia-dev/noctalia-shell";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+    };
 
-    # dank material shell
-    # dms = {
-    #   url = "github:AvengeMedia/DankMaterialShell/stable";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
-
-    # vicinae = {
-    #   url = "github:vicinaehq/vicinae";
-    #   # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
-
-    # vicinae-extensions = {
-    #   url = "github:vicinaehq/extensions";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
