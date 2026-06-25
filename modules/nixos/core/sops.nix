@@ -10,6 +10,10 @@
       ...
     }:
     {
+      imports = [
+        inputs.sops-nix.nixosModules.sops
+      ];
+
       environment.systemPackages = with pkgs; [
         age
       ];
@@ -18,5 +22,6 @@
       sops.defaultSopsFormat = "yaml";
 
       sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+      sops.age.generateKey = true;
     };
 }
