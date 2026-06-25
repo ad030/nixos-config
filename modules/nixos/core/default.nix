@@ -15,6 +15,6 @@
     users-settings
     ssh
     security
-    secrets
+    secret-service
   ];
 }

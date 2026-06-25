@@ -1,7 +1,6 @@
-# use gnome keyring for secrets backend
 { self, inputs, ... }:
 {
-  flake.modules.nixos.secrets =
+  flake.modules.nixos.secret-service =
     {
       pkgs,
       config,
@@ -9,6 +8,7 @@
       ...
     }:
     {
+      # use gnome keyring for secrets backend
       services.gnome.gnome-keyring.enable = true;
       security.pam.services.login.enableGnomeKeyring = true;
     };
