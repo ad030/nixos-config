@@ -7,7 +7,7 @@
 let
   hostname = "attlerock";
   nixpkgs = inputs.nixpkgs-stable;
-  systemUsers = [ "solanum" ];
+  systemUsers = [ "esker" ];
 in
 {
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
@@ -20,18 +20,9 @@ in
     # nixos modules
     ++ (with config.flake.modules.nixos; [
       core
-      home-manager
-      desktop
-      gaming
-      flatpak
+      server
     ])
     # users in nixos configuration
-    ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers)
-    # user configs in home manager
-    ++ [
-      {
-        home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
-      }
-    ];
+    ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers);
   };
 }
