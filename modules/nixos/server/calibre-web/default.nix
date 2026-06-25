@@ -1,8 +1,15 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.calibre-web =
-
+    let
+      inherit (self.lib.server) mkMediaUser;
+      serviceUser = mkMediaUser {
+        name = "calibre-web";
+        uid = 3005;
+      };
+    in
     {
+      users = serviceUser.users;
 
       services.nginx.virtualHosts = {
         "calibre-web.home" = {
@@ -38,6 +45,8 @@
             ...
           }:
           {
+            users = serviceUser.users;
+
             services.calibre-web = {
               enable = true;
             };

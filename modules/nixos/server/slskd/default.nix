@@ -3,10 +3,10 @@
 {
   flake.modules.nixos.slskd =
     let
-      inherit (self.modules.nixos.serverLib) mkMediaUser;
+      inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "slskd";
-        gid = 3003;
+        uid = 3003;
       };
     in
     {
@@ -56,7 +56,7 @@
               enable = true;
 
               user = "slskd";
-              group = "media";
+              group = "slskd";
 
               openFirewall = true;
 

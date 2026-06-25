@@ -7,7 +7,7 @@
   flake.modules.nixos.jellyfin =
     { pkgs, lib, ... }:
     let
-      inherit (self.modules.nixos.serverLib) mkMediaUser;
+      inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "jellyfin";
         uid = 3002;

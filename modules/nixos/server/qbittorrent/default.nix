@@ -3,7 +3,7 @@
   flake.modules.nixos.qbittorrent =
     { pkgs, lib, ... }:
     let
-      inherit (self.modules.nixos.serverLib) mkMediaUser;
+      inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "qbittorrent";
         uid = 3007;
@@ -57,7 +57,7 @@
               package = pkgs.qbittorrent-nox;
 
               user = "qbittorrent";
-              group = "media";
+              group = "qbittorrent";
 
               openFirewall = true;
               torrentingPort = 6881;

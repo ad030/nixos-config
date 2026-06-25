@@ -2,10 +2,10 @@
 {
   flake.modules.nixos.adguardhome =
     let
-      inherit (self.modules.nixos.serverLib) mkMediaUser;
+      inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "adguardhome";
-        gid = 3004;
+        uid = 3004;
       };
     in
     {

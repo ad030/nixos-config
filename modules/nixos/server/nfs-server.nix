@@ -1,4 +1,3 @@
-{ self, inputs, ... }:
 {
   flake.modules.nixos.nfs-server = {
     services.nfs.server = {

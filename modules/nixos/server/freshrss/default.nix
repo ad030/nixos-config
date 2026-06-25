@@ -2,10 +2,10 @@
 {
   flake.modules.nixos.freshrss =
     let
-      inherit (self.modules.nixos.serverLib) mkMediaUser;
+      inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "freshrss";
-        gid = 3006;
+        uid = 3006;
       };
     in
 
