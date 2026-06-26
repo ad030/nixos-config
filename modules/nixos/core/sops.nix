@@ -30,6 +30,5 @@
       sops.defaultSopsFormat = "yaml";
 
       sops.age.keyFile = age-key-file;
-      sops.age.generateKey = true;
     };
 }
