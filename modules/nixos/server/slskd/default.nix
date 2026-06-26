@@ -1,7 +1,12 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  ...
+}:
 
 {
   flake.modules.nixos.slskd =
+    { config, ... }:
     let
       inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
@@ -19,6 +24,10 @@
             recommendedProxySettings = true;
           };
         };
+      };
+
+      sops.secrets.slskd_env = {
+        owner = "slskd";
       };
 
       containers.slskd = {
@@ -42,6 +51,14 @@
           }
         ];
 
+        # pass env file into container
+        bindMounts = {
+          "/run/secrets/slskd_env" = {
+            hostPath = config.sops.secrets.slskd_env.path;
+            isReadOnly = true;
+          };
+        };
+
         config =
           {
             config,
@@ -57,6 +74,7 @@
 
               user = "slskd";
               group = "slskd";
+              environmentFile = "/run/secrets/slskd_env";
 
               openFirewall = true;
 
