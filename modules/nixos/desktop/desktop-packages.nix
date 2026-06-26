@@ -3,6 +3,9 @@
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
+        firefox
+        foot
+
         ffmpeg
         imagemagick
         mpv
