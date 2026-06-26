@@ -11,8 +11,7 @@ in
   flake.modules.nixos."users-${username}" =
     { config, pkgs, ... }:
     {
-
-      config.sops.secrets.passwords.${username}.neededForUsers = true;
+      sops.secrets."passwords/${username}".neededForUsers = true;
 
       users.users.${username} = {
         isNormalUser = true;
@@ -21,7 +20,7 @@ in
           "networkmanager"
           "wheel"
         ];
-        hashedPasswordFile = config.sops.secrets.passwords.${username}.path;
+        hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
       };
     };
 

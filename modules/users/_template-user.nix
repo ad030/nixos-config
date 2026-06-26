@@ -10,13 +10,13 @@ in
     { config, pkgs, ... }:
     {
       # use sops for user password
-      config.sops.secrets.passwords.${username}.neededForUsers = true;
+      sops.secrets."passwords/${username}".neededForUsers = true;
 
       users.users.${username} = {
         isNormalUser = true;
         shell = pkgs.bash;
         extraGroups = [ ];
-        hashedPasswordFile = config.sops.secrets.passwords.${username}.path;
+        hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
       };
     };
 
