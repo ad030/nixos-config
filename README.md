@@ -1,6 +1,6 @@
 # My NixOS Configuration
 
-Shamelessly copied 99% of this from
+I shamelessly copied 99% of this from
 [GaetanLepage's configuration](https://github.com/GaetanLepage/nix-config).
 
 ## Devices
@@ -18,3 +18,18 @@ Users are also named after characters from the game.
 
 Package versions are locked by flake.lock. To update run `nix flake update` and
 then rebuild the system.
+
+## Secrets
+
+Secrets are encrypted in `secrets/secrets.yaml`. To unlock them, the host must
+have an age key in the `.sops.yaml` file.
+
+Each host derives an age key from its SSH host key located at
+`/etc/ssh/ssh_host_id25519_key`.
+
+### Unlocking secrets on new host using sops and age
+
+If decryption fails, it is impossible to log into any user because user
+passwords are also stored in `secrets/secrets.yaml`. As a last resort, the root
+user can be used to log in and fix it. The root user is not intended to be used
+otherwise.
