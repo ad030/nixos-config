@@ -3,7 +3,6 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 let
@@ -11,7 +10,7 @@ let
 in
 {
   flake.modules.nixos."users-${username}" =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       config.sops.secrets.passwords.${username}.neededForUsers = true;
 

@@ -1,15 +1,13 @@
 {
   self,
   inputs,
-  config,
-  ...
 }:
 let
   username = "CHANGE_ME";
 in
 {
   flake.modules.nixos."users-${username}" =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       # use sops for user password
       config.sops.secrets.passwords.${username}.neededForUsers = true;
