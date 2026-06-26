@@ -7,8 +7,10 @@
       config,
       ...
     }:
+    let
+      theme = self.themes.gruvbox-dark.waybar;
+    in
     {
-
       services = {
         blueman-applet.enable = true;
         network-manager-applet.enable = true;
@@ -16,6 +18,9 @@
 
       programs.waybar = {
         enable = true;
+
+        style = theme;
+
         settings = {
           main = {
             layer = "top";

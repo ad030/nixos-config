@@ -52,6 +52,7 @@ in
         faded_aqua = "#427b58";
         faded_orange = "#af3a03";
       };
+      alpha = "1.00";
     in
     {
       inherit palette;
@@ -97,7 +98,7 @@ in
       };
 
       foot = {
-        alpha = "1.00";
+        inherit alpha;
       }
       // builtins.mapAttrs (_: rgb: lib.removePrefix "#" rgb) {
         background = palette.dark1;
@@ -156,5 +157,62 @@ in
         shadow = {
         };
       };
+
+      # waybar style.css as a string
+      waybar = ''
+        * {
+          border-radius: 0;
+          font-family: "MesloLGM Nerd Font", "Font Awesome 5 Free";
+          color: ${palette.light1};
+          font-size: 16px;
+        }
+
+        window#waybar {
+          background-color: transparent;
+          color: ${palette.light1};
+        }
+
+        #clock,
+        #battery,
+        #cpu,
+        #mpris,
+        #workspaces,
+        #scratchpad,
+        #memory,
+        #backlight,
+        #idle_inhibitor,
+        #wireplumber,
+        #network {
+          background-color: alpha(${palette.dark1}, ${alpha});
+          color: ${palette.light1};
+          margin: 2px;
+          padding: 4px 12px;
+          border: 1px solid ${palette.light1};
+        }
+
+        tooltip {
+          background-color: alpha(${palette.dark1}, ${alpha});
+          border: 1px solid ${palette.light1};
+        }
+
+        button:hover {
+          box-shadow: none;
+          text-shadow: none;
+          border-color: transparent;
+          background: none;
+          transition: none;
+        }
+
+        #workspaces button {
+          padding: 0 8px;
+          margin: 0 2px;
+        }
+
+        #workspaces button.focused {
+          background-color: alpha(${palette.dark4}, ${alpha});
+        }
+      '';
+
     };
+
 }
