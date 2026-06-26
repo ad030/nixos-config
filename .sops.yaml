@@ -1,12 +1,12 @@
 keys:
-  - &recovery age1agxh4kg2nac4zakv3hwfv42qx5mssc0q6cs85l4m5k7kk22ed5fqrcxavl # manually generated
+  - &age_recovery age1agxh4kg2nac4zakv3hwfv42qx5mssc0q6cs85l4m5k7kk22ed5fqrcxavl # manually generated
 
   # automatically generated from ssh host keys
-  - &brittle-hollow age1swu2dp4pxctvsa2w20fm6959qg0qsyqxgrsgysh3fj4qdvasm3fsy6r5vv
+  - &age_brittle-hollow age1swu2dp4pxctvsa2w20fm6959qg0qsyqxgrsgysh3fj4qdvasm3fsy6r5vv
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
-          - *primary
-          - *brittle-hollow
+          - *age_primary
+          - *age_brittle-hollow
