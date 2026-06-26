@@ -17,9 +17,6 @@
     ./nfs.nix
   ];
 
-  # Bootloader.
-  boot.consoleLogLevel = 3;
-
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
@@ -66,43 +63,6 @@
       };
     };
   };
-
-  programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-
-    firefox.enable = true;
-
-    # foot terminal emulator
-    foot = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-
-    # ssh.startAgent = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-  };
-
-  security = {
-    rtkit.enable = true;
-    pam = {
-      services = {
-        swaylock = { };
-        hyprlock = { };
-      };
-    };
-  };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
-  # List services that you want to enable:
 
   # power management
   powerManagement.enable = true;

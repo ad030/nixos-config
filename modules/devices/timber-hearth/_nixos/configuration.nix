@@ -17,9 +17,6 @@
     ./nfs.nix
   ];
 
-  # Bootloader.
-  boot.consoleLogLevel = 3;
-
   # Set your time zone.
   time.timeZone = "America/Toronto";
 
@@ -52,43 +49,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-
-    thermald.enable = true;
-    tlp = {
-      enable = false;
-
-      settings = {
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "powersave";
-
-        START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-        STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-      };
-    };
   };
-
-  programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
-
-    firefox.enable = true;
-
-    # foot terminal emulator
-    foot = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-  };
-
-  # for pipewire
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
-  # List services that you want to enable:
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
