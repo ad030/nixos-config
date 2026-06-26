@@ -9,9 +9,6 @@
       pkgs,
       ...
     }:
-    let
-      age-key-file = "/var/lib/sops-nix/key.txt";
-    in
     {
       imports = [
         inputs.sops-nix.nixosModules.sops
@@ -22,13 +19,11 @@
         age
       ];
 
-      environment.sessionVariables = {
-        SOPS_AGE_KEY_FILE = age-key-file;
+      sops = {
+        defaultSopsFile = "${self}/secrets/secrets.yaml";
+        defaultSopsFormat = "yaml";
+
+        age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       };
-
-      sops.defaultSopsFile = "${self}/secrets/secrets.yaml";
-      sops.defaultSopsFormat = "yaml";
-
-      sops.age.keyFile = age-key-file;
     };
 }
