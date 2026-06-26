@@ -3,7 +3,7 @@
     users.mutableUsers = false;
 
     # root user only for emergency logins (if i mess up sops-nix and passwords are disabled)
-    users.users.root.hashedPassword = "$y$j9T$G8vUPuF8xgGGP8Y/CbP9x.$jzOR575KBP/R/PT9baCSmvRuqzhQw3rb88xKTijHkF8";
+    users.users.root.hashedPassword = "$y$j9T$KPQS8q1qZ8.HR5rtnT33N0$jlOkZFzUl4tWpKXBzreJcbe7cQW1E0JPL9.2uOKp0u.";
 
     # create user and group for use in shared media directories (nfs)
     users.users.media = {
