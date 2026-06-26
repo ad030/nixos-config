@@ -1,10 +1,10 @@
 {
-  flake.modules.nixos.networking-server = {
+  flake.modules.nixos.networking-server = { lib, ... }: {
     networking.nat = {
       enable = true;
       # Use "ve-*" when using nftables instead of iptables
       internalInterfaces = [ "ve-+" ];
-      externalInterface = "eno1";
+      externalInterface = lib.mkDefault "eno1";
       # Lazy IPv6 connectivity for the container
       enableIPv6 = true;
     };
