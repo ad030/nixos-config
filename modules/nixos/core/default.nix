@@ -16,5 +16,6 @@
     ssh
     security
     secret-service
+    sops
   ];
 }
