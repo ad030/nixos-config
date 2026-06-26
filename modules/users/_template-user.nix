@@ -11,11 +11,14 @@ in
   flake.modules.nixos."users-${username}" =
     { pkgs, ... }:
     {
+      # use sops for user password
+      config.sops.secrets.passwords.${username}.neededForUsers = true;
+
       users.users.${username} = {
         isNormalUser = true;
         shell = pkgs.bash;
         extraGroups = [ ];
-        hashedPassword = "";
+        hashedPasswordFile = config.sops.secrets.passwords.${username}.path;
       };
     };
 

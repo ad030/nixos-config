@@ -13,6 +13,8 @@ in
   flake.modules.nixos."users-${username}" =
     { pkgs, ... }:
     {
+      config.sops.secrets.passwords.${username}.neededForUsers = true;
+
       users.users.${username} = {
         isNormalUser = true;
         shell = pkgs.bash;
@@ -20,7 +22,7 @@ in
           "wheel"
           "networkmanager"
         ];
-        hashedPassword = ""; # TODO: add yescrypt hashed password later
+        hashedPasswordFile = config.sops.secrets.passwords.${username}.path;
       };
     };
 

@@ -10,8 +10,11 @@ let
 in
 {
   flake.modules.nixos."users-${username}" =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
+
+      config.sops.secrets.passwords.${username}.neededForUsers = true;
+
       users.users.${username} = {
         isNormalUser = true;
         shell = pkgs.bash;
@@ -19,7 +22,7 @@ in
           "networkmanager"
           "wheel"
         ];
-        hashedPassword = "$y$j9T$avB97rOQS/qFTosBcYu/w.$1cDcc.hv8V69alJB1vdQ3hGrKIPlJtw.3/OWJPl0Ow9";
+        hashedPasswordFile = config.sops.secrets.passwords.${username}.path;
       };
     };
 
