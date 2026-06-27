@@ -17,5 +17,6 @@
     security
     secret-service
     sops
+    filesystem
   ];
 }
