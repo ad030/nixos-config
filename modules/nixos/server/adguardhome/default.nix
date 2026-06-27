@@ -3,7 +3,7 @@
   flake.modules.nixos.adguardhome =
     { config, lib, ... }:
     {
-      systemd.tmpfiles.settings = {
+      systemd.tmpfiles.settings."homelab-dirs" = {
         "/srv/adguard".d = {
           user = "adguardhome";
           group = "adguardhome";

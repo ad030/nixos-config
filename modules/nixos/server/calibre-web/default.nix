@@ -10,7 +10,7 @@
     in
     {
 
-      systemd.tmpfiles.settings = {
+      systemd.tmpfiles.settings."homelab-dirs" = {
         "/srv/calibre-web".d = {
           user = "calibre-web";
           group = "calibre-web";

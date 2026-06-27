@@ -10,7 +10,7 @@
       };
     in
     {
-      systemd.tmpfiles.settings = {
+      systemd.tmpfiles.settings."homelab-dirs" = {
         "/srv/freshrss".d = {
           user = "freshrss";
           group = "freshrss";

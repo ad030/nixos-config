@@ -15,7 +15,7 @@
       };
     in
     {
-      systemd.tmpfiles.settings = {
+      systemd.tmpfiles.settings."homelab-dirs" = {
         "/srv/slskd".d = {
           user = "slskd";
           group = "slskd";

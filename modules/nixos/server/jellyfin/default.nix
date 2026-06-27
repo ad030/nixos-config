@@ -14,7 +14,7 @@
       };
     in
     {
-      systemd.tmpfiles.settings = {
+      systemd.tmpfiles.settings."homelab-dirs" = {
         "/srv/jellyfin".d = {
           user = "jellyfin";
           group = "jellyfin";
