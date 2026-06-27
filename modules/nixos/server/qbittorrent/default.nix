@@ -17,6 +17,7 @@
           locations."/" = {
             proxyPass = "http://10.0.0.7:8090";
             recommendedProxySettings = true;
+            proxyWebsockets = true;
           };
         };
       };
@@ -24,6 +25,7 @@
       containers.qbittorrent = {
         autoStart = true;
 
+        privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.7";
 
@@ -36,10 +38,10 @@
             hostPort = 6881; # torrenting port
             protocol = "udp";
           }
-          {
-            hostPort = 8090; # webui port
-            protocol = "tcp";
-          }
+          # {
+          #   hostPort = 8090; # webui port
+          #   protocol = "tcp";
+          # }
         ];
 
         config =
@@ -63,6 +65,11 @@
               torrentingPort = 6881;
               webuiPort = 8090;
             };
+
+            networking.useHostResolvConf = lib.mkForce false;
+            services.resolved.enable = true;
+
+            system.stateVersion = "26.05";
           };
       };
 

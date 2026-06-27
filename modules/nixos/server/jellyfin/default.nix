@@ -21,6 +21,7 @@
           locations."/" = {
             proxyPass = "http://10.0.0.2:8096";
             recommendedProxySettings = true;
+            proxyWebsockets = true;
           };
         };
       };
@@ -28,18 +29,19 @@
       containers.jellyfin = {
         autoStart = true;
 
+        privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.2";
 
         forwardPorts = [
-          {
-            hostPort = 8096;
-            protocol = "tcp";
-          }
-          {
-            hostPort = 7359;
-            protocol = "udp";
-          }
+          # {
+          #   hostPort = 8096;
+          #   protocol = "tcp";
+          # }
+          # {
+          #   hostPort = 7359;
+          #   protocol = "udp";
+          # }
         ];
 
         config =
@@ -64,11 +66,15 @@
               allowedTCPPorts = [
                 8096 # web ui
               ];
-              allowedUDPPorts = [
-                7359 # auto detect jellyfin servers on network
-              ];
+              # allowedUDPPorts = [
+              #   7359 # auto detect jellyfin servers on network
+              # ];
             };
 
+            networking.useHostResolvConf = lib.mkForce false;
+            services.resolved.enable = true;
+
+            system.stateVersion = "26.05";
           };
       };
 

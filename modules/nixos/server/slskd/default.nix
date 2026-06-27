@@ -33,18 +33,19 @@
       containers.slskd = {
         autoStart = true;
 
+        privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.3";
 
         forwardPorts = [
-          {
-            hostPort = 5030; # http web ui
-            protocol = "tcp";
-          }
-          {
-            hostPort = 5031; # https web ui
-            protocol = "tcp";
-          }
+          # {
+          #   hostPort = 5030; # http web ui
+          #   protocol = "tcp";
+          # }
+          # {
+          #   hostPort = 5031; # https web ui
+          #   protocol = "tcp";
+          # }
           {
             hostPort = 50300; # soulseek connections
             protocol = "tcp";
@@ -56,6 +57,10 @@
           "/run/secrets/slskd_env" = {
             hostPath = config.sops.secrets.slskd_env.path;
             isReadOnly = true;
+          };
+          "/var/lib/slskd" = {
+            hostPath = "/srv/slskd";
+            isReadOnly = false;
           };
         };
 
@@ -77,11 +82,15 @@
               environmentFile = "/run/secrets/slskd_env";
 
               openFirewall = true;
-
               settings = {
                 web.port = 5030;
               };
             };
+
+            networking.useHostResolvConf = lib.mkForce false;
+            services.resolved.enable = true;
+
+            system.stateVersion = "26.05";
           };
       };
 

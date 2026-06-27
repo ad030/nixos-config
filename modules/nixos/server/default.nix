@@ -8,6 +8,7 @@
     nfs-server
     reverse-proxy
 
+    landing-page
     adguardhome
     jellyfin
     slskd

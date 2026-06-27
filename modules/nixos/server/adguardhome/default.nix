@@ -1,20 +1,12 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.adguardhome =
-    let
-      inherit (self.lib.server) mkMediaUser;
-      serviceUser = mkMediaUser {
-        name = "adguardhome";
-        uid = 3004;
-      };
-    in
+    { config, lib, ... }:
     {
-      users = serviceUser.users;
-
       services.nginx.virtualHosts = {
-        "adguard.home" = {
+        "adguard.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.4:8096";
+            proxyPass = "http://10.0.0.4:80";
             recommendedProxySettings = true;
           };
         };
@@ -23,6 +15,7 @@
       containers.adguardhome = {
         autoStart = true;
 
+        privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.4";
 
@@ -32,8 +25,16 @@
             protocol = "tcp";
           }
           {
+            hostPort = 53;
+            protocol = "udp";
+          }
+          {
             hostPort = 443;
             protocol = "tcp";
+          }
+          {
+            hostPort = 443;
+            protocol = "udp";
           }
           {
             hostPort = 8080;
@@ -44,15 +45,14 @@
             hostPort = 3000;
             protocol = "tcp";
           }
-          {
-            hostPort = 53;
-            protocol = "udp";
-          }
-          {
-            hostPort = 443;
-            protocol = "udp";
-          }
         ];
+
+        bindMounts = {
+          "/var/lib/AdGuardHome" = {
+            hostPath = "/srv/adguardhome";
+            isReadOnly = false;
+          };
+        };
 
         config =
           {
@@ -62,9 +62,23 @@
             ...
           }:
           {
-            users = serviceUser.users;
             services.adguardhome = {
               enable = true;
+
+              settings = {
+                filtering = {
+                  rewrites = [
+                    {
+                      domain = "*.home.lan";
+                      answer = "192.168.8.201";
+                    }
+                    {
+                      domain = "home.lan";
+                      answer = "192.168.8.201";
+                    }
+                  ];
+                };
+              };
             };
 
             networking.firewall = {
@@ -79,6 +93,11 @@
                 443
               ];
             };
+
+            networking.useHostResolvConf = lib.mkForce false;
+            services.resolved.enable = true;
+
+            system.stateVersion = "26.05";
           };
       };
 

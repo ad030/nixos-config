@@ -29,5 +29,21 @@ in
           extraGroups = [ "media" ];
         };
       };
+
+    mkServiceUser =
+      {
+        name,
+        uid,
+      }:
+      {
+        users.groups = {
+          ${name}.gid = uid;
+        };
+        users.users.${name} = {
+          inherit uid;
+          group = name;
+          isSystemUser = true;
+        };
+      };
   };
 }
