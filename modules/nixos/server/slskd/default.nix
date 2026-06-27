@@ -15,10 +15,18 @@
       };
     in
     {
+      systemd.tmpfiles.settings = {
+        "/srv/slskd".d = {
+          user = "slskd";
+          group = "slskd";
+          mode = "0750";
+        };
+      };
+
       users = serviceUser.users;
 
       services.nginx.virtualHosts = {
-        "slskd.home" = {
+        "slskd.home.lan" = {
           locations."/" = {
             proxyPass = "http://10.0.0.3:5030";
             recommendedProxySettings = true;

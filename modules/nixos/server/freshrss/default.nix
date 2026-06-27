@@ -10,10 +10,18 @@
       };
     in
     {
+      systemd.tmpfiles.settings = {
+        "/srv/freshrss".d = {
+          user = "freshrss";
+          group = "freshrss";
+          mode = "0750";
+        };
+      };
+
       users = serviceUser.users;
 
       services.nginx.virtualHosts = {
-        "freshrss.home" = {
+        "freshrss.home.lan" = {
           locations."/" = {
             proxyPass = "http://10.0.0.6:80";
             recommendedProxySettings = true;

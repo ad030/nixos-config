@@ -9,6 +9,15 @@
       };
     in
     {
+
+      systemd.tmpfiles.settings = {
+        "/srv/calibre-web".d = {
+          user = "calibre-web";
+          group = "calibre-web";
+          mode = "0750";
+        };
+      };
+
       users = serviceUser.users;
 
       services.nginx.virtualHosts = {

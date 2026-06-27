@@ -3,6 +3,14 @@
   flake.modules.nixos.adguardhome =
     { config, lib, ... }:
     {
+      systemd.tmpfiles.settings = {
+        "/srv/adguard".d = {
+          user = "adguardhome";
+          group = "adguardhome";
+          mode = "0750";
+        };
+      };
+
       services.nginx.virtualHosts = {
         "adguard.home.lan" = {
           locations."/" = {

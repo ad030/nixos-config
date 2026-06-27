@@ -14,10 +14,33 @@
       };
     in
     {
+      systemd.tmpfiles.settings = {
+        "/srv/jellyfin".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "0750";
+        };
+        "/srv/jellyfin/cache".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "0750";
+        };
+        "/srv/jellyfin/data".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "0750";
+        };
+        "/srv/jellyfin/data/config".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "0750";
+        };
+      };
+
       users = serviceUser.users;
 
       services.nginx.virtualHosts = {
-        "jellyfin.home" = {
+        "jellyfin.home.lan" = {
           locations."/" = {
             proxyPass = "http://10.0.0.2:8096";
             recommendedProxySettings = true;
@@ -44,6 +67,13 @@
           # }
         ];
 
+        bindMounts = {
+          "/srv/jellyfin" = {
+            hostPath = "/srv/jellyfin";
+            isReadOnly = false;
+          };
+        };
+
         config =
           {
             config,
@@ -58,6 +88,10 @@
               enable = true;
               user = "jellyfin";
               group = "jellyfin";
+
+              cacheDir = "/srv/jellyfin/cache";
+              dataDir = "/srv/jellyfin/data";
+              configDir = "/srv/jellyfin/data/config";
 
               openFirewall = false;
             };

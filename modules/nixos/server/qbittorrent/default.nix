@@ -10,10 +10,18 @@
       };
     in
     {
+      systemd.tmpfiles.settings = {
+        "/srv/qbittorrent".d = {
+          user = "qbittorrent";
+          group = "qbittorrent";
+          mode = "0750";
+        };
+      };
+
       users = serviceUser.users;
 
       services.nginx.virtualHosts = {
-        "qbittorrent.home" = {
+        "qbittorrent.home.lan" = {
           locations."/" = {
             proxyPass = "http://10.0.0.7:8090";
             recommendedProxySettings = true;
