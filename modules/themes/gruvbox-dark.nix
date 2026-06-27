@@ -1,4 +1,4 @@
-## GRUVBOX THEME
+# Gruvbox color palette by morhetz
 { self, inputs, ... }:
 let
   lib = inputs.nixpkgs-stable.lib;
