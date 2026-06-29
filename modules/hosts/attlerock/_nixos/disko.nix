@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "nvme-SK_hynix_BC511_HFM256GDJTNI-82A0A_CY04N073311704T0I";
+        device = "/dev/disk/by-id/nvme-SK_hynix_BC511_HFM256GDJTNI-82A0A_CY04N073311704T0I";
 
         content = {
           type = "gpt";
