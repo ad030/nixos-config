@@ -18,5 +18,6 @@
     secret-service
     sops
     filesystem
+    power-management
   ];
 }
