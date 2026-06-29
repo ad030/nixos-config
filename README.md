@@ -34,13 +34,14 @@ Each host derives an age key from its SSH host key located at
    nixos-anywhere remote install, generate one manually and copy it into place
    before the first rebuild:
    `ssh-keygen -t ed25519 -N "" -f ./extra-files/etc/ssh/ssh_host_ed25519_key`
-2. Generate age key from **public** key:
+2. Generate age key from the SSH **public** key:
    `nix run nixpkgs#ssh-to-age -- -i ssh_host_ed25519_key.pub`
 3. Add public age key to `.sops.yaml` under `keys:` and `creation_rules:`.
 4. Re-encrypt the secrets file to take the new age key using
    `sops updatekeys secrets/secrets.yaml`.
 5. Rebuild the system on the new host. If using nixos-anywhere, add the flag:
-   `--extra-files ./extra-files` and run from the root of this repo.
+   `--extra-files ./extra-files` and run from the root of this repo so that the
+   new system uses this host key and can decrypt the secrets.
 
 If decryption fails, it is impossible to log into any user because user
 passwords are also stored in `secrets/secrets.yaml`. As a last resort, the root
