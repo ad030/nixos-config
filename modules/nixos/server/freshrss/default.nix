@@ -6,7 +6,7 @@
       inherit (self.lib.server) mkServiceUser;
       serviceUser = mkServiceUser {
         name = "freshrss";
-        uid = 3006;
+        uid = 3005;
       };
     in
     {

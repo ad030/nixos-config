@@ -5,7 +5,7 @@
       inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "calibre-web";
-        uid = 3005;
+        uid = 3004;
       };
     in
     {
