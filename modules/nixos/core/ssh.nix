@@ -3,10 +3,10 @@
   flake.modules.nixos.ssh = {
     services.openssh = {
       enable = true;
-      settings.PermitRootLogin = "no";
+      settings.PermitRootLogin = "prohibit-password";
       settings.PasswordAuthentication = false;
     };
 
-    programs.ssh.startAgent = false; # use gnome-keyring ssh-agent
+    networking.firewall.allowedTCPPorts = [ 22 ];
   };
 }
