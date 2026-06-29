@@ -35,7 +35,7 @@ Each host derives an age key from its SSH host key located at
    before the first rebuild:
    `ssh-keygen -t ed25519 -N "" -f ./extra-files/etc/ssh/ssh_host_ed25519_key`
 2. Generate age key from the SSH **public** key:
-   `nix run nixpkgs#ssh-to-age -- -i ssh_host_ed25519_key.pub`
+   `nix run nixpkgs#ssh-to-age -- -i ./extra-files/etc/ssh/ssh_host_ed25519_key.pub`
 3. Add public age key to `.sops.yaml` under `keys:` and `creation_rules:`.
 4. Re-encrypt the secrets file to take the new age key using
    `sops updatekeys secrets/secrets.yaml`.
