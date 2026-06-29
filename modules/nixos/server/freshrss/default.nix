@@ -29,6 +29,10 @@
         };
       };
 
+      sops.secrets."freshrss/password" = {
+        owner = "freshrss";
+      };
+
       containers.freshrss = {
         autoStart = true;
 
@@ -40,6 +44,10 @@
           "/srv/freshrss" = {
             hostPath = "/srv/freshrss";
             isReadOnly = false;
+          };
+          "/run/secrets/freshrss-password" = {
+            hostPath = config.sops.secrets."freshrss/password".path;
+            isReadOnly = true;
           };
         };
 
@@ -56,6 +64,11 @@
             services.freshrss = {
               enable = true;
               dataDir = "/srv/freshrss";
+
+              baseUrl = "http://freshrss.home.lan";
+
+              defaultUser = "dokja";
+              passwordFile = "/run/secrets/freshrss-password";
             };
 
             networking.firewall = {

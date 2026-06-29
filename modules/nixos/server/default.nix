@@ -13,6 +13,7 @@
 
       landing-page
       adguardhome
+      freshrss
       jellyfin
       slskd
       qbittorrent
