@@ -23,33 +23,5 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  services = {
-    # Enable the X11 windowing system.
-    # You can disable this if you're only using the Wayland session.
-    xserver = {
-      enable = true;
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-    };
-
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
-
-    # Enable CUPS to print documents.
-    printing.enable = true;
-
-    # Enable sound with pipewire.
-    pulseaudio.enable = false;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-  };
-
   system.stateVersion = "25.11"; # Did you read the comment?
 }
