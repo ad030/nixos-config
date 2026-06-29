@@ -14,6 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware.nix
     ./networking.nix
+    ./disko.nix
   ];
 
   # Set your time zone.

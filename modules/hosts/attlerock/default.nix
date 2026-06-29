@@ -14,7 +14,6 @@ in
     system = "x86_64-linux";
     modules = [
       ./_nixos/configuration.nix
-      ./_disko.nix
       { networking.hostName = hostname; }
       { nixpkgs.config.allowUnfree = true; }
     ]
