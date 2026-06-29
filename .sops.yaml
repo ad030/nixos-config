@@ -1,8 +1,10 @@
 keys:
-  - &age_recovery age1agxh4kg2nac4zakv3hwfv42qx5mssc0q6cs85l4m5k7kk22ed5fqrcxavl # manually generated
+  # manually generated
+  - &age_recovery age1agxh4kg2nac4zakv3hwfv42qx5mssc0q6cs85l4m5k7kk22ed5fqrcxavl
 
   # automatically generated from ssh host keys
   - &age_brittle-hollow age1swu2dp4pxctvsa2w20fm6959qg0qsyqxgrsgysh3fj4qdvasm3fsy6r5vv
+  - &age_attlerock age146vlmetw6eh8kgcmcuq556phn548j9vyryav3vjstxx83z3v8cgsvyvl3f
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
@@ -10,3 +12,4 @@ creation_rules:
       - age:
           - *age_recovery
           - *age_brittle-hollow
+          - *age_attlerock
