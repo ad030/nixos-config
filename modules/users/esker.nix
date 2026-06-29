@@ -22,6 +22,10 @@ in
           "networkmanager"
         ];
         hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
+
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOToXINio9+fZSsAW3/YmgioP+7RLFXwEZNJRWRQMZjl solanum@brittle-hollow"
+        ];
       };
     };
 
