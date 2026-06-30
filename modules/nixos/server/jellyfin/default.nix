@@ -49,6 +49,12 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = [
+          8096
+        ];
+      };
+
       containers.jellyfin = {
         autoStart = true;
 
@@ -57,10 +63,10 @@
         localAddress = "10.0.0.2";
 
         forwardPorts = [
-          # {
-          #   hostPort = 8096;
-          #   protocol = "tcp";
-          # }
+          {
+            hostPort = 8096;
+            protocol = "tcp";
+          }
           # {
           #   hostPort = 7359;
           #   protocol = "udp";

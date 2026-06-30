@@ -21,6 +21,11 @@
           group = "slskd";
           mode = "0750";
         };
+        "/srv/downloads/slskd".d = {
+          user = "slskd";
+          group = "slskd";
+          mode = "0750";
+        };
       };
 
       users = serviceUser.users;

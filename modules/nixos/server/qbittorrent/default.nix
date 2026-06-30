@@ -16,6 +16,11 @@
           group = "qbittorrent";
           mode = "0750";
         };
+        "/srv/downloads/qbittorrent".d = {
+          user = "qbittorrent";
+          group = "qbittorrent";
+          mode = "0750";
+        };
       };
 
       users = serviceUser.users;
