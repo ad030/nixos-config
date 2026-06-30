@@ -6,6 +6,7 @@
 }:
 {
   networking = {
+    hostId = "5213c5fa";
     interfaces.wlp1s0 = {
       ipv4.addresses = [
         {

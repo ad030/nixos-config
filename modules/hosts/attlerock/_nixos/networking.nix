@@ -6,6 +6,7 @@
 }:
 {
   networking = {
+    hostId = "4be7dc7a";
     interfaces.eno1 = {
       ipv4.addresses = [
         {
