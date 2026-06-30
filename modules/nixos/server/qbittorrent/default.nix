@@ -52,6 +52,21 @@
           # }
         ];
 
+        bindMounts = {
+          "/srv/qbittorrent" = {
+            hostPath = "/srv/qbittorrent";
+            isReadOnly = false;
+          };
+          "/srv/downloads/incomplete" = {
+            hostPath = "/srv/downloads/qbittorrent";
+            isReadOnly = false;
+          };
+          "/srv/downloads/complete" = {
+            hostPath = "/srv/media/tank/Downloads/qbittorrent";
+            isReadOnly = false;
+          };
+        };
+
         config =
           {
             config,

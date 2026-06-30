@@ -72,6 +72,18 @@
             hostPath = "/srv/jellyfin";
             isReadOnly = false;
           };
+          "/media/Movies" = {
+            hostPath = "/srv/media/tank/Movies";
+            isReadOnly = false;
+          };
+          "/media/Shows" = {
+            hostPath = "/srv/media/tank/Shows";
+            isReadOnly = false;
+          };
+          "/media/Music" = {
+            hostPath = "/srv/media/tank/Music";
+            isReadOnly = true;
+          };
         };
 
         config =

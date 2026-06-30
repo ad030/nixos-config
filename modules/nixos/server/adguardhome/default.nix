@@ -4,7 +4,7 @@
     { config, lib, ... }:
     {
       systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/adguard".d = {
+        "/srv/adguardhome".d = {
           user = "root";
           group = "root";
           mode = "0750";

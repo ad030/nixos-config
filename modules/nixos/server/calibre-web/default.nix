@@ -52,6 +52,10 @@
             hostPath = "/srv/calibre-web";
             isReadOnly = false;
           };
+          "/Books" = {
+            hostPath = "/srv/media/tank/Books/calibre-library";
+            isReadOnly = false;
+          };
         };
 
         config =

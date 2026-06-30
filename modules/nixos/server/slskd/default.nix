@@ -70,6 +70,14 @@
             hostPath = "/srv/slskd";
             isReadOnly = false;
           };
+          "/srv/downloads/complete" = {
+            hostPath = "/srv/media/tank/Downloads/slskd";
+            isReadOnly = false;
+          };
+          "/srv/downloads/incomplete" = {
+            hostPath = "/srv/downloads/slskd";
+            isReadOnly = false;
+          };
         };
 
         config =
