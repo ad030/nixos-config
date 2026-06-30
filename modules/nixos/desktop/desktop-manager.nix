@@ -7,10 +7,37 @@
     }:
 
     {
+      services = {
+        # Enable the X11 windowing system.
+        # You can disable this if you're only using the Wayland session.
+        xserver = {
+          enable = true;
+          # Configure keymap in X11
+          xkb = {
+            layout = "us";
+            variant = "";
+          };
+        };
+
+        # Enable touchpad support (enabled default in most desktopManager).
+        libinput.enable = true;
+
+        # Enable CUPS to print documents.
+        printing.enable = true;
+
+        # Enable sound with pipewire.
+        pulseaudio.enable = false;
+        pipewire = {
+          enable = true;
+          alsa.enable = true;
+          alsa.support32Bit = true;
+          pulse.enable = true;
+        };
+      };
+
       services.desktopManager = {
         plasma6.enable = true;
       };
-
       environment.plasma6.excludePackages = with pkgs; [
         kdePackages.elisa # Music player
         kdePackages.kdepim-runtime # Akonadi agents

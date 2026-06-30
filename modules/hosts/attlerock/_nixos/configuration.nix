@@ -15,6 +15,7 @@
     ./hardware.nix
     ./networking.nix
     ./disko.nix
+    ./mounts.nix
   ];
 
   # Set your time zone.
