@@ -4,6 +4,17 @@
       enable = true;
     };
 
-    networking.firewall.allowedTCPPorts = [ 2049 ];
+    networking.firewall.allowedTCPPorts = [
+      111
+      2049
+    ];
+
+    systemd.tmpfiles.settings."nfs-server" = {
+      "/export".d = {
+        user = "nobody";
+        group = "nogroup";
+        mode = "0555";
+      };
+    };
   };
 }

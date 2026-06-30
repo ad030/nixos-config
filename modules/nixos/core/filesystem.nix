@@ -9,11 +9,16 @@
     # not all my systems use it but good to keep it
     boot.initrd.services.lvm.enable = true;
 
-    # enable zfs
+    # enable filesystems
     boot.supportedFilesystems = [
       "zfs"
+      "nfs"
     ];
     boot.zfs.forceImportRoot = false;
+
+    boot.initrd.kernelModules = [
+      "nfs"
+    ];
 
   };
 }
