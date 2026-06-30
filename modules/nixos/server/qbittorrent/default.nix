@@ -6,7 +6,7 @@
       inherit (self.lib.server) mkMediaUser;
       serviceUser = mkMediaUser {
         name = "qbittorrent";
-        uid = 3006;
+        uid = 3007;
       };
     in
     {

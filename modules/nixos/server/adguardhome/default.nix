@@ -2,14 +2,23 @@
 {
   flake.modules.nixos.adguardhome =
     { config, lib, ... }:
+    # let
+    #   inherit (self.lib.server) mkServiceUser;
+    #   serviceUser = mkServiceUser {
+    #     name = "adguardhome";
+    #     uid = 3004;
+    #   };
+    # in
     {
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/adguardhome".d = {
-          user = "root";
-          group = "root";
-          mode = "0750";
-        };
-      };
+      # users = serviceUser.users;
+
+      # systemd.tmpfiles.settings."homelab-dirs" = {
+      #   "/srv/adguardhome".d = {
+      #     user = "adguardhome";
+      #     group = "adguardhome";
+      #     mode = "0750";
+      #   };
+      # };
 
       services.nginx.virtualHosts = {
         "adguard.home.lan" = {
@@ -55,12 +64,12 @@
           }
         ];
 
-        bindMounts = {
-          "/var/lib/AdGuardHome" = {
-            hostPath = "/srv/adguardhome";
-            isReadOnly = false;
-          };
-        };
+        # bindMounts = {
+        #   "/var/lib/AdGuardHome" = {
+        #     hostPath = "/srv/adguardhome";
+        #     isReadOnly = false;
+        #   };
+        # };
 
         config =
           {
@@ -70,10 +79,16 @@
             ...
           }:
           {
+            # users = serviceUser.users;
+
             services.adguardhome = {
               enable = true;
 
               settings = {
+                os = {
+                  user = "adguardhome";
+                  group = "adguardhome";
+                };
                 filtering = {
                   rewrites = [
                     {
@@ -103,7 +118,12 @@
             };
 
             networking.useHostResolvConf = lib.mkForce false;
-            services.resolved.enable = true;
+            services.resolved = {
+              enable = true;
+              settings.Resolve = {
+                DNSStubListener = "no";
+              };
+            };
 
             system.stateVersion = "26.05";
           };
