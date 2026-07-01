@@ -2,24 +2,7 @@
 {
   flake.modules.nixos.adguardhome =
     { config, lib, ... }:
-    let
-      inherit (self.lib.server) mkServiceUser;
-      serviceUser = mkServiceUser {
-        name = "adguardhome";
-        uid = 3004;
-      };
-    in
     {
-      users = serviceUser.users;
-
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/adguardhome".d = {
-          user = "adguardhome";
-          group = "adguardhome";
-          mode = "0750";
-        };
-      };
-
       networking.firewall = {
         allowedTCPPorts = [
           53
@@ -72,13 +55,6 @@
           }
         ];
 
-        bindMounts = {
-          "/var/lib/AdGuardHome" = {
-            hostPath = "/srv/adguardhome";
-            isReadOnly = false;
-          };
-        };
-
         config =
           {
             config,
@@ -87,64 +63,61 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.adguardhome = {
               enable = true;
 
               settings = {
-                filtering = {
-                  rewrites = [
-                    {
-                      domain = "*.home.lan";
-                      answer = "192.168.8.201";
-                      enabled = true;
-                    }
-                    {
-                      domain = "home.lan";
-                      answer = "192.168.8.201";
-                      enabled = true;
-                    }
-                  ];
-                };
+                users = [
+                  {
+                    name = "admin";
+                    password = "$2b$05$xAEJhRzoPgnSfmOKCgAP0OjgORZvKaSyTgEkCKUGOxTMOtfTJ0edC";
+                  }
+                ];
               };
 
-            };
+              filtering = {
+                protection_enabled = true;
+                filtering_enabled = true;
 
-            systemd.services.adguardhome.serviceConfig = {
-              DynamicUser = lib.mkForce false;
-              ProtectSystem = lib.mkForce false;
-              User = "adguardhome";
-              Group = "adguardhome";
-              StateDirectory = lib.mkForce "AdGuardHome";
-              StateDirectoryMode = "0750";
-              AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ]; # needed to bind port 53
-            };
-
-            networking.firewall = {
-              allowedTCPPorts = [
-                53 # dns
-                80 # http
-                443 # https
-                3000 # admin panel
-              ];
-              allowedUDPPorts = [
-                53
-                443
-              ];
-            };
-
-            networking.useHostResolvConf = lib.mkForce false;
-            services.resolved = {
-              enable = true;
-              settings.Resolve = {
-                DNSStubListener = "no";
+                rewrites = [
+                  {
+                    domain = "*.home.lan";
+                    answer = "192.168.8.201";
+                    enabled = true;
+                  }
+                  {
+                    domain = "home.lan";
+                    answer = "192.168.8.201";
+                    enabled = true;
+                  }
+                ];
               };
             };
-
-            system.stateVersion = "26.05";
           };
-      };
 
+        networking.firewall = {
+          allowedTCPPorts = [
+            53 # dns
+            80 # http
+            443 # https
+            3000 # admin panel
+          ];
+          allowedUDPPorts = [
+            53
+            443
+          ];
+        };
+
+        networking.useHostResolvConf = lib.mkForce false;
+        services.resolved = {
+          enable = true;
+          settings.Resolve = {
+            DNSStubListener = "no";
+          };
+        };
+
+        system.stateVersion = "26.05";
+      };
     };
+
 }
