@@ -14,7 +14,7 @@
       services.nginx.virtualHosts = {
         "adguard.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.4:80";
+            proxyPass = "http://10.0.0.4:3000";
             recommendedProxySettings = true;
           };
         };
@@ -70,28 +70,30 @@
                 users = [
                   {
                     name = "admin";
+                    # hashed password here because i'm too stupid to use sops-nix for this
                     password = "$2b$05$xAEJhRzoPgnSfmOKCgAP0OjgORZvKaSyTgEkCKUGOxTMOtfTJ0edC";
                   }
                 ];
+                filtering = {
+                  protection_enabled = true;
+                  filtering_enabled = true;
+
+                  rewrites = [
+                    {
+                      domain = "*.home.lan";
+                      answer = "192.168.8.201";
+                      enabled = true;
+                    }
+                    {
+                      domain = "home.lan";
+                      answer = "192.168.8.201";
+                      enabled = true;
+                    }
+                  ];
+                };
+
               };
 
-              filtering = {
-                protection_enabled = true;
-                filtering_enabled = true;
-
-                rewrites = [
-                  {
-                    domain = "*.home.lan";
-                    answer = "192.168.8.201";
-                    enabled = true;
-                  }
-                  {
-                    domain = "home.lan";
-                    answer = "192.168.8.201";
-                    enabled = true;
-                  }
-                ];
-              };
             };
 
             networking.firewall = {

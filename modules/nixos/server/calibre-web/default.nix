@@ -29,6 +29,10 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = [ 8083 ];
+      };
+
       containers.calibre-web = {
         autoStart = true;
 
@@ -41,10 +45,6 @@
             hostPort = 8083;
             protocol = "tcp";
           }
-          {
-            hostPort = 8083;
-            protocol = "udp";
-          }
         ];
 
         bindMounts = {
@@ -52,7 +52,7 @@
             hostPath = "/srv/calibre-web";
             isReadOnly = false;
           };
-          "/Books" = {
+          "/library" = {
             hostPath = "/srv/media/tank/Books/calibre-library";
             isReadOnly = false;
           };
@@ -66,17 +66,26 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.calibre-web = {
               enable = true;
 
               dataDir = "/srv/calibre-web";
+              user = "calibre-web";
+              group = "calibre-web";
+
+              listen = {
+                ip = "0.0.0.0";
+                port = 8083;
+              };
+
+              options = {
+                calibreLibrary = "/library";
+                enableBookUploading = true;
+              };
             };
 
             networking.firewall = {
               allowedTCPPorts = [ 8083 ];
-              allowedUDPPorts = [ 8083 ];
             };
 
             networking.useHostResolvConf = lib.mkForce false;

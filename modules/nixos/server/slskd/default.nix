@@ -75,16 +75,16 @@
             hostPath = "/srv/slskd";
             isReadOnly = false;
           };
-          "/media/Music" = {
+          "/media/music" = {
             hostPath = "/srv/media/tank/Music/Music";
             isReadOnly = true;
           };
-          "/srv/downloads/complete" = {
-            hostPath = "/srv/media/tank/Downloads/slskd";
+          "/downloads/incomplete" = {
+            hostPath = "/srv/downloads/slskd";
             isReadOnly = false;
           };
-          "/srv/downloads/incomplete" = {
-            hostPath = "/srv/downloads/slskd";
+          "/downloads/complete" = {
+            hostPath = "/srv/media/tank/Downloads/slskd";
             isReadOnly = false;
           };
         };
@@ -106,13 +106,17 @@
               group = "slskd";
               environmentFile = "/run/secrets/slskd/env";
 
-              openFirewall = true;
               settings = {
                 web.port = 5030;
 
+                directories = {
+                  downloads = "/downloads/complete";
+                  incomplete = "/downloads/incomplete";
+                };
+
                 shares = {
                   directories = [
-                    "/media/Music"
+                    "/media/music"
                   ];
                 };
 
@@ -120,9 +124,18 @@
                   listen_port = 50300;
                   description = ''
                     A slskd user. https://github.com/slskd/slskd. 
-                          Be considerate of others 👍'';
+                          Be considerate of others 👍
+                  '';
                 };
               };
+            };
+
+            networking.firewall = {
+              allowedTCPPorts = [
+                5030
+                5031
+                50300
+              ];
             };
 
             networking.useHostResolvConf = lib.mkForce false;

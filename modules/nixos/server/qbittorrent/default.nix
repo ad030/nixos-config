@@ -62,11 +62,11 @@
             hostPath = "/srv/qbittorrent";
             isReadOnly = false;
           };
-          "/srv/downloads/incomplete" = {
+          "/downloads/incomplete" = {
             hostPath = "/srv/downloads/qbittorrent";
             isReadOnly = false;
           };
-          "/srv/downloads/complete" = {
+          "/downloads/complete" = {
             hostPath = "/srv/media/tank/Downloads/qbittorrent";
             isReadOnly = false;
           };
@@ -86,12 +86,36 @@
               enable = true;
               package = pkgs.qbittorrent-nox;
 
+              profileDir = "/srv/qbittorrent";
+
               user = "qbittorrent";
               group = "qbittorrent";
 
-              openFirewall = true;
               torrentingPort = 6881;
               webuiPort = 8090;
+
+              serverConfig = {
+                BitTorrent = {
+                  Session = {
+                    GlobalUPSpeedLimit = "100";
+                    DefaultSavePath = "/downloads/complete";
+                    TempPath = "/downloads/incomplete";
+                    TempPathEnabled = "true";
+                  };
+                };
+                Preferences = {
+                  WebUI = {
+                    Password_PBKDF2 = "@ByteArray(1f+GZ4bqvo93Lgp/d3//FA==:Thyh7U5F+vC3d7VEQ/aIwShyzg6ssb/2Qy4JwD5dM4ycyFLDK5Nu/DxScj2R7u56q36jLxCd1vn7ql5iThHzvA==)";
+                  };
+                };
+              };
+            };
+
+            networking.firewall = {
+              allowedTCPPorts = [
+                6881
+                8090
+              ];
             };
 
             networking.useHostResolvConf = lib.mkForce false;

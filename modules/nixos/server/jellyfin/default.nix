@@ -30,7 +30,7 @@
           group = "jellyfin";
           mode = "0750";
         };
-        "/srv/jellyfin/data/config".d = {
+        "/srv/jellyfin/config".d = {
           user = "jellyfin";
           group = "jellyfin";
           mode = "0750";
@@ -78,15 +78,15 @@
             hostPath = "/srv/jellyfin";
             isReadOnly = false;
           };
-          "/media/Movies" = {
+          "/media/movies" = {
             hostPath = "/srv/media/tank/Movies";
             isReadOnly = false;
           };
-          "/media/Shows" = {
+          "/media/shows" = {
             hostPath = "/srv/media/tank/Shows";
             isReadOnly = false;
           };
-          "/media/Music" = {
+          "/media/music" = {
             hostPath = "/srv/media/tank/Music";
             isReadOnly = true;
           };
@@ -109,7 +109,7 @@
 
               cacheDir = "/srv/jellyfin/cache";
               dataDir = "/srv/jellyfin/data";
-              configDir = "/srv/jellyfin/data/config";
+              configDir = "/srv/jellyfin/config";
 
               openFirewall = false;
             };
