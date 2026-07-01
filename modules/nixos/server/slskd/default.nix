@@ -51,10 +51,10 @@
         localAddress = "10.0.0.3";
 
         forwardPorts = [
-          # {
-          #   hostPort = 5030; # http web ui
-          #   protocol = "tcp";
-          # }
+          {
+            hostPort = 5030; # http web ui
+            protocol = "tcp";
+          }
           # {
           #   hostPort = 5031; # https web ui
           #   protocol = "tcp";
@@ -74,6 +74,10 @@
           "/var/lib/slskd" = {
             hostPath = "/srv/slskd";
             isReadOnly = false;
+          };
+          "/media/Music" = {
+            hostPath = "/srv/media/tank/Music/Music";
+            isReadOnly = true;
           };
           "/srv/downloads/complete" = {
             hostPath = "/srv/media/tank/Downloads/slskd";
@@ -105,6 +109,19 @@
               openFirewall = true;
               settings = {
                 web.port = 5030;
+
+                shares = {
+                  directories = [
+                    "/media/Music"
+                  ];
+                };
+
+                soulseek = {
+                  listen_port = 50300;
+                  description = ''
+                    A slskd user. https://github.com/slskd/slskd. 
+                          Be considerate of others 👍'';
+                };
               };
             };
 
