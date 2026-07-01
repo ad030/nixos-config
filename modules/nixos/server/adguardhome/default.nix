@@ -93,30 +93,30 @@
                 ];
               };
             };
+
+            networking.firewall = {
+              allowedTCPPorts = [
+                53 # dns
+                80 # http
+                443 # https
+                3000 # admin panel
+              ];
+              allowedUDPPorts = [
+                53
+                443
+              ];
+            };
+
+            networking.useHostResolvConf = lib.mkForce false;
+            services.resolved = {
+              enable = true;
+              settings.Resolve = {
+                DNSStubListener = "no";
+              };
+            };
+
+            system.stateVersion = "26.05";
           };
-
-        networking.firewall = {
-          allowedTCPPorts = [
-            53 # dns
-            80 # http
-            443 # https
-            3000 # admin panel
-          ];
-          allowedUDPPorts = [
-            53
-            443
-          ];
-        };
-
-        networking.useHostResolvConf = lib.mkForce false;
-        services.resolved = {
-          enable = true;
-          settings.Resolve = {
-            DNSStubListener = "no";
-          };
-        };
-
-        system.stateVersion = "26.05";
       };
     };
 
