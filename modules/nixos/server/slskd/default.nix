@@ -39,7 +39,7 @@
         };
       };
 
-      sops.secrets.slskd_env = {
+      sops.secrets."slskd/env" = {
         owner = "slskd";
       };
 
@@ -67,8 +67,8 @@
 
         # pass env file into container
         bindMounts = {
-          "/run/secrets/slskd_env" = {
-            hostPath = config.sops.secrets.slskd_env.path;
+          "/run/secrets/slskd/env" = {
+            hostPath = config.sops.secrets."slskd/env".path;
             isReadOnly = true;
           };
           "/var/lib/slskd" = {
@@ -100,7 +100,7 @@
 
               user = "slskd";
               group = "slskd";
-              environmentFile = "/run/secrets/slskd_env";
+              environmentFile = "/run/secrets/slskd/env";
 
               openFirewall = true;
               settings = {
