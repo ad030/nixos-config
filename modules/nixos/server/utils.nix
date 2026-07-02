@@ -10,7 +10,7 @@ in
 {
   flake.lib.server = {
 
-    # create user in media group
+    # create system user in media group with specified name and uid/gid
     # used for services that require access to media drive
     mkMediaUser =
       {
@@ -18,11 +18,11 @@ in
         uid,
       }:
       {
-        users.groups = {
+        groups = {
           ${name}.gid = uid;
           media.gid = media-gid; # hardcode the media gid (i'll figure out a better way someday)
         };
-        users.users.${name} = {
+        users.${name} = {
           inherit uid;
           group = name;
           isSystemUser = true;
@@ -30,16 +30,17 @@ in
         };
       };
 
+    # create system user with the specified name and uid/gid
     mkServiceUser =
       {
         name,
         uid,
       }:
       {
-        users.groups = {
+        groups = {
           ${name}.gid = uid;
         };
-        users.users.${name} = {
+        users.${name} = {
           inherit uid;
           group = name;
           isSystemUser = true;

@@ -9,10 +9,6 @@
     { config, ... }:
     let
       inherit (self.lib.server) mkMediaUser;
-      serviceUser = mkMediaUser {
-        name = "slskd";
-        uid = 3003;
-      };
     in
     {
       systemd.tmpfiles.settings."homelab-dirs" = {
@@ -28,7 +24,10 @@
         };
       };
 
-      users = serviceUser.users;
+      users = mkMediaUser {
+        name = "slskd";
+        uid = 3003;
+      };
 
       services.nginx.virtualHosts = {
         "slskd.home.lan" = {
@@ -50,15 +49,17 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.3";
 
+        privateUsers = false; # use host uid and gid
+
         forwardPorts = [
           {
             hostPort = 5030; # http web ui
             protocol = "tcp";
           }
-          # {
-          #   hostPort = 5031; # https web ui
-          #   protocol = "tcp";
-          # }
+          {
+            hostPort = 5031; # https web ui
+            protocol = "tcp";
+          }
           {
             hostPort = 50300; # soulseek connections
             protocol = "tcp";
@@ -97,8 +98,6 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.slskd = {
               enable = true;
 

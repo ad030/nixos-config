@@ -4,10 +4,6 @@
     { config, lib, ... }:
     let
       inherit (self.lib.server) mkServiceUser;
-      serviceUser = mkServiceUser {
-        name = "freshrss";
-        uid = 3006;
-      };
     in
     {
       systemd.tmpfiles.settings."homelab-dirs" = {
@@ -18,7 +14,10 @@
         };
       };
 
-      users = serviceUser.users;
+      users = mkServiceUser {
+        name = "freshrss";
+        uid = 3006;
+      };
 
       services.nginx.virtualHosts = {
         "freshrss.home.lan" = {
@@ -40,6 +39,8 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.6";
 
+        privateUsers = false; # use host uid and gid
+
         bindMounts = {
           "/srv/freshrss" = {
             hostPath = "/srv/freshrss";
@@ -59,8 +60,6 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.freshrss = {
               enable = true;
               dataDir = "/srv/freshrss";

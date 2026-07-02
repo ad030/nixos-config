@@ -8,10 +8,6 @@
     { pkgs, lib, ... }:
     let
       inherit (self.lib.server) mkMediaUser;
-      serviceUser = mkMediaUser {
-        name = "jellyfin";
-        uid = 3002;
-      };
     in
     {
       systemd.tmpfiles.settings."homelab-dirs" = {
@@ -37,7 +33,10 @@
         };
       };
 
-      users = serviceUser.users;
+      users = mkMediaUser {
+        name = "jellyfin";
+        uid = 3002;
+      };
 
       services.nginx.virtualHosts = {
         "jellyfin.home.lan" = {
@@ -61,6 +60,8 @@
         privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.2";
+
+        privateUsers = false; # use host uid and gid
 
         forwardPorts = [
           {
@@ -100,8 +101,6 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.jellyfin = {
               enable = true;
               user = "jellyfin";

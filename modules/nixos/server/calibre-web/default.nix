@@ -3,10 +3,6 @@
   flake.modules.nixos.calibre-web =
     let
       inherit (self.lib.server) mkMediaUser;
-      serviceUser = mkMediaUser {
-        name = "calibre-web";
-        uid = 3005;
-      };
     in
     {
 
@@ -18,7 +14,10 @@
         };
       };
 
-      users = serviceUser.users;
+      users = mkMediaUser {
+        name = "calibre-web";
+        uid = 3005;
+      };
 
       services.nginx.virtualHosts = {
         "calibre-web.home.lan" = {
@@ -39,6 +38,8 @@
         privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.5";
+
+        privateUsers = false; # use host uid and gid
 
         forwardPorts = [
           {

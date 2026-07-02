@@ -4,10 +4,6 @@
     { pkgs, lib, ... }:
     let
       inherit (self.lib.server) mkMediaUser;
-      serviceUser = mkMediaUser {
-        name = "qbittorrent";
-        uid = 3007;
-      };
     in
     {
       systemd.tmpfiles.settings."homelab-dirs" = {
@@ -23,7 +19,10 @@
         };
       };
 
-      users = serviceUser.users;
+      users = mkMediaUser {
+        name = "qbittorrent";
+        uid = 3007;
+      };
 
       services.nginx.virtualHosts = {
         "qbittorrent.home.lan" = {
@@ -41,6 +40,8 @@
         privateNetwork = true;
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.7";
+
+        privateUsers = false; # use host uid and gid
 
         forwardPorts = [
           {
@@ -80,8 +81,6 @@
             ...
           }:
           {
-            users = serviceUser.users;
-
             services.qbittorrent = {
               enable = true;
               package = pkgs.qbittorrent-nox;
