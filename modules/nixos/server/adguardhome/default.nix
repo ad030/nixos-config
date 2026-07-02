@@ -27,6 +27,8 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.4";
 
+        privateUsers = false; # use host uid and gid
+
         forwardPorts = [
           {
             hostPort = 53;
@@ -45,11 +47,6 @@
             protocol = "udp";
           }
           {
-            hostPort = 8080;
-            containerPort = 80;
-            protocol = "tcp";
-          }
-          {
             hostPort = 3000;
             protocol = "tcp";
           }
@@ -66,6 +63,11 @@
             services.adguardhome = {
               enable = true;
 
+              host = "0.0.0.0";
+              port = "3000";
+
+              mutableSettings = true;
+
               settings = {
                 users = [
                   {
@@ -77,7 +79,6 @@
                 filtering = {
                   protection_enabled = true;
                   filtering_enabled = true;
-
                   rewrites = [
                     {
                       domain = "*.home.lan";
@@ -99,7 +100,6 @@
             networking.firewall = {
               allowedTCPPorts = [
                 53 # dns
-                80 # http
                 443 # https
                 3000 # admin panel
               ];
@@ -112,9 +112,9 @@
             networking.useHostResolvConf = lib.mkForce false;
             services.resolved = {
               enable = true;
-              settings.Resolve = {
-                DNSStubListener = "no";
-              };
+
+              # needs to be set in order for adguard home to access port 53
+              settings.Resolve.DNSStubListener = "no";
             };
 
             system.stateVersion = "26.05";
