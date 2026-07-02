@@ -8,10 +8,18 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        firefox # browser
         libreoffice # office suite
         kdePackages.okular # pdf viewer
 
-        # image viewers
+        # password manager
+        keepassxc
+
+        # media
+        ffmpeg
+        imagemagick
+        mpv
+        vlc
         feh
         swayimg
 
@@ -26,6 +34,11 @@
         (texliveBasic.withPackages (ps: [ ps.latexmk ]))
         biber
         python314Packages.pylatexenc
+
+        gimp
+        kdePackages.kdenlive
+        krita
+        aseprite
       ];
     };
 }

@@ -3,19 +3,9 @@
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
-        firefox
         foot
 
-        ffmpeg
-        imagemagick
-        mpv
-        vlc
-        feh
-
         fastfetch
-
-        # password manager
-        keepassxc
 
         # bluetooth
         bluez
