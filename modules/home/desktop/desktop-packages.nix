@@ -24,8 +24,10 @@
         swayimg
 
         ani-cli # watch anime
-        strawberry # music player
         jellyfin-desktop # access media server
+
+        strawberry # music player
+        picard # music tagging
 
         obsidian # notetaking
         freetube # youtube frontend
@@ -38,7 +40,7 @@
         gimp
         kdePackages.kdenlive
         krita
-        aseprite
+        # aseprite
       ];
     };
 }
