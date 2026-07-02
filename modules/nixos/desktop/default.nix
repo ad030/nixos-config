@@ -11,5 +11,6 @@
     window-manager
     desktop-packages
     home-manager
+    audio
   ];
 }

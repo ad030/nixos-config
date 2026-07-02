@@ -2,8 +2,9 @@
 {
   flake.modules.homeManager.desktop.imports = with config.flake.modules.homeManager; [
     desktop-packages
-    niri
+    audio
 
+    niri
     waybar
     fuzzel
     foot
