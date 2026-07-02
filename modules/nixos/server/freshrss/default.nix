@@ -12,10 +12,6 @@
         };
       };
 
-      sops.secrets."freshrss/password" = {
-        owner = "freshrss";
-      };
-
       containers.freshrss = {
         autoStart = true;
 
@@ -25,12 +21,11 @@
 
         privateUsers = "pick";
 
-        bindMounts = {
-          "/run/secrets/freshrss-password" = {
-            hostPath = config.sops.secrets."freshrss/password".path;
-            isReadOnly = true;
-          };
-        };
+        # pass in sops secrets into container using systemd loadcredentials
+        # https://github.com/Mic92/sops-nix/issues/514#issuecomment-2036359239
+        extraFlags = [
+          "--load-credential=freshrss-password:${config.sops.secrets."freshrss/password".path}"
+        ];
 
         config =
           {
@@ -46,7 +41,7 @@
               baseUrl = "http://freshrss.home.lan";
 
               defaultUser = "dokja";
-              passwordFile = "/run/secrets/freshrss-password";
+              passwordFile = "/run/credentials/freshrss-config.service/freshrss-password";
             };
 
             networking.firewall = {
@@ -54,6 +49,10 @@
                 80
               ];
             };
+
+            # needed to pass sops secret into service
+            systemd.services.freshrss-config.serviceConfig.LoadCredential =
+              "freshrss-password:freshrss-password";
 
             networking.useHostResolvConf = lib.mkForce false;
             services.resolved.enable = true;

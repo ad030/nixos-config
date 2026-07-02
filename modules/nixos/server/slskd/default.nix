@@ -28,10 +28,6 @@
         };
       };
 
-      sops.secrets."slskd/env" = {
-        owner = "slskd";
-      };
-
       containers.slskd = {
         autoStart = true;
 
@@ -55,10 +51,6 @@
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
         bindMounts = {
-          "/run/secrets/slskd/env" = {
-            hostPath = config.sops.secrets."slskd/env".path;
-            isReadOnly = true;
-          };
           "/media/music" = {
             mountPoint = "/media/music:idmap";
             hostPath = "/srv/media/tank/Music/Music";
@@ -76,6 +68,12 @@
           };
         };
 
+        # pass sops secret into container using systemd loadcredential
+        # https://github.com/Mic92/sops-nix/issues/514#issuecomment-2036359239
+        extraFlags = [
+          "--load-credentials=env:${config.sops.secrets."slskd/env".path}"
+        ];
+
         config =
           {
             config,
@@ -91,7 +89,7 @@
 
               group = "media";
 
-              environmentFile = "/run/secrets/slskd/env";
+              environmentFile = "/run/credentials/slskd.service/env";
 
               settings = {
                 web.port = 5030;
@@ -116,6 +114,9 @@
                 };
               };
             };
+
+            # needed to pass sops secret into service
+            systemd.services.slskd.serviceConfig.LoadCredentials = "env:env";
 
             networking.firewall = {
               allowedTCPPorts = [
