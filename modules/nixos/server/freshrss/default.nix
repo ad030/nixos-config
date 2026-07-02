@@ -43,7 +43,7 @@
               baseUrl = "http://freshrss.home.lan";
 
               defaultUser = "dokja";
-              passwordFile = "/run/credentials/freshrss-config.service/freshrss-password";
+              passwordFile = "/run/credentials/@system/freshrss-password";
             };
 
             networking.firewall = {
@@ -51,10 +51,6 @@
                 80
               ];
             };
-
-            # needed to pass sops secret into service
-            systemd.services.freshrss-config.serviceConfig.LoadCredential =
-              "freshrss-password:freshrss-password";
 
             networking.useHostResolvConf = lib.mkForce false;
             services.resolved.enable = true;

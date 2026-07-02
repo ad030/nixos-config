@@ -91,7 +91,7 @@
 
               group = "media";
 
-              environmentFile = "/run/credentials/slskd.service/env";
+              environmentFile = "/run/credentials/@system/slskd-env";
 
               settings = {
                 web.port = 5030;
@@ -116,9 +116,6 @@
                 };
               };
             };
-
-            # needed to pass sops secret into service
-            systemd.services.slskd.serviceConfig.LoadCredential = "env:slskd-env";
 
             networking.firewall = {
               allowedTCPPorts = [
