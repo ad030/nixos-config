@@ -5,6 +5,7 @@
 {
   flake.modules.nixos.server = {
     imports = with config.flake.modules.nixos; [
+      server-packages
       networking-server
       nfs-server
       reverse-proxy
