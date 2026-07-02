@@ -20,6 +20,7 @@ in
         extraGroups = [
           "wheel"
           "networkmanager"
+          "media"
         ];
         hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
 
