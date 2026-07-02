@@ -48,6 +48,8 @@
           }
         ];
 
+        # no id map option yet, workaround
+        # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
         bindMounts = {
           "/downloads/incomplete" = {
             mountPoint = "/downloads/incomplete:idmap";

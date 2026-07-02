@@ -52,7 +52,8 @@
           }
         ];
 
-        # pass env file into container
+        # no id map option yet, workaround
+        # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
         bindMounts = {
           "/run/secrets/slskd/env" = {
             hostPath = config.sops.secrets."slskd/env".path;
