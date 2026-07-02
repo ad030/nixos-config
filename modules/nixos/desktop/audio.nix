@@ -1,6 +1,14 @@
 { self, flakes, ... }:
 {
-  flake.modules.nixos.audio = {
+  flake.modules.nixos.audio = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      # audio
+      pavucontrol
+      pamixer
+      wireplumber
+
+    ];
+
     services = {
       pulseaudio.enable = false;
       pipewire = {

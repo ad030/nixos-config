@@ -13,7 +13,13 @@
         feh
 
         fastfetch
-      ];
 
+        # password manager
+        keepassxc
+
+        # bluetooth
+        bluez
+        bluez-tools
+      ];
     };
 }

@@ -19,21 +19,9 @@
         jq
         htop
 
-        # used for secrets backend
-        keepassxc
-
         # notifications
         libnotify
         mako
-
-        # audio
-        pavucontrol
-        pamixer
-        wireplumber
-
-        # bluetooth
-        bluez
-        bluez-tools
 
         # nix programming; language server, formatter
         nil
