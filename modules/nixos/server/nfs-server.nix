@@ -1,7 +1,14 @@
 {
   flake.modules.nixos.nfs-server = {
-    services.nfs.server = {
-      enable = true;
+    services.nfs = {
+      server = {
+        enable = true;
+      };
+      settings = {
+        mountd = {
+          manage-gids = true;
+        };
+      };
     };
 
     networking.firewall.allowedTCPPorts = [
