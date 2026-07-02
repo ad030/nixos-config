@@ -38,7 +38,8 @@
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
         bindMounts = {
           "/library" = {
-            hostPath = "/srv/media/tank/Books/calibre-library:idmap";
+            mountPoint = "/library:idmap";
+            hostPath = "/srv/media/tank/Books/calibre-library";
             isReadOnly = false;
           };
         };
