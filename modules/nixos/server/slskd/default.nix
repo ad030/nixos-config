@@ -28,6 +28,8 @@
         };
       };
 
+      sops.secrets."slskd/env" = { };
+
       containers.slskd = {
         autoStart = true;
 
@@ -71,7 +73,7 @@
         # pass sops secret into container using systemd loadcredential
         # https://github.com/Mic92/sops-nix/issues/514#issuecomment-2036359239
         extraFlags = [
-          "--load-credentials=env:${config.sops.secrets."slskd/env".path}"
+          "--load-credentials=slskd-env:${config.sops.secrets."slskd/env".path}"
         ];
 
         config =
@@ -116,7 +118,7 @@
             };
 
             # needed to pass sops secret into service
-            systemd.services.slskd.serviceConfig.LoadCredentials = "env:env";
+            systemd.services.slskd.serviceConfig.LoadCredentials = "env:slskd-env";
 
             networking.firewall = {
               allowedTCPPorts = [

@@ -12,6 +12,8 @@
         };
       };
 
+      sops.secrets."freshrss/password" = { };
+
       containers.freshrss = {
         autoStart = true;
 
