@@ -2,23 +2,7 @@
 {
   flake.modules.nixos.freshrss =
     { config, lib, ... }:
-    let
-      inherit (self.lib.server) mkServiceUser;
-    in
     {
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/freshrss".d = {
-          user = "freshrss";
-          group = "freshrss";
-          mode = "0750";
-        };
-      };
-
-      users = mkServiceUser {
-        name = "freshrss";
-        uid = 3006;
-      };
-
       services.nginx.virtualHosts = {
         "freshrss.home.lan" = {
           locations."/" = {
@@ -39,13 +23,9 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.6";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         bindMounts = {
-          "/srv/freshrss" = {
-            hostPath = "/srv/freshrss";
-            isReadOnly = false;
-          };
           "/run/secrets/freshrss-password" = {
             hostPath = config.sops.secrets."freshrss/password".path;
             isReadOnly = true;
@@ -62,7 +42,6 @@
           {
             services.freshrss = {
               enable = true;
-              dataDir = "/srv/freshrss";
 
               baseUrl = "http://freshrss.home.lan";
 

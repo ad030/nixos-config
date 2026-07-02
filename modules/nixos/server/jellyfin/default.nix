@@ -7,37 +7,9 @@
   flake.modules.nixos.jellyfin =
     { pkgs, lib, ... }:
     let
-      inherit (self.lib.server) mkMediaUser;
+      mediaGid = 3333;
     in
     {
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/jellyfin".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "0750";
-        };
-        "/srv/jellyfin/cache".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "0750";
-        };
-        "/srv/jellyfin/data".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "0750";
-        };
-        "/srv/jellyfin/config".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "0750";
-        };
-      };
-
-      users = mkMediaUser {
-        name = "jellyfin";
-        uid = 3002;
-      };
-
       services.nginx.virtualHosts = {
         "jellyfin.home.lan" = {
           locations."/" = {
@@ -61,7 +33,7 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.2";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         forwardPorts = [
           {
@@ -75,19 +47,18 @@
         ];
 
         bindMounts = {
-          "/srv/jellyfin" = {
-            hostPath = "/srv/jellyfin";
-            isReadOnly = false;
-          };
           "/media/movies" = {
+            mountPoint = "/media/movies:idmap";
             hostPath = "/srv/media/tank/Movies";
             isReadOnly = false;
           };
           "/media/shows" = {
+            mountPoint = "/media/shows:idmap";
             hostPath = "/srv/media/tank/Shows";
             isReadOnly = false;
           };
           "/media/music" = {
+            mountPoint = "/media/music:idmap";
             hostPath = "/srv/media/tank/Music";
             isReadOnly = true;
           };
@@ -101,16 +72,11 @@
             ...
           }:
           {
+            users.groups.media.gid = mediaGid;
+
             services.jellyfin = {
               enable = true;
-              user = "jellyfin";
-              group = "jellyfin";
-
-              cacheDir = "/srv/jellyfin/cache";
-              dataDir = "/srv/jellyfin/data";
-              configDir = "/srv/jellyfin/config";
-
-              openFirewall = false;
+              group = "media";
             };
 
             networking.firewall = {

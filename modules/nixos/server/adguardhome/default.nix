@@ -27,7 +27,7 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.4";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         forwardPorts = [
           {

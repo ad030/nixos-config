@@ -8,25 +8,15 @@
   flake.modules.nixos.slskd =
     { config, ... }:
     let
-      inherit (self.lib.server) mkMediaUser;
+      mediaGid = 3333;
     in
     {
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/slskd".d = {
-          user = "slskd";
-          group = "slskd";
-          mode = "0750";
-        };
+      systemd.tmpfiles.settings."media-downloads" = {
         "/srv/downloads/slskd".d = {
-          user = "slskd";
-          group = "slskd";
-          mode = "0750";
+          user = "root";
+          group = "media";
+          mode = "0775";
         };
-      };
-
-      users = mkMediaUser {
-        name = "slskd";
-        uid = 3003;
       };
 
       services.nginx.virtualHosts = {
@@ -49,15 +39,11 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.3";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         forwardPorts = [
           {
             hostPort = 5030; # http web ui
-            protocol = "tcp";
-          }
-          {
-            hostPort = 5031; # https web ui
             protocol = "tcp";
           }
           {
@@ -72,19 +58,18 @@
             hostPath = config.sops.secrets."slskd/env".path;
             isReadOnly = true;
           };
-          "/var/lib/slskd" = {
-            hostPath = "/srv/slskd";
-            isReadOnly = false;
-          };
           "/media/music" = {
+            mountPoint = "/media/music:idmap";
             hostPath = "/srv/media/tank/Music/Music";
             isReadOnly = true;
           };
           "/downloads/incomplete" = {
+            mountPoint = "/downloads/incomplete:idmap";
             hostPath = "/srv/downloads/slskd";
             isReadOnly = false;
           };
           "/downloads/complete" = {
+            mountPoint = "/downloads/complete:idmap";
             hostPath = "/srv/media/tank/Downloads/slskd";
             isReadOnly = false;
           };
@@ -98,11 +83,13 @@
             ...
           }:
           {
+            users.groups.media.gid = mediaGid;
+
             services.slskd = {
               enable = true;
 
-              user = "slskd";
-              group = "slskd";
+              group = "media";
+
               environmentFile = "/run/secrets/slskd/env";
 
               settings = {
@@ -132,7 +119,6 @@
             networking.firewall = {
               allowedTCPPorts = [
                 5030
-                5031
                 50300
               ];
             };

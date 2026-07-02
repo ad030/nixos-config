@@ -2,23 +2,9 @@
 {
   flake.modules.nixos.calibre-web =
     let
-      inherit (self.lib.server) mkMediaUser;
+      mediaGid = 3333;
     in
     {
-
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/calibre-web".d = {
-          user = "calibre-web";
-          group = "calibre-web";
-          mode = "0750";
-        };
-      };
-
-      users = mkMediaUser {
-        name = "calibre-web";
-        uid = 3005;
-      };
-
       services.nginx.virtualHosts = {
         "calibre-web.home.lan" = {
           locations."/" = {
@@ -39,7 +25,7 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.5";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         forwardPorts = [
           {
@@ -49,12 +35,8 @@
         ];
 
         bindMounts = {
-          "/srv/calibre-web" = {
-            hostPath = "/srv/calibre-web";
-            isReadOnly = false;
-          };
           "/library" = {
-            hostPath = "/srv/media/tank/Books/calibre-library";
+            hostPath = "/srv/media/tank/Books/calibre-library:idmap";
             isReadOnly = false;
           };
         };
@@ -67,12 +49,11 @@
             ...
           }:
           {
+            users.groups.media.gid = mediaGid;
+
             services.calibre-web = {
               enable = true;
-
-              dataDir = "/srv/calibre-web";
-              user = "calibre-web";
-              group = "calibre-web";
+              group = "media";
 
               listen = {
                 ip = "0.0.0.0";

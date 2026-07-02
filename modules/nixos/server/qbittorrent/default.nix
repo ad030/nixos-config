@@ -3,25 +3,15 @@
   flake.modules.nixos.qbittorrent =
     { pkgs, lib, ... }:
     let
-      inherit (self.lib.server) mkMediaUser;
+      mediaGid = 3333;
     in
     {
-      systemd.tmpfiles.settings."homelab-dirs" = {
-        "/srv/qbittorrent".d = {
-          user = "qbittorrent";
-          group = "qbittorrent";
-          mode = "0750";
-        };
+      systemd.tmpfiles.settings."media-downloads" = {
         "/srv/downloads/qbittorrent".d = {
-          user = "qbittorrent";
-          group = "qbittorrent";
-          mode = "0750";
+          user = "root";
+          group = "media";
+          mode = "0775";
         };
-      };
-
-      users = mkMediaUser {
-        name = "qbittorrent";
-        uid = 3007;
       };
 
       services.nginx.virtualHosts = {
@@ -41,7 +31,7 @@
         hostAddress = "10.0.0.1";
         localAddress = "10.0.0.7";
 
-        privateUsers = false; # use host uid and gid
+        privateUsers = "pick";
 
         forwardPorts = [
           {
@@ -52,22 +42,20 @@
             hostPort = 6881; # torrenting port
             protocol = "udp";
           }
-          # {
-          #   hostPort = 8090; # webui port
-          #   protocol = "tcp";
-          # }
+          {
+            hostPort = 8090; # webui port
+            protocol = "tcp";
+          }
         ];
 
         bindMounts = {
-          "/srv/qbittorrent" = {
-            hostPath = "/srv/qbittorrent";
-            isReadOnly = false;
-          };
           "/downloads/incomplete" = {
+            mountPoint = "/downloads/incomplete:idmap";
             hostPath = "/srv/downloads/qbittorrent";
             isReadOnly = false;
           };
           "/downloads/complete" = {
+            mountPoint = "/downloads/complete:idmap";
             hostPath = "/srv/media/tank/Downloads/qbittorrent";
             isReadOnly = false;
           };
@@ -81,14 +69,13 @@
             ...
           }:
           {
+            users.groups.media.gid = mediaGid;
+
             services.qbittorrent = {
               enable = true;
               package = pkgs.qbittorrent-nox;
 
-              profileDir = "/srv/qbittorrent";
-
-              user = "qbittorrent";
-              group = "qbittorrent";
+              group = "media";
 
               torrentingPort = 6881;
               webuiPort = 8090;
