@@ -8,5 +8,9 @@
     waybar
     fuzzel
     foot
+
+    keepassxc
+    vesktop
+    signal-desktop
   ];
 }

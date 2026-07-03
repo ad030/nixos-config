@@ -44,10 +44,6 @@
 
           startup = [
             {
-              command = "keepassxc";
-              always = true;
-            }
-            {
               command = "foot --server";
               always = true;
             }

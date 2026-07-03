@@ -24,7 +24,6 @@
 
       programs.niri = {
         settings = {
-
           spawn-at-startup =
             let
               wallpaper = self.images.ow-archaeologist-cover;
