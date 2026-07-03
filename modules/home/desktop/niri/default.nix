@@ -53,6 +53,11 @@
                   "-w"
                 ];
               }
+              {
+                argv = [
+                  "${lib.getExe pkgs.xwayland-satellite}"
+                ];
+              }
             ];
 
           input = {
