@@ -53,18 +53,17 @@
                   "-w"
                 ];
               }
-              {
-                argv = [
-                  # version of xwayland-satellite that comes with niri-flake
-                  "${lib.getExe pkgs.xwayland-satellite-unstable}"
-                ];
-              }
             ];
 
           input = {
             focus-follows-mouse = {
               enable = false;
             };
+          };
+
+          xwayland-satellite = {
+            enable = true;
+            path = lib.getExe pkgs.xwayland-satellite-unstable;
           };
 
         };
