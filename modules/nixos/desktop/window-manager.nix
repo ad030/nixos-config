@@ -10,10 +10,11 @@
     {
       imports = [
         self.modules.nixos.idle-lock
+        inputs.niri.overlays.niri
       ];
 
       environment.systemPackages = with pkgs; [
-        xwayland-satellite
+        xwayland-satellite-unstable
       ];
 
       programs = {
