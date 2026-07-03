@@ -38,12 +38,6 @@ in
         desktop
         dev
         gaming
-
-        apps
-
-        signal-desktop
-        vesktop
-        keepassxc
       ];
 
       home = {
