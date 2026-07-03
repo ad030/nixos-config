@@ -15,7 +15,7 @@
     users.users.media = {
       uid = 3333;
       group = "media";
-      isNormalUser = true;
+      isSystemUser = true;
     };
     users.groups.media.gid = 3333;
   };
