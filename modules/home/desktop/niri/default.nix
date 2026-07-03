@@ -55,7 +55,8 @@
               }
               {
                 argv = [
-                  "${lib.getExe pkgs.xwayland-satellite}"
+                  # version of xwayland-satellite that comes with niri-flake
+                  "${lib.getExe pkgs.xwayland-satellite-unstable}"
                 ];
               }
             ];
