@@ -12,6 +12,10 @@
         self.modules.nixos.idle-lock
       ];
 
+      environment.systemPackages = with pkgs; [
+        xwayland-satellite
+      ];
+
       programs = {
         sway = {
           enable = false;
