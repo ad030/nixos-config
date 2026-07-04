@@ -9,20 +9,32 @@ let
 in
 {
   flake.modules.nixos."users-${username}" =
-    { config, pkgs, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     {
       sops.secrets."passwords/${username}".neededForUsers = true;
 
-      users.users.${username} = {
-        isNormalUser = true;
-        shell = pkgs.bash;
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "media"
-        ];
-        hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
-      };
+      users.users.${username} =
+        let
+          uid = self.lib.sharedIds.users.${username}.uid;
+          groups = self.lib.sharedIds.users.${username}.groups;
+        in
+        {
+          inherit uid;
+          isNormalUser = true;
+          shell = pkgs.bash;
+          extraGroups =
+            lib.uniqueStrings [
+              "networkmanager"
+              "wheel"
+            ]
+            ++ groups;
+          hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
+        };
     };
 
   flake.hmUsers.${username} =

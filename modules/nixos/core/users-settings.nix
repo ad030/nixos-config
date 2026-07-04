@@ -1,4 +1,12 @@
 {
+  self,
+  inputs,
+  ...
+}:
+let
+  sharedGroups = self.lib.sharedIds.groups;
+in
+{
   flake.modules.nixos.users-settings = {
     users.mutableUsers = false;
 
@@ -12,6 +20,6 @@
     };
 
     # create group for use in shared media directories (nfs)
-    users.groups.media.gid = 3333;
+    users.groups.media.gid = sharedGroups.media.gid;
   };
 }
