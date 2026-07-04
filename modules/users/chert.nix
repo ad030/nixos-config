@@ -41,6 +41,8 @@ in
     {
       imports = with self.modules.homeManager; [
         core
+        desktop
+        gaming
       ];
 
       home = {
