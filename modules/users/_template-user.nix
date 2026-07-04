@@ -1,6 +1,7 @@
 {
   self,
   inputs,
+  ...
 }:
 let
   username = "CHANGE_ME";
