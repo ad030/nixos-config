@@ -58,10 +58,7 @@ in
         stateVersion = "26.05";
 
         packages = with pkgs; [
-          nemo # file manager
-
           papirus-icon-theme
-
         ];
 
         pointerCursor = {
