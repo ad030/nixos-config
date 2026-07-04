@@ -3,7 +3,7 @@
   inputs,
 }:
 let
-  username = "CHANGE_ME";
+  username = "chert";
 in
 {
   flake.modules.nixos."users-${username}" =

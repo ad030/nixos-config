@@ -20,8 +20,8 @@ in
 
       users.users.${username} =
         let
-          uid = self.lib.sharedIds.users.${username}.uid;
-          groups = self.lib.sharedIds.users.${username}.groups;
+          uid = self.lib.sharedIds.users.${username}.uid or null;
+          groups = self.lib.sharedIds.users.${username}.groups or [ ];
         in
         {
           inherit uid;
