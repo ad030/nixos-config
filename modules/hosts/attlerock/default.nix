@@ -22,7 +22,7 @@ in
       core
       server
     ])
-    # add shared users to this system
+    # generate stub users on this system for each regular user
     ++ (
       let
         sharedUsers = self.lib.sharedIds.users;
