@@ -16,4 +16,8 @@ in
   };
 
   # nixos: use flake.modules.nixos."users-${username}" to store nixos module
+  options.flake.nixosUsers = mkOption {
+    type = with types; attrsOf deferredModule;
+    default = { };
+  };
 }

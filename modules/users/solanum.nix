@@ -8,7 +8,7 @@ let
   username = "solanum";
 in
 {
-  flake.modules.nixos."users-${username}" =
+  flake.nixosUsers.${username} =
     {
       config,
       pkgs,

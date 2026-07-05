@@ -27,7 +27,7 @@ in
       flatpak
     ])
     # users in nixos configuration
-    ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers)
+    ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)
     # user configs in home manager
     ++ [
       {
