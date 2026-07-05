@@ -45,5 +45,4 @@ Each host derives an age key from its SSH host key located at
 
 If decryption fails, it is impossible to log into any user because user
 passwords are also stored in `secrets/secrets.yaml`. As a last resort, the root
-user can be used to log in and fix it. _The root user is not intended to be used
-otherwise._
+user can be used to log in and fix it.
