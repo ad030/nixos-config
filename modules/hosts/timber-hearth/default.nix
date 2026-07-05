@@ -20,6 +20,7 @@ in
     # nixos modules
     ++ (with config.flake.modules.nixos; [
       core
+      nvidia
       home-manager
       desktop
       gaming
