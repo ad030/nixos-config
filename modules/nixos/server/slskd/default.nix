@@ -15,7 +15,7 @@
         "/srv/downloads/slskd".d = {
           user = "root";
           group = "media";
-          mode = "0775";
+          mode = "2775";
         };
       };
 

@@ -10,7 +10,7 @@
         "/srv/downloads/qbittorrent".d = {
           user = "root";
           group = "media";
-          mode = "0775";
+          mode = "2775";
         };
       };
 
