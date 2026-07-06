@@ -5,16 +5,18 @@
 }:
 
 {
-  flake.modules.nixos.laptop-power-management = {
+  flake.modules.nixos.laptop-power-management = { lib, ... }: {
     services = {
-      thermald.enable = true;
+      thermald.enable = false;
+      power-profiles-daemon.enable = lib.mkForce false;
       tlp = {
-        enable = false;
+        enable = true;
 
         settings = {
           CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
-          CPU_ENERGY_PERF_POLICY_ON_AC = "powersave";
+          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
+          # this doesn't work on hp laptops cause they hate users
           START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
           STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
         };
