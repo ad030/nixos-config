@@ -52,7 +52,7 @@
             hostPath = moviesDir;
             isReadOnly = false;
           };
-          "/downloads/qbittorrent" = {
+          "/downloads" = {
             mountPoint = "/downloads:idmap";
             hostPath = downloadsDir;
             isReadOnly = true;
