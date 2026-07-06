@@ -4,10 +4,17 @@
     { pkgs, lib, ... }:
     let
       mediaGid = 3333;
+      incompleteDir = "/srv/downloads";
+      completeDir = "/srv/media/tank/Downloads";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
-        "/srv/downloads/qbittorrent".d = {
+        "${completeDir}/qbittorrent".d = {
+          user = "root";
+          group = "media";
+          mode = "2775";
+        };
+        "${incompleteDir}/qbittorrent".d = {
           user = "root";
           group = "media";
           mode = "2775";
@@ -53,12 +60,12 @@
         bindMounts = {
           "/downloads/incomplete" = {
             mountPoint = "/downloads/incomplete:idmap";
-            hostPath = "/srv/downloads/qbittorrent";
+            hostPath = "${incompleteDir}/qbittorrent";
             isReadOnly = false;
           };
           "/downloads/complete" = {
             mountPoint = "/downloads/complete:idmap";
-            hostPath = "/srv/media/tank/Downloads/qbittorrent";
+            hostPath = "${completeDir}/qbittorrent";
             isReadOnly = false;
           };
         };

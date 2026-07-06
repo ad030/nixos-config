@@ -9,10 +9,18 @@
     { config, ... }:
     let
       mediaGid = 3333;
+      incompleteDir = "/srv/downloads";
+      completeDir = "/srv/media/tank/Downloads";
+      musicDir = "/srv/media/tank/Music/Music";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
-        "/srv/downloads/slskd".d = {
+        "${incompleteDir}/slskd".d = {
+          user = "root";
+          group = "media";
+          mode = "2775";
+        };
+        "${completeDir}/slskd".d = {
           user = "root";
           group = "media";
           mode = "2775";
@@ -55,17 +63,17 @@
         bindMounts = {
           "/media/music" = {
             mountPoint = "/media/music:idmap";
-            hostPath = "/srv/media/tank/Music/Music";
+            hostPath = musicDir;
             isReadOnly = true;
           };
           "/downloads/incomplete" = {
             mountPoint = "/downloads/incomplete:idmap";
-            hostPath = "/srv/downloads/slskd";
+            hostPath = "${incompleteDir}/slskd";
             isReadOnly = false;
           };
           "/downloads/complete" = {
             mountPoint = "/downloads/complete:idmap";
-            hostPath = "/srv/media/tank/Downloads/slskd";
+            hostPath = "${completeDir}/slskd";
             isReadOnly = false;
           };
         };
