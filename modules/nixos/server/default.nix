@@ -19,6 +19,7 @@
       slskd
       qbittorrent
       calibre-web
+      radarr
     ];
 
   };
