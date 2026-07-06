@@ -9,6 +9,7 @@
       rsync
       ethtool
       iperf3
+      smartmontools
     ];
   };
 }

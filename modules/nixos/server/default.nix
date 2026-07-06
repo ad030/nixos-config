@@ -10,7 +10,7 @@
       nfs-server
       reverse-proxy
       media-dirs
-      sleep
+      idle-server
 
       landing-page
       adguardhome
