@@ -16,6 +16,7 @@
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite-unstable
+        quickshell # for creating custom status bar
       ];
 
       programs = {
