@@ -12,6 +12,9 @@
         libreoffice # office suite
         kdePackages.okular # pdf viewer
 
+        # file manager that's better than dolphin
+        pcmanfm-qt
+
         # password manager
         keepassxc
 
