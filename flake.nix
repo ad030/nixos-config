@@ -17,18 +17,22 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # declarative flatpak installation
     d-flatpak = {
       url = "github:in-a-dil-emma/declarative-flatpak/latest";
     };
 
+    # wayland scrolling window manager
     niri = {
       url = "github:sodiboo/niri-flake";
     };
 
+    # secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
 
+    # declarative disk partitioning
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs-stable";
