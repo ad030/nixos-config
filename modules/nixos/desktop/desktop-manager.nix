@@ -28,14 +28,14 @@
 
       # Enable LXQt desktop environment
       services.xserver.desktopManager.lxqt = {
-        enable = true;
+        enable = false;
         extraPackages = with pkgs; [
           # kdePackages.kwin
           # lxqt.lxqt-wayland-session
           papirus-icon-theme
         ];
       };
-      xdg.portal.lxqt.enable = true;
+      xdg.portal.lxqt.enable = false;
       ### wayland session is currently not working
       ### https://www.reddit.com/r/NixOS/comments/1hyjjnx/lxqt_wayland_session_not_appearing_in_sddm/
       # services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
