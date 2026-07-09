@@ -20,8 +20,10 @@
         ];
 
       services.displayManager = {
+        # defaultSession = "niri";
         sddm = {
           enable = true;
+
           wayland.enable = true;
 
           theme = "sddm-astronaut-theme";

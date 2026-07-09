@@ -26,19 +26,37 @@
         printing.enable = true;
       };
 
-      # Enable LXQt desktop manager
+      # Enable LXQt desktop environment
       services.xserver.desktopManager.lxqt = {
         enable = true;
         extraPackages = with pkgs; [
-          kdePackages.kwin
-          lxqt.lxqt-wayland-session
+          # kdePackages.kwin
+          # lxqt.lxqt-wayland-session
           papirus-icon-theme
         ];
       };
       xdg.portal.lxqt.enable = true;
+      ### wayland session is currently not working
+      ### https://www.reddit.com/r/NixOS/comments/1hyjjnx/lxqt_wayland_session_not_appearing_in_sddm/
+      # services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
+      # nixpkgs.overlays = [
+      #   (final: prev: {
+      #     lxqt = prev.lxqt // {
+      #       lxqt-wayland-session = prev.lxqt.lxqt-wayland-session.overrideAttrs (old: {
+      #         passthru = (old.passthru or { }) // {
+      #           providedSessions = [ "lxqt-wayland" ];
+      #         };
+      #       });
+      #     };
+      #   })
+      # ];
 
+      # Enable Cinnamon desktop environment
+      services.xserver.desktopManager.cinnamon.enable = true;
+
+      # Enable KDE Plasma 6 desktop environment
       services.desktopManager = {
-        plasma6.enable = false;
+        plasma6.enable = true;
       };
       environment.plasma6.excludePackages = with pkgs; [
         kdePackages.elisa # Music player
