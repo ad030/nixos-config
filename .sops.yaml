@@ -5,6 +5,7 @@ keys:
   # automatically generated from ssh host keys
   - &age_brittle-hollow age1swu2dp4pxctvsa2w20fm6959qg0qsyqxgrsgysh3fj4qdvasm3fsy6r5vv
   - &age_attlerock age146vlmetw6eh8kgcmcuq556phn548j9vyryav3vjstxx83z3v8cgsvyvl3f
+  - &age_timber-hearth age1mr26v87srxxatmshfqn9mtenh5p09rskh6l2t994scxhxmazncdquuakpa
 
 creation_rules:
   - path_regex: secrets/secrets.yaml$
@@ -13,3 +14,4 @@ creation_rules:
           - *age_recovery
           - *age_brittle-hollow
           - *age_attlerock
+          - *age_timber-hearth
