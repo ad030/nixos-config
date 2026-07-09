@@ -1,21 +1,24 @@
 import QtQuick;
 import Quickshell;
 import Quickshell.Widgets;
+import qs
 
 WrapperRectangle {
         color: Theme.background;
-        border.color: "#ffffff";
+        border.color: Theme.foreground;
         border.width: 1;
         margin: 4;
 
-        WrapperItem {
-                leftMargin: 11;
-                rightMargin: 11;
+        implicitHeight: 42;
+
+        WrapperMouseArea {
+                leftMargin: 10;
+                rightMargin: 10;
                 topMargin: 4;
                 bottomMargin: 4;
 
                 Text {
-                        color: "#ffffff";
+                        color: Theme.foreground;
                         text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
 
                         font.family: Theme.fontFamily;
@@ -26,5 +29,8 @@ WrapperRectangle {
                         id: clock;
                         precision: SystemClock.Minutes;
                 }
+
+                hoverEnabled: true;
+                onEntered: { }
         }
 }

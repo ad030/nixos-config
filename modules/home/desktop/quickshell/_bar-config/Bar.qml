@@ -1,13 +1,17 @@
 import Quickshell
 import QtQuick.Layouts
+import qs.widgets
 
 Scope {
         Variants {
                 model: Quickshell.screens
 
                 PanelWindow {
+                        id: barRoot;
+
                         required property var modelData
                         screen: modelData
+
                         margins {
                                 right: 2; 
                                 bottom: 2; 
@@ -23,25 +27,19 @@ Scope {
                                 right: true
                         }
 
-                        implicitHeight: 40
-                        // implicitHeight: 38
+                        implicitHeight: 42
+                        // implicitHeight: 40
 
                         // left modules
                         RowLayout {
                                 anchors.left: parent.left
                                 spacing: 4;
-
-                                ClockWidget {}
-                                ClockWidget {}
                         }
 
                         // centre modules
                         RowLayout {
                                 anchors.centerIn: parent
                                 spacing: 4;
-
-                                ClockWidget {}
-                                ClockWidget {}
                         }
                         
                         // right modules
@@ -49,8 +47,13 @@ Scope {
                                 anchors.right: parent.right
                                 spacing: 4;
 
+                                VolumeWidget {}
+                                // NetworkingWidget {}
+                                BatteryWidget {}
                                 ClockWidget {}
-                                ClockWidget {}
+                                PowerOffWidget {
+                                        inhibitorTarget: barRoot
+                                }
                         }
 
                 }
