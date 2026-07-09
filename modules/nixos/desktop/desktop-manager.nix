@@ -52,7 +52,7 @@
       # ];
 
       # Enable Cinnamon desktop environment
-      services.xserver.desktopManager.cinnamon.enable = true;
+      services.xserver.desktopManager.cinnamon.enable = false;
 
       # Enable KDE Plasma 6 desktop environment
       services.desktopManager = {
