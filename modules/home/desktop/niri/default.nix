@@ -56,11 +56,6 @@
                   "-w"
                 ];
               }
-              {
-                argv = [
-                  "${lib.getExe' pkgs.xdg-user-dirs "xdg-user-dirs-update"}"
-                ];
-              }
             ];
 
           input = {
