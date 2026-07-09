@@ -6,8 +6,14 @@
 }:
 
 {
-  flake.modules.homeManager.dev.imports = with config.flake.modules.homeManager; [
-    neovim
-    tmux
-  ];
+  flake.modules.homeManager.dev = { pkgs, ... }: {
+    imports = with config.flake.modules.homeManager; [
+      neovim
+      tmux
+    ];
+
+    home.packages = with pkgs; [
+      godot
+    ];
+  };
 }

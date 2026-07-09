@@ -128,6 +128,20 @@ WrapperRectangle {
                                 }
                                 WrapperMouseArea {
                                         Text {
+                                                text: "Reboot";
+                                                color: Theme.foreground;
+                                                font.family: Theme.fontFamily;
+                                                font.pixelSize: Theme.fontSize;
+                                        }
+
+                                        onDoubleClicked: mouse => {
+                                                p.exec ([ 
+                                                        "reboot"
+                                                ]);
+                                        };
+                                }
+                                WrapperMouseArea {
+                                        Text {
                                                 text: "Shut down";
                                                 color: Theme.foreground;
                                                 font.family: Theme.fontFamily;

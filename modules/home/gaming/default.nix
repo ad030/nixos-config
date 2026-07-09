@@ -5,11 +5,16 @@
   ...
 }:
 {
-  flake.modules.homeManager.gaming.imports = with config.flake.modules.homeManager; [
-    obs-studio
+  flake.modules.homeManager.gaming = { pkgs, ... }: {
+    imports = with config.flake.modules.homeManager; [
+      lutris
+      sober
+    ];
 
-    lutris
-    sober
-    prism-launcher
-  ];
+    home.packages = with pkgs; [
+      osu-lazer
+      heroic
+      prismlauncher
+    ];
+  };
 }
