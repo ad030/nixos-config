@@ -24,12 +24,21 @@
 
         # Enable CUPS to print documents.
         printing.enable = true;
-
-        # Enable sound with pipewire.
       };
 
+      # Enable LXQt desktop manager
+      services.xserver.desktopManager.lxqt = {
+        enable = true;
+        extraPackages = with pkgs; [
+          kdePackages.kwin
+          lxqt.lxqt-wayland-session
+          papirus-icon-theme
+        ];
+      };
+      xdg.portal.lxqt.enable = true;
+
       services.desktopManager = {
-        plasma6.enable = true;
+        plasma6.enable = false;
       };
       environment.plasma6.excludePackages = with pkgs; [
         kdePackages.elisa # Music player
@@ -47,6 +56,5 @@
         kdePackages.kwalletmanager
         kdePackages.ksshaskpass
       ];
-
     };
 }
