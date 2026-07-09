@@ -24,6 +24,7 @@
 
       # file manager that's better than dolphin
       pcmanfm-qt
+      gvfs
 
       # password manager
       keepassxc

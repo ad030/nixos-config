@@ -28,28 +28,15 @@
 
       # Enable LXQt desktop environment
       services.xserver.desktopManager.lxqt = {
-        enable = false;
+        enable = true;
         extraPackages = with pkgs; [
-          # kdePackages.kwin
-          # lxqt.lxqt-wayland-session
+          kdePackages.kwin
+          lxqt.lxqt-wayland-session
           papirus-icon-theme
         ];
       };
-      xdg.portal.lxqt.enable = false;
-      ### wayland session is currently not working
-      ### https://www.reddit.com/r/NixOS/comments/1hyjjnx/lxqt_wayland_session_not_appearing_in_sddm/
-      # services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
-      # nixpkgs.overlays = [
-      #   (final: prev: {
-      #     lxqt = prev.lxqt // {
-      #       lxqt-wayland-session = prev.lxqt.lxqt-wayland-session.overrideAttrs (old: {
-      #         passthru = (old.passthru or { }) // {
-      #           providedSessions = [ "lxqt-wayland" ];
-      #         };
-      #       });
-      #     };
-      #   })
-      # ];
+      xdg.portal.lxqt.enable = true;
+      services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
 
       # Enable Cinnamon desktop environment
       services.xserver.desktopManager.cinnamon.enable = false;
