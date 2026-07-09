@@ -18,7 +18,7 @@
           main = {
             terminal = "${lib.getExe pkgs.foot}";
             layer = "overlay";
-            font = "MesloLGM Nerd Font:size=12";
+            font = "MesloLGM Nerd Font:size=16";
           };
 
           colors = theme.fuzzel;
