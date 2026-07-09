@@ -10,8 +10,11 @@ in
   flake.modules.homeManager.quickshell = {
     programs.quickshell = {
       enable = true;
+    };
 
-      configs = map (f: /. + f) configFiles;
+    xdg.configFile."quickshell" = {
+      source = ./_bar-config;
+      recursive = true;
     };
 
   };

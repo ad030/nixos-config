@@ -6,6 +6,7 @@
 
     niri
     waybar
+    quickshell
     fuzzel
     foot
 

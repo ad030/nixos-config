@@ -73,11 +73,9 @@ in
       gtk = {
         enable = true;
         colorScheme = "light";
-
         theme = {
           name = "Gruvbox";
           package = pkgs.gruvbox-gtk-theme;
-
         };
         iconTheme = {
           # name = "Papirus";
@@ -103,6 +101,8 @@ in
           enable = lib.mkForce false;
         };
       };
+
+      xdg.configFile."gtk-2.0/gtkrc".force = true;
 
       ## WINDOW MANAGERS
       wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
