@@ -23,9 +23,18 @@
 ```
 ```
 
-4. Finally, install the system with the specified config using nixos-anywhere.
+3. Inside the nixos-anywhere CLI arguments, add `--extra-files ./extra-files`
+   and
+   `--generate-hardware-config nixos-generate-config ./modules/hosts/<hostname>/_nixos/hardware.nix`
+   to the command.
+
+4. If you do not have enough room in the Nix store on your local device (where
+   you are running the command), you can add the `--build-on-remote` flag to
+   instead build the system on the target host.
+
+5. Finally, install the system with the specified config using nixos-anywhere.
    Enter the root password set previously.
 
 ```bash
-nix run github:nix-community/nixos-anywhere -- --flake '.#<config-name>' --extra-files ./extra-files --target-host root@<machine-ip>
+nix run github:nix-community/nixos-anywhere -- --flake '.#<hostname>' --extra-files ./extra-files --target-host root@<machine-ip> --generate-hardware-config nixos-generate-config ./modules/hosts/<hostname>/_nixos/hardware.nix
 ```
