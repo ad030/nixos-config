@@ -20,6 +20,7 @@
 
       home.packages = with pkgs; [
         swaybg
+        quickshell
       ];
 
       programs.niri = {
@@ -27,14 +28,16 @@
           spawn-at-startup =
             let
               wallpaper = self.images.ow-archaeologist-cover;
+              terminal = pkgs.foot;
+              statusBar = pkgs.quickshell;
             in
             [
               {
-                argv = [ "${lib.getExe pkgs.waybar}" ];
+                argv = [ "${lib.getExe statusBar}" ];
               }
               {
                 argv = [
-                  "${lib.getExe pkgs.foot}"
+                  "${lib.getExe terminal}"
                   "--server"
                 ];
               }
