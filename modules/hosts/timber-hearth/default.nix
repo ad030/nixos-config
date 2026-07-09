@@ -7,7 +7,10 @@
 let
   hostname = "timber-hearth";
   nixpkgs = inputs.nixpkgs-unstable;
-  systemUsers = [ "solanum" ];
+  systemUsers = [
+    "solanum"
+    "chert"
+  ];
 in
 {
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
