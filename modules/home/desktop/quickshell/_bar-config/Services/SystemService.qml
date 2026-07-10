@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Io
+import QtQuick
 
 Singleton {
         property real avgCpuLoad
@@ -32,7 +33,7 @@ Singleton {
         Process {
                 id: memoryProc
                 running: true
-                command: ["sh" "-c" "cat /proc/meminfo | grep 'Mem' | awk '{printf \"%d %d %d\", $2, $3, $7}'" ];
+                command: ["sh", "-c", "cat /proc/meminfo | grep 'Mem' | awk '{printf \"%d %d %d\", $2, $3, $7}'", ];
 
                 stdout: StdioCollector {
                         id: memCollector

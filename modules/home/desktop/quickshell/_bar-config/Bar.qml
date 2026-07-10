@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick.Layouts
-import qs.widgets
+import qs.Modules
+import qs.Widgets
 
 Scope {
         Variants {
@@ -28,12 +29,12 @@ Scope {
                         }
 
                         implicitHeight: 42
-                        // implicitHeight: 40
 
                         // left modules
                         RowLayout {
                                 anchors.left: parent.left
                                 spacing: 4;
+                                NiriWorkspaces { }
                         }
 
                         // centre modules
@@ -47,11 +48,11 @@ Scope {
                                 anchors.right: parent.right
                                 spacing: 4;
 
-                                VolumeWidget {}
-                                // NetworkingWidget {}
-                                BatteryWidget {}
-                                ClockWidget {}
-                                PowerOffWidget {
+                                Volume { }
+                                Network { }
+                                Battery { }
+                                Clock { }
+                                PowerOff {
                                         inhibitorTarget: barRoot
                                 }
                         }

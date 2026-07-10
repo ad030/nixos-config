@@ -1,6 +1,0 @@
-pragma Singleton
-
-Singleton {
-
-        wifi
-}

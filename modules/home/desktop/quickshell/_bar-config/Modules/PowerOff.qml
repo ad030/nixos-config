@@ -5,36 +5,25 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs
+import qs.Widgets
 
-WrapperRectangle {
+BarModuleRectangle {
         id: root
 
-        color: Theme.background;
-        border.color: Theme.foreground;
-        border.width: 1;
-        margin: 4;
-
-        implicitHeight: 42;
         implicitWidth: 42;
 
-        // target status bar as window for idle inhibitor
-        property var inhibitorTarget;
+        leftMargin: 0;
+        rightMargin: 0;
+        topMargin: 0;
+        bottomMargin: 0;
 
-        readonly property var icon: "";
+        resizeChild: true;
+
+        // target status bar as window for idle inhibitor
+        property var inhibitorTarget
 
         WrapperMouseArea {
                 id: button
-
-                margin: 0
-
-                // Text {
-                //         text: icon;
-                //
-                //         color: Theme.foreground;
-                //         font.family: Theme.iconFontFamily;
-                //         font.pixelSize: Theme.fontSize;
-                //         font.weight: Font.Black;
-                // }
 
                 Image {
                         source: "../nixos.svg"
@@ -42,7 +31,6 @@ WrapperRectangle {
                         sourceSize.width: 1024
                         sourceSize.height: 1024
                 }
-
 
                 onClicked: mouse => {
                         menu.visible = !menu.visible;
@@ -77,20 +65,17 @@ WrapperRectangle {
                         border.color: Theme.foreground;
                         border.width: 1;
 
-                        leftMargin: 10;
-                        rightMargin: 10;
-                        topMargin: 4;
-                        bottomMargin: 4;
+                        leftMargin: 12;
+                        rightMargin: 12;
+                        topMargin: 6;
+                        bottomMargin: 6;
 
                         ColumnLayout {
                                 spacing: 2
 
                                 WrapperMouseArea {
-                                        Text {
+                                        BarText {
                                                 text: inhibitor.enabled ? "Disable idle inhibitor" : "Enable idle inhibitor";
-                                                color: Theme.foreground;
-                                                font.family: Theme.fontFamily;
-                                                font.pixelSize: Theme.fontSize;
                                         }
 
                                         onDoubleClicked: mouse => {
@@ -98,11 +83,8 @@ WrapperRectangle {
                                         };
                                 }
                                 WrapperMouseArea {
-                                        Text {
+                                        BarText {
                                                 text: "Lock screen";
-                                                color: Theme.foreground;
-                                                font.family: Theme.fontFamily;
-                                                font.pixelSize: Theme.fontSize;
                                         }
 
                                         onDoubleClicked: mouse => {
@@ -110,11 +92,8 @@ WrapperRectangle {
                                         };
                                 }
                                 WrapperMouseArea {
-                                        Text {
+                                        BarText {
                                                 text: "Log out";
-                                                color: Theme.foreground;
-                                                font.family: Theme.fontFamily;
-                                                font.pixelSize: Theme.fontSize;
                                         }
 
                                         onDoubleClicked: mouse => {
@@ -127,11 +106,8 @@ WrapperRectangle {
                                         };
                                 }
                                 WrapperMouseArea {
-                                        Text {
+                                        BarText {
                                                 text: "Reboot";
-                                                color: Theme.foreground;
-                                                font.family: Theme.fontFamily;
-                                                font.pixelSize: Theme.fontSize;
                                         }
 
                                         onDoubleClicked: mouse => {
@@ -141,11 +117,8 @@ WrapperRectangle {
                                         };
                                 }
                                 WrapperMouseArea {
-                                        Text {
+                                        BarText {
                                                 text: "Shut down";
-                                                color: Theme.foreground;
-                                                font.family: Theme.fontFamily;
-                                                font.pixelSize: Theme.fontSize;
                                         }
 
                                         onDoubleClicked: mouse => {

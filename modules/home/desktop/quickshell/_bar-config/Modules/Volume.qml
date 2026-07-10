@@ -4,21 +4,15 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Pipewire
 import qs
+import qs.Widgets
 
-WrapperRectangle {
-        color: Theme.background;
-        border.color: Theme.foreground;
-        border.width: 1;
-        margin: 4;
-
-        implicitHeight: 42;
-
+BarModuleRectangle {
         readonly property var sink: Pipewire.defaultAudioSink;
         readonly property var audio: sink?.audio;
 
         readonly property var icon: audio ?  
         (
-                audio.muted ? "\uf6a9" : 
+                audio.muted ? "" : 
                 (
                         audio.volume > 0.3 ? "" : 
                         audio.volume > 0 ? "" : ""
@@ -30,32 +24,18 @@ WrapperRectangle {
         }
 
         WrapperMouseArea {
-                leftMargin: 10;
-                rightMargin: 10;
-                topMargin: 4;
-                bottomMargin: 4;
-
                 RowLayout {
-                        spacing: 2
+                        spacing: 4
 
-                        Text {
+                        BarIconText {
                                 text: icon;
-
-                                color: Theme.foreground;
-                                font.family: Theme.iconFontFamily;
-                                font.pixelSize: Theme.fontSize;
-                                font.weight: Font.Black;
                         }
 
-                        Text {
+                        BarText {
                                 text: audio ? (
                                         audio.muted ? "Muted" : 
                                         Math.round(audio.volume * 100) + "%"
                                 ) : "--%"; 
-
-                                color: Theme.foreground;
-                                font.family: Theme.fontFamily;
-                                font.pixelSize: Theme.fontSize;
                         }
                 }
 
