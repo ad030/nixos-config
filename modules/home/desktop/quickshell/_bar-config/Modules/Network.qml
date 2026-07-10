@@ -8,11 +8,11 @@ import qs.Widgets
 import qs.Services
 
 BarModuleRectangle {
-        readonly property var wifiIcon: "";
-        readonly property var wiredIcon: "";
-        readonly property var errorIcon: "";
-
         WrapperMouseArea {
+                readonly property var wifiIcon: "";
+                readonly property var wiredIcon: "";
+                readonly property var errorIcon: "";
+
                 RowLayout {
                         spacing: 4
 

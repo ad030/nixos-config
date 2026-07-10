@@ -4,4 +4,5 @@ import qs.Widgets
 import qs.Services
 
 BarModuleRectangle {
+
 }
