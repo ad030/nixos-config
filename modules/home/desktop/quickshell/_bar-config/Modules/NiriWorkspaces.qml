@@ -23,6 +23,8 @@ BarModuleRectangle {
                                 WrapperMouseArea {
                                         leftMargin: 10;
                                         rightMargin: 10;
+                                        topMargin: 2;
+                                        bottomMargin: 2;
 
                                         BarText {
                                                 text: modelData.idx
