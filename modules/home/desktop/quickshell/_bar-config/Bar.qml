@@ -53,7 +53,7 @@ Variants {
                         Network { }
                         Battery { }
                         Clock { }
-                        PowerOff {
+                        PowerButton {
                                 inhibitorTarget: barRoot
                         }
                 }
