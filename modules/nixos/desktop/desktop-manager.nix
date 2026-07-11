@@ -27,19 +27,19 @@
       };
 
       # Enable LXQt desktop environment
-      services.xserver.desktopManager.lxqt = {
-        enable = true;
-        extraPackages = with pkgs; [
-          kdePackages.kwin
-          lxqt.lxqt-wayland-session
-          papirus-icon-theme
-        ];
-      };
-      xdg.portal.lxqt.enable = true;
-      services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
+      # services.xserver.desktopManager.lxqt = {
+      #   enable = false;
+      #   extraPackages = with pkgs; [
+      #     kdePackages.kwin
+      #     lxqt.lxqt-wayland-session
+      #     papirus-icon-theme
+      #   ];
+      # };
+      # xdg.portal.lxqt.enable = false;
+      # services.displayManager.sessionPackages = [ pkgs.lxqt.lxqt-wayland-session ];
 
       # Enable Cinnamon desktop environment
-      services.xserver.desktopManager.cinnamon.enable = false;
+      # services.xserver.desktopManager.cinnamon.enable = false;
 
       # Enable KDE Plasma 6 desktop environment
       services.desktopManager = {
