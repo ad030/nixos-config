@@ -15,10 +15,6 @@ BarModuleRectangle {
                 id: p
         }
 
-        Process {
-                id: brightness
-        }
-
         WrapperMouseArea {
                 RowLayout {
                         spacing: 4
@@ -28,7 +24,7 @@ BarModuleRectangle {
                         }
 
                         BarText {
-                                text: audio ? (
+                                text: value ? (
                                         audio.muted ? "Muted" : 
                                         Math.round(audio.volume * 100) + "%"
                                 ) : "--%"; 
@@ -36,18 +32,12 @@ BarModuleRectangle {
                 }
 
                 onWheel: wheel => {
-                        if (!audio) return;
                         const step = 0.04;
                         if (wheel.angleDelta.y > 0) 
                         p.exec(["brightnessctl", "set", "+4%"]);
                         else if (wheel.angleDelta.y < 0) 
                         p.exec(["brightnessctl", "set", "4%-"]);
-                };
 
-                onClicked: mouse => {
-                        if (!audio) return;
-                        if (mouse.button === Qt.LeftButton) 
-                        audio.muted = !audio.muted;
                 };
         }
 }
