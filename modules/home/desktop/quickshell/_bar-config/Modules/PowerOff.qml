@@ -50,7 +50,7 @@ BarModuleRectangle {
                 anchor.item: root;
                 anchor.edges: Edges.Bottom   
                 anchor.gravity: Edges.Bottom
-                // anchor.margins.bottom: -4; // increase gap between button and menu
+                anchor.margins.bottom: -4; // increase gap between button and menu
 
                 color: Theme.background;
 
