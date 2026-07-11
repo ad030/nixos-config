@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
-import Quickshell.Networking
 import qs
 import qs.Widgets
 import qs.Services
@@ -23,7 +22,7 @@ BarModuleRectangle {
                         }
 
                         BarText {
-                                text: NetworkingService.connectionName; 
+                                text: NetworkingService.connectionName || "Disconnected"; 
                         }
                 }
         }

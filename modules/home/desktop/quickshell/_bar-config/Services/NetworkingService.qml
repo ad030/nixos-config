@@ -15,7 +15,9 @@ Singleton {
 
         readonly property string connectionType: {
                 if (!connectedDevice) return "None"
-                return connectedDevice.type === DeviceType.Wired ? "Wired" : "Wifi"
+                return connectedDevice.type === DeviceType.Wired ? "Wired" : (
+                        connectedDevice.type === DeviceType.Wifi ? "Wifi" : "Error"
+                )
         }
 
         readonly property string connectionName: {
