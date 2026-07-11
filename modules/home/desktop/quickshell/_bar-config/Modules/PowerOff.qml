@@ -10,7 +10,7 @@ import qs.Widgets
 BarModuleRectangle {
         id: root
 
-        implicitWidth: 42;
+        implicitWidth: root.implicitHeight;
 
         leftMargin: 0;
         rightMargin: 0;

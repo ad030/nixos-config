@@ -7,24 +7,23 @@ import qs
 import qs.Widgets
 
 BarModuleRectangle {
-        WrapperMouseArea {
+        readonly property var sink: Pipewire.defaultAudioSink;
+        readonly property var audio: sink?.audio;
 
-                readonly property var sink: Pipewire.defaultAudioSink;
-                readonly property var audio: sink?.audio;
-
-                readonly property var icon: audio ?  
+        readonly property var icon: audio ?  
+        (
+                audio.muted ? "" : 
                 (
-                        audio.muted ? "" : 
-                        (
-                                audio.volume > 0.3 ? "" : 
-                                audio.volume > 0 ? "" : ""
-                        )
-                ) : "";
+                        audio.volume > 0.3 ? "" : 
+                        audio.volume > 0 ? "" : ""
+                )
+        ) : "";
 
-                PwObjectTracker {
-                        objects: sink ? [ sink ] : [];
-                }
+        PwObjectTracker {
+                objects: sink ? [ sink ] : [];
+        }
 
+        WrapperMouseArea {
                 RowLayout {
                         spacing: 4
 
