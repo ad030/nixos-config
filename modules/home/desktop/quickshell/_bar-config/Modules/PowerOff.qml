@@ -19,7 +19,7 @@ BarModuleRectangle {
 
         resizeChild: true;
 
-        // target status bar as window for idle inhibitor
+        // target status bar popupwindow as window for idle inhibitor
         property var inhibitorTarget
 
         WrapperMouseArea {
@@ -43,13 +43,14 @@ BarModuleRectangle {
                 visible: false;
                 grabFocus: true;
 
+                // needed so the menu isn't tiny
                 implicitWidth: menuWrapper.implicitWidth
                 implicitHeight: menuWrapper.implicitHeight
 
                 anchor.window: root;
                 anchor.item: root;
-                anchor.edges: Edges.Bottom   
-                anchor.gravity: Edges.Bottom
+                anchor.edges: Edges.Bottom | Edges.Right
+                anchor.gravity: Edges.Bottom | Edges.Left
                 anchor.margins.bottom: -4; // increase gap between button and menu
 
                 color: Theme.background;
