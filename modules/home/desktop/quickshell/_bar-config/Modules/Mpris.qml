@@ -20,7 +20,7 @@ BarModuleRectangle {
 
         // only show if player is not stopped
         // format: <artist> - <title>
-        property string finalText: player?.playbackState !== MprisPlaybackState.Stopped ? artist + " - " + trackTitle : "..."
+        property string finalText: player && player.playbackState !== MprisPlaybackState.Stopped ? artist + " - " + trackTitle : "..."
 
         property string icon: ""
 
