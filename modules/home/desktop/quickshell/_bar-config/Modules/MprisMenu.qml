@@ -14,19 +14,27 @@ BarModuleRectangle {
         property var items: [
                 {
                         icon: "",
-                        action: () => player.previous()
+                        action: () => { 
+                                if (player?.canGoPrevious) { player.previous() }
+                        }
                 },
                 {
                         icon: player?.isPlaying ? "" : "",
-                        action: () => player.togglePlaying()
+                        action: () => {
+                                if (player?.canPlay) { player.togglePlaying() } 
+                        }
                 },
                 {
                         icon: "",
-                        action: () => player.next()
+                        action: () => { 
+                                if (player?.canGoNext) { player.next() } 
+                }
                 },
                 {
                         icon: "",
-                        action: () => player.stop()
+                        action: () => {
+                                if (player?.canControl) { player.stop() }
+                        }
                 },
         ]
 
