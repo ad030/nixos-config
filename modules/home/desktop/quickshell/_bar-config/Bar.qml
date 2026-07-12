@@ -49,6 +49,7 @@ Variants {
                         anchors.right: parent.right
                         spacing: 4;
 
+                        Mpris { }
                         Volume { }
                         Network { }
                         Battery { }

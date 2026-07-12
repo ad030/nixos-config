@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Widgets
@@ -46,7 +45,6 @@ BarModuleRectangle {
                 implicitWidth: powerMenu.implicitWidth
                 implicitHeight: powerMenu.implicitHeight
 
-                anchor.window: root;
                 anchor.item: root;
                 anchor.edges: Edges.Bottom | Edges.Right
                 anchor.gravity: Edges.Bottom | Edges.Left
