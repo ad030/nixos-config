@@ -12,16 +12,17 @@ BarModuleRectangle {
 
         property var player: {
                 const players = Mpris.players.values
-                return players.find(p => p.isPlaying) || players[0] || null
+                return players.find(p => p.isPlaying) 
         }
 
         property string trackTitle: player?.trackTitle || "Unknown Title"
         property string artist: player?.trackAlbumArtist || player?.trackArtist || "Unknown Artist"
 
+        // only show if player is not stopped
+        // format: <artist> - <title>
         property string finalText: player?.playbackState !== MprisPlaybackState.Stopped ? artist + " - " + trackTitle : "..."
 
         property string icon: ""
-
 
         WrapperMouseArea {
                 RowLayout {
@@ -30,7 +31,7 @@ BarModuleRectangle {
                                 text: icon
                         }
 
-                        // text with marquee scrolling
+                        // text with scrolling
                         Item {
                                 id: textContainer
 
@@ -38,11 +39,14 @@ BarModuleRectangle {
                                 implicitHeight: text1.implicitHeight
                                 clip: true
 
-                                property int gap: 30
-                                property bool needsScroll: text1.implicitWidth > textContainer.width
+                                property int gap: 30 // gap between current and next string
+                                property bool needsScroll: text1.implicitWidth > textContainer.width // only need to scroll if string is longer than implicit width
 
+                                // store two text items in row for infinite scrolling
+                                // (need second item to appear from right after end of first)
                                 RowLayout {
                                         id: scrollingTextRow
+
                                         spacing: textContainer.gap
                                         x: 0
 
@@ -62,6 +66,7 @@ BarModuleRectangle {
 
                                 Connections {
                                         target: root
+                                        // reset scroll to beginning when track changes
                                         function onFinalTextChanged() { textContainer.resetScroll() }
                                 }
 
@@ -83,8 +88,10 @@ BarModuleRectangle {
                                         loops: Animation.Infinite
                                         easing.type: Easing.Linear
 
+                                        // scroll animation ends exactly at beginning of second text item
+                                        // decreasing x = scrolling text to left
                                         from: 0
-                                        to: -(text1.implicitWidth + textContainer.gap)
+                                        to: -(text1.implicitWidth + textContainer.gap) 
                                         duration: Math.max(0, (text1.implicitWidth + textContainer.gap) * 40)
                                 }
                         }
