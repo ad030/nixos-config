@@ -50,7 +50,7 @@ BarModuleRectangle {
                 anchor.margins.bottom: -4
 
                 implicitHeight: Math.ceil(contents.implicitHeight)
-                implicitWidth: Math.ceilcontents.implicitWidth)
+                implicitWidth: Math.ceil(contents.implicitWidth)
 
                 BarModuleRectangle {
                         id: contents
