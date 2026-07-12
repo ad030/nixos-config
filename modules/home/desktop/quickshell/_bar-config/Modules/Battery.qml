@@ -26,6 +26,9 @@ BarModuleRectangle {
                         text: icon;
                 }
 
+                anchors.fill: root
+                resizeChild: false
+
                 hoverEnabled: true
                 onEntered: {
                         PopupSingleton.open(popup)
