@@ -97,6 +97,9 @@ BarModuleRectangle {
                         }
                 }
 
+                anchors.fill: parent
+                resizeChild: false
+
                 onClicked: {
                         if (popup.visible) {
                                 PopupSingleton.close(popup)

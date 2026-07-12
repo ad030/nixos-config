@@ -21,15 +21,17 @@ BarModuleRectangle {
         // target status bar popupwindow as window for idle inhibitor
         property var inhibitorTarget
 
-        WrapperMouseArea {
-                id: button
 
+        WrapperMouseArea {
                 Image {
                         source: "../nixos.svg"
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: 1024
                         sourceSize.height: 1024
                 }
+
+                anchors.fill: parent
+                resizeChild: true // needed for the svg icon to not be huge
 
                 onClicked: mouse => {
                         if (popup.visible) {

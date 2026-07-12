@@ -9,6 +9,7 @@ import qs.Utilities
 BarModuleRectangle {
         id: root
 
+
         SystemClock {
                 id: clock
                 precision: SystemClock.Minutes
@@ -19,13 +20,17 @@ BarModuleRectangle {
                         text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
                 }
 
-                onClicked: { 
-                        if (popup.visible) {
-                                PopupSingleton.close(popup)
-                        } else {
-                                PopupSingleton.open(popup)
-                        }
+                anchors.fill: parent
+                resizeChild: false
 
+                hoverEnabled: true
+
+                onEntered: { 
+                        PopupSingleton.open(popup)
+                }
+
+                onExited: { 
+                        PopupSingleton.close(popup)
                 }
         }
 

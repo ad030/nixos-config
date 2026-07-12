@@ -5,8 +5,11 @@ import Quickshell.Widgets
 import Quickshell.Services.UPower
 import qs
 import qs.Widgets
+import qs.Utilities
 
 BarModuleRectangle {
+        id: root
+
         visible: battery.isLaptopBattery;
 
         readonly property var battery: UPower.displayDevice;
@@ -18,15 +21,37 @@ BarModuleRectangle {
                 battery.percentage > 0.2 ? "" : ""
         );
 
-        RowLayout {
-                spacing: 2
-
+        WrapperMouseArea {
                 BarIconText {
                         text: icon;
                 }
 
-                BarText {
-                        text: Math.round(battery.percentage * 100) + "%"; 
+                hoverEnabled: true
+                onEntered: {
+                        PopupSingleton.open(popup)
+                }
+                onExited: {
+                        PopupSingleton.close(popup)
+                }
+        }
+
+        PopupWindow {
+                id: popup
+                visible: false
+
+                anchor.item: root
+                anchor.edges: Edges.Bottom
+                anchor.gravity: Edges.Bottom
+                anchor.margins.bottom: -4
+
+                implicitHeight: contents.implicitHeight
+                implicitWidth: contents.implicitWidth
+
+                BarModuleRectangle {
+                        id: contents
+                        BarText {
+                                text: Math.round(battery.percentage * 100) + "%"; 
+                        }
                 }
         }
 }
