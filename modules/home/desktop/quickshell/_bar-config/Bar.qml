@@ -50,6 +50,7 @@ Variants {
                         spacing: 4;
 
                         Mpris { }
+                        Brightness { }
                         Volume { }
                         Network { }
                         Battery { }

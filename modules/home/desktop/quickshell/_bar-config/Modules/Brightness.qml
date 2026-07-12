@@ -4,40 +4,59 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
 import qs
+import qs.Services
+import qs.Utilities
 import qs.Widgets
 
 BarModuleRectangle {
-        readonly property str icon: ""
+        id: root
+
+        visible: BrightnessService.hasBacklightDevice
+
+        readonly property string icon: ""
 
         property int value
 
-        Process {
-                id: p
-        }
-
         WrapperMouseArea {
-                RowLayout {
-                        spacing: 4
-
-                        BarIconText {
-                                text: icon;
-                        }
-
-                        BarText {
-                                text: value ? (
-                                        audio.muted ? "Muted" : 
-                                        Math.round(audio.volume * 100) + "%"
-                                ) : "--%"; 
-                        }
+                BarIconText {
+                        text: icon;
                 }
 
+                hoverEnabled: true
                 onWheel: wheel => {
-                        const step = 0.04;
+                        const step = 4
                         if (wheel.angleDelta.y > 0) 
-                        p.exec(["brightnessctl", "set", "+4%"]);
+                        BrightnessService.increasePercent(step)
                         else if (wheel.angleDelta.y < 0) 
-                        p.exec(["brightnessctl", "set", "4%-"]);
+                        BrightnessService.decreasePercent(step)
 
                 };
+
+                onEntered: {
+                        PopupSingleton.open(popup)
+                }
+                onExited: {
+                        PopupSingleton.close(popup)
+                }
+        }
+
+        PopupWindow {
+                id: popup
+                visible: false
+
+                anchor.item: root
+                anchor.edges: Edges.Bottom
+                anchor.gravity: Edges.Bottom
+                anchor.margins.bottom: -4
+
+                implicitHeight: Math.ceil(contents.implicitHeight)
+                implicitWidth: Math.ceil(contents.implicitWidth)
+
+                BarModuleRectangle {
+                        id: contents
+                        BarText {
+                                text: BrightnessService.hasBacklightDevice ? BrightnessService.currentBrightness + "%" : "--%"
+                        }
+                }
         }
 }
