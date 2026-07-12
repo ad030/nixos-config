@@ -10,6 +10,8 @@ import qs.Utilities
 BarModuleRectangle {
         id: root
 
+        implicitWidth: root.implicitHeight
+
         visible: battery.isLaptopBattery;
 
         readonly property var battery: UPower.displayDevice;
