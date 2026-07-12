@@ -7,23 +7,45 @@ import qs.Widgets
 import qs.Utilities
 
 BarModuleRectangle {
+        id: root
+
+        SystemClock {
+                id: clock
+                precision: SystemClock.Minutes
+        }
+
         WrapperMouseArea {
-                RowLayout {
-                        // spacing: 4
-                        // BarIconText {
-                        //         text: ""
-                        // }
+                BarText {
+                        text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
+                }
+
+                onClicked: { 
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
+
+                }
+        }
+
+        PopupWindow {
+                id: popup
+                visible: false
+
+                anchor.item: root
+                anchor.edges: Edges.Bottom
+                anchor.gravity: Edges.Bottom
+                anchor.margins.bottom: -4
+
+                implicitHeight: popupChild.implicitHeight
+                implicitWidth: popupChild.implicitWidth
+
+                BarModuleRectangle {
+                        id: popupChild
                         BarText {
-                                text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
+                                text: Qt.formatDateTime(clock.date, "dddd, MMMM M t")
                         }
                 }
-
-                SystemClock {
-                        id: clock
-                        precision: SystemClock.Minutes
-                }
-
-                hoverEnabled: true
-                onEntered: { }
         }
 }
