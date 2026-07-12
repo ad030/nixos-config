@@ -11,31 +11,33 @@ import qs.Utilities
 BarModuleRectangle {
         id: root
 
+        implicitWidth: root.implicitHeight
+
         readonly property string wifiIcon: "";
         readonly property string wiredIcon: "";
         readonly property string errorIcon: "";
 
-        property real wifiStrength: NetworkingService.connectedWifiStrength
-        property int wiredSpeed: NetworkingService.connectedWiredSpeed 
-
+        property real wifiStrength: NetworkingService?.connectedWifiStrength
+        property int wiredSpeed: NetworkingService?.connectedWiredSpeed 
 
         WrapperMouseArea {
                 BarIconText {
-                        text: NetworkingService.connectedDevice.type === DeviceType.Wired ? wiredIcon : (
-                                NetworkingService.connectedDevice.type === DeviceType.Wired ? wifiIcon : errorIcon
+                        text: NetworkingService.connectedDevice?.type === DeviceType.Wired ? wiredIcon : (
+                                NetworkingService.connectedDevice?.type === DeviceType.Wifi ? wifiIcon : errorIcon
                         );
                 }
 
                 anchors.fill: root
                 resizeChild: false
 
-                onClicked: {
-                        if (popup.visible) {
-                                PopupSingleton.close(popup)
-                        } else {
-                                PopupSingleton.open(popup)
-                        }
+                hoverEnabled: true
 
+                onEntered: { 
+                        PopupSingleton.open(popup)
+                }
+
+                onExited: { 
+                        PopupSingleton.close(popup)
                 }
         }
 
@@ -43,7 +45,6 @@ BarModuleRectangle {
                 id: popup
 
                 visible: false
-                grabFocus: true
 
                 implicitWidth: contents.implicitWidth
                 implicitHeight: contents.implicitHeight
@@ -63,16 +64,16 @@ BarModuleRectangle {
                                 spacing: 2
 
                                 BarText {
-                                        text: NetworkingService.connectedNetwork.name
-                                }
-                                BarText {
-                                        text: NetworkingService.ipv4
+                                        text: NetworkingService.connectedNetwork?.name
                                 }
                                 BarText {
                                         visible: NetworkingService.connectedNetwork != null
-                                        text: NetworkingService.connectedDeviceType === "Wired" ? wiredSpeed + "Mb/s" : 
-                                        (NetworkingService.connectedDeviceType === "Wifi" ? Math.round(wifiStrength * 100) + "%"
+                                        text: NetworkingService.connectedDevice.type === DeviceType.Wired ? wiredSpeed + "Mb/s" : 
+                                        (NetworkingService.connectedDevice.type === DeviceType.Wifi ? Math.round(wifiStrength * 100) + "%"
                                         : "" )
+                                }
+                                BarText {
+                                        text: NetworkingService.ipv4
                                 }
                         }
                 }
