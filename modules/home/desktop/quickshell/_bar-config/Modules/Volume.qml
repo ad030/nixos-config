@@ -28,7 +28,7 @@ BarModuleRectangle {
                 objects: sink ? [ sink ] : []
         }
 
-        readonly property string volumePercent: Math.round(audio.volume * 100) + "%"
+        readonly property string volumePercent: audio ? Math.round(audio.volume * 100) + "%" : "--%"
 
         WrapperMouseArea {
                 BarIconText {
@@ -85,7 +85,7 @@ BarModuleRectangle {
                         border.width: 1
 
                         BarText {
-                                text: audio.muted ? volumePercent + " (Muted)" : volumePercent
+                                text: audio ? (audio.muted ? volumePercent + " (Muted)" : volumePercent) : "--%"
                         }
                 }
         }
