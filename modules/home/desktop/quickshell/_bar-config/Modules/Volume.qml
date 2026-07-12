@@ -10,6 +10,8 @@ import qs.Utilities
 BarModuleRectangle {
         id: root
 
+        implicitWidth: root.implicitHeight
+
         readonly property var sink: Pipewire.defaultAudioSink
         readonly property var audio: sink?.audio
 
@@ -27,7 +29,6 @@ BarModuleRectangle {
         }
 
         readonly property string volumePercent: Math.round(audio.volume * 100) + "%"
-
 
         WrapperMouseArea {
                 BarIconText {
@@ -71,8 +72,8 @@ BarModuleRectangle {
 
                 visible: false
 
-                implicitWidth: contents.implicitWidth
-                implicitHeight: contents.implicitHeight
+                implicitWidth: Math.ceil(contents.implicitWidth)
+                implicitHeight: Math.ceil(contents.implicitHeight)
 
                 anchor.edges: Edges.Bottom
                 anchor.gravity: Edges.Bottom
@@ -80,6 +81,8 @@ BarModuleRectangle {
 
                 BarModuleRectangle {
                         id: contents
+
+                        border.width: 1
 
                         BarText {
                                 text: audio.muted ? volumePercent + " (Muted)" : volumePercent
