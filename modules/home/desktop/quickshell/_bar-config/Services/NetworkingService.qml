@@ -10,7 +10,7 @@ Singleton {
 
         Process {
                 id: ipv4Proc
-                command: [ "sh", "-c", "ip -4 addr show " + connectedDevice.name + " | grep -oP '(?<=inet\\s)\\d+(\\.\\d+){3}'"]
+                command: [ "sh", "-c", "ip -4 addr show " + connectedDevice?.name + " | grep -oP '(?<=inet\\s)\\d+(\\.\\d+){3}'"]
                 running: true
 
                 stdout: SplitParser {
@@ -51,13 +51,14 @@ Singleton {
         }
 
         readonly property real connectedWifiStrength: {
-                if (connectedNetwork.device.type !== DeviceType.Wifi) {
+                if (connectedNetwork?.device.type !== DeviceType.Wifi) {
                         return -1
                 }
                 return connectedNetwork.signalStrength
         }
 
         readonly property int connectedWiredSpeed: {
+                if (!connectedDevice) { return -1 }
                 if (connectedDevice.type !== DeviceType.Wired) {
                         return -1
                 }
