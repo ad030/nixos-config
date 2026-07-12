@@ -17,6 +17,9 @@
     environment.systemPackages = with pkgs; [
       foot
 
+      # brightness
+      brightnessctl
+
       # bluetooth
       bluez
       bluez-tools
