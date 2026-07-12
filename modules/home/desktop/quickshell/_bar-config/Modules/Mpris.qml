@@ -12,7 +12,7 @@ BarModuleRectangle {
 
         property var player: {
                 const players = Mpris.players.values
-                return players.find(p => p.isPlaying) 
+                return players.find(p => p.isPlaying) || players[0] || null
         }
 
         property string trackTitle: player?.trackTitle || "Unknown Title"
