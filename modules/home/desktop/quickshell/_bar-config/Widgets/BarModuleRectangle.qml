@@ -13,7 +13,7 @@ WrapperRectangle {
         topMargin: 6
         bottomMargin: 6
 
-        implicitHeight: 40
+        implicitHeight: 42
 
         resizeChild: false
 }

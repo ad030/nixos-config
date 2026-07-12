@@ -27,7 +27,7 @@ Variants {
                         right: true
                 }
 
-                implicitHeight: 40
+                implicitHeight: 42
 
                 // left modules
                 RowLayout {
