@@ -5,13 +5,14 @@ import Quickshell.Services.Mpris
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Widgets
+import qs.Utilities
 
 BarModuleRectangle {
         id: root
 
         property var player: {
                 const players = Mpris.players.values
-                return players.find(p => p.playing) || players[0] || null
+                return players.find(p => p.isPlaying) || players[0] || null
         }
 
         property string trackTitle: player?.trackTitle || "Unknown Title"
@@ -19,7 +20,6 @@ BarModuleRectangle {
 
         property string finalText: player?.playbackState !== MprisPlaybackState.Stopped ? artist + " - " + trackTitle : "..."
 
-        // property string icon: player?.playbackState !== MprisPlaybackState.Stopped ? (player.isPlaying ? "" : "") : ""
         property string icon: ""
 
 
@@ -29,8 +29,64 @@ BarModuleRectangle {
                         BarIconText {
                                 text: icon
                         }
-                        BarText {
-                                text: finalText
+
+                        // text with marquee scrolling
+                        Item {
+                                id: textContainer
+
+                                implicitWidth: Math.min(210, text1.implicitWidth) // width of text is at most 210, then scrolling begins
+                                implicitHeight: text1.implicitHeight
+                                clip: true
+
+                                property int gap: 30
+                                property bool needsScroll: text1.implicitWidth > textContainer.width
+
+                                RowLayout {
+                                        id: scrollingTextRow
+                                        spacing: textContainer.gap
+                                        x: 0
+
+                                        BarText {
+                                                id: text1
+                                                text: finalText
+                                        }
+                                        BarText {
+                                                id: text2
+                                                text: finalText
+                                                visible: textContainer.needsScroll
+                                        }
+                                }
+
+                                onNeedsScrollChanged: resetScroll()
+                                Component.onCompleted: resetScroll()
+
+                                Connections {
+                                        target: root
+                                        function onFinalTextChanged() { textContainer.resetScroll() }
+                                }
+
+                                function resetScroll() {
+                                        scrollAnim.stop()
+                                        scrollingTextRow.x = 0
+                                        if (needsScroll) {
+                                                scrollAnim.start()
+                                        }
+                                }
+
+                                // scroll through artist and title text continuously
+                                NumberAnimation {
+                                        id: scrollAnim
+                                        target: scrollingTextRow
+                                        property: "x"
+                                        running: false
+
+                                        loops: Animation.Infinite
+                                        easing.type: Easing.Linear
+
+                                        from: 0
+                                        to: -(text1.implicitWidth + textContainer.gap)
+                                        duration: Math.max(0, (text1.implicitWidth + textContainer.gap) * 40)
+                                }
                         }
                 }
 
