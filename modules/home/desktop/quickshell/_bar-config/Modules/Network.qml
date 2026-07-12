@@ -46,8 +46,8 @@ BarModuleRectangle {
 
                 visible: false
 
-                implicitWidth: contents.implicitWidth
-                implicitHeight: contents.implicitHeight
+                implicitWidth: Math.ceil(contents.implicitWidth)
+                implicitHeight: Math.ceil(contents.implicitHeight)
 
                 anchor.item: root
 

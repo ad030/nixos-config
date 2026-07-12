@@ -49,8 +49,8 @@ BarModuleRectangle {
                 grabFocus: true;
 
                 // needed so the menu isn't tiny
-                implicitWidth: menu.implicitWidth
-                implicitHeight: menu.implicitHeight
+                implicitWidth: Math.ceil(menu.implicitWidth)
+                implicitHeight: Math.ceil(menu.implicitHeight)
 
                 anchor.item: root;
                 anchor.edges: Edges.Bottom | Edges.Right

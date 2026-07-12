@@ -43,11 +43,11 @@ BarModuleRectangle {
                 anchor.gravity: Edges.Bottom
                 anchor.margins.bottom: -4
 
-                implicitHeight: popupChild.implicitHeight
-                implicitWidth: popupChild.implicitWidth
+                implicitHeight: Math.ceil(contents.implicitHeight)
+                implicitWidth: Math.ceil(contents.implicitWidth)
 
                 BarModuleRectangle {
-                        id: popupChild
+                        id: contents
                         BarText {
                                 text: Qt.formatDateTime(clock.date, "dddd, MMMM M t")
                         }

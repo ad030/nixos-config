@@ -115,8 +115,8 @@ BarModuleRectangle {
                 visible: false
                 grabFocus: true
 
-                implicitWidth: menu.implicitWidth
-                implicitHeight: menu.implicitHeight
+                implicitWidth: Math.ceil(menu.implicitWidth)
+                implicitHeight: Math.ceil(menu.implicitHeight)
 
                 anchor.item: root
 
