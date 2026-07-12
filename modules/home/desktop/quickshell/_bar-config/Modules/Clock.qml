@@ -1,13 +1,22 @@
-import QtQuick;
-import Quickshell;
-import Quickshell.Widgets;
+import QtQuick
+import QtQuick.Layouts
+import Quickshell
+import Quickshell.Widgets
 import qs
 import qs.Widgets
+import qs.Utilities
 
 BarModuleRectangle {
         WrapperMouseArea {
-                BarText {
-                        text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
+
+                RowLayout {
+                        spacing: 4
+                        BarIconText {
+                                text: ""
+                        }
+                        BarText {
+                                text: Qt.formatDateTime(clock.date, "yyyy-MM-dd hh:mm")
+                        }
                 }
 
                 SystemClock {

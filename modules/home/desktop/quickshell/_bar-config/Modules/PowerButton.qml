@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
 import qs.Widgets
+import qs.Utilities
 
 BarModuleRectangle {
         id: root
@@ -31,19 +32,23 @@ BarModuleRectangle {
                 }
 
                 onClicked: mouse => {
-                        menu.visible = !menu.visible;
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
                 };
         }
 
         PopupWindow {
-                id: menu
+                id: popup
 
                 visible: false;
                 grabFocus: true;
 
                 // needed so the menu isn't tiny
-                implicitWidth: powerMenu.implicitWidth
-                implicitHeight: powerMenu.implicitHeight
+                implicitWidth: menu.implicitWidth
+                implicitHeight: menu.implicitHeight
 
                 anchor.item: root;
                 anchor.edges: Edges.Bottom | Edges.Right
@@ -51,8 +56,7 @@ BarModuleRectangle {
                 anchor.margins.bottom: -4; // increase gap between button and menu
 
                 PowerMenu {
-                        id: powerMenu
-                        anchors.fill: parent
+                        id: menu
                         inhibitor: inhibitor
                 }
         }

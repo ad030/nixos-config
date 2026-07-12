@@ -39,7 +39,6 @@ BarModuleRectangle {
                 id: p
         }
 
-
         ColumnLayout {
                 spacing: 2
 
