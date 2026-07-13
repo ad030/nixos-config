@@ -27,7 +27,7 @@ BarModuleRectangle {
 
         WrapperMouseArea {
                 RowLayout {
-                        spacing: 4
+                        spacing: root.leftMargin // use margin size for gap between icon and text
                         BarIconText {
                                 text: icon
                         }
