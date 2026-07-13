@@ -25,15 +25,20 @@ BarModuleRectangle {
                         }
                 },
                 {
-                        icon: "",
-                        action: () => {
-                                if (player?.canControl) { player.stop() }
-                        }
-                },
-                {
                         icon: "",
                         action: () => { 
                                 if (player?.canGoNext) { player.next() } 
+                        }
+                },
+                { 
+                        // add gap in menu
+                        icon: " ",
+                        action: { }
+                },
+                {
+                        icon: "",
+                        action: () => {
+                                if (player?.canControl) { player.stop() }
                         }
                 },
         ]
