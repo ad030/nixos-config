@@ -73,7 +73,7 @@ in
 
       gtk = {
         enable = true;
-        gtk2.enable = false;
+        gtk2.enable = false; # fixes ~/.config/gtk-2.0/gtkrc file clobbering issue
 
         colorScheme = "light";
         theme = {
@@ -99,9 +99,8 @@ in
       };
 
       services = {
-        ssh-agent.enable = true;
         gnome-keyring = {
-          enable = lib.mkForce false;
+          enable = true;
         };
       };
 
