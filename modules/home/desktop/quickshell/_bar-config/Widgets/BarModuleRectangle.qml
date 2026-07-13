@@ -4,6 +4,7 @@ import Quickshell.Widgets
 import qs
 
 WrapperRectangle {
+
         color: Theme.background
         border.color: Theme.foreground
         border.width: 1
