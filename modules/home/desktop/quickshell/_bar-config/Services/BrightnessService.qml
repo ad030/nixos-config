@@ -26,7 +26,6 @@ Singleton {
                                 } else {
                                         root.hasBacklightDevice = false
                                 }
-                                console.log(root.device)
                         }
                 }
         }
