@@ -38,7 +38,7 @@ BarModuleRectangle {
                 anchors.fill: parent
                 resizeChild: false
 
-                hoverEnabled: true
+                acceptedButtons: Qt.AllButtons
 
                 onWheel: wheel => {
                         if (!audio) return
@@ -51,18 +51,26 @@ BarModuleRectangle {
                 }
 
                 onClicked: mouse => {
-                        if (!audio) return
-                        if (mouse.button === Qt.LeftButton) 
-                        audio.muted = !audio.muted
+                        if (mouse.button === Qt.LeftButton) {
+                                if (popup.visible) {
+                                        PopupSingleton.close(popup)
+                                } else {
+                                        PopupSingleton.open(popup)
+                                }
+                        } else if (mouse.button === Qt.RightButton) {
+                                if (!audio) return
+                                audio.muted = !audio.muted
+                        }
                 }
 
-                onEntered: {
-                        PopupSingleton.open(popup)
-                }
-
-                onExited: {
-                        PopupSingleton.close(popup)
-                }
+                // onEntered: {
+                //         PopupSingleton.open(popup)
+                // }
+                //
+                // onExited: {
+                //         PopupSingleton.close(popup)
+                // }
+                //
         }
 
         PopupWindow {

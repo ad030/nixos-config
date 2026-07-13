@@ -23,22 +23,32 @@ BarModuleRectangle {
         WrapperMouseArea {
                 BarIconText {
                         text: NetworkingService.connectedDevice?.type === DeviceType.Wired ? wiredIcon : (
-                                NetworkingService.connectedDevice?.type === DeviceType.Wifi ? wifiIcon : errorIcon
+                                NetworkingService.connectedDevice?.type === DeviceType.Wifi ? wifiIcon : 
+                                errorIcon
                         );
                 }
 
                 anchors.fill: root
                 resizeChild: false
 
-                hoverEnabled: true
+                // hoverEnabled: true
+                //
+                // onEntered: { 
+                //         PopupSingleton.open(popup)
+                // }
+                //
+                // onExited: { 
+                //         PopupSingleton.close(popup)
+                // }
+                //
 
-                onEntered: { 
-                        PopupSingleton.open(popup)
-                }
-
-                onExited: { 
-                        PopupSingleton.close(popup)
-                }
+                onClicked: mouse => {
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
+                };
         }
 
         PopupWindow {
@@ -64,16 +74,19 @@ BarModuleRectangle {
                                 spacing: 2
 
                                 BarText {
-                                        text: NetworkingService.connectedNetwork?.name
+                                        text: NetworkingService.connectedNetwork ? NetworkingService.connectedNetwork.name : "Disconnected"
                                 }
                                 BarText {
-                                        visible: NetworkingService.connectedNetwork != null
-                                        text: NetworkingService.connectedDevice.type === DeviceType.Wired ? wiredSpeed + "Mb/s" : 
-                                        (NetworkingService.connectedDevice.type === DeviceType.Wifi ? Math.round(wifiStrength * 100) + "%"
-                                        : "" )
+                                        visible: NetworkingService.connectedDevice !== null && NetworkingService.connectedNetwork !== null
+                                        text: this.visible ? 
+                                        ( 
+                                                NetworkingService.connectedDevice.type === DeviceType.Wired ? wiredSpeed + "Mb/s" : 
+                                                NetworkingService.connectedDevice.type === DeviceType.Wifi ? Math.round(wifiStrength * 100) + "%" : ""
+                                        ) : "" 
                                 }
                                 BarText {
-                                        text: NetworkingService.ipv4
+                                        visible: NetworkingService.ipv4 !== null
+                                        text: this.visible ? NetworkingService.ipv4 : ""
                                 }
                         }
                 }

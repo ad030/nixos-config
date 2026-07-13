@@ -22,21 +22,33 @@ BarModuleRectangle {
                         text: icon;
                 }
 
-                hoverEnabled: true
+                anchors.fill: parent
+                resizeChild: false
+
                 onWheel: wheel => {
                         const step = 4
-                        if (wheel.angleDelta.y > 0) 
-                        BrightnessService.increasePercent(step)
-                        else if (wheel.angleDelta.y < 0) 
-                        BrightnessService.decreasePercent(step)
+                        if (wheel.angleDelta.y > 0) {
+                                BrightnessService.increasePercent(step)
+                        } else if (wheel.angleDelta.y < 0) {
+                                BrightnessService.decreasePercent(step)
+                        }
 
                 };
 
-                onEntered: {
-                        PopupSingleton.open(popup)
-                }
-                onExited: {
-                        PopupSingleton.close(popup)
+                // hoverEnabled: true
+                // onEntered: {
+                //         PopupSingleton.open(popup)
+                // }
+                // onExited: {
+                //         PopupSingleton.close(popup)
+                // }
+
+                onClicked: mouse => {
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
                 }
         }
 

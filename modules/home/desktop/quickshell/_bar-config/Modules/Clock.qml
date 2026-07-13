@@ -23,15 +23,24 @@ BarModuleRectangle {
                 anchors.fill: parent
                 resizeChild: false
 
-                hoverEnabled: true
+                // hoverEnabled: true
+                //
+                // onEntered: { 
+                //         PopupSingleton.open(popup)
+                // }
+                //
+                // onExited: { 
+                //         PopupSingleton.close(popup)
+                // }
 
-                onEntered: { 
-                        PopupSingleton.open(popup)
-                }
 
-                onExited: { 
-                        PopupSingleton.close(popup)
-                }
+                onClicked: mouse => {
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
+                };
         }
 
         PopupWindow {

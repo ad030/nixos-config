@@ -31,13 +31,21 @@ BarModuleRectangle {
                 anchors.fill: root
                 resizeChild: false
 
-                hoverEnabled: true
-                onEntered: {
-                        PopupSingleton.open(popup)
-                }
-                onExited: {
-                        PopupSingleton.close(popup)
-                }
+                // hoverEnabled: true
+                // onEntered: {
+                //         PopupSingleton.open(popup)
+                // }
+                // onExited: {
+                //         PopupSingleton.close(popup)
+                // }
+
+                onClicked: mouse => {
+                        if (popup.visible) {
+                                PopupSingleton.close(popup)
+                        } else {
+                                PopupSingleton.open(popup)
+                        }
+                };
         }
 
         PopupWindow {
