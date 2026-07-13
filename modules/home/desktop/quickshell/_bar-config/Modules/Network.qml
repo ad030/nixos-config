@@ -48,7 +48,15 @@ BarModuleRectangle {
                         } else {
                                 PopupSingleton.open(popup)
                         }
-                };
+                }
+
+                // change button color on click
+                // onPressed: {
+                //         root.color = Theme.dark0
+                // }
+                // onReleased: {
+                //         root.color = Theme.background
+                // }
         }
 
         PopupWindow {

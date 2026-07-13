@@ -16,6 +16,8 @@ BarModuleRectangle {
                         model: NiriService.workspaces.filter(ws => ws.output === screen.name)
 
                         delegate: WrapperRectangle {        
+                                id: wsItem
+
                                 required property var modelData
 
                                 color: modelData.is_focused ? Theme.dark4 : Theme.background
@@ -33,6 +35,14 @@ BarModuleRectangle {
                                         onClicked: {
                                                 NiriService.focusWorkspace(modelData.idx)
                                         }
+
+                                        // change button color on click
+                                        // onPressed: {
+                                        //         wsItem.color = Theme.dark3
+                                        // }
+                                        // onReleased: {
+                                        //         wsItem.color = Theme.dark4
+                                        // }
                                 }
                         }
                 }

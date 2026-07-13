@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
+import qs
 import qs.Widgets
 import qs.Utilities
 
@@ -40,6 +41,14 @@ BarModuleRectangle {
                                 PopupSingleton.open(popup)
                         }
                 };
+
+                // change button color on click
+                // onPressed: {
+                //         root.color = Theme.dark0
+                // }
+                // onReleased: {
+                //         root.color = Theme.background
+                // }
         }
 
         PopupWindow {
