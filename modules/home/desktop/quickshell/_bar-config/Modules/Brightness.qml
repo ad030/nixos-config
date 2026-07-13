@@ -55,7 +55,7 @@ BarModuleRectangle {
                 BarModuleRectangle {
                         id: contents
                         BarText {
-                                text: BrightnessService.hasBacklightDevice ? BrightnessService.currentBrightness + "%" : "--%"
+                                text: BrightnessService.hasBacklightDevice ? Math.round(BrightnessService.currentBrightnessPercent * 100) + "%" : "--%"
                         }
                 }
         }

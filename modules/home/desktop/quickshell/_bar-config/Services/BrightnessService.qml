@@ -10,21 +10,23 @@ Singleton {
         property bool hasBacklightDevice: false
         property int maxBrightness: 1
         property int currentBrightness: 0
+        property real currentBrightnessPercent: currentBrightness / maxBrightness
 
         Process {
                 id: listDevices
                 command: ["sh", "-c", "ls /sys/class/backlight 2>/dev/null"]
                 running: true
 
-                stdout: SplitParser {
-                        onRead: (data) => {
-                                const devices = data.trim().filter(d => d.length > 0)
-                                if (devices.length > 0) {
-                                        root.device = devices[0]
+                stdout: StdioCollector {
+                        onStreamFinished: {
+                                const backlights = text.trim().split("\n").filter(d => d.length > 0)
+                                if (backlights.length > 0) {
+                                        root.device = backlights[0]
                                         root.hasBacklightDevice = true
                                 } else {
                                         root.hasBacklightDevice = false
                                 }
+                                console.log(root.device)
                         }
                 }
         }
