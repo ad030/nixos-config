@@ -65,7 +65,7 @@ BarModuleRectangle {
                 BarModuleRectangle {
                         id: contents
                         BarText {
-                                text: Qt.formatDateTime(clock.date, "dddd, MMMM M t")
+                                text: Qt.formatDateTime(clock.date, "dddd, MMMM d t")
                         }
                 }
         }
