@@ -6,6 +6,10 @@
       ...
     }:
     {
+      environment.systemPackages = [
+        pkgs.protonup-qt
+      ];
+
       # steam on niri with xwayland-satellite spawns black square
       # fix is to add this flag
       # https://discourse.nixos.org/t/niri-xwayland-satellite-black-steam-window-fix/77107
@@ -20,6 +24,10 @@
       programs.steam = {
         enable = true;
         protontricks.enable = true;
+
+        extraCompatPackages = [
+          # pkgs.proton-ge-bin
+        ];
       };
     };
 }
