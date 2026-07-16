@@ -36,6 +36,7 @@
       vlc
       feh
       swayimg
+      yt-dlp
 
       ani-cli # watch anime
       jellyfin-desktop # access media server
