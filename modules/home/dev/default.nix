@@ -15,6 +15,7 @@
     home.packages = with pkgs; [
       gh # github cli
       godot # game engine
+      nixpkgs-review # for reviewing nixpkgs PRs
     ];
   };
 }
