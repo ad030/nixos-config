@@ -20,6 +20,7 @@
       qbittorrent
       calibre-web
       radarr
+      tailscale
     ];
 
   };
