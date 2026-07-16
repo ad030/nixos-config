@@ -13,7 +13,8 @@
     ];
 
     home.packages = with pkgs; [
-      godot
+      gh # github cli
+      godot # game engine
     ];
   };
 }
