@@ -13,8 +13,9 @@
 
     home.packages = with pkgs; [
       # osu-lazer
-      heroic
-      prismlauncher
+      heroic # linux native launcher for epic games
+      prismlauncher # minecraft launcher
+      owmods-gui # outer wilds mod launcher gui
     ];
   };
 }
