@@ -16,5 +16,6 @@ So for example:
 
 ```bash
 nmcli connection modify CIKTEL_PORTAL_FASTLANE_0624 ipv4.dns "192.168.8.201"
+nmcli connection modify CIKTEL_PORTAL_FASTLANE_0624 ipv4.dns "192.168.8.201,192.168.8.1,8.8.8.8" # secondary dns servers
 nmcli connection modify CIKTEL_PORTAL_FASTLANE_0624 ipv4.ignore-auto-dns yes
 ```
