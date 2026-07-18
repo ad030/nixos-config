@@ -12,6 +12,7 @@
     }:
     {
       boot.initrd.availableKernelModules = [
+        "nvidia_uvm"
         "nvidia_drm"
         "nvidia_modeset"
         "nvidia"
