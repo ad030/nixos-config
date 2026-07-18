@@ -15,7 +15,7 @@ BarModuleRectangle {
                 const players = Mpris.players.values
 
                 // prioritize strawberry music player when playing
-                const strawberryPlayer = players.find(p => p.dbusName == "org.mpris.MediaPlayer2.strawberry" && p.isPlaying) 
+                const strawberryPlayer = players.find(p => p.dbusName == "org.mpris.MediaPlayer2.strawberry") 
                 const fallbackPlayer = players.find(p => p.isPlaying) || players[0]
 
                 return strawberryPlayer || fallbackPlayer || null
