@@ -17,6 +17,10 @@
         "nvidia"
       ];
 
+      boot.kernelParams = [
+        "nvidia-drm.modeset=1"
+      ];
+
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
       };
@@ -29,6 +33,7 @@
       hardware.nvidia = {
         # kernel modesetting needed for wayland
         modesetting.enable = true;
+
         # false = use open drivers from nvidia (not nouveau)
         open = true;
 
