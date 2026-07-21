@@ -111,7 +111,7 @@
             services.resolved = {
               enable = true;
 
-              # needs to be set in order for adguard home to access port 53
+              # needs to be set in order to access port 53
               settings.Resolve.DNSStubListener = "no";
             };
 
