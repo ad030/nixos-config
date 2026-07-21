@@ -10,7 +10,7 @@
     interfaces.wlp1s0 = {
       ipv4.addresses = [
         {
-          address = "192.168.8.210";
+          address = "192.168.8.221";
           prefixLength = 24;
         }
       ];
