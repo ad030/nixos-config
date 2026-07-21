@@ -23,8 +23,17 @@
       services.nginx.virtualHosts = {
         "technitium.home.lan" = {
           locations."/" = {
-            proxyPass = "http://192.168.8.202:5380";
+            proxyPass = "http://10.0.0.10:5380";
             recommendedProxySettings = true;
+          };
+        };
+      };
+
+      services.tailscale.serve.services = {
+        technitium = {
+          advertised = true;
+          endpoints = {
+            "tcp:5380" = "http://10.0.0.10:5380";
           };
         };
       };
@@ -33,26 +42,26 @@
         autoStart = true;
 
         privateNetwork = true;
-        hostBridge = "br0";
-        localAddress = "192.168.8.202/24";
+        hostAddress = "10.0.0.1";
+        localAddress = "10.0.0.10";
 
         privateUsers = "pick";
 
-        # forwardPorts = lib.concatLists (
-        #   lib.mapAttrsToList (
-        #     pr: ps: # protocol, ports to open for this protocol
-        #     map (p: {
-        #       hostPort = p;
-        #       protocol = pr;
-        #     }) ps
-        #   ) ports
-        # );
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         config =
           {
             config,
-            pkgs,
             lib,
+            pkgs,
             ...
           }:
           {
