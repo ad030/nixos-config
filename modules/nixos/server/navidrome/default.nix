@@ -77,6 +77,7 @@
               settings = {
                 Port = 4533;
 
+                Address = "0.0.0.0";
                 MusicFolder = "/media/music";
               };
             };
