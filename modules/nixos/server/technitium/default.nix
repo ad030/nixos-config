@@ -29,7 +29,7 @@
         };
       };
 
-      containers.adguardhome = {
+      containers.technitium = {
         autoStart = true;
 
         privateNetwork = true;
