@@ -42,6 +42,7 @@
       jellyfin-desktop # access media server
 
       strawberry # music player
+      feishin # music player (navidrome)
       picard # music tagging
 
       obsidian # notetaking
