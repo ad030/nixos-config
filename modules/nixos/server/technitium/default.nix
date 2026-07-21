@@ -23,7 +23,7 @@
       services.nginx.virtualHosts = {
         "technitium.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.10:3000";
+            proxyPass = "http://10.0.0.10:5380";
             recommendedProxySettings = true;
           };
         };
@@ -60,6 +60,10 @@
               enable = true;
 
               openFirewall = false;
+            };
+
+            systemd.services.technitium-dns-server.serviceConfig = {
+              LogsDirectory = "technitium";
             };
 
             networking.firewall = {
