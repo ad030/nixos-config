@@ -13,7 +13,11 @@
       idle-server
 
       landing-page
-      adguardhome
+
+      ## DNS servers
+      # adguardhome
+      technitium
+
       freshrss
       jellyfin
       slskd
