@@ -4,7 +4,7 @@
     { config, lib, ... }:
     let
       ports = {
-        tcp = [ ];
+        tcp = [ 8082 ];
         udp = [ ];
       };
     in
@@ -19,6 +19,15 @@
       };
 
       sops.secrets."freshrss/password" = { };
+
+      services.tailscale.serve.services = {
+        freshrss = {
+          advertised = true;
+          endpoints = {
+            "tcp:80" = "http://10.0.0.6:80";
+          };
+        };
+      };
 
       containers.freshrss = {
         autoStart = true;
@@ -35,15 +44,13 @@
           "--load-credential=freshrss-password:${config.sops.secrets."freshrss/password".path}"
         ];
 
-        forwardPorts = lib.concatLists (
-          lib.mapAttrsToList (
-            pr: ps: # protocol, ports to open for this protocol
-            map (p: {
-              hostPort = p;
-              protocol = pr;
-            }) ps
-          ) ports
-        );
+        forwardPorts = [
+          {
+            hostPort = 8080;
+            containerPort = 80;
+            protocol = "tcp";
+          }
+        ];
 
         config =
           {

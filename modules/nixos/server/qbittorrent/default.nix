@@ -46,6 +46,15 @@
         allowedUDPPorts = ports.udp;
       };
 
+      services.tailscale.serve.services = {
+        qbittorrent = {
+          advertised = true;
+          endpoints = {
+            "tcp:8090" = "http://10.0.0.7:8090";
+          };
+        };
+      };
+
       containers.qbittorrent = {
         autoStart = true;
 

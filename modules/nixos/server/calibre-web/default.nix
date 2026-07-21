@@ -30,6 +30,15 @@
         allowedTCPPorts = ports.tcp;
       };
 
+      services.tailscale.serve.services = {
+        calibre-web = {
+          advertised = true;
+          endpoints = {
+            "tcp:8083" = "http://10.0.0.5:8083";
+          };
+        };
+      };
+
       containers.calibre-web = {
         autoStart = true;
 
