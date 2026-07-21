@@ -12,6 +12,13 @@
     }:
     let
       mediaGid = 3333;
+      ports = {
+        tcp = [
+          7878 # web ui
+        ];
+        udp = [ ];
+      };
+
       moviesDir = "/srv/media/tank/Movies";
       downloadsDir = "/srv/media/tank/Downloads/qbittorrent";
     in
@@ -26,6 +33,10 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = ports.tcp;
+      };
+
       sops.secrets."radarr/env" = { };
 
       containers.radarr = {
@@ -37,12 +48,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 7878; # webui port
-            protocol = "tcp";
-          }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
@@ -88,9 +102,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                7878
-              ];
+              allowedTCPPorts = ports.tcp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

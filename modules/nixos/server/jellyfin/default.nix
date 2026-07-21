@@ -8,6 +8,13 @@
     { pkgs, lib, ... }:
     let
       mediaGid = 3333;
+
+      ports = {
+        tcp = [
+          8096 # web ui
+        ];
+        udp = [ ];
+      };
     in
     {
       services.nginx.virtualHosts = {
@@ -21,9 +28,7 @@
       };
 
       networking.firewall = {
-        allowedTCPPorts = [
-          8096
-        ];
+        allowedTCPPorts = ports.tcp;
       };
 
       containers.jellyfin = {
@@ -35,16 +40,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 8096;
-            protocol = "tcp";
-          }
-          # {
-          #   hostPort = 7359;
-          #   protocol = "udp";
-          # }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
@@ -82,12 +86,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                8096 # web ui
-              ];
-              # allowedUDPPorts = [
-              #   7359 # auto detect jellyfin servers on network
-              # ];
+              allowedTCPPorts = ports.tcp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

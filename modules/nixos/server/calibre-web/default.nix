@@ -1,8 +1,20 @@
 { self, inputs, ... }:
 {
   flake.modules.nixos.calibre-web =
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
       mediaGid = 3333;
+      ports = {
+        tcp = [
+          8083
+        ];
+        udp = [ ];
+      };
     in
     {
       services.nginx.virtualHosts = {
@@ -15,7 +27,7 @@
       };
 
       networking.firewall = {
-        allowedTCPPorts = [ 8083 ];
+        allowedTCPPorts = ports.tcp;
       };
 
       containers.calibre-web = {
@@ -27,12 +39,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 8083;
-            protocol = "tcp";
-          }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
@@ -70,7 +85,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [ 8083 ];
+              allowedTCPPorts = ports.tcp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

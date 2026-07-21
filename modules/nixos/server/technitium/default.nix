@@ -3,19 +3,21 @@
   flake.modules.nixos.technitium =
     { config, lib, ... }:
     let
-      TCPPorts = [
-        53 # dns
-        5380 # web ui
-        53443 # web ui https
-      ];
-      UDPPorts = [
-        53 # dns
-      ];
+      ports = {
+        tcp = [
+          53 # dns
+          5380 # web ui
+          53443 # web ui https
+        ];
+        udp = [
+          53 # dns
+        ];
+      };
     in
     {
       networking.firewall = {
-        allowedTCPPorts = TCPPorts;
-        allowedUDPPorts = UDPPorts;
+        allowedTCPPorts = ports.tcp;
+        allowedUDPPorts = ports.udp;
       };
 
       services.nginx.virtualHosts = {
@@ -36,20 +38,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 53;
-            protocol = "tcp";
-          }
-          {
-            hostPort = 53;
-            protocol = "udp";
-          }
-          {
-            hostPort = 5380;
-            protocol = "tcp";
-          }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         config =
           {
@@ -66,8 +63,8 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = TCPPorts;
-              allowedUDPPorts = UDPPorts;
+              allowedTCPPorts = ports.tcp;
+              allowedUDPPorts = ports.udp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

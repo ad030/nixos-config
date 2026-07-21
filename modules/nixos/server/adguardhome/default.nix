@@ -2,13 +2,21 @@
 {
   flake.modules.nixos.adguardhome =
     { config, lib, ... }:
+    let
+      ports = {
+        tcp = [
+          53 # dns
+          3000 # web ui
+        ];
+        udp = [
+          53 # dns
+        ];
+      };
+    in
     {
       networking.firewall = {
-        allowedTCPPorts = [
-          53
-          3000
-          8080
-        ];
+        allowedTCPPorts = ports.tcp;
+        allowedUDPPorts = ports.udp;
       };
 
       services.nginx.virtualHosts = {
@@ -29,28 +37,25 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 53;
-            protocol = "tcp";
-          }
-          {
-            hostPort = 53;
-            protocol = "udp";
-          }
-          {
-            hostPort = 443;
-            protocol = "tcp";
-          }
-          {
-            hostPort = 443;
-            protocol = "udp";
-          }
-          {
-            hostPort = 3000;
-            protocol = "tcp";
-          }
-        ];
+        # forwardPorts =
+        #   (map (p: {
+        #     hostPort = p;
+        #     protocol = "tcp";
+        #   }) ports.tcp)
+        #   ++ (map (p: {
+        #     hostPort = p;
+        #     protocol = "udp";
+        #   }) ports.udp);
+
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         config =
           {
@@ -98,15 +103,8 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                53 # dns
-                443 # https
-                3000 # admin panel
-              ];
-              allowedUDPPorts = [
-                53
-                443
-              ];
+              allowedTCPPorts = ports.tcp;
+              allowedUDPPorts = ports.udp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

@@ -4,6 +4,16 @@
     { pkgs, lib, ... }:
     let
       mediaGid = 3333;
+      ports = {
+        tcp = [
+          6881 # torrenting port
+          8090 # web ui
+        ];
+        udp = [
+          6881 # torrenting port
+        ];
+      };
+
       incompleteDir = "/srv/downloads";
       completeDir = "/srv/media/tank/Downloads";
     in
@@ -31,6 +41,11 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = ports.tcp;
+        allowedUDPPorts = ports.udp;
+      };
+
       containers.qbittorrent = {
         autoStart = true;
 
@@ -40,20 +55,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 6881; # torrenting port
-            protocol = "tcp";
-          }
-          {
-            hostPort = 6881; # torrenting port
-            protocol = "udp";
-          }
-          {
-            hostPort = 8090; # webui port
-            protocol = "tcp";
-          }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
@@ -107,10 +117,8 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                6881
-                8090
-              ];
+              allowedTCPPorts = ports.tcp;
+              allowedUDPPorts = ports.udp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

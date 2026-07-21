@@ -6,9 +6,22 @@
 
 {
   flake.modules.nixos.slskd =
-    { config, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
       mediaGid = 3333;
+      ports = {
+        tcp = [
+          5030 # webui
+          50300 # soulseek network
+        ];
+        udp = [ ];
+      };
+
       incompleteDir = "/srv/downloads";
       completeDir = "/srv/media/tank/Downloads";
       musicDir = "/srv/media/tank/Music/Music";
@@ -36,6 +49,10 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = ports.tcp;
+      };
+
       sops.secrets."slskd/env" = { };
 
       containers.slskd = {
@@ -47,16 +64,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = [
-          {
-            hostPort = 5030; # http web ui
-            protocol = "tcp";
-          }
-          {
-            hostPort = 50300; # soulseek connections
-            protocol = "tcp";
-          }
-        ];
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
@@ -126,10 +142,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                5030
-                50300
-              ];
+              allowedTCPPorts = ports.tcp;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

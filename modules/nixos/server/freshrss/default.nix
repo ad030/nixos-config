@@ -2,6 +2,12 @@
 {
   flake.modules.nixos.freshrss =
     { config, lib, ... }:
+    let
+      ports = {
+        tcp = [ ];
+        udp = [ ];
+      };
+    in
     {
       services.nginx.virtualHosts = {
         "freshrss.home.lan" = {
@@ -29,6 +35,16 @@
           "--load-credential=freshrss-password:${config.sops.secrets."freshrss/password".path}"
         ];
 
+        forwardPorts = lib.concatLists (
+          lib.mapAttrsToList (
+            pr: ps: # protocol, ports to open for this protocol
+            map (p: {
+              hostPort = p;
+              protocol = pr;
+            }) ps
+          ) ports
+        );
+
         config =
           {
             config,
@@ -47,9 +63,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = [
-                80
-              ];
+              allowedTCPPorts = ports.tcp ++ [ 80 ];
             };
 
             networking.useHostResolvConf = lib.mkForce false;
