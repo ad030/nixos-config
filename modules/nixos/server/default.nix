@@ -14,6 +14,8 @@
 
       landing-page
 
+      tailscale
+
       ## DNS servers
       # adguardhome
       technitium
@@ -24,7 +26,7 @@
       qbittorrent
       calibre-web
       radarr
-      tailscale
+      navidrome
     ];
 
   };
