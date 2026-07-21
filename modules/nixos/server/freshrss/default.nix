@@ -4,7 +4,7 @@
     { config, lib, ... }:
     let
       ports = {
-        tcp = [ 8082 ];
+        tcp = [ 8080 ];
         udp = [ ];
       };
     in
@@ -70,7 +70,7 @@
             };
 
             networking.firewall = {
-              allowedTCPPorts = ports.tcp ++ [ 80 ];
+              allowedTCPPorts = [ 80 ];
             };
 
             networking.useHostResolvConf = lib.mkForce false;

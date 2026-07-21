@@ -57,15 +57,15 @@
 
         privateUsers = "pick";
 
-        forwardPorts = lib.concatLists (
-          lib.mapAttrsToList (
-            pr: ps: # protocol, ports to open for this protocol
-            map (p: {
-              hostPort = p;
-              protocol = pr;
-            }) ps
-          ) ports
-        );
+        forwardPorts =
+          map (p: {
+            hostPort = p;
+            protocol = "tcp";
+          }) ports.tcp
+          ++ map (p: {
+            hostPort = p;
+            protocol = "udp";
+          }) ports.udp;
 
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
