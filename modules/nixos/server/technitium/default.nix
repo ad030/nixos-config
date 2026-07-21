@@ -62,6 +62,8 @@
               openFirewall = false;
             };
 
+            # they messed up the hardening and technitium can't even write to its own log file
+            # https://discourse.nixos.org/t/technitium-dns-fails-with-access-denied-at-var-lib/64672/4
             systemd.services.technitium-dns-server.serviceConfig = {
               LogsDirectory = "technitium";
             };
