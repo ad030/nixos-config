@@ -46,6 +46,9 @@
             proxyPass = "http://10.0.0.3:5030";
             recommendedProxySettings = true;
           };
+
+          sslCertificate = "/root/_wildcard.home.lan.pem";
+          sslCertificateKey = "/root/_wildcard.home.lan-key.pem";
         };
       };
 

@@ -12,5 +12,9 @@
         443
       ];
     };
+
+    security.pki.certificateFiles = [
+      "/root/.local/share/mkcert/rootCA.pem"
+    ];
   };
 }
