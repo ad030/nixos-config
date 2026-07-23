@@ -30,6 +30,10 @@
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
+
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
+          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
         };
       };
 

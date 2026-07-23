@@ -23,6 +23,10 @@
             proxyPass = "http://10.0.0.5:8083";
             recommendedProxySettings = true;
           };
+
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
+          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
         };
       };
 

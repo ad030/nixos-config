@@ -25,6 +25,10 @@
             proxyPass = "http://10.0.0.4:3000";
             recommendedProxySettings = true;
           };
+
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
+          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
         };
       };
 

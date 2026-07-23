@@ -47,8 +47,9 @@
             recommendedProxySettings = true;
           };
 
-          sslCertificate = "/root/_wildcard.home.lan.pem";
-          sslCertificateKey = "/root/_wildcard.home.lan-key.pem";
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
+          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
         };
       };
 

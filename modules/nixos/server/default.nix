@@ -11,6 +11,7 @@
     {
       imports = with config.flake.modules.nixos; [
         ssl-root-certs
+        domain-certs
 
         networking-server
         nfs-server

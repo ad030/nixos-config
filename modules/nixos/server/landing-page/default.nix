@@ -19,9 +19,14 @@
 
       services.nginx.virtualHosts = {
         "home.lan" = {
-          root = "/etc/www";
+          default = true;
 
           locations."/".index = "index.html";
+          root = "/etc/www";
+
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
+          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
         };
       };
 

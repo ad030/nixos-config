@@ -8,6 +8,13 @@
       networking = {
         nftables.enable = true;
 
+        firewall = {
+          allowedTCPPorts = [
+            80
+            443
+          ];
+        };
+
         nat = {
           enable = true;
           # Use "ve-*" when using nftables instead of iptables
