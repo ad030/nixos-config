@@ -3,31 +3,42 @@
   ...
 }:
 {
-  flake.modules.nixos.server = {
-    imports = with config.flake.modules.nixos; [
-      server-packages
-      networking-server
-      nfs-server
-      reverse-proxy
-      media-dirs
-      idle-server
+  flake.modules.nixos.server =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      imports = with config.flake.modules.nixos; [
+        networking-server
+        nfs-server
+        reverse-proxy
+        media-dirs
+        idle-server
 
-      landing-page
+        landing-page
 
-      tailscale
+        tailscale
 
-      ## DNS servers
-      # adguardhome
-      technitium
+        ## DNS servers
+        # adguardhome
+        technitium
 
-      freshrss
-      jellyfin
-      slskd
-      qbittorrent
-      calibre-web
-      radarr
-      navidrome
-    ];
+        freshrss
+        jellyfin
+        slskd
+        qbittorrent
+        calibre-web
+        radarr
+        navidrome
+      ];
 
-  };
+      environment.systemPackages = with pkgs; [
+        mkcert
+        rsync
+        ethtool
+        iperf3
+        smartmontools
+      ];
+    };
 }
