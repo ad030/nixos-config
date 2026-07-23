@@ -24,5 +24,7 @@
           enableIPv6 = true;
         };
       };
+
+      # services.tailscale.serve.enable = true;
     };
 }

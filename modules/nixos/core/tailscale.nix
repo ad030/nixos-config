@@ -14,8 +14,6 @@
       # 1. Enable the service and the firewall
       services.tailscale = {
         enable = true;
-
-        serve.enable = true;
       };
 
       networking = {
