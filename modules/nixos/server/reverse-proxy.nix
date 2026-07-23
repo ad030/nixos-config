@@ -1,4 +1,8 @@
 {
+  self,
+  ...
+}:
+{
   flake.modules.nixos.reverse-proxy = {
     services.nginx = {
       enable = true;
@@ -12,9 +16,5 @@
         443
       ];
     };
-
-    security.pki.certificateFiles = [
-      "/root/.local/share/mkcert/rootCA.pem"
-    ];
   };
 }

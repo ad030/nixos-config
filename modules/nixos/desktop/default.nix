@@ -5,27 +5,34 @@
   ...
 }:
 {
-  flake.modules.nixos.desktop = { pkgs, ... }: {
-    imports = with config.flake.modules.nixos; [
-      desktop-manager
-      display-manager
-      window-manager
-      home-manager
-      audio
-    ];
+  flake.modules.nixos.desktop =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      imports = with config.flake.modules.nixos; [
+        ssl-root-certs
 
-    environment.systemPackages = with pkgs; [
-      foot
+        desktop-manager
+        display-manager
+        window-manager
+        home-manager
+        audio
+      ];
 
-      # brightness
-      brightnessctl
+      environment.systemPackages = with pkgs; [
+        foot
 
-      # bluetooth
-      bluez
-      bluez-tools
+        # brightness
+        brightnessctl
 
-      # unix utilities
-      busybox
-    ];
-  };
+        # bluetooth
+        bluez
+        bluez-tools
+
+        # unix utilities
+        busybox
+      ];
+    };
 }

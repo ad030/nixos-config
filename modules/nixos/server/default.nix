@@ -10,6 +10,8 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
+        ssl-root-certs
+
         networking-server
         nfs-server
         reverse-proxy
