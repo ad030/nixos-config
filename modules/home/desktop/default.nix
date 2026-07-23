@@ -40,7 +40,7 @@
 
       ## archive file utilities
       _7zip-zstd
-      ark
+      kdePackages.ark
 
       ani-cli # watch anime
       jellyfin-desktop # access media server
