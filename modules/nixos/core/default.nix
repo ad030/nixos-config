@@ -7,7 +7,6 @@
 {
   flake.modules.nixos.core =
     {
-      config,
       lib,
       pkgs,
       ...
