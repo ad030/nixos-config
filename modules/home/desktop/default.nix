@@ -22,14 +22,14 @@
       libreoffice # office suite
       kdePackages.okular # pdf viewer
 
-      # file manager that's better than dolphin
+      ## file manager that's better than dolphin
       pcmanfm-qt
-      gvfs
+      gvfs # for pcmanfm
 
-      # password manager
+      ## password manager
       keepassxc
 
-      # media
+      ## media
       ffmpeg
       imagemagick
       mpv
@@ -37,6 +37,10 @@
       feh
       swayimg
       yt-dlp
+
+      ## archive file utilities
+      _7zip-zstd
+      ark
 
       ani-cli # watch anime
       jellyfin-desktop # access media server
@@ -48,7 +52,7 @@
       obsidian # notetaking
       freetube # youtube frontend
 
-      # latex stuff
+      ## latex stuff
       (texliveBasic.withPackages (ps: [ ps.latexmk ]))
       biber
       python314Packages.pylatexenc

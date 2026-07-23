@@ -23,6 +23,9 @@
       # bluetooth
       bluez
       bluez-tools
+
+      # unix utilities
+      busybox
     ];
   };
 }
