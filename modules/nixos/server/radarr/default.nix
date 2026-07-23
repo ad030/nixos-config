@@ -41,14 +41,14 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      services.tailscale.serve.services = {
-        radarr = {
-          advertised = true;
-          endpoints = {
-            "tcp:7878" = "http://10.0.0.8:7878";
-          };
-        };
-      };
+      # services.tailscale.serve.services = {
+      #   radarr = {
+      #     advertised = true;
+      #     endpoints = {
+      #       "tcp:7878" = "http://10.0.0.8:7878";
+      #     };
+      #   };
+      # };
 
       sops.secrets."radarr/env" = { };
 

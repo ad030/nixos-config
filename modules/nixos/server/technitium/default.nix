@@ -33,14 +33,14 @@
         };
       };
 
-      services.tailscale.serve.services = {
-        technitium = {
-          advertised = true;
-          endpoints = {
-            "tcp:5380" = "http://10.0.0.10:5380";
-          };
-        };
-      };
+      # services.tailscale.serve.services = {
+      #   technitium = {
+      #     advertised = true;
+      #     endpoints = {
+      #       "tcp:5380" = "http://10.0.0.10:5380";
+      #     };
+      #   };
+      # };
 
       containers.technitium = {
         autoStart = true;

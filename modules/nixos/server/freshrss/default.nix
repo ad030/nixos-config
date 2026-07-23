@@ -24,14 +24,14 @@
 
       sops.secrets."freshrss/password" = { };
 
-      services.tailscale.serve.services = {
-        freshrss = {
-          advertised = true;
-          endpoints = {
-            "tcp:80" = "http://10.0.0.6:80";
-          };
-        };
-      };
+      # services.tailscale.serve.services = {
+      #   freshrss = {
+      #     advertised = true;
+      #     endpoints = {
+      #       "tcp:80" = "http://10.0.0.6:80";
+      #     };
+      #   };
+      # };
 
       containers.freshrss = {
         autoStart = true;

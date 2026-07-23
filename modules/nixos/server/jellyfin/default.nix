@@ -35,14 +35,14 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      services.tailscale.serve.services = {
-        jellyfin = {
-          advertised = true;
-          endpoints = {
-            "tcp:8096" = "http://10.0.0.2:8096";
-          };
-        };
-      };
+      # services.tailscale.serve.services = {
+      #   jellyfin = {
+      #     advertised = true;
+      #     endpoints = {
+      #       "tcp:8096" = "http://10.0.0.2:8096";
+      #     };
+      #   };
+      # };
 
       containers.jellyfin = {
         autoStart = true;
