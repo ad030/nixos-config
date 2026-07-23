@@ -33,16 +33,35 @@ with an asterisk in the domain name) covers a base domain name and all its
 subdomains.
 
 ```bash
-# mkcert "*.home.lan"
-Note: the local CA is not installed in the system trust store.
-Run "mkcert -install" for certificates to be trusted automatically ⚠️
+# mkcert home.lan "*.home.lan"
 
 Created a new certificate valid for the following names 📜
+ - "home.lan"
  - "*.home.lan"
 
 Reminder: X.509 wildcards only go one level deep, so this won't match a.b.home.lan ℹ️
 
-The certificate is at "./_wildcard.home.lan.pem" and the key at "./_wildcard.home.lan-key.pem" ✅
+The certificate is at "./home.lan+1.pem" and the key at "./home.lan+1-key.pem" ✅
 
 It will expire on 23 October 2028 🗓
+```
+
+Make sure Nginx has a way to access the generated keys. _Nginx running as an
+unprivileged user cannot read the_ /root _directory_. Instead, we can copy it to
+_/etc/nginx/ssl_ and give Nginx permissions to read it.
+
+```nix
+# modules/nixos/server/domain-certs.nix
+environment.etc = {
+    # store the keys at /etc/nginx/ssl
+    "nginx/ssl/homelab-domain.pem" = { 
+        source = "/root/home.lan+1.pem"; # update this path if needed
+        mode = "0444";
+    };
+    "nginx/ssl/homelab-domain-key.pem" = { 
+        source = "/root/home.lan+1-key.pem"; # update this path if needed
+        mode = "0400";
+        user = "nginx";
+    };
+}
 ```
