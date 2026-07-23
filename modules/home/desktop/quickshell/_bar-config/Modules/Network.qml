@@ -63,6 +63,7 @@ BarModuleRectangle {
                 id: popup
 
                 visible: false
+                grabFocus: true
 
                 implicitWidth: Math.ceil(contents.implicitWidth)
                 implicitHeight: Math.ceil(contents.implicitHeight)

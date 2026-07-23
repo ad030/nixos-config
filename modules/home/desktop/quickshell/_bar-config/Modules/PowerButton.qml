@@ -55,6 +55,7 @@ BarModuleRectangle {
                 id: popup
 
                 visible: false;
+                grabFocus: true;
 
                 // needed so the menu isn't tiny
                 implicitWidth: Math.ceil(menu.implicitWidth)

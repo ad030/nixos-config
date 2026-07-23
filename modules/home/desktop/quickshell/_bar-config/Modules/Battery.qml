@@ -58,7 +58,9 @@ BarModuleRectangle {
 
         PopupWindow {
                 id: popup
+
                 visible: false
+                grabFocus: true;
 
                 anchor.item: root
                 anchor.edges: Edges.Bottom
