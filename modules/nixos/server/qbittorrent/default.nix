@@ -115,7 +115,7 @@
               serverConfig = {
                 BitTorrent = {
                   Session = {
-                    GlobalUPSpeedLimit = "100";
+                    GlobalUPSpeedLimit = "20";
                     DefaultSavePath = "/downloads/complete";
                     TempPath = "/downloads/incomplete";
                     TempPathEnabled = "true";
