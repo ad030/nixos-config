@@ -18,7 +18,7 @@
     in
     {
       services.nginx.virtualHosts = {
-        "calibre-web.home.lan" = {
+        "calibre.home.lan" = {
           locations."/" = {
             proxyPass = "http://10.0.0.5:8083";
             recommendedProxySettings = true;
