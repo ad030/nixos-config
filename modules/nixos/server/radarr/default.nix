@@ -32,8 +32,8 @@
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/_wildcard.home.lan.pem";
-          sslCertificateKey = "/etc/nginx/ssl/_wildcard.home.lan-key.pem";
+          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
+          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
 

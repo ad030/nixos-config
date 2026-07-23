@@ -5,12 +5,12 @@
 {
   flake.modules.nixos.domain-certs = {
     environment.etc = {
-      "nginx/ssl/_wildcard.home.lan.pem" = {
-        source = "/root/_wildcard.home.lan.pem";
+      "nginx/ssl/homelab-domain.pem" = {
+        source = "/root/home.lan+1.pem";
         mode = "0444";
       };
-      "nginx/ssl/_wildcard.home.lan-key.pem" = {
-        source = "/root/_wildcard.home.lan-key.pem";
+      "nginx/ssl/homelab-domain-key.pem" = {
+        source = "/root/home.lan+1-key.pem";
         mode = "0400";
         user = "nginx";
       };
