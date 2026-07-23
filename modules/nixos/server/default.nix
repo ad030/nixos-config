@@ -21,8 +21,6 @@
 
         landing-page
 
-        tailscale
-
         ## DNS servers
         # adguardhome
         technitium

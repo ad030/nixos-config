@@ -26,6 +26,7 @@
         filesystem
         power-management
         printing
+        tailscale
       ];
 
       programs = {
