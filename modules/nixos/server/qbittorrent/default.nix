@@ -124,6 +124,8 @@
                 Preferences = {
                   WebUI = {
                     Password_PBKDF2 = "@ByteArray(1f+GZ4bqvo93Lgp/d3//FA==:Thyh7U5F+vC3d7VEQ/aIwShyzg6ssb/2Qy4JwD5dM4ycyFLDK5Nu/DxScj2R7u56q36jLxCd1vn7ql5iThHzvA==)";
+                    ReverseProxySupportEnabled = "true";
+                    TrustedReverseProxiesList = "10.0.0.1";
                   };
                 };
               };
