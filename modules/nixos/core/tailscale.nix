@@ -16,7 +16,6 @@
         enable = true;
 
         serve.enable = true;
-
       };
 
       networking = {
