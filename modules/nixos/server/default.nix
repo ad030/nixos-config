@@ -40,6 +40,7 @@
         ethtool
         iperf3
         smartmontools
+        openssl
       ];
     };
 }
