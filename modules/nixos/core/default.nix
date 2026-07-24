@@ -40,6 +40,8 @@
         # unix utilities
         busybox
 
+        lshw
+
         neovim
         wget
         curl
