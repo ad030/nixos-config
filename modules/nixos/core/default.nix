@@ -37,6 +37,9 @@
       };
 
       environment.systemPackages = with pkgs; [
+        # unix utilities
+        busybox
+
         neovim
         wget
         curl
