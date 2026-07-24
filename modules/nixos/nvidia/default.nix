@@ -35,10 +35,11 @@
         # kernel modesetting needed for wayland
         modesetting.enable = true;
 
-        # false = use open drivers from nvidia (not nouveau)
+        # true: use open drivers from nvidia (not nouveau)
+        # false: use proprietary drivers from nvidia
         open = true;
 
-        powerManagement.enable = false;
+        powerManagement.enable = true;
         powerManagement.finegrained = false;
 
       };
