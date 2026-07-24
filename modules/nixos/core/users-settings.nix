@@ -22,5 +22,7 @@ in
 
     # create group for use in shared media directories (nfs)
     users.groups.media.gid = sharedGroups.media.gid;
+    users.groups.render.gid = sharedGroups.render.gid;
+    users.groups.video.gid = sharedGroups.video.gid;
   };
 }

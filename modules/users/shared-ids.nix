@@ -17,6 +17,12 @@
       media = {
         gid = 3333;
       };
+      render = {
+        gid = 303;
+      };
+      video = {
+        gid = 26;
+      };
     };
   };
 }

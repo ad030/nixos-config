@@ -5,9 +5,16 @@
 }:
 {
   flake.modules.nixos.jellyfin =
-    { pkgs, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      mediaGid = 3333;
+      mediaGid = config.users.groups.media.gid;
+      renderGid = config.users.groups.render.gid;
+      videoGid = config.users.groups.video.gid;
 
       ports = {
         tcp = [
@@ -44,6 +51,11 @@
       #   };
       # };
 
+      # services.udev.extraRules = ''
+      #   SUBSYSTEM=="drm", KERNEL=="renderD128", MODE="0666"
+      #   SUBSYSTEM=="drm", KERNEL=="card1", MODE="0666"
+      # '';
+
       containers.jellyfin = {
         autoStart = true;
 
@@ -52,6 +64,7 @@
         localAddress = "10.0.0.2";
 
         privateUsers = "pick";
+        # privateUsers = "no";
 
         forwardPorts =
           map (p: {
@@ -81,7 +94,46 @@
             hostPath = "/srv/media/tank/Music";
             isReadOnly = true;
           };
+
+          # "/media/movies" = {
+          #   mountPoint = "/media/movies";
+          #   hostPath = "/srv/media/tank/Movies";
+          #   isReadOnly = false;
+          # };
+          # "/media/shows" = {
+          #   mountPoint = "/media/shows";
+          #   hostPath = "/srv/media/tank/Shows";
+          #   isReadOnly = false;
+          # };
+          # "/media/music" = {
+          #   mountPoint = "/media/music";
+          #   hostPath = "/srv/media/tank/Music";
+          #   isReadOnly = true;
+          # };
+
+          # pass igpu in for hardware acceleration
+          "/dev/dri/renderD128" = {
+            mountPoint = "/dev/dri/renderD128";
+            hostPath = "/dev/dri/renderD128";
+            isReadOnly = false;
+          };
+          # "/dev/dri/card1" = {
+          #   mountPoint = "/dev/dri/card1";
+          #   hostPath = "/dev/dri/card1";
+          #   isReadOnly = false;
+          # };
         };
+
+        allowedDevices = [
+          {
+            modifier = "rw";
+            node = "/dev/dri/renderD128";
+          }
+          # {
+          #   modifier = "rw";
+          #   node = "/dev/dri/card1";
+          # }
+        ];
 
         config =
           {
@@ -92,11 +144,20 @@
           }:
           {
             users.groups.media.gid = mediaGid;
+            users.groups.render.gid = renderGid;
+            users.groups.video.gid = videoGid;
+
+            users.users.jellyfin.extraGroups = [
+              "render"
+              "video"
+            ];
 
             services.jellyfin = {
               enable = true;
               group = "media";
             };
+
+            hardware.graphics.enable = true;
 
             networking.firewall = {
               allowedTCPPorts = ports.tcp;
