@@ -42,5 +42,7 @@
         smartmontools
         openssl
       ];
+
+      hardware.graphics.enable = true;
     };
 }
