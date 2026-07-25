@@ -23,8 +23,6 @@ in
       home-manager
       laptop
       desktop
-      gaming
-      flatpak
     ])
     # users in nixos configuration
     ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)
