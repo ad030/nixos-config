@@ -27,12 +27,14 @@ in
           inherit uid;
           isNormalUser = true;
           shell = pkgs.bash;
-          extraGroups =
-            lib.uniqueStrings [
+          extraGroups = lib.uniqueStrings (
+            [
               "networkmanager"
               "wheel"
+              "input"
             ]
-            ++ groups;
+            ++ groups
+          );
           hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
         };
     };
