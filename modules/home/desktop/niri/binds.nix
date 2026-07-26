@@ -23,8 +23,16 @@
           action.close-window = [ ];
           hotkey-overlay.title = "Close focused window";
         };
+        # "Mod+D" = {
+        #   action.spawn = [ "${lib.getExe pkgs.fuzzel}" ];
+        #   hotkey-overlay.title = "Open launcher";
+        # };
         "Mod+D" = {
-          action.spawn = [ "${lib.getExe pkgs.rofi}" ];
+          action.spawn = [
+            "${lib.getExe pkgs.rofi}"
+            "-show"
+            "drun"
+          ];
           hotkey-overlay.title = "Open launcher";
         };
 

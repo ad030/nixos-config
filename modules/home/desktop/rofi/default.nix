@@ -1,9 +1,11 @@
 {
   flake.modules.homeManager.rofi = {
     programs.rofi = {
+      enable = true;
 
-      theme = "gruvbox-dark";
+      theme = "gruvbox-dark-soft";
       terminal = "foot";
+      font = "MesloLGM Nerd Font Mono 16";
 
       modes = [
         "window"
@@ -11,7 +13,7 @@
         "run"
       ];
 
-      font = "Meslo LGM Regular 16";
+      cycle = true;
 
       location = "center";
 
