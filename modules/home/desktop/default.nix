@@ -4,11 +4,12 @@
     imports = with config.flake.modules.homeManager; [
       audio
 
+      foot
       niri
       waybar
       quickshell
+      rofi
       fuzzel
-      foot
 
       keepassxc
       vesktop
