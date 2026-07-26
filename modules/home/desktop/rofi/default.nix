@@ -11,7 +11,7 @@
         "run"
       ];
 
-      font = "Meslo LGM Regular 14";
+      font = "Meslo LGM Regular 16";
 
       location = "center";
 
