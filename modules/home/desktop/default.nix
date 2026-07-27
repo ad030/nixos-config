@@ -9,7 +9,7 @@
       waybar
       quickshell
       rofi
-      fuzzel
+      # fuzzel
 
       keepassxc
       vesktop
