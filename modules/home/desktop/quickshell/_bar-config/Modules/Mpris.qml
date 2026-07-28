@@ -15,13 +15,16 @@ BarModuleRectangle {
                 const players = Mpris.players.values
 
                 // prioritize strawberry music player when playing
+                // NOTE: to check dbus names of processes, run `qdbus`
                 const strawberryPlayer = players.find(p => p.dbusName === "org.mpris.MediaPlayer2.strawberry" && 
+                        p.playbackState !== MprisPlaybackState.Stopped) 
+                const feishinPlayer = players.find(p => p.dbusName === "org.mpris.MediaPlayer2.Feishin" && 
                         p.playbackState !== MprisPlaybackState.Stopped) 
                 const fallbackPlayer = players.find(p => p.isPlaying) || 
                         players.find(p => p.playbackState === MprisPlaybackState.Paused) ||
                         players[0]
 
-                return strawberryPlayer || fallbackPlayer || null
+                return strawberryPlayer || feishinPlayer || fallbackPlayer || null
         }
 
         property string trackTitle: player?.trackTitle || "Unknown Title"
