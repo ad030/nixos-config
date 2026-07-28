@@ -5,26 +5,30 @@
       pkgs,
       ...
     }:
-
     {
-      environment.systemPackages =
-        let
-          sddm-astronaut = (
-            pkgs.sddm-astronaut.override {
-              embeddedTheme = "black_hole";
-            }
-          );
-        in
-        [
-          sddm-astronaut
-        ];
+      environment.systemPackages = [
+        (pkgs.sddm-astronaut.override {
+          embeddedTheme = "astronaut";
+        })
+        pkgs.bibata-cursors
+      ];
+
+      fonts.packages = [
+        pkgs.open-sans
+      ];
 
       services.displayManager = {
         # defaultSession = "niri";
         sddm = {
           enable = true;
+          package = pkgs.kdePackages.sddm;
 
-          wayland.enable = true;
+          wayland = {
+            enable = true;
+            # need to set this because weston is shit
+            # cursor does not appear without kwin
+            compositor = "kwin";
+          };
 
           theme = "sddm-astronaut-theme";
 
@@ -32,6 +36,13 @@
           extraPackages = [
             pkgs.sddm-astronaut # this bit is needed!!!
           ];
+
+          settings = {
+            Theme = {
+              CursorTheme = "Bibata-Modern-Ice";
+              CursorSize = "24";
+            };
+          };
         };
       };
     };
