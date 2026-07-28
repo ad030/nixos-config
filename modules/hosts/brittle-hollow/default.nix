@@ -23,6 +23,8 @@ in
       home-manager
       laptop
       desktop
+
+      window-manager
     ])
     # users in nixos configuration
     ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)

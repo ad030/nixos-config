@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.desktop-manager =
+  flake.modules.nixos.desktop-environment =
     {
       config,
       pkgs,

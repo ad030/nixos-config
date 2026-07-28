@@ -28,6 +28,9 @@ in
       desktop
       gaming
       flatpak
+
+      desktop-environment
+      window-manager
     ])
     # users in nixos configuration
     ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)
