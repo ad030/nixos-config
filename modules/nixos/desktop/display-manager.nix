@@ -2,6 +2,7 @@
   flake.modules.nixos.display-manager =
     {
       config,
+      lib,
       pkgs,
       ...
     }:
@@ -21,7 +22,7 @@
         # defaultSession = "niri";
         sddm = {
           enable = true;
-          package = pkgs.kdePackages.sddm;
+          package = lib.mkForce pkgs.kdePackages.sddm;
 
           wayland = {
             enable = true;
