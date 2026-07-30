@@ -32,6 +32,7 @@
         calibre-web
         radarr
         navidrome
+        sonarr
       ];
 
       environment.systemPackages = with pkgs; [

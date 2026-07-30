@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.radarr =
+  flake.modules.nixos.sonarr =
     {
       config,
       lib,
@@ -14,23 +14,23 @@
       mediaGid = 3333;
       ports = {
         tcp = [
-          7878 # web ui
+          8989 # web ui
         ];
         udp = [ ];
       };
 
-      moviesDir = "/srv/media/tank/Movies";
+      showsDir = "/srv/media/tank/Shows";
       completeDir = "/srv/media/tank/Downloads";
       incompleteDir = "/srv/downloads";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
-        "${completeDir}/radarr".d = {
+        "${completeDir}/sonarr".d = {
           user = "root";
           group = "media";
           mode = "2775";
         };
-        "${incompleteDir}/radarr".d = {
+        "${incompleteDir}/sonarr".d = {
           user = "root";
           group = "media";
           mode = "2775";
@@ -38,9 +38,9 @@
       };
 
       services.nginx.virtualHosts = {
-        "radarr.home.lan" = {
+        "sonarr.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.8:7878";
+            proxyPass = "http://10.0.0.11:8989";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -55,23 +55,14 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      # services.tailscale.serve.services = {
-      #   radarr = {
-      #     advertised = true;
-      #     endpoints = {
-      #       "tcp:7878" = "http://10.0.0.8:7878";
-      #     };
-      #   };
-      # };
+      sops.secrets."sonarr/env" = { };
 
-      sops.secrets."radarr/env" = { };
-
-      containers.radarr = {
+      containers.sonarr = {
         autoStart = true;
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.8";
+        localAddress = "10.0.0.11";
 
         privateUsers = "pick";
 
@@ -88,25 +79,25 @@
         # no id map option yet, workaround
         # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
         bindMounts = {
-          "/media/movies" = {
-            mountPoint = "/media/movies:idmap";
-            hostPath = moviesDir;
+          "/media/shows" = {
+            mountPoint = "/media/shows:idmap";
+            hostPath = showsDir;
             isReadOnly = false;
           };
           "/downloads/complete" = {
-            mountPoint = "/downloads/complete:idmap";
-            hostPath = "${completeDir}/radarr";
+            mountPoint = "/downloads:idmap";
+            hostPath = "${completeDir}/sonarr";
             isReadOnly = false;
           };
           "/downloads/incomplete" = {
-            mountPoint = "/downloads/incomplete:idmap";
-            hostPath = "${incompleteDir}/radarr";
+            mountPoint = "/downloads:idmap";
+            hostPath = "${incompleteDir}/sonarr";
             isReadOnly = false;
           };
         };
 
         extraFlags = [
-          "--load-credential=radarr-env:${config.sops.secrets."radarr/env".path}"
+          "--load-credential=sonarr-env:${config.sops.secrets."sonarr/env".path}"
         ];
 
         config =
@@ -119,17 +110,17 @@
           {
             users.groups.media.gid = mediaGid;
 
-            services.radarr = {
+            services.sonarr = {
               enable = true;
 
               group = "media";
 
               environmentFiles = [
-                "/run/credentials/@system/radarr-env"
+                "/run/credentials/@system/sonarr-env"
               ];
 
               settings = {
-                server.port = 7878;
+                server.port = 8989;
               };
             };
 
