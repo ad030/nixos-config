@@ -2,6 +2,11 @@
   fileSystems."/srv/media/tank" = {
     device = "tank";
     fsType = "zfs";
+
+    options = [
+      "acltype=posixacl"
+      "aclinherit=passthrough"
+    ];
   };
 
   fileSystems."/srv/media/wd-blue-1tb" = {
