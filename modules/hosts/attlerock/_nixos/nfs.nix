@@ -26,9 +26,9 @@
   systemd.tmpfiles.settings."export-tank" = {
     "/export/tank" = {
       d = {
-        user = "root"; 
-        group = "media"; 
-        mode = "2775"; 
+        user = "root";
+        group = "media";
+        mode = "2775";
       };
       # ensure media group gets rwx permissions
       "a+media-perms" = {
@@ -53,6 +53,7 @@
         type = "a";
         argument = "default:mask::rwx";
       };
+    };
   };
 
   services.nfs.server.exports = ''
