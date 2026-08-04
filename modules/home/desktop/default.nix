@@ -24,9 +24,9 @@
       kdePackages.okular # pdf viewer
 
       ## file manager that's better than dolphin
-      nemo
       pcmanfm-qt
       gvfs # for pcmanfm
+      # nemo-with-extensions
 
       ## password manager
       keepassxc
@@ -43,6 +43,7 @@
       ## archive file utilities
       _7zip-zstd
       kdePackages.ark
+      # file-roller
 
       ani-cli # watch anime
       jellyfin-desktop # access media server
