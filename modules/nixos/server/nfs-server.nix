@@ -4,6 +4,7 @@
       server = {
         enable = true;
       };
+
       settings = {
         mountd = {
           manage-gids = true;
@@ -18,8 +19,8 @@
 
     systemd.tmpfiles.settings."nfs-server" = {
       "/export".d = {
-        user = "nobody";
-        group = "nogroup";
+        user = "root";
+        group = "root";
         mode = "0555";
       };
     };

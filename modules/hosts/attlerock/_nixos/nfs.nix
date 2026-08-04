@@ -16,13 +16,6 @@
     options = [ "bind" ];
   };
 
-  systemd.tmpfiles.rules = [
-    "d /export/tank 2775 root media - -"
-    "a /export/tank - - - - group:media:rwx"
-    "a /export/tank - - - - default:group:media:rwx"
-    "a /export/tank - - - - default:mask::rwx"
-  ];
-
   systemd.tmpfiles.settings."export-tank" = {
     "/export/tank" = {
       d = {
@@ -33,25 +26,24 @@
       # ensure media group gets rwx permissions
       "a+media-perms" = {
         type = "a";
-        argument = "group:media:rwx";
+        argument = "group:media:rwX";
       };
-      # set default permissions for new files (owner, group, other)
-      "a+user-perms" = {
+      # default permissions
+      "a+default-user-perms" = {
         type = "a";
-        argument = "default:user::rwx";
+        argument = "d:user::rwX";
       };
-      "a+group-perms" = {
+      "a+default-group-perms" = {
         type = "a";
-        argument = "default:group:media:rwx";
+        argument = "d:group::rwX";
       };
-      "a+other-perms" = {
+      "a+default-other-perms" = {
         type = "a";
-        argument = "default:other::rwx";
+        argument = "d:other::r-X";
       };
-      # set default acl mask
-      "a+default-mask" = {
+      "a+mask" = {
         type = "a";
-        argument = "default:mask::rwx";
+        argument = "mask::rwx";
       };
     };
   };
