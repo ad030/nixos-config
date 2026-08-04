@@ -36,7 +36,6 @@
       imagemagick
       mpv
       vlc
-      feh
       swayimg
       yt-dlp
 
