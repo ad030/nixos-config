@@ -4,7 +4,7 @@
       gvfs
       # needed for file managers
       lxmenu-data
-      menu-cache
+      # menu-cache
       shared-mime-info
     ];
 

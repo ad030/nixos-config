@@ -106,9 +106,13 @@ in
         };
       };
 
-      # xdg.configFile."gtk-2.0/gtkrc".force = lib.mkForce true;
-
       ## WINDOW MANAGERS
       wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
+
+      # use nemo as default file manager
+      xdg.mimeApps.defaultApplications = {
+        "inode/directory" = [ "nemo.desktop" ];
+        "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+      };
     };
 }

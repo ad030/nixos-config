@@ -4,6 +4,6 @@
     bash
     nix
     xdg
-    default-apps
+    # default-apps
   ];
 }

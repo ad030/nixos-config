@@ -25,6 +25,7 @@
 
       systemd.user.sessionVariables = {
         XDG_MENU_PREFIX = "lxde-";
+        XDG_CURRENT_DESKTOP = "LXDE";
       };
 
       programs.niri = {
