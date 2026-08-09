@@ -39,6 +39,7 @@
       environment.systemPackages = with pkgs; [
         # unix utilities
         busybox
+        outils
 
         lshw
 
