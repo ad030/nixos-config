@@ -16,6 +16,7 @@
 
         display-manager
         home-manager
+        file-manager
         audio
 
         ## IMPORT THESE MANUALLY IN HOST CONFIGS

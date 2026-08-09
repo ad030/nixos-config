@@ -23,6 +23,10 @@
         quickshell
       ];
 
+      systemd.user.sessionVariables = {
+        XDG_MENU_PREFIX = "lxde-";
+      };
+
       programs.niri = {
         settings = {
           spawn-at-startup =

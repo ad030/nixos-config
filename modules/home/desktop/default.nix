@@ -24,9 +24,8 @@
       kdePackages.okular # pdf viewer
 
       ## file manager that's better than dolphin
-      pcmanfm-qt
-      gvfs # for pcmanfm
-      # nemo-with-extensions
+      # pcmanfm-qt
+      nemo-with-extensions
 
       ## password manager
       keepassxc
