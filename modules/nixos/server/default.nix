@@ -42,6 +42,7 @@
         iperf3
         smartmontools
         openssl
+        ntp
       ];
 
       hardware.graphics.enable = true;
