@@ -19,7 +19,8 @@
       ];
 
       services.displayManager = {
-        # defaultSession = "niri";
+        defaultSession = lib.mkDefault "niri";
+
         sddm = {
           enable = true;
           package = lib.mkForce pkgs.kdePackages.sddm;
