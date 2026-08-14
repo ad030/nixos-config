@@ -18,7 +18,6 @@
         package-caches
         nix-settings
         fonts
-        timesyncd
         users-settings
         ssh
         security
