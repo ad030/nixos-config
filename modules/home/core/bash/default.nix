@@ -26,9 +26,12 @@
           ll = "ls -l";
           ls = "ls --color=tty";
 
-          # for reloading nixos config using flake
-          nrs = "sudo nixos-rebuild switch";
-          nc = "cd ${nixos-config-dir}";
+          # related to nixos
+          nrs = "nixos-rebuild switch";
+          snrs = "sudo nixos-rebuild switch";
+          nrf = "nixos-rebuild switch --flake";
+          snrf = "sudo nixos-rebuild switch --flake";
+          ncf = "cd ${nixos-config-dir}";
         };
 
       };
