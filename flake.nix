@@ -24,7 +24,8 @@
 
     # wayland scrolling window manager
     niri = {
-      url = "github:sodiboo/niri-flake";
+      # url = "github:sodiboo/niri-flake";
+      url = "github:epireyn/niri-flake";
     };
 
     # secrets management

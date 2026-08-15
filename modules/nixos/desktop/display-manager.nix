@@ -19,7 +19,7 @@
       ];
 
       services.displayManager = {
-        defaultSession = lib.mkDefault "niri";
+        defaultSession = lib.mkForce "niri";
 
         sddm = {
           enable = true;

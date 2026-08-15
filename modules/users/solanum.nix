@@ -80,7 +80,7 @@ in
         colorScheme = "light";
         theme = {
           name = "Gruvbox";
-          package = pkgs.gruvbox-gtk-theme;
+          package = pkgs.gruvbox-dark-gtk;
         };
         iconTheme = {
           # name = "Papirus";
