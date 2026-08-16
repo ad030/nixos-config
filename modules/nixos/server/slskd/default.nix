@@ -151,6 +151,28 @@
                           Be considerate of others 👍
                   '';
                 };
+
+                integrations = {
+                  webhooks = {
+                    message_webhook = {
+                      on = [ "PrivateMessageReceived" ];
+                      call = {
+                        url = "http://10.0.0.1:8082/slskd-message";
+                        headers = [
+                          {
+                            name = "Title";
+                            value = "slskd: New message";
+                          }
+                          {
+                            name = "Priority";
+                            value = "default";
+                          }
+                        ];
+                        ignore_certificate_errors = true;
+                      };
+                    };
+                  };
+                };
               };
             };
 

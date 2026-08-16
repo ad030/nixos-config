@@ -25,6 +25,9 @@
         # adguardhome
         technitium
 
+        # notifications
+        ntfy
+
         freshrss
         jellyfin
         slskd
