@@ -38,6 +38,10 @@
       swayimg
       yt-dlp
 
+      simple-scan # scanner (for scanners implementing SANE interface)
+      # NOTE: modern printers are compatible with CUPS
+      # no specific tool necessary; should be automatically detected by client
+
       ## archive file utilities
       _7zip-zstd
       kdePackages.ark
