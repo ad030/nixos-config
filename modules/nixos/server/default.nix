@@ -36,6 +36,7 @@
         radarr
         navidrome
         sonarr
+        vaultwarden
       ];
 
       environment.systemPackages = with pkgs; [
