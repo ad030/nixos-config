@@ -14,6 +14,7 @@
       keepassxc
       vesktop
       signal-desktop
+      obs-studio
     ];
 
     home.packages = with pkgs; [

@@ -28,6 +28,7 @@ in
       desktop
       gaming
       flatpak
+      dev
 
       desktop-environment
       window-manager

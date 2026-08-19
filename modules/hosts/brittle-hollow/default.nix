@@ -23,6 +23,7 @@ in
       home-manager
       laptop
       desktop
+      dev
 
       window-manager
     ])
