@@ -13,7 +13,6 @@
     }:
     {
       imports = [
-        inputs.niri.homeModules.niri
         self.modules.homeManager.wl-screenshot
         self.modules.homeManager.idle-daemon
       ];

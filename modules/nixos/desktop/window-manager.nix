@@ -9,6 +9,7 @@
     }:
     {
       imports = [
+        inputs.niri.nixosModules.niri
         self.modules.nixos.idle-lock
       ];
 
@@ -27,6 +28,7 @@
 
         niri = {
           enable = true;
+          package = pkgs.niri;
         };
 
         hyprland = {

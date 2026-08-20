@@ -21,6 +21,8 @@
             inherit (theme.border) active inactive urgent;
           };
 
+          default-column-width.proportion = 0.66;
+
           focus-ring = {
             enable = false;
             width = 2;
