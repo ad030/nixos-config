@@ -37,6 +37,7 @@
       mpv
       vlc
       swayimg
+      lxqt.lximage-qt
       yt-dlp
 
       simple-scan # scanner (for scanners implementing SANE interface)

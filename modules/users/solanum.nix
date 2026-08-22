@@ -110,9 +110,22 @@ in
       wayland.windowManager.sway.extraOptions = [ "--unsupported-gpu" ];
 
       # use nemo as default file manager
-      xdg.mimeApps.defaultApplications = {
-        "inode/directory" = [ "nemo.desktop" ];
-        "application/x-gnome-saved-search" = [ "nemo.desktop" ];
-      };
+      xdg.mimeApps.defaultApplications =
+        let
+          imageViewer = "swayimg.desktop";
+        in
+        {
+          "inode/directory" = [ "nemo.desktop" ];
+          "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+
+          # image types
+          "image/apng" = [ imageViewer ];
+          "image/avif" = [ imageViewer ];
+          "image/gif" = [ imageViewer ];
+          "image/jpeg" = [ imageViewer ];
+          "image/png" = [ imageViewer ];
+          "image/svg+xml" = [ imageViewer ];
+          "image/webp" = [ imageViewer ];
+        };
     };
 }
