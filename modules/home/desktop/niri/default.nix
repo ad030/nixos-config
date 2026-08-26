@@ -22,10 +22,10 @@
         quickshell
       ];
 
-      systemd.user.sessionVariables = {
-        XDG_MENU_PREFIX = "lxde-";
-        XDG_CURRENT_DESKTOP = "LXDE";
-      };
+      # systemd.user.sessionVariables = {
+      #   XDG_MENU_PREFIX = "lxde-";
+      #   XDG_CURRENT_DESKTOP = "LXDE";
+      # };
 
       programs.niri = {
         settings = {
@@ -70,7 +70,7 @@
 
           xwayland-satellite = {
             enable = true;
-            path = lib.getExe pkgs.xwayland-satellite-stable;
+            path = lib.getExe pkgs.xwayland-satellite;
           };
 
         };

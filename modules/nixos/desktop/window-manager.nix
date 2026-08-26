@@ -16,6 +16,7 @@
       nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
       environment.systemPackages = with pkgs; [
+        xwayland-satellite
         xwayland-satellite-unstable
         quickshell # for creating custom status bar
       ];

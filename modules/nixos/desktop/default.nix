@@ -32,6 +32,16 @@
         printing.enable = true;
       };
 
+      xdg.portal = {
+        enable = true;
+        wlr.enable = true;
+
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+        ];
+      };
+
       environment.systemPackages = with pkgs; [
         foot
 
@@ -41,6 +51,16 @@
         # bluetooth
         bluez
         bluez-tools
+
+        # password manager
+        bitwarden-desktop
       ];
+
+      programs = {
+        firefox = {
+          enable = true;
+          # package = pkgs.firefox-esr;
+        };
+      };
     };
 }

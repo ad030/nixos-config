@@ -20,7 +20,6 @@
     home.packages = with pkgs; [
       fastfetch
 
-      firefox # browser
       libreoffice # office suite
       kdePackages.okular # pdf viewer
 

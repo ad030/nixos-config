@@ -23,11 +23,8 @@
           action.close-window = [ ];
           hotkey-overlay.title = "Close focused window";
         };
-        # "Mod+D" = {
-        #   action.spawn = [ "${lib.getExe pkgs.fuzzel}" ];
-        #   hotkey-overlay.title = "Open launcher";
-        # };
         "Mod+D" = {
+          # action.spawn = [ "${lib.getExe pkgs.fuzzel}" ];
           action.spawn = [
             "${lib.getExe pkgs.rofi}"
             "-show"
@@ -166,6 +163,10 @@
         "Mod+Shift+8".action.move-window-to-workspace = 8;
         "Mod+Shift+9".action.move-window-to-workspace = 9;
         "Mod+Shift+0".action.move-window-to-workspace = 10;
+
+        "Mod+R".action.toggle-window-floating = [ ];
+        "Mod+S".action.consume-or-expel-window-right = [ ];
+        "Mod+A".action.consume-or-expel-window-left = [ ];
       };
     };
   };
