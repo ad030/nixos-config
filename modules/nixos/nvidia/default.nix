@@ -6,8 +6,9 @@
 {
   flake.modules.nixos.nvidia =
     {
-      pkgs,
       config,
+      pkgs,
+      lib,
       ...
     }:
     {
@@ -23,7 +24,7 @@
       ];
 
       environment.sessionVariables = {
-        NIXOS_OZONE_WL = "1";
+        NIXOS_OZONE_WL = lib.mkDefault 1;
       };
 
       services.xserver.videoDrivers = [ "nvidia" ];

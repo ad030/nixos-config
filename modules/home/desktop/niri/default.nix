@@ -22,10 +22,11 @@
         quickshell
       ];
 
-      # systemd.user.sessionVariables = {
-      #   XDG_MENU_PREFIX = "lxde-";
-      #   XDG_CURRENT_DESKTOP = "LXDE";
-      # };
+      systemd.user.sessionVariables = {
+        #   XDG_MENU_PREFIX = "lxde-";
+        #   XDG_CURRENT_DESKTOP = "LXDE";
+        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+      };
 
       programs.niri = {
         settings = {

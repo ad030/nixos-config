@@ -31,7 +31,7 @@
           snrs = "sudo nixos-rebuild switch";
           nrf = "nixos-rebuild switch --flake";
           snrf = "sudo nixos-rebuild switch --flake";
-          ncf = "cd ${nixos-config-dir}";
+          nC = "cd ${nixos-config-dir}";
         };
 
       };

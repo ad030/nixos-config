@@ -17,26 +17,29 @@
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite
-        xwayland-satellite-unstable
         quickshell # for creating custom status bar
       ];
 
-      programs = {
-        sway = {
-          enable = false;
-          xwayland.enable = true;
-        };
+      # force niri to use gtk desktop portal rather than gnome portal
+      # https://wiki.nixos.org/wiki/Niri#File_picker_not_working
+      xdg.portal.config.niri = {
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+      };
 
+      programs = {
         niri = {
           enable = true;
           package = pkgs.niri;
         };
-
-        hyprland = {
-          enable = false;
-          withUWSM = true;
-          xwayland.enable = true;
-        };
+        # sway = {
+        #   enable = false;
+        #   xwayland.enable = true;
+        # };
+        # hyprland = {
+        #   enable = false;
+        #   withUWSM = true;
+        #   xwayland.enable = true;
+        # };
       };
     };
 }
