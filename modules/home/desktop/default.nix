@@ -25,7 +25,6 @@
 
       ## file manager that's better than dolphin
       # pcmanfm-qt
-      nemo-with-extensions
 
       ## password manager
       keepassxc

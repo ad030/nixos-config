@@ -52,6 +52,8 @@ in
         desktop
         dev
         gaming
+
+        nemo
       ];
 
       home = {
