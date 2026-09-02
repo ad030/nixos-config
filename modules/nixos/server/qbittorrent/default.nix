@@ -23,15 +23,61 @@
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
-        "${completeDir}/qbittorrent".d = {
-          user = "root";
-          group = "media";
-          mode = "2775";
+        "${completeDir}/qbittorrent" = {
+          d = {
+            user = "root";
+            group = "media";
+            mode = "2775";
+          };
+          "a+media-perms" = {
+            type = "a";
+            argument = "group:media:rwX";
+          };
+          # default permissions
+          "a+default-user-perms" = {
+            type = "a";
+            argument = "d:user::rwX";
+          };
+          "a+default-group-perms" = {
+            type = "a";
+            argument = "d:group::rwX";
+          };
+          "a+default-other-perms" = {
+            type = "a";
+            argument = "d:other::r-X";
+          };
+          "a+mask" = {
+            type = "a";
+            argument = "mask::rwx";
+          };
         };
-        "${incompleteDir}/qbittorrent".d = {
-          user = "root";
-          group = "media";
-          mode = "2775";
+        "${incompleteDir}/qbittorrent" = {
+          d = {
+            user = "root";
+            group = "media";
+            mode = "2775";
+          };
+          "a+media-perms" = {
+            type = "a";
+            argument = "group:media:rwX";
+          };
+          # default permissions
+          "a+default-user-perms" = {
+            type = "a";
+            argument = "d:user::rwX";
+          };
+          "a+default-group-perms" = {
+            type = "a";
+            argument = "d:group::rwX";
+          };
+          "a+default-other-perms" = {
+            type = "a";
+            argument = "d:other::r-X";
+          };
+          "a+mask" = {
+            type = "a";
+            argument = "mask::rwx";
+          };
         };
       };
 

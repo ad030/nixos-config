@@ -21,6 +21,7 @@
           extraConfig = {
             GAMES = "${config.home.homeDirectory}/Games";
             VAULTS = "${config.home.homeDirectory}/Vaults"; # obsidian vaults
+            TEMP = "${config.home.homeDirectory}/Temp"; # temporary files
           };
         };
         mimeApps.enable = pkgs.stdenv.hostPlatform.isLinux;
