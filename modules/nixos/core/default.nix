@@ -40,6 +40,10 @@
         # unix utilities
         busybox
         outils
+        gdu
+        bat
+        btop
+        htop
 
         lshw
 
@@ -50,7 +54,6 @@
         bash
         python314
         jq
-        htop
 
         # notifications
         libnotify
