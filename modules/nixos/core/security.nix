@@ -1,7 +1,16 @@
 {
-  flake.modules.nixos.security = {
-    security = {
-      rtkit.enable = true;
+  flake.modules.nixos.security =
+    {
+      pkgs,
+      ...
+    }:
+    {
+      environment.systemPackages = with pkgs; [
+        firejail
+      ];
+
+      security = {
+        rtkit.enable = true;
+      };
     };
-  };
 }

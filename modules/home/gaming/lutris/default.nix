@@ -6,15 +6,11 @@
 {
   flake.modules.homeManager.lutris =
     { pkgs, ... }:
-    {
-      # programs.lutris = {
-      #   enable = true;
-      # };
-
+    let
       # temporary fix for lutris because openldap keeps failing
       # https://github.com/NixOS/nixpkgs/issues/513245#issuecomment-4319854191
-      home.packages = [
-        (pkgs.lutris.override {
+      lutris-pkg = (
+        pkgs.lutris.override {
           # Intercept buildFHSEnv to modify target packages
           buildFHSEnv =
             args:
@@ -36,7 +32,13 @@
                   builtins.filter (p: (p.pname or "") != "openldap") originalPkgs ++ [ customLdap ];
               }
             );
-        })
-      ];
+        }
+      );
+    in
+    {
+      programs.lutris = {
+        enable = true;
+        package = lutris-pkg;
+      };
     };
 }

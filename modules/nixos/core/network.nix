@@ -7,6 +7,8 @@
       ...
     }:
     {
+      environment.systemPackages = with pkgs; [
+      ];
       networking = {
         # Enable networking
         networkmanager.enable = true;
