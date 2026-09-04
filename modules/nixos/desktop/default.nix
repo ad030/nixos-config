@@ -60,6 +60,11 @@
           enable = true;
           # package = pkgs.firefox-esr;
         };
+        localsend = {
+          enable = true;
+          openFirewall = true;
+        };
       };
+
     };
 }
