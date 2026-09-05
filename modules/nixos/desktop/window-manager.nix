@@ -13,7 +13,17 @@
         self.modules.nixos.idle-lock
       ];
 
-      nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+      nixpkgs.overlays = [
+        inputs.niri.overlays.niri
+        # fix xwayland-satellite v0.8.2 dropdown menu bug
+        # https://github.com/Supreeeme/xwayland-satellite/issues/468
+        (final: prev: {
+          xwayland-satellite =
+            (import inputs.nixpkgs {
+              inherit (prev) system;
+            }).xwayland-satellite;
+        })
+      ];
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite

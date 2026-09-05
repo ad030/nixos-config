@@ -1,7 +1,7 @@
 # Gruvbox color palette by morhetz
-{ self, inputs, ... }:
+{ inputs, ... }:
 let
-  lib = inputs.nixpkgs-stable.lib;
+  lib = inputs.nixpkgs.lib;
 in
 {
   flake.themes.gruvbox-dark =

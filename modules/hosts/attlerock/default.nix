@@ -7,7 +7,7 @@
 }:
 let
   hostname = "attlerock";
-  nixpkgs = inputs.nixpkgs-stable;
+  nixpkgs = inputs.nixpkgs;
 in
 {
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
