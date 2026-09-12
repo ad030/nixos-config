@@ -27,6 +27,7 @@
         power-management
         printing
         tailscale
+        ssl-root-certs
       ];
 
       programs = {

@@ -12,8 +12,6 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
-        ssl-root-certs
-
         display-manager
         home-manager
         file-manager
