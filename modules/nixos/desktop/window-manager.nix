@@ -21,7 +21,7 @@
         (final: prev: {
           xwayland-satellite =
             (import inputs."nixpkgs-xwayland-satellite-0.8.1" {
-              inherit (prev) system;
+              localSystem = prev.stdenv.hostPlatform.system;
             }).xwayland-satellite;
         })
       ];
