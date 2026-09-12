@@ -44,8 +44,7 @@
 
       ## archive file utilities
       _7zip-zstd
-      kdePackages.ark
-      # file-roller
+      file-roller
 
       ani-cli # watch anime
       jellyfin-desktop # access media server
