@@ -11,11 +11,12 @@ let
     "solanum"
     "chert"
   ];
+  hostPlatform = "x86_64-linux";
 in
 {
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
     modules = [
+      { nixpkgs.hostPlatform = hostPlatform; }
       ./_nixos/configuration.nix
       { networking.hostName = hostname; }
       { nixpkgs.config.allowUnfree = true; }
