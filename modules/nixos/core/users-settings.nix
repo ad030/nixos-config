@@ -10,7 +10,7 @@ in
   flake.modules.nixos.users-settings = {
     users.mutableUsers = false;
 
-    # root user only for emergency logins
+    # root user only for emergency logins (if sops is unavailable)
     # and ssh to rebuild systems
     users.users.root = {
       hashedPassword = "$y$j9T$KPQS8q1qZ8.HR5rtnT33N0$jlOkZFzUl4tWpKXBzreJcbe7cQW1E0JPL9.2uOKp0u.";
@@ -22,6 +22,8 @@ in
 
     # create group for use in shared media directories (nfs)
     users.groups.media.gid = sharedGroups.media.gid;
+
+    # needed for igpu hardware acceleration
     users.groups.render.gid = sharedGroups.render.gid;
     users.groups.video.gid = sharedGroups.video.gid;
   };

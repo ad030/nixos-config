@@ -13,7 +13,6 @@
     {
       imports = with config.flake.modules.nixos; [
         display-manager
-        home-manager
         file-manager
         audio
 

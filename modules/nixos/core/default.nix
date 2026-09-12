@@ -28,6 +28,7 @@
         printing
         tailscale
         ssl-root-certs
+        home-manager
       ];
 
       programs = {
