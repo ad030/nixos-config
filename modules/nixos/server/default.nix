@@ -36,6 +36,12 @@
         navidrome
         sonarr
         vaultwarden
+
+        # local wikipedia
+        kiwix
+
+        # download manager
+        aria2
       ];
 
       environment.systemPackages = with pkgs; [

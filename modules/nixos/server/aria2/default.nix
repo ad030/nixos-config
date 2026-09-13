@@ -106,7 +106,7 @@
             };
 
             systemd.services.aria2.serviceConfig = {
-              Group = "media";
+              Group = lib.mkForce "media";
             };
 
             networking.useHostResolvConf = lib.mkForce false;
