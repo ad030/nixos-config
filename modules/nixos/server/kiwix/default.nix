@@ -54,6 +54,8 @@
 
               port = 8084;
               openFirewall = true;
+
+              libraryPath = "/kiwix/library.xml";
             };
 
             networking.useHostResolvConf = lib.mkForce false;
