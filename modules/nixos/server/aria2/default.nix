@@ -95,7 +95,10 @@
                 dir = "/downloads/complete";
                 enable-rpc = true;
                 rpc-listen-all = true;
+                disable-ipv6 = true;
+
                 rpc-listen-port = 6800;
+
                 listen-port = [
                   {
                     from = 6882;
