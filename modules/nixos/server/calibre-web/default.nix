@@ -15,12 +15,14 @@
         ];
         udp = [ ];
       };
+      localAddr = "10.0.0.5";
+      webPort = "8083";
     in
     {
       services.nginx.virtualHosts = {
         "calibre.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.5:8083";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
           };
 
@@ -34,21 +36,12 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      # services.tailscale.serve.services = {
-      #   calibre-web = {
-      #     advertised = true;
-      #     endpoints = {
-      #       "tcp:8083" = "http://10.0.0.5:8083";
-      #     };
-      #   };
-      # };
-
       containers.calibre-web = {
         autoStart = true;
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.5";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 
@@ -103,6 +96,10 @@
 
             networking.useHostResolvConf = lib.mkForce false;
             services.resolved.enable = true;
+
+            systemd.services.calibre-web.serviceConfig = {
+              UMask = "0002";
+            };
 
             system.stateVersion = "26.05";
           };

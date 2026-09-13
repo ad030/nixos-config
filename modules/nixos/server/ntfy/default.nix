@@ -13,12 +13,15 @@
         ];
         udp = [ ];
       };
+
+      localAddr = "10.0.0.12";
+      webPort = "8082";
     in
     {
       services.nginx.virtualHosts = {
         "ntfy.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.12:8082";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -38,7 +41,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.12";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

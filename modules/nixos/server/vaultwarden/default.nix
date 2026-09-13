@@ -10,6 +10,9 @@
         udp = [
         ];
       };
+
+      localAddr = "10.0.0.15";
+      webPort = "8222";
     in
     {
       networking.firewall = {
@@ -20,7 +23,7 @@
       services.nginx.virtualHosts = {
         "vaultwarden.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.15:8222";
+            proxyPass = "http://${localAddr}:${webPort}";
             proxyWebsockets = true;
             recommendedProxySettings = true;
           };
@@ -38,7 +41,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.15";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

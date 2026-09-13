@@ -22,12 +22,14 @@
         ];
         udp = [ ];
       };
+      localAddr = "10.0.0.2";
+      webPort = "8096";
     in
     {
       services.nginx.virtualHosts = {
         "jellyfin.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.2:8096";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -42,29 +44,14 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      # services.tailscale.serve.services = {
-      #   jellyfin = {
-      #     advertised = true;
-      #     endpoints = {
-      #       "tcp:8096" = "http://10.0.0.2:8096";
-      #     };
-      #   };
-      # };
-
-      # services.udev.extraRules = ''
-      #   SUBSYSTEM=="drm", KERNEL=="renderD128", MODE="0666"
-      #   SUBSYSTEM=="drm", KERNEL=="card1", MODE="0666"
-      # '';
-
       containers.jellyfin = {
         autoStart = true;
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.2";
+        localAddress = localAddr;
 
         privateUsers = "pick";
-        # privateUsers = "no";
 
         forwardPorts =
           map (p: {

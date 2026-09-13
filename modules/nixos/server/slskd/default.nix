@@ -25,6 +25,9 @@
       incompleteDir = "/srv/downloads";
       completeDir = "/srv/media/tank/Downloads";
       musicDir = "/srv/media/tank/Music/Music";
+
+      webPort = "5030";
+      localAddr = "10.0.0.3";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
@@ -43,7 +46,7 @@
       services.nginx.virtualHosts = {
         "slskd.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.3:5030";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
           };
 
@@ -73,7 +76,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.3";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

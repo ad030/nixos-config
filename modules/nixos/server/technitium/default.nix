@@ -13,6 +13,9 @@
           53 # dns
         ];
       };
+
+      localAddr = "10.0.0.10";
+      webPort = "5380";
     in
     {
       networking.firewall = {
@@ -23,7 +26,7 @@
       services.nginx.virtualHosts = {
         "technitium.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.10:5380";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
           };
 
@@ -33,21 +36,12 @@
         };
       };
 
-      # services.tailscale.serve.services = {
-      #   technitium = {
-      #     advertised = true;
-      #     endpoints = {
-      #       "tcp:5380" = "http://10.0.0.10:5380";
-      #     };
-      #   };
-      # };
-
       containers.technitium = {
         autoStart = true;
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.10";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

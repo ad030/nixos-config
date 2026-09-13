@@ -20,6 +20,9 @@
 
       incompleteDir = "/srv/downloads";
       completeDir = "/srv/media/tank/Downloads";
+
+      localAddr = "10.0.0.7";
+      webPort = "8090";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
@@ -38,7 +41,7 @@
       services.nginx.virtualHosts = {
         "qbittorrent.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.7:8090";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -68,7 +71,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.7";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

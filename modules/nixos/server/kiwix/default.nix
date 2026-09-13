@@ -4,15 +4,15 @@
   ...
 }:
 {
-  flake.modules.nixos.freshrss =
+  flake.modules.nixos.kiwix =
     { config, lib, ... }:
     let
-      localAddr = "10.0.0.6";
-      webPort = "80";
+      localAddr = "10.0.0.19";
+      webPort = "8084";
     in
     {
       services.nginx.virtualHosts = {
-        "freshrss.home.lan" = {
+        "kiwix.home.lan" = {
           locations."/" = {
             proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
@@ -24,9 +24,7 @@
         };
       };
 
-      sops.secrets."freshrss/password" = { };
-
-      containers.freshrss = {
+      containers.kiwix-serve = {
         autoStart = true;
 
         privateNetwork = true;
@@ -35,16 +33,10 @@
 
         privateUsers = "pick";
 
-        # pass in sops secrets into container using systemd loadcredentials
-        # https://github.com/Mic92/sops-nix/issues/514#issuecomment-2036359239
-        extraFlags = [
-          "--load-credential=freshrss-password:${config.sops.secrets."freshrss/password".path}"
-        ];
-
         forwardPorts = [
           {
-            hostPort = 8080;
-            containerPort = 80;
+            hostPort = 8084;
+            containerPort = 8084;
             protocol = "tcp";
           }
         ];
@@ -57,17 +49,11 @@
             ...
           }:
           {
-            services.freshrss = {
+            services.kiwix-serve = {
               enable = true;
 
-              baseUrl = "http://freshrss.home.lan";
-
-              defaultUser = "dokja";
-              passwordFile = "/run/credentials/@system/freshrss-password";
-            };
-
-            networking.firewall = {
-              allowedTCPPorts = [ 80 ];
+              port = 8084;
+              openFirewall = true;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

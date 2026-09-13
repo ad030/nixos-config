@@ -22,6 +22,9 @@
       showsDir = "/srv/media/tank/Shows";
       completeDir = "/srv/media/tank/Downloads";
       incompleteDir = "/srv/downloads";
+
+      localAddr = "10.0.0.11";
+      webPort = "8989";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
@@ -40,7 +43,7 @@
       services.nginx.virtualHosts = {
         "sonarr.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.11:8989";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -62,7 +65,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.11";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 

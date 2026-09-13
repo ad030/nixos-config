@@ -12,6 +12,8 @@
           53 # dns
         ];
       };
+      localAddr = "10.0.0.4";
+      webPort = "3000";
     in
     {
       networking.firewall = {
@@ -22,7 +24,7 @@
       services.nginx.virtualHosts = {
         "adguard.home.lan" = {
           locations."/" = {
-            proxyPass = "http://10.0.0.4:3000";
+            proxyPass = "http://${localAddr}:${webPort}";
             recommendedProxySettings = true;
           };
 
@@ -37,7 +39,7 @@
 
         privateNetwork = true;
         hostAddress = "10.0.0.1";
-        localAddress = "10.0.0.4";
+        localAddress = localAddr;
 
         privateUsers = "pick";
 
