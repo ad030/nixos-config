@@ -76,24 +76,8 @@
             hostPath = "/srv/media/tank/Shows";
             isReadOnly = false;
           };
-          "/media/music" = {
-            mountPoint = "/media/music:idmap";
-            hostPath = "/srv/media/tank/Music";
-            isReadOnly = true;
-          };
-
-          # "/media/movies" = {
-          #   mountPoint = "/media/movies";
-          #   hostPath = "/srv/media/tank/Movies";
-          #   isReadOnly = false;
-          # };
-          # "/media/shows" = {
-          #   mountPoint = "/media/shows";
-          #   hostPath = "/srv/media/tank/Shows";
-          #   isReadOnly = false;
-          # };
           # "/media/music" = {
-          #   mountPoint = "/media/music";
+          #   mountPoint = "/media/music:idmap";
           #   hostPath = "/srv/media/tank/Music";
           #   isReadOnly = true;
           # };
