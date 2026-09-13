@@ -38,7 +38,7 @@
         vaultwarden
 
         # local wikipedia
-        kiwix
+        kiwix-serve
 
         # download manager
         aria2

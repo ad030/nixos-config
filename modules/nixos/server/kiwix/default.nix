@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.kiwix =
+  flake.modules.nixos.kiwix-serve =
     { config, lib, ... }:
     let
       localAddr = "10.0.0.19";
