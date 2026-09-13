@@ -39,7 +39,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixpkgs-unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
