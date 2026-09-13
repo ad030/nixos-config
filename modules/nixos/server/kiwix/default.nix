@@ -65,7 +65,7 @@
               port = 8084;
               openFirewall = true;
 
-              library = import ./library.nix;
+              library = import ./_library.nix;
             };
 
             networking.useHostResolvConf = lib.mkForce false;

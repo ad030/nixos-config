@@ -2,7 +2,7 @@
 # remember to add leading slash
 builtins.mapAttrs (_: f: "/zim/${f}.zim") (
   ## DEVDOCS ##
-  builtins.mapAttrs (_: f: "devdocs${f}/") {
+  builtins.mapAttrs (_: f: "devdocs/${f}") {
     devdocsBash = "devdocs_en_bash_2026-04";
     devdocsC = "devdocs_en_c_2026-07";
     devdocsCmake = "devdocs_en_cmake_2026-08";
@@ -23,13 +23,13 @@ builtins.mapAttrs (_: f: "/zim/${f}.zim") (
     devdocsTypescript = "devdocs_en_typescript_2026-07";
   }
   ## LIBRETEXTS ##
-  // builtins.mapAttrs (_: f: "libretexts${f}/") {
+  // builtins.mapAttrs (_: f: "libretexts/${f}") {
     libretextsBiz = "libretexts.org_en_biz_2026-01";
     libretextsMath = "libretexts.org_en_math_2026-01";
     libretextsPhys = "libretexts.org_en_phys_2026-01";
   }
   ## WIKIMEDIA ##
-  // builtins.mapAttrs (_: f: "wikimedia${f}/") {
+  // builtins.mapAttrs (_: f: "wikimedia/${f}") {
     wikibooksAll = "wikibooks_en_all_maxi_2026-04";
     wikipediaCS = "wikipedia_en_computer_maxi_2026-06";
     wikipediaKnots = "wikipedia_en_knots_maxi_2026-07";
