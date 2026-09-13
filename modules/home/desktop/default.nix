@@ -69,6 +69,9 @@
       puddletag
       zotero
       audacity
+
+      calibre # ebook reader
+      kiwix # local web reader
     ];
   };
 }

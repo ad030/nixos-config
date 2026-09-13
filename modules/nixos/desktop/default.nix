@@ -53,9 +53,6 @@
 
         # password manager
         bitwarden-desktop
-
-        # ebook reader
-        calibre
       ];
 
       programs = {
