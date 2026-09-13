@@ -29,19 +29,33 @@
       };
 
       services.nginx.virtualHosts = {
-        "aria2.home.lan" = {
-          root = "${pkgs.ariang}/share/ariang";
+        "aria2.home.lan" =
+          let
+            ariang443Patch = pkgs.runCommand "ariang-patch" { } ''
+                            mkdir -p $out
+                            cp -r ${pkgs.ariang}/share/ariang/* $out/
+                            chmod -R u+w $out
 
-          locations."/jsonrpc" = {
-            proxyPass = "http://${localAddr}:${webPort}/jsonrpc";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
+                            # set the rpc port to 443 instead of default port 6800 
+              for f in $out/js/aria-ng-*.min.js; do
+                    sed -i 's/6800/443/g' "$f"
+                  done
+
+            '';
+          in
+          {
+            root = ariang443Patch;
+
+            locations."/jsonrpc" = {
+              proxyPass = "http://${localAddr}:${webPort}/jsonrpc";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+            };
+
+            forceSSL = true;
+            sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
+            sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
           };
-
-          forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
-        };
       };
 
       sops.secrets."aria2/rpc-token" = { };
