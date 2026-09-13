@@ -60,15 +60,6 @@
         allowedTCPPorts = ports.tcp;
       };
 
-      # services.tailscale.serve.services = {
-      #   slskd = {
-      #     advertised = true;
-      #     endpoints = {
-      #       "tcp:5030" = "http://10.0.0.3:5030";
-      #     };
-      #   };
-      # };
-
       sops.secrets."slskd/env" = { };
 
       containers.slskd = {
