@@ -53,12 +53,14 @@
 
         # password manager
         bitwarden-desktop
+
+        # ebook reader
+        calibre
       ];
 
       programs = {
         firefox = {
           enable = true;
-          # package = pkgs.firefox-esr;
         };
         localsend = {
           enable = true;
