@@ -46,6 +46,9 @@ in
       lib,
       ...
     }:
+    let
+      homeDir = "/home/${username}";
+    in
     {
       imports = with self.modules.homeManager; [
         core
@@ -58,7 +61,7 @@ in
 
       home = {
         username = username;
-        homeDirectory = "/home/${username}";
+        homeDirectory = homeDir;
         stateVersion = "26.05";
 
         packages = with pkgs; [
@@ -105,6 +108,9 @@ in
       services = {
         gnome-keyring = {
           enable = true;
+        };
+        flameshot.settings.General = {
+          savePath = "${homeDir}/Pictures/Screenshots";
         };
       };
 

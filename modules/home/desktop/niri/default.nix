@@ -13,7 +13,6 @@
     }:
     {
       imports = [
-        self.modules.homeManager.flameshot
         self.modules.homeManager.idle-daemon
       ];
 
