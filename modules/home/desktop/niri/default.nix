@@ -13,7 +13,7 @@
     }:
     {
       imports = [
-        self.modules.homeManager.wl-screenshot
+        self.modules.homeManager.flameshot
         self.modules.homeManager.idle-daemon
       ];
 

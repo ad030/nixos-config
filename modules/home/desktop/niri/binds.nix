@@ -43,7 +43,7 @@
         };
 
         "Mod+Shift+S" = {
-          action.spawn = [ "wl-screenshot" ];
+          action.spawn = [ "flameshot" ];
           hotkey-overlay.title = "Take screenshot";
         };
 
