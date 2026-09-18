@@ -16,6 +16,7 @@
       signal-desktop
       obs-studio
       yt-dlp
+      picard
     ];
 
     home.packages = with pkgs; [
@@ -51,7 +52,6 @@
 
       strawberry # music player
       feishin # music player (navidrome)
-      picard # music tagging
 
       obsidian # notetaking
       freetube # youtube frontend
@@ -70,7 +70,7 @@
       zotero
       audacity
 
-      calibre # ebook reader
+      # calibre # ebook reader
     ];
   };
 }
