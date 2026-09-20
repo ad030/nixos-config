@@ -31,7 +31,7 @@
         settings = {
           spawn-at-startup =
             let
-              wallpaper = self.images.ow-archaeologist-cover;
+              wallpaper = lib.mkDefault self.images.ow-post-credits;
               terminal = pkgs.foot;
               statusBar = pkgs.quickshell;
             in
