@@ -1,3 +1,7 @@
+vim.pack.add({
+	"https://github.com/neovim/nvim-lspconfig",
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("useful-lsp-config", { clear = true }),
 	callback = function(event)
