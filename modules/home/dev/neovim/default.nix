@@ -40,7 +40,6 @@
           pyright
           typescript-language-server
           jdt-language-server
-
         ];
 
         plugins = with pkgs.vimPlugins; [
