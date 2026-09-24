@@ -10,6 +10,7 @@ let
   systemUsers = [
     "solanum"
     "chert"
+    "esker"
   ];
   hostPlatform = "x86_64-linux";
 in
