@@ -7,7 +7,11 @@ vim.pack.add({
 
 require("mini.ai").setup({ n_lines = 500 })
 require("mini.completion").setup()
-require("mini.cmdline").setup()
+require("mini.cmdline").setup({
+	autocomplete = {
+		enable = false,
+	},
+})
 require("mini.icons").setup()
 require("mini.pick").setup()
 require("mini.snippets").setup()
