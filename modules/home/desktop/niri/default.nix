@@ -31,7 +31,7 @@
         settings = {
           spawn-at-startup =
             let
-              wallpaper = lib.mkDefault self.images.ow-post-credits;
+              wallpaper = lib.mkDefault self.images.asefthukomplijygrdzq-ring-planet-0;
               terminal = pkgs.foot;
               statusBar = pkgs.quickshell;
             in
