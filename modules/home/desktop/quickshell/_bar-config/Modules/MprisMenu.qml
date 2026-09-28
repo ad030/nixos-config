@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
+import Quickshell.Services.Mpris
 import qs.Widgets
 
 BarModuleRectangle {
@@ -13,19 +14,19 @@ BarModuleRectangle {
         // power menu items and actions to do when clicked
         property var items: [
                 {
-                        icon: "",
+                        icon: "skip_previous",
                         action: () => { 
                                 if (player?.canGoPrevious) { player.previous() }
                         }
                 },
                 {
-                        icon: player?.isPlaying ? "" : "",
+                        icon: player?.isPlaying ? "pause" : "play_arrow",
                         action: () => {
-                                if (player?.canPlay) { player.togglePlaying() } 
+                                if (player?.canTogglePlaying) { player.togglePlaying() } 
                         }
                 },
                 {
-                        icon: "",
+                        icon: "skip_next",
                         action: () => { 
                                 if (player?.canGoNext) { player.next() } 
                         }
@@ -36,9 +37,38 @@ BarModuleRectangle {
                         action: { }
                 },
                 {
-                        icon: "",
+                        icon: "stop",
                         action: () => {
                                 if (player?.canControl) { player.stop() }
+                        }
+                },
+                {
+                        icon: player?.loopState == MprisLoopState.Track ? "repeat_one_on" : 
+                                (player?.loopState == MprisLoopState.Playlist ? "repeat_on" : "repeat"),
+                        action: () => {
+                                if (player && player.canControl && player.loopSupported) { 
+                                        switch(player.loopState) {
+                                                case MprisLoopState.None:
+                                                        player.loopState = MprisLoopState.Playlist;
+                                                        break;
+                                                case MprisLoopState.Playlist:
+                                                        player.loopState = MprisLoopState.Track;
+                                                        break;
+                                                case MprisLoopState.Track:
+                                                        player.loopState = MprisLoopState.None;
+                                                        break;
+                                                default:
+                                                        break;
+                                        }
+                                }
+                        }
+                },
+                {
+                        icon: player?.shuffle ? "shuffle_on" : "shuffle",
+                        action: () => {
+                                if (player && player.canControl && player.shuffleSupported) { 
+                                        player.shuffle = !(player.shuffle)
+                                }
                         }
                 },
         ]
