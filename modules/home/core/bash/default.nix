@@ -29,8 +29,7 @@
           # related to nixos
           nrs = "nixos-rebuild switch";
           snrs = "sudo nixos-rebuild switch";
-          nrf = "nixos-rebuild switch --flake";
-          snrf = "sudo nixos-rebuild switch --flake";
+          snrt = "sudo nixos-rebuild test";
           nC = "cd ${nixos-config-dir}";
         };
 
