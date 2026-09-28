@@ -98,9 +98,14 @@ in
           size = 24;
           package = pkgs.bibata-cursors;
         };
+        # font = {
+        #   name = "MesloLGM Nerd Font";
+        #   package = pkgs.nerd-fonts.meslo-lg;
+        #   size = 12;
+        # };
         font = {
-          name = "MesloLGM Nerd Font";
-          package = pkgs.nerd-fonts.meslo-lg;
+          name = "Noto Nerd Font";
+          package = pkgs.nerd-fonts.noto;
           size = 12;
         };
       };

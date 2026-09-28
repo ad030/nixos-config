@@ -23,6 +23,7 @@
           main = {
             # font = "Fira Code Mono:size=14";
             font = "Meslo LGM Nerd Font Mono:size=14";
+            # font = "Noto Sans Mono:size=14";
           };
 
           colors-dark = theme.foot;

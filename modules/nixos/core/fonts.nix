@@ -13,6 +13,7 @@
         noto-fonts-color-emoji
 
         # nerd fonts
+        nerd-fonts.noto
         nerd-fonts.fira-mono
         nerd-fonts.meslo-lg
 

@@ -13,7 +13,7 @@ BarModuleRectangle {
 
         visible: BrightnessService.hasBacklightDevice
 
-        readonly property string icon: ""
+        readonly property string icon: "brightness_5"
 
         WrapperMouseArea {
                 BarIconText {

@@ -6,6 +6,7 @@
       theme = "gruvbox-dark-soft";
       terminal = "foot";
       font = "MesloLGM Nerd Font Mono 16";
+      # font = "Noto Nerd Font 16";
 
       modes = [
         "window"

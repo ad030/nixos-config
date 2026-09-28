@@ -12,11 +12,14 @@ BarModuleRectangle {
 
         readonly property var battery: UPower.displayDevice;
 
-        readonly property var icon: battery.isCharging === UPowerDeviceState.Charging ? "" : ( 
-                battery.percentage > 0.8 ? "" : 
-                battery.percentage > 0.6 ? "" : 
-                battery.percentage > 0.4 ? "" :
-                battery.percentage > 0.2 ? "" : ""
+        readonly property var icon: battery.isCharging === UPowerDeviceState.Charging ? "charger" : ( 
+                battery.percentage > 0.95 ? "battery_android_frame_full" : 
+                battery.percentage > 0.80 ? "battery_android_frame_6" : 
+                battery.percentage > 0.70 ? "battery_android_frame_5" : 
+                battery.percentage > 0.55 ? "battery_android_frame_4" : 
+                battery.percentage > 0.40 ? "battery_android_frame_3" : 
+                battery.percentage > 0.25 ? "battery_android_frame_2" : 
+                battery.percentage > 0.10 ? "battery_android_frame_1" : "battery_android_alert"
         );
 
         implicitWidth: root.implicitHeight

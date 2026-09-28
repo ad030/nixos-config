@@ -17,12 +17,12 @@ BarModuleRectangle {
 
         readonly property var icon: audio ?  
         (
-                audio.muted ? "" : 
+                audio.muted ? "volume_off" : 
                 (
-                        audio.volume > 0.5 ? "" : 
-                        audio.volume > 0 ? "" : ""
+                        audio.volume > 0.5 ? "volume_up" : 
+                        audio.volume > 0 ? "volume_down" : "volume_mute"
                 )
-        ) : ""
+        ) : "volume_off"
 
         PwObjectTracker {
                 objects: sink ? [ sink ] : []

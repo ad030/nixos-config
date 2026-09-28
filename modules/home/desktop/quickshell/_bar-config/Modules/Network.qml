@@ -13,9 +13,9 @@ BarModuleRectangle {
 
         implicitWidth: root.implicitHeight
 
-        readonly property string wifiIcon: "";
-        readonly property string wiredIcon: "";
-        readonly property string errorIcon: "";
+        readonly property string wifiIcon: "wifi";
+        readonly property string wiredIcon: "settings_ethernet";
+        readonly property string errorIcon: "android_wifi_4_bar_off";
 
         property real wifiStrength: NetworkingService?.connectedWifiStrength
         property int wiredSpeed: NetworkingService?.connectedWiredSpeed 

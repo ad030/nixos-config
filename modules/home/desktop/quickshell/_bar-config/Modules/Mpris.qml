@@ -34,7 +34,7 @@ BarModuleRectangle {
         // format: <artist> - <title>
         property string finalText: player && player.playbackState !== MprisPlaybackState.Stopped ? artist + " - " + trackTitle : "..."
 
-        property string icon: ""
+        property string icon: "music_note_2"
 
         WrapperMouseArea {
                 RowLayout {

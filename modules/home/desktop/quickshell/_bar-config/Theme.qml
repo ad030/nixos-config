@@ -8,9 +8,9 @@ Singleton {
 
         // fonts
         readonly property string fontFamily: "MesloLGM Nerd Font";
-        readonly property string iconFontFamily: "Font Awesome 6 Free";
+        // readonly property string fontFamily: "Noto Sans Mono";
+        readonly property string iconFontFamily: "Material Symbols Rounded";
         readonly property int fontSize: 16;
-
 
 
         readonly property color dark0_hard: "#1d2021";
