@@ -26,6 +26,12 @@ BarModuleRectangle {
                         }
                 },
                 {
+                        icon: "stop",
+                        action: () => {
+                                if (player?.canControl) { player.stop() }
+                        }
+                },
+                {
                         icon: "skip_next",
                         action: () => { 
                                 if (player?.canGoNext) { player.next() } 
@@ -35,12 +41,6 @@ BarModuleRectangle {
                         // add gap in menu
                         icon: " ",
                         action: { }
-                },
-                {
-                        icon: "stop",
-                        action: () => {
-                                if (player?.canControl) { player.stop() }
-                        }
                 },
                 {
                         icon: player?.loopState == MprisLoopState.Track ? "repeat_one_on" : 
