@@ -13,19 +13,23 @@ BarModuleRectangle {
 
         implicitWidth: root.implicitHeight
 
-        readonly property string wifiIcon: "wifi";
-        readonly property string wiredIcon: "settings_ethernet";
-        readonly property string errorIcon: "android_wifi_4_bar_off";
+        readonly property string wifiIcon: wifiStrength ? (
+                wifiStrength < 0.33 ? "wifi_1_bar" :
+                wifiStrength < 0.66 ? "wifi_2_bar" : "wifi")
+                : "wifi"
+        readonly property string wiredIcon: "settings_ethernet"
+        readonly property string errorIcon: "wifi_off"
 
         property real wifiStrength: NetworkingService?.connectedWifiStrength
         property int wiredSpeed: NetworkingService?.connectedWiredSpeed 
 
         WrapperMouseArea {
                 BarIconText {
-                        text: NetworkingService.connectedDevice?.type === DeviceType.Wired ? wiredIcon : (
-                                NetworkingService.connectedDevice?.type === DeviceType.Wifi ? wifiIcon : 
+                        text: NetworkingService.connectedDevice ? (
+                                NetworkingService.connectedDevice.type === DeviceType.Wired ? wiredIcon : 
+                                NetworkingService.connectedDevice.type === DeviceType.Wifi ? wifiIcon : 
                                 errorIcon
-                        );
+                        ) : errorIcon;
                 }
 
                 anchors.fill: root
