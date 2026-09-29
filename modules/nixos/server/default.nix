@@ -42,7 +42,7 @@
         kiwix-serve
 
         # download manager
-        aria2
+        # aria2
       ];
 
       environment.systemPackages = with pkgs; [

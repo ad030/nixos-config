@@ -23,6 +23,7 @@
       virtualisation.oci-containers.containers = {
         technitium = {
           image = "docker.io/technitium/dns-server:15.5.1";
+          hostname = "technitium";
           ports = [
             "53:53/tcp"
             "53:53/udp"

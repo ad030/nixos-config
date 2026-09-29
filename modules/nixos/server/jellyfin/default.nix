@@ -16,13 +16,9 @@
       renderGid = config.users.groups.render.gid;
       videoGid = config.users.groups.video.gid;
 
-      ports = {
-        tcp = [
-          8096 # web ui
-        ];
-        udp = [ ];
-      };
-      localAddr = "10.0.0.2";
+      jellyfinUid = 2002;
+
+      localAddr = "127.0.0.1";
       webPort = "8096";
     in
     {
@@ -40,106 +36,49 @@
         };
       };
 
-      networking.firewall = {
-        allowedTCPPorts = ports.tcp;
+      hardware.graphics.enable = true;
+
+      users.groups.jellyfin.gid = jellyfinUid;
+      users.users.jellyfin = {
+        isSystemUser = true;
+        uid = jellyfinUid;
+        group = "jellyfin";
       };
 
-      containers.jellyfin = {
-        autoStart = true;
-
-        privateNetwork = true;
-        hostAddress = "10.0.0.1";
-        localAddress = localAddr;
-
-        privateUsers = "pick";
-
-        forwardPorts =
-          map (p: {
-            hostPort = p;
-            protocol = "tcp";
-          }) ports.tcp
-          ++ map (p: {
-            hostPort = p;
-            protocol = "udp";
-          }) ports.udp;
-
-        # no id map option yet, workaround
-        # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
-        bindMounts = {
-          "/media/movies" = {
-            mountPoint = "/media/movies:idmap";
-            hostPath = "/srv/media/tank/Movies";
-            isReadOnly = false;
-          };
-          "/media/shows" = {
-            mountPoint = "/media/shows:idmap";
-            hostPath = "/srv/media/tank/Shows";
-            isReadOnly = false;
-          };
-          # "/media/music" = {
-          #   mountPoint = "/media/music:idmap";
-          #   hostPath = "/srv/media/tank/Music";
-          #   isReadOnly = true;
-          # };
-
-          # pass igpu in for hardware acceleration
-          "/dev/dri/renderD128" = {
-            mountPoint = "/dev/dri/renderD128";
-            hostPath = "/dev/dri/renderD128";
-            isReadOnly = false;
-          };
-          # "/dev/dri/card1" = {
-          #   mountPoint = "/dev/dri/card1";
-          #   hostPath = "/dev/dri/card1";
-          #   isReadOnly = false;
-          # };
+      systemd.tmpfiles.settings."jellyfin-config" = {
+        "/srv/config/jellyfin/config".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "755";
         };
-
-        allowedDevices = [
-          {
-            modifier = "rw";
-            node = "/dev/dri/renderD128";
-          }
-          # {
-          #   modifier = "rw";
-          #   node = "/dev/dri/card1";
-          # }
-        ];
-
-        config =
-          {
-            config,
-            pkgs,
-            lib,
-            ...
-          }:
-          {
-            users.groups.media.gid = mediaGid;
-            users.groups.render.gid = renderGid;
-            users.groups.video.gid = videoGid;
-
-            users.users.jellyfin.extraGroups = [
-              "render"
-              "video"
-            ];
-
-            services.jellyfin = {
-              enable = true;
-              group = "media";
-            };
-
-            hardware.graphics.enable = true;
-
-            networking.firewall = {
-              allowedTCPPorts = ports.tcp;
-            };
-
-            networking.useHostResolvConf = lib.mkForce false;
-            services.resolved.enable = true;
-
-            system.stateVersion = "26.05";
-          };
+        "/srv/config/jellyfin/cache".d = {
+          user = "jellyfin";
+          group = "jellyfin";
+          mode = "755";
+        };
       };
 
+      virtualisation.oci-containers.containers = {
+        jellyfin = {
+          image = "docker.io/jellyfin/jellyfin:12.1";
+          hostname = "jellyfin";
+          user = "${toString config.users.users.jellyfin.uid}:${toString config.users.groups.jellyfin.gid}";
+          ports = [
+            "127.0.0.1:8096:8096/tcp"
+          ];
+          volumes = [
+            "/srv/media/tank/Movies:/media/movies:ro"
+            "/srv/media/tank/Shows:/media/shows:ro"
+            "/srv/config/jellyfin/cache:/cache:rw"
+            "/srv/config/jellyfin/config:/config:rw"
+          ];
+          devices = [ "/dev/dri/renderD128:/dev/dri/renderD128" ];
+          extraOptions = [
+            "--group-add=${toString renderGid}"
+            "--group-add=${toString videoGid}"
+            "--group-add=${toString mediaGid}"
+          ];
+        };
+      };
     };
 }
