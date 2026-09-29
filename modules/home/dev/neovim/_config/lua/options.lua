@@ -78,10 +78,10 @@ vim.opt.wildmode = "longest:list"
 vim.opt.smartindent = true
 
 -- tabs are 8 spaces long
-vim.opt.tabstop = 8
-vim.opt.softtabstop = 8
--- indents are 8 spaces long
-vim.opt.shiftwidth = 8
+-- vim.opt.tabstop = 8
+-- vim.opt.softtabstop = 8
+-- -- indents are 8 spaces long
+-- vim.opt.shiftwidth = 8
 
 -- replace tabs with equivalent amount of spaces
 vim.opt.expandtab = true
