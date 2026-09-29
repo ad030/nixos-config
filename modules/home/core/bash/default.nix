@@ -29,7 +29,10 @@
           # related to nixos
           nrs = "nixos-rebuild switch";
           snrs = "sudo nixos-rebuild switch";
+
+          nrt = "nixos-rebuild test";
           snrt = "sudo nixos-rebuild test";
+
           nC = "cd ${nixos-config-dir}";
         };
 
