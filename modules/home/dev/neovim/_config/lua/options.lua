@@ -52,9 +52,9 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = {
-        tab = "» ",
-        trail = "·",
-        nbsp = "␣",
+	tab = "» ",
+	trail = "·",
+	nbsp = "␣",
 }
 
 -- Preview substitutions live, as you type!
@@ -75,8 +75,7 @@ vim.opt.ttyfast = true
 -- bash-like tab completion
 vim.opt.wildmode = "longest:list"
 
--- autoindent in c style
-vim.opt.cindent = true
+vim.opt.smartindent = true
 
 -- tabs are 8 spaces long
 vim.opt.tabstop = 8
