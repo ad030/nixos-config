@@ -7,17 +7,6 @@
       webPort = "5380";
     in
     {
-      networking.firewall = {
-        allowedTCPPorts = [
-          53
-          5380
-          53443
-        ];
-        allowedUDPPorts = [
-          53
-        ];
-      };
-
       services.nginx.virtualHosts = {
         "technitium.home.lan" = {
           locations."/" = {
@@ -31,17 +20,22 @@
         };
       };
 
-      services.technitium-dns-server = {
-        enable = true;
-
-        openFirewall = false;
+      virtualisation.oci-containers.containers = {
+        technitium = {
+          image = "docker.io/technitium/dns-server:15.5.1";
+          ports = [
+            "53:53/tcp"
+            "53:53/udp"
+            "127.0.0.1:5380:5380/tcp"
+            "127.0.0.1:53443:53443/tcp"
+          ];
+          volumes = [ "/srv/config/technitium:/etc/dns" ];
+        };
       };
 
-      # they messed up the hardening and technitium can't even write to its own log file
-      # https://discourse.nixos.org/t/technitium-dns-fails-with-access-denied-at-var-lib/64672/4
-      systemd.services.technitium-dns-server.serviceConfig = {
-        LogsDirectory = "technitium";
+      services.resolved = {
+        # needs to be set in order to access port 53
+        settings.Resolve.DNSStubListener = "no";
       };
     };
-
 }

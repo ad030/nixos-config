@@ -17,6 +17,7 @@
         reverse-proxy
         media-dirs
         idle-server
+        containers
 
         landing-page
 
