@@ -5,25 +5,32 @@
 }:
 {
   flake.modules.nixos.navidrome =
-    { pkgs, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      mediaGid = 3333;
-
-      ports = {
-        tcp = [
-          4533 # web ui
-        ];
-        udp = [ ];
+      username = "navidrome";
+      directories = {
+        data = "/srv/config/navidrome";
+        music = "/srv/media/tank/Music";
       };
 
-      localAddr = "10.0.0.9";
+      ids = {
+        user = {
+          ${username} = 2006;
+        };
+      };
+
       webPort = "4533";
     in
     {
       services.nginx.virtualHosts = {
         "navidrome.home.lan" = {
           locations."/" = {
-            proxyPass = "http://${localAddr}:${webPort}";
+            proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -34,71 +41,41 @@
         };
       };
 
-      networking.firewall = {
-        allowedTCPPorts = ports.tcp;
+      systemd.tmpfiles.settings."navidrome-config" = {
+        "${directories.data}".d = {
+          user = username;
+          group = username;
+          mode = "0700";
+        };
       };
 
-      containers.navidrome = {
-        autoStart = true;
+      users = {
+        users.${username} = {
+          uid = ids.user.${username};
+          isNormalUser = true;
+          group = username;
+        };
+        groups.${username}.gid = ids.user.${username};
+      };
 
-        privateNetwork = true;
-        hostAddress = "10.0.0.1";
-        localAddress = localAddr;
-
-        privateUsers = "pick";
-
-        forwardPorts =
-          map (p: {
-            hostPort = p;
-            protocol = "tcp";
-          }) ports.tcp
-          ++ map (p: {
-            hostPort = p;
-            protocol = "udp";
-          }) ports.udp;
-
-        # no id map option yet, workaround
-        # https://github.com/NixOS/nixpkgs/issues/329530#issuecomment-2513815925
-        bindMounts = {
-          "/media/music" = {
-            mountPoint = "/media/music:idmap";
-            hostPath = "/srv/media/tank/Music";
-            isReadOnly = true;
+      virtualisation.oci-containers.containers = {
+        navidrome = {
+          image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
+          hostname = "navidrome";
+          user = "${toString config.users.users.${username}.uid}:${
+            toString config.users.groups.${username}.gid
+          }";
+          ports = [
+            "127.0.0.1:4533:4533/tcp"
+          ];
+          volumes = [
+            "${directories.data}:/data"
+            "${directories.music}:/music:ro"
+          ];
+          environment = {
+            ND_BASEURL = "http://navidrome.home.lan";
           };
         };
-
-        config =
-          {
-            config,
-            pkgs,
-            lib,
-            ...
-          }:
-          {
-            users.groups.media.gid = mediaGid;
-
-            services.navidrome = {
-              enable = true;
-              group = "media";
-
-              settings = {
-                Port = 4533;
-
-                Address = "0.0.0.0";
-                MusicFolder = "/media/music";
-              };
-            };
-
-            networking.firewall = {
-              allowedTCPPorts = ports.tcp;
-            };
-
-            networking.useHostResolvConf = lib.mkForce false;
-            services.resolved.enable = true;
-
-            system.stateVersion = "26.05";
-          };
       };
-
     };
 }

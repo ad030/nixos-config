@@ -32,7 +32,7 @@
         jellyfin
         slskd
         qbittorrent
-        calibre-web
+        calibre-web-automated
         radarr
         navidrome
         sonarr

@@ -31,7 +31,7 @@ builtins.mapAttrs (_: f: "/zim/${f}.zim") (
     libretextsPhys = "libretexts.org_en_phys_2026-01";
   }
   ## WIKIPEDIA ##
-  // builtins.mapAttrs (_: f: "wikimedia/${f}") {
+  // builtins.mapAttrs (_: f: "wikipedia/${f}") {
     wikipediaCS = "wikipedia_en_computer_maxi_2026-06";
     wikipediaKnots = "wikipedia_en_knots_maxi_2026-07";
     wikipediaMath = "wikipedia_en_mathematics_maxi_2026-06";

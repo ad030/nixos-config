@@ -1,7 +1,7 @@
 {
   flake.modules.nixos.media-dirs = {
     # create directories where media is mounted at
-    systemd.tmpfiles.settings."homelab-dirs" = {
+    systemd.tmpfiles.settings."homelab-media-dirs" = {
       "/srv/downloads" = {
         d = {
           user = "root";

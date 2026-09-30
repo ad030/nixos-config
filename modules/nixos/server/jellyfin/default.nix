@@ -12,20 +12,33 @@
       ...
     }:
     let
-      mediaGid = config.users.groups.media.gid;
-      renderGid = config.users.groups.render.gid;
-      videoGid = config.users.groups.video.gid;
+      ids = {
+        group = {
+          media = config.users.groups.media.gid;
+          render = config.users.groups.render.gid;
+          video = config.users.groups.video.gid;
+        };
 
-      jellyfinUid = 2002;
+        user = {
+          ${username} = 2002;
+        };
+      };
 
-      localAddr = "127.0.0.1";
+      directories = {
+        config = "/srv/config/jellyfin";
+        cache = "/var/cache/jellyfin";
+        movies = "/srv/media/tank/Movies";
+        shows = "/srv/media/tank/Shows";
+      };
+
+      username = "jellyfin";
       webPort = "8096";
     in
     {
       services.nginx.virtualHosts = {
         "jellyfin.home.lan" = {
           locations."/" = {
-            proxyPass = "http://${localAddr}:${webPort}";
+            proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
             proxyWebsockets = true;
           };
@@ -38,45 +51,51 @@
 
       hardware.graphics.enable = true;
 
-      users.groups.jellyfin.gid = jellyfinUid;
-      users.users.jellyfin = {
-        isSystemUser = true;
-        uid = jellyfinUid;
-        group = "jellyfin";
+      users = {
+        users.${username} = {
+          uid = ids.user.${username};
+          isNormalUser = true;
+          group = username;
+        };
+        groups.${username}.gid = ids.user.${username};
       };
 
       systemd.tmpfiles.settings."jellyfin-config" = {
-        "/srv/config/jellyfin/config".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "755";
+        ${directories.config}.d = {
+          user = username;
+          group = username;
+          mode = "0750";
         };
-        "/srv/config/jellyfin/cache".d = {
-          user = "jellyfin";
-          group = "jellyfin";
-          mode = "755";
+        ${directories.cache}.d = {
+          user = username;
+          group = username;
+          mode = "0750";
         };
       };
 
       virtualisation.oci-containers.containers = {
         jellyfin = {
-          image = "docker.io/jellyfin/jellyfin:12.1";
+          image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
           hostname = "jellyfin";
-          user = "${toString config.users.users.jellyfin.uid}:${toString config.users.groups.jellyfin.gid}";
+          user = "${toString config.users.users.${username}.uid}:${
+            toString config.users.groups.${username}.gid
+          }";
           ports = [
             "127.0.0.1:8096:8096/tcp"
           ];
           volumes = [
-            "/srv/media/tank/Movies:/media/movies:ro"
-            "/srv/media/tank/Shows:/media/shows:ro"
-            "/srv/config/jellyfin/cache:/cache:rw"
-            "/srv/config/jellyfin/config:/config:rw"
+            "${directories.movies}:/media/movies:ro"
+            "${directories.shows}:/media/shows:ro"
+            "${directories.cache}:/cache:rw"
+            "${directories.config}:/config:rw"
           ];
           devices = [ "/dev/dri/renderD128:/dev/dri/renderD128" ];
           extraOptions = [
-            "--group-add=${toString renderGid}"
-            "--group-add=${toString videoGid}"
-            "--group-add=${toString mediaGid}"
+            "--group-add=${toString ids.group.render}"
+            "--group-add=${toString ids.group.video}"
+            "--group-add=${toString ids.group.media}"
+            "--cap-drop=ALL"
+            "--security-opt=no-new-privileges"
           ];
         };
       };
