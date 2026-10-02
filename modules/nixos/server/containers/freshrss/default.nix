@@ -3,25 +3,42 @@
   inputs,
   ...
 }:
+let
+  # directories = {
+  #   data = "/srv/config/freshrss/data";
+  #   extensions = "/srv/config/freshrss/extensions";
+  # };
+  serviceName = "freshrss";
+
+  uid = 2005;
+
+  webPort = "8085";
+in
 {
-  flake.modules.nixos.containers-freshrss =
-    { config, lib, ... }:
-    let
-      directories = {
-        data = "/srv/config/freshrss/data";
-        extensions = "/srv/config/freshrss/extensions";
-      };
-      username = "freshrss";
-
-      ids = {
-        user = {
-          ${username} = 2005;
-        };
-      };
-
-      webPort = "8085";
-    in
+  flake.modules.nixos."containers-${serviceName}" =
     {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      # needed for setting up rootless podman containers
+      users = {
+        users.${serviceName} = {
+          inherit uid;
+          isNormalUser = true;
+          linger = true;
+          group = serviceName;
+          extraGroups = [
+            "media"
+          ];
+        };
+        groups.${serviceName}.gid = uid;
+      };
+      nix.settings.allowed-users = [ serviceName ];
+      home-manager.users.${serviceName} = self.modules.homeManager."containers-${serviceName}";
+
       services.nginx.virtualHosts = {
         "freshrss.home.lan" = {
           locations."/" = {
@@ -35,118 +52,81 @@
         };
       };
 
-      users = {
-        users.${username} = {
-          uid = ids.user.${username};
-          isNormalUser = true;
-          group = username;
-        };
-        groups.${username}.gid = ids.user.${username};
-      };
-
-      systemd.tmpfiles.settings."freshrss-config" = {
-        ${directories.data}.d = {
-          user = username;
-          group = username;
-          mode = "0750";
-        };
-        ${directories.extensions}.d = {
-          user = username;
-          group = username;
-          mode = "0750";
-        };
-      };
-
       sops.secrets."freshrss/env/ADMIN_PASSWORD" = { };
       sops.secrets."freshrss/env/ADMIN_API_PASSWORD" = { };
 
-      sops.templates."freshrss.env".content = ''
-        FRESHRSS_USER=--user admin --password ${
-          config.sops.placeholder."freshrss/env/ADMIN_PASSWORD"
-        } --api-password ${config.sops.placeholder."freshrss/env/ADMIN_API_PASSWORD"} --language en
-      '';
-
-      virtualisation.oci-containers.containers = {
-        freshrss = {
-          image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
-          hostname = "freshrss";
-          # user = "${toString config.users.users.${username}.uid}:${
-          #   toString config.users.groups.${username}.gid
-          # }";
-          ports = [
-            "127.0.0.1:8085:80/tcp"
-          ];
-          volumes = [
-            "${directories.data}:/var/www/FreshRSS/data"
-            "${directories.extensions}:/var/www/FreshRSS/extensions"
-          ];
-          environmentFiles = [
-            "${config.sops.templates."freshrss.env".path}"
-          ];
-          environment = {
-            TZ = "America/New_York";
-            CRON_MIN = "1,31";
-            FRESHRSS_INSTALL = ''
-              --api-enabled
-              --base-url http://freshrss.home.lan
-              --default-user admin
-              --language en
-            '';
-            TRUSTED_PROXY = "10.88.0.0/16";
-          };
-        };
+      sops.templates."freshrss.env" = {
+        owner = serviceName;
+        content = ''
+          FRESHRSS_USER=--user admin --password ${
+            config.sops.placeholder."freshrss/env/ADMIN_PASSWORD"
+          } --api-password ${config.sops.placeholder."freshrss/env/ADMIN_API_PASSWORD"} --language en
+        '';
       };
 
-      # containers.freshrss = {
-      #   autoStart = true;
-      #
-      #   privateNetwork = true;
-      #   hostAddress = "10.0.0.1";
-      #   localAddress = localAddr;
-      #
-      #   privateUsers = "pick";
-      #
-      #   # pass in sops secrets into container using systemd loadcredentials
-      #   # https://github.com/Mic92/sops-nix/issues/514#issuecomment-2036359239
-      #   extraFlags = [
-      #     "--load-credential=freshrss-password:${config.sops.secrets."freshrss/password".path}"
-      #   ];
-      #
-      #   forwardPorts = [
-      #     {
-      #       hostPort = 8080;
-      #       containerPort = 80;
-      #       protocol = "tcp";
-      #     }
-      #   ];
-      #
-      #   config =
-      #     {
-      #       config,
-      #       pkgs,
-      #       lib,
-      #       ...
-      #     }:
-      #     {
-      #       services.freshrss = {
-      #         enable = true;
-      #
-      #         baseUrl = "http://freshrss.home.lan";
-      #
-      #         defaultUser = "dokja";
-      #         passwordFile = "/run/credentials/@system/freshrss-password";
-      #       };
-      #
-      #       networking.firewall = {
-      #         allowedTCPPorts = [ 80 ];
-      #       };
-      #
-      #       networking.useHostResolvConf = lib.mkForce false;
-      #       services.resolved.enable = true;
-      #
-      #       system.stateVersion = "26.05";
-      #     };
-      # };
+      networking.firewall.allowedTCPPorts = [ 8085 ];
 
+      # systemd.tmpfiles.settings."freshrss-config" = {
+      #   ${directories.data}.d = {
+      #     user = serviceName;
+      #     group = serviceName;
+      #     mode = "0750";
+      #   };
+      #   ${directories.extensions}.d = {
+      #     user = serviceName;
+      #     group = serviceName;
+      #     mode = "0750";
+      #   };
+      # };
+    };
+
+  flake.modules.homeManager."containers-${serviceName}" =
+    {
+      config,
+      lib,
+      osConfig,
+      pkgs,
+      ...
+    }:
+    {
+      home.username = serviceName;
+      home.homeDirectory = "/home/${serviceName}";
+      home.stateVersion = "26.05";
+
+      xdg.dataFile."${serviceName}/data/.empty".text = "";
+      xdg.dataFile."${serviceName}/extensions/.empty".text = "";
+
+      services.podman = {
+        enable = true;
+        containers = {
+          freshrss = {
+            image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
+            ports = [
+              # "127.0.0.1:8085:80/tcp"
+              "8085:80/tcp"
+            ];
+            volumes = [
+              "${config.xdg.dataHome}/${serviceName}/data:/var/www/FreshRSS/data"
+              "${config.xdg.dataHome}/${serviceName}/extensions:/var/www/FreshRSS/extensions"
+            ];
+            environmentFile = [
+              "${osConfig.sops.templates."freshrss.env".path}"
+            ];
+            environment = {
+              TZ = "America/New_York";
+              CRON_MIN = "1,31";
+              # nix complains about multiline string here
+              FRESHRSS_INSTALL = lib.concatStringsSep " " [
+                "--api-enabled"
+                "--base-url https://freshrss.home.lan"
+                "--default-user admin"
+                "--language en"
+              ];
+              TRUSTED_PROXY = "192.168.8.201";
+            };
+          };
+
+        };
+      };
     };
 }
