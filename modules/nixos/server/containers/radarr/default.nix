@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.radarr =
+  flake.modules.nixos.containers-radarr =
     {
       config,
       lib,

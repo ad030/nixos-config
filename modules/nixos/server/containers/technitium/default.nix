@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.technitium =
+  flake.modules.nixos.containers-technitium =
     { config, lib, ... }:
     let
       username = "technitium";

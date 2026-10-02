@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.calibre-web-automated =
+  flake.modules.nixos.containers-calibre-web-automated =
     {
       config,
       pkgs,

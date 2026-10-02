@@ -1,6 +1,6 @@
 # shared config across containers
 {
-  flake.modules.nixos.containers = {
+  flake.modules.nixos.containers-core = {
     virtualisation.oci-containers = {
       backend = "podman";
     };

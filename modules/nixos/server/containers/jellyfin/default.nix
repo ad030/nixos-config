@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.jellyfin =
+  flake.modules.nixos.containers-jellyfin =
     {
       config,
       pkgs,

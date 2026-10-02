@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.aria2 =
+  flake.modules.nixos.containers-aria2 =
     {
       config,
       pkgs,

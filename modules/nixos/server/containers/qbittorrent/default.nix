@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.qbittorrent =
+  flake.modules.nixos.containers-qbittorrent =
     {
       config,
       pkgs,

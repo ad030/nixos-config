@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.adguardhome =
+  flake.modules.nixos.containers-adguardhome =
     { config, lib, ... }:
     let
       ports = {

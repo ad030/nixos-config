@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.ntfy =
+  flake.modules.nixos.containers-ntfy =
     {
       config,
       pkgs,
@@ -26,6 +26,31 @@
       webPort = "8082";
     in
     {
+      virtualisation.oci-containers.containers = {
+        ntfy = {
+          image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
+          hostname = "ntfy";
+          user = "${toString config.users.users.${username}.uid}:${
+            toString config.users.groups.${username}.gid
+          }";
+          cmd = [
+            "serve"
+          ];
+          ports = [
+            "127.0.0.1:8082:8082/tcp"
+          ];
+          volumes = [
+            "${directories.cache}:/var/cache/ntfy"
+            "${directories.config}:/etc/ntfy"
+          ];
+          environment = {
+            NTFY_BASE_URL = "http://ntfy.home.lan";
+            NTFY_LISTEN_HTTP = ":8082";
+            NTFY_BEHIND_PROXY = "true";
+          };
+        };
+      };
+
       services.nginx.virtualHosts = {
         "ntfy.home.lan" = {
           locations."/" = {
@@ -60,31 +85,6 @@
           group = username;
         };
         groups.${username}.gid = ids.user.${username};
-      };
-
-      virtualisation.oci-containers.containers = {
-        ntfy = {
-          image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
-          hostname = "ntfy";
-          user = "${toString config.users.users.${username}.uid}:${
-            toString config.users.groups.${username}.gid
-          }";
-          cmd = [
-            "serve"
-          ];
-          ports = [
-            "127.0.0.1:8082:8082/tcp"
-          ];
-          volumes = [
-            "${directories.cache}:/var/cache/ntfy"
-            "${directories.config}:/etc/ntfy"
-          ];
-          environment = {
-            NTFY_BASE_URL = "http://ntfy.home.lan";
-            NTFY_LISTEN_HTTP = ":8082";
-            NTFY_BEHIND_PROXY = "true";
-          };
-        };
       };
 
       # containers.ntfy = {

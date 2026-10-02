@@ -1,11 +1,5 @@
 {
-  self,
-  inputs,
-  ...
-}:
-
-{
-  flake.modules.nixos.slskd =
+  flake.modules.nixos.containers-slskd =
     {
       config,
       pkgs,
@@ -60,7 +54,6 @@
           };
         };
       };
-
     in
     {
       virtualisation.oci-containers.containers = {
@@ -72,7 +65,7 @@
           }";
           volumes = [
             "${directories.config}:/app"
-            "${configurationYaml}:/config/slskd.yml:ro"
+            "${configurationYaml}:/app/slskd.yml:ro"
             "${directories.music}:/media/music:ro"
             "${directories.incompleteDownloads}:/downloads/incomplete"
             "${directories.completeDownloads}:/downloads/complete"
@@ -85,7 +78,7 @@
             "${config.sops.secrets."slskd/env".path}"
           ];
           environment = {
-            SLSKD_CONFIG = "/config/slskd.yml";
+            SLSKD_CONFIG = "/app/slskd.yml";
             SLSKD_DOWNLOADS_DIR = "/downloads/complete";
             SLSKD_INCOMPLETE_DIR = "/downloads/incomplete";
             SLSKD_SHARED_DIR = "/media/music";
@@ -138,9 +131,7 @@
       sops.secrets."slskd/env" = { };
 
       networking.firewall.allowedTCPPorts = [
-        5030
         50300
       ];
-
     };
 }

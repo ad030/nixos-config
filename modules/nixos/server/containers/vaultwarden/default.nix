@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.modules.nixos.vaultwarden =
+  flake.modules.nixos.containers-vaultwarden =
     { config, lib, ... }:
     let
       username = "vaultwarden";

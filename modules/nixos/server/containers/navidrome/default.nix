@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.navidrome =
+  flake.modules.nixos.containers-navidrome =
     {
       config,
       pkgs,

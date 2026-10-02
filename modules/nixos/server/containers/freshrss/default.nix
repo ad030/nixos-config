@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.freshrss =
+  flake.modules.nixos.containers-freshrss =
     { config, lib, ... }:
     let
       directories = {

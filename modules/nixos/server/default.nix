@@ -17,29 +17,29 @@
         reverse-proxy
         media-dirs
         idle-server
-        containers
+        containers-core
 
         landing-page
 
         ## DNS servers
         # adguardhome
-        technitium
+        containers-technitium
 
         # notifications
-        ntfy
+        containers-ntfy
 
-        freshrss
-        jellyfin
-        slskd
-        qbittorrent
-        calibre-web-automated
-        radarr
-        navidrome
-        sonarr
-        vaultwarden
+        containers-freshrss
+        containers-jellyfin
+        containers-slskd
+        containers-qbittorrent
+        containers-calibre-web-automated
+        containers-radarr
+        containers-navidrome
+        containers-sonarr
+        containers-vaultwarden
 
         # local wikipedia
-        kiwix-serve
+        containers-kiwix-serve
 
         # download manager
         # aria2

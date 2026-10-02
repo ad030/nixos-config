@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.sonarr =
+  flake.modules.nixos.containers-sonarr =
     {
       config,
       lib,

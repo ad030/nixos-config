@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.modules.nixos.kiwix-serve =
+  flake.modules.nixos.containers-kiwix-serve =
     { config, lib, ... }:
     let
       webPort = "8084";
