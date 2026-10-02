@@ -10,6 +10,9 @@
       useUserPackages = true;
       extraSpecialArgs = { inherit inputs; };
       backupFileExtension = "backup";
+      sharedModules = [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
     };
   };
 }
