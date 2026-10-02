@@ -149,7 +149,15 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      xdg.dataFile."${serviceName}/.empty".text = "";
+      # generate data and cache directories
+      xdg.dataFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
+      xdg.cacheFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
 
       services.podman = {
         enable = true;

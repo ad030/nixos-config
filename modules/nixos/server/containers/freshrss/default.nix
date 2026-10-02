@@ -93,8 +93,19 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      xdg.dataFile."${serviceName}/data/.empty".text = "";
-      xdg.dataFile."${serviceName}/extensions/.empty".text = "";
+      # generate data and cache directories
+      xdg.dataFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
+      xdg.cacheFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
+      xdg.dataFile."${serviceName}-extensions/.empty" = {
+        text = "";
+        force = true;
+      };
 
       services.podman = {
         enable = true;
@@ -106,8 +117,8 @@ in
               "8085:80/tcp"
             ];
             volumes = [
-              "${config.xdg.dataHome}/${serviceName}/data:/var/www/FreshRSS/data"
-              "${config.xdg.dataHome}/${serviceName}/extensions:/var/www/FreshRSS/extensions"
+              "${config.xdg.dataHome}/${serviceName}:/var/www/FreshRSS/data"
+              "${config.xdg.dataHome}/${serviceName}-extensions:/var/www/FreshRSS/extensions"
             ];
             environmentFile = [
               "${osConfig.sops.templates."freshrss.env".path}"

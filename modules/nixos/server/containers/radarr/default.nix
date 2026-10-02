@@ -3,85 +3,39 @@
   inputs,
   ...
 }:
+let
+  serviceName = "radarr";
+  uid = 2009;
+
+  directories = {
+    movies = "/srv/media/tank/Movies";
+  };
+
+  webPort = "7878";
+in
 {
-  flake.modules.nixos.containers-radarr =
+  flake.modules.nixos."containers-${serviceName}" =
     {
       config,
       lib,
       pkgs,
       ...
     }:
-    let
-      username = "radarr";
-
-      ids = {
-        group = {
-          media = 3333;
-        };
-        user = {
-          ${username} = 2009;
-        };
-      };
-
-      ports = {
-        tcp = [
-          7878 # web ui
-        ];
-        udp = [ ];
-      };
-
-      directories = {
-        config = "/srv/config/radarr";
-        movies = "/srv/media/tank/Movies";
-      };
-
-      webPort = "7878";
-    in
     {
-      virtualisation.oci-containers.containers = {
-        radarr = {
-          image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
-          hostname = "radarr";
-          environment = {
-            PUID = "${toString config.users.users.${username}.uid}";
-            PGID = "${toString config.users.groups.media.gid}";
-            TZ = "America/New_York";
-          };
-          volumes = [
-            "${directories.movies}:/movies"
-            "${directories.config}:/config"
-          ];
-          ports = [
-            "127.0.0.1:7878:7878/tcp"
-          ];
-          environmentFiles = [
-            "${config.sops.secrets."radarr/env".path}"
-          ];
-          extraOptions = [
-            "--group-add=${toString config.users.groups.media.gid}"
-          ];
-        };
-      };
-
-      systemd.tmpfiles.settings."radarr-config" = {
-        ${directories.config}.d = {
-          user = "radarr";
-          group = "radarr";
-          mode = "0700";
-        };
-      };
-
+      # needed for setting up rootless podman containers
       users = {
-        users.${username} = {
-          uid = ids.user.${username};
+        users.${serviceName} = {
+          inherit uid;
           isNormalUser = true;
-          group = username;
-          extraGroups = [
-            "media"
-          ];
+          linger = true;
+          group = "media";
         };
-        groups.${username}.gid = ids.user.${username};
+        groups.${serviceName}.gid = uid;
       };
+      nix.settings.allowed-users = [ serviceName ];
+      home-manager.users.${serviceName}.imports = [
+        self.modules.homeManager."containers-${serviceName}"
+      ];
 
       services.nginx.virtualHosts = {
         "radarr.home.lan" = {
@@ -97,7 +51,9 @@
         };
       };
 
-      sops.secrets."radarr/env" = { };
+      sops.secrets."radarr/env" = {
+        owner = serviceName;
+      };
 
       # containers.radarr = {
       #   autoStart = true;
@@ -177,5 +133,54 @@
       #     };
       # };
 
+    };
+
+  flake.modules.homeManager."containers-${serviceName}" =
+    {
+      config,
+      lib,
+      osConfig,
+      pkgs,
+      ...
+    }:
+    {
+      home.username = serviceName;
+      home.homeDirectory = "/home/${serviceName}";
+      home.stateVersion = "26.05";
+
+      # generate data and cache directories
+      xdg.dataFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
+      xdg.cacheFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
+
+      services.podman = {
+        enable = true;
+        containers = {
+          radarr = {
+            image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
+            environment = {
+              PUID = "0";
+              PGID = "0";
+              TZ = "America/New_York";
+            };
+            volumes = [
+              "${directories.movies}:/media/movies"
+              "${config.xdg.dataHome}/${serviceName}:/config"
+            ];
+            ports = [
+              "127.0.0.1:7878:7878/tcp"
+            ];
+            environmentFile = [
+              "${osConfig.sops.secrets."radarr/env".path}"
+            ];
+            extraPodmanArgs = [ "--group-add=keep-groups" ];
+          };
+        };
+      };
     };
 }
