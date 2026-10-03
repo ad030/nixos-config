@@ -64,20 +64,7 @@ in
         '';
       };
 
-      networking.firewall.allowedTCPPorts = [ 8085 ];
-
-      # systemd.tmpfiles.settings."freshrss-config" = {
-      #   ${directories.data}.d = {
-      #     user = serviceName;
-      #     group = serviceName;
-      #     mode = "0750";
-      #   };
-      #   ${directories.extensions}.d = {
-      #     user = serviceName;
-      #     group = serviceName;
-      #     mode = "0750";
-      #   };
-      # };
+      # networking.firewall.allowedTCPPorts = [ 8085 ];
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -113,8 +100,8 @@ in
           freshrss = {
             image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
             ports = [
-              # "127.0.0.1:8085:80/tcp"
-              "8085:80/tcp"
+              "127.0.0.1:8085:80/tcp"
+              # "8085:80/tcp"
             ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/var/www/FreshRSS/data"

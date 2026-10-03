@@ -134,6 +134,7 @@ in
         containers = {
           slskd = {
             image = "docker.io/slskd/slskd:0.26.0@sha256:ecd4026d4f8fb504e2cc55323efa2c1f5b56d20d3686b018249cc36b48ea17a6";
+            userNS = "keep-id";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/app"
               "${configurationYaml}:/app/slskd.yml:ro"
@@ -154,7 +155,7 @@ in
               SLSKD_INCOMPLETE_DIR = "/downloads/incomplete";
               SLSKD_SHARED_DIR = "/media/music";
             };
-            extraPodmanArgs = [ "--group-add=keep-groups" ];
+            # extraPodmanArgs = [ "--group-add=keep-groups" ];
           };
         };
       };

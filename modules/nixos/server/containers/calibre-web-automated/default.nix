@@ -141,6 +141,7 @@ in
     {
       config,
       lib,
+      osConfig,
       pkgs,
       ...
     }:
@@ -174,7 +175,7 @@ in
             ];
             environment = {
               PUID = uid;
-              PGID = uid;
+              PGID = osConfig.users.groups.media.gid;
               TZ = "America/New_York";
               CWA_PORT_OVERRIDE = "8083";
             };

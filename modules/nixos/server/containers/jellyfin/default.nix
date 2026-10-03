@@ -58,19 +58,6 @@ in
       };
 
       hardware.graphics.enable = true;
-
-      # systemd.tmpfiles.settings."jellyfin-config" = {
-      #   ${directories.config}.d = {
-      #     user = serviceName;
-      #     group = serviceName;
-      #     mode = "0750";
-      #   };
-      #   ${directories.cache}.d = {
-      #     user = serviceName;
-      #     group = serviceName;
-      #     mode = "0750";
-      #   };
-      # };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =

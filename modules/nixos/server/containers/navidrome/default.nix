@@ -50,14 +50,6 @@ in
           sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
-
-      # systemd.tmpfiles.settings."navidrome-config" = {
-      #   "${directories.data}".d = {
-      #     user = username;
-      #     group = username;
-      #     mode = "0700";
-      #   };
-      # };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
