@@ -95,6 +95,7 @@ in
               NTFY_LISTEN_HTTP = ":8082";
               NTFY_BEHIND_PROXY = "true";
             };
+            autoStart = true;
           };
         };
       };

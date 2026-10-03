@@ -90,6 +90,7 @@ in
             environment = {
               ND_BASEURL = "http://navidrome.home.lan";
             };
+            autoStart = true;
           };
         };
       };

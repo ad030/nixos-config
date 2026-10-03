@@ -122,6 +122,7 @@ in
               ];
               TRUSTED_PROXY = "192.168.8.201";
             };
+            autoStart = true;
           };
 
         };

@@ -118,6 +118,7 @@ in
               QBT_WEBUI_PORT = "8090";
               TZ = "America/New_York";
             };
+            autoStart = true;
           };
         };
       };

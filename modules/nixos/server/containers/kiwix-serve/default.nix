@@ -90,6 +90,7 @@ in
             environment = {
               PORT = "8084";
             };
+            autoStart = true;
           };
         };
       };

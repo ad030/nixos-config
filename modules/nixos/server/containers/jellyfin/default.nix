@@ -98,6 +98,7 @@ in
             ];
             devices = [ "/dev/dri/renderD128:/dev/dri/renderD128" ];
             extraPodmanArgs = [ "--group-add=keep-groups" ];
+            autoStart = true;
           };
         };
       };

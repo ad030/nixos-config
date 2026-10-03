@@ -100,6 +100,7 @@ in
               "${osConfig.sops.secrets."radarr/env".path}"
             ];
             extraPodmanArgs = [ "--group-add=keep-groups" ];
+            autoStart = true;
           };
         };
       };

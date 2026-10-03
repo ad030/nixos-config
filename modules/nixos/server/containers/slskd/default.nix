@@ -155,6 +155,7 @@ in
               SLSKD_SHARED_DIR = "/media/music";
             };
             extraPodmanArgs = [ "--group-add=keep-groups" ];
+            autoStart = true;
           };
         };
       };

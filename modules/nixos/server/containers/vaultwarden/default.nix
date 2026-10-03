@@ -83,6 +83,7 @@ in
             environmentFile = [
               "${osConfig.sops.secrets."vaultwarden/env".path}"
             ];
+            autoStart = true;
           };
         };
       };

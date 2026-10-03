@@ -122,6 +122,7 @@ in
             environment = {
               DNS_SERVER_ADMIN_PASSWORD_FILE = "/run/secrets/technitium-admin-password";
             };
+            autoStart = true;
           };
         };
       };

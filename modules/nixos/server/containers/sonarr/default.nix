@@ -101,6 +101,7 @@ in
               "${osConfig.sops.secrets."sonarr/env".path}"
             ];
             extraPodmanArgs = [ "--group-add=keep-groups" ];
+            autoStart = true;
           };
         };
       };
