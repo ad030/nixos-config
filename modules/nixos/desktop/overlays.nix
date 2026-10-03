@@ -1,6 +1,6 @@
 # overlays for specific packages
 {
-  flake.modules.homeManager.desktop-pkgs-overlays =
+  flake.modules.nixos.overlays-desktop =
     {
       config,
       lib,
@@ -9,9 +9,9 @@
     }:
     {
       nixpkgs.overlays = [
+        # zotero fails to build due to deprecated version of firefox esr
+        # https://github.com/NixOS/nixpkgs/issues/568692
         (final: prev: {
-          # zotero fails to build due to deprecated version of firefox esr
-          # https://github.com/NixOS/nixpkgs/issues/568692
           zotero = prev.zotero.overrideAttrs (old: {
             version = "9.0.6";
             src = final.fetchFromGithub {

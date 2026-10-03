@@ -2,7 +2,6 @@
 {
   flake.modules.homeManager.desktop = { pkgs, ... }: {
     imports = with config.flake.modules.homeManager; [
-      desktop-pkgs-overlays
       audio
 
       foot

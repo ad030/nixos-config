@@ -12,6 +12,7 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
+        overlays-desktop
         display-manager
         file-manager
         audio
