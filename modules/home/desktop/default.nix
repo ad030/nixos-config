@@ -61,11 +61,6 @@
       biber
       python314Packages.pylatexenc
 
-      gimp
-      kdePackages.kdenlive
-      krita
-      # aseprite
-
       puddletag
       zotero
       audacity

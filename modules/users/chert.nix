@@ -49,6 +49,7 @@ in
         core
         desktop
         gaming
+        art
       ];
 
       home = {

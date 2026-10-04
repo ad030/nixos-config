@@ -55,6 +55,7 @@ in
         desktop
         dev
         gaming
+        art
 
         nemo
       ];
