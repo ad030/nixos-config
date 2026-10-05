@@ -6,6 +6,7 @@
   flake.modules.nixos.gaming = { pkgs, ... }: {
     imports = with config.flake.modules.nixos; [
       steam
+      aagl
     ];
 
     environment.systemPackages = with pkgs; [

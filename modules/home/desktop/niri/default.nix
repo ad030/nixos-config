@@ -28,6 +28,7 @@
       };
 
       programs.niri = {
+
         settings = {
           spawn-at-startup =
             let
@@ -72,7 +73,6 @@
             enable = true;
             path = lib.getExe pkgs.xwayland-satellite;
           };
-
         };
       };
     };

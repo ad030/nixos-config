@@ -41,6 +41,7 @@ in
     ++ [
       {
         home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
+        home-manager.sharedModules = [ ./home.nix ];
       }
     ];
   };

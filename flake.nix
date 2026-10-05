@@ -43,6 +43,13 @@
     # add this until it is fixed
     # https://github.com/NixOS/nixpkgs/issues/568692
     nixpkgs-zotero.url = "github:NixOS/nixpkgs/7a0f122f5090cf4c2ade2a13a0e229d4e19ba71f";
+
+    # anime games launcher
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      # url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
