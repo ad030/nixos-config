@@ -1,6 +1,6 @@
 # host specific home manager config
 {
-  home-manager.sharedModules.imports = [
+  home-manager.sharedModules = [
     ./niri.nix
   ];
 }
