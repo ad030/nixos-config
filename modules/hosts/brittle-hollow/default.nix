@@ -14,7 +14,7 @@ in
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
     modules = [
       { nixpkgs.hostPlatform = hostPlatform; }
-      ./_nixos/configuration.nix
+      ./_nixos
       { networking.hostName = hostname; }
       { nixpkgs.config.allowUnfree = true; }
     ]
