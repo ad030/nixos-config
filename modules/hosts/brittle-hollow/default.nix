@@ -29,12 +29,7 @@ in
       window-manager
     ])
     # users in nixos configuration
-    ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)
+    ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers);
     # user configs in home manager
-    ++ [
-      {
-        home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
-      }
-    ];
   };
 }

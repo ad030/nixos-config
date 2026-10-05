@@ -22,23 +22,25 @@ in
     ++ (with config.flake.modules.nixos; [
       core
       server
-    ])
-    # generate stub users on this system for each regular user
-    ++ (
-      let
-        sharedUsers = self.lib.sharedIds.users;
-      in
-      [
-        {
-          users.users = lib.mapAttrs (name: user: {
-            uid = user.uid;
-            isSystemUser = true;
-            group = "nogroup";
-            extraGroups = user.groups;
-            hashedPassword = "!";
-          }) sharedUsers;
-        }
-      ]
-    );
+
+      containers-technitium # dns server
+
+      # notifications
+      containers-ntfy # notifications
+
+      containers-freshrss
+      containers-jellyfin
+      containers-slskd
+      containers-qbittorrent
+      containers-calibre-web-automated
+      containers-radarr
+      containers-navidrome
+      containers-sonarr
+      containers-vaultwarden
+
+      containers-kiwix-serve # local wikipedia
+
+      # containers-aria2 # download manager
+    ]);
   };
 }

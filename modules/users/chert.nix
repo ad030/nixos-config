@@ -7,7 +7,7 @@ let
   username = "chert";
 in
 {
-  flake.nixosUsers.${username} =
+  flake.modules.nixos."users-${username}" =
     {
       config,
       pkgs,
@@ -35,9 +35,13 @@ in
           );
           hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
         };
+
+      home-manager.users.${username}.imports = [
+        self.modules.homeManager."users-${username}"
+      ];
     };
 
-  flake.hmUsers.${username} =
+  flake.modules.homeManager."users-${username}" =
     {
       config,
       pkgs,

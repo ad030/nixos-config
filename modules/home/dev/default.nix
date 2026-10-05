@@ -8,6 +8,7 @@
 {
   flake.modules.homeManager.dev = { pkgs, ... }: {
     imports = with config.flake.modules.homeManager; [
+      core
       neovim
       tmux
     ];

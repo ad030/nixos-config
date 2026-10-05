@@ -18,9 +18,10 @@ in
   flake.nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
     modules = [
       { nixpkgs.hostPlatform = hostPlatform; }
-      ./_nixos
       { networking.hostName = hostname; }
       { nixpkgs.config.allowUnfree = true; }
+      ./_nixos
+      ./_home
     ]
     # nixos modules
     ++ (with config.flake.modules.nixos; [
@@ -36,13 +37,6 @@ in
       window-manager
     ])
     # users in nixos configuration
-    ++ (map (user: config.flake.nixosUsers.${user}) systemUsers)
-    # user configs in home manager
-    ++ [
-      {
-        home-manager.users = nixpkgs.lib.genAttrs systemUsers (user: config.flake.hmUsers.${user});
-        home-manager.sharedModules = [ ./_home ];
-      }
-    ];
+    ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers);
   };
 }

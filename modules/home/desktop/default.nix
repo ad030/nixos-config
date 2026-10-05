@@ -2,7 +2,10 @@
 {
   flake.modules.homeManager.desktop = { pkgs, ... }: {
     imports = with config.flake.modules.homeManager; [
+      core
+
       audio
+      default-apps
 
       foot
       niri

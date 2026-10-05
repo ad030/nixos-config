@@ -19,7 +19,7 @@
         idle-server
         landing-page
 
-        containers
+        containers-core
       ];
 
       environment.systemPackages = with pkgs; [

@@ -11,6 +11,10 @@
         uid = 1001;
         groups = [ "media" ];
       };
+      esker = {
+        uid = 1002;
+        groups = [ "media" ];
+      };
     };
 
     groups = {

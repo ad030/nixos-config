@@ -7,7 +7,7 @@ let
   username = "CHANGE_ME";
 in
 {
-  flake.nixosUsers.${username} =
+  flake.modules.nixos."users-${username}" =
     {
       config,
       pkgs,
@@ -30,9 +30,13 @@ in
           extraGroups = lib.uniqueStrings [ ] ++ groups;
           hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
         };
+
+      home-manager.users.${username}.imports = [
+        self.modules.homeManager."users-${username}"
+      ];
     };
 
-  flake.hmUsers.${username} =
+  flake.modules.homeManager."users-${username}" =
     {
       config,
       pkgs,

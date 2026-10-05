@@ -6,12 +6,12 @@
     };
 
     # for storing container data
-    systemd.tmpfiles.settings."container-data" = {
-      "/srv/config".d = {
-        user = "root";
-        group = "root";
-        mode = "0755";
-      };
-    };
+    # systemd.tmpfiles.settings."container-data" = {
+    #   "/srv/config".d = {
+    #     user = "root";
+    #     group = "root";
+    #     mode = "0755";
+    #   };
+    # };
   };
 }
