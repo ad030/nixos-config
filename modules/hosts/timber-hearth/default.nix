@@ -6,7 +6,7 @@
 }:
 let
   hostname = "timber-hearth";
-  nixpkgs = inputs.nixpkgs-unstable;
+  nixpkgs = inputs.nixpkgs;
   systemUsers = [
     "solanum"
     "chert"
