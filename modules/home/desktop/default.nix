@@ -57,6 +57,7 @@
       feishin # music player (navidrome)
 
       obsidian # notetaking
+      zettlr # notetaking
       freetube # youtube frontend
 
       ## latex stuff
@@ -67,6 +68,8 @@
       puddletag
       zotero
       audacity
+
+      # zoom-us
 
       # calibre # ebook reader
     ];
