@@ -69,6 +69,8 @@
       zotero
       audacity
 
+      sleek-todo # todo list
+
       # zoom-us
 
       # calibre # ebook reader
