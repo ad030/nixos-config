@@ -43,6 +43,26 @@ in
       # containers-aria2 # download manager
 
       containers-forgejo
-    ]);
+    ])
+    # generate stub users on this system for each regular user
+    # >> NECESSARY FOR NFS TO WORK! <<
+    # there needs to be a user on both server and client with matching uids
+    ++ (
+      let
+        sharedUsers = self.lib.sharedIds.users;
+        nfsGroups = [ "media" ];
+      in
+      [
+        {
+          users.users = lib.mapAttrs (_: user: {
+            uid = user.uid;
+            isSystemUser = true;
+            group = "nogroup";
+            extraGroups = lib.intersectLists user.groups nfsGroups;
+            hashedPassword = "!";
+          }) sharedUsers;
+        }
+      ]
+    );
   };
 }

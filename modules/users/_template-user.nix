@@ -27,7 +27,7 @@ in
           inherit uid;
           isNormalUser = true;
           shell = pkgs.bash;
-          extraGroups = [ ];
+          extraGroups = lib.uniqueStrings ([ ] ++ groups);
           hashedPasswordFile = config.sops.secrets."passwords/${username}".path;
         };
 
