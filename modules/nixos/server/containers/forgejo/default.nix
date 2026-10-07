@@ -4,13 +4,9 @@
   ...
 }:
 let
-  serviceName = "calibre-web-automated";
-  directories = {
-    library = "/srv/media/tank/Books/calibre-library";
-    ingest = "/srv/media/tank/Books/ingest";
-  };
-  webPort = "8083";
-  uid = 2003;
+  serviceName = "forgejo";
+  webPort = "8094";
+  uid = 2019;
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -28,9 +24,6 @@ in
           isNormalUser = true;
           linger = true;
           group = serviceName;
-          extraGroups = [
-            "media"
-          ];
         };
         groups.${serviceName}.gid = uid;
       };
@@ -40,7 +33,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "calibre.home.lan" = {
+        "forgejo.home.lan" = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
@@ -52,13 +45,10 @@ in
         };
       };
 
-      systemd.tmpfiles.settings."calibre-web-automated-config" = {
-        ${directories.ingest}.d = {
-          user = serviceName;
-          group = "media";
-          mode = "0777";
-        };
-      };
+      networking.firewall.allowedTCPPorts = [
+        2222
+      ];
+
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -74,7 +64,7 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate data, cache, directories
       xdg.dataFile."${serviceName}/.empty" = {
         text = "";
         force = true;
@@ -87,21 +77,21 @@ in
       services.podman = {
         enable = true;
         containers = {
-          calibre-web-automated = {
-            image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
+          forgejo = {
+            image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
+            user = "1000:1000";
+            userNS = "keep-id:uid=1000,gid=1000";
             volumes = [
-              "${config.xdg.dataHome}/${serviceName}:/config"
-              "${directories.library}:/calibre-library"
-              "${directories.ingest}:/cwa-book-ingest"
+              "${config.xdg.dataHome}/${serviceName}:/var/lib/gitea"
+              "/etc/localtime:/etc/localtime:ro"
             ];
             ports = [
-              "127.0.0.1:8083:8083/tcp"
+              "127.0.0.1:${webPort}:3000/tcp"
+              "2222:2222/tcp"
             ];
             environment = {
-              PUID = uid;
-              PGID = osConfig.users.groups.media.gid;
-              TZ = "America/New_York";
-              CWA_PORT_OVERRIDE = "8083";
+              USER_UID = 1000;
+              USER_GID = 1000;
             };
             autoStart = true;
           };

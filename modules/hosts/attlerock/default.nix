@@ -23,9 +23,9 @@ in
       core
       server
 
+      # specific containers
       containers-technitium # dns server
 
-      # notifications
       containers-ntfy # notifications
 
       containers-freshrss
@@ -41,6 +41,8 @@ in
       containers-kiwix-serve # local wikipedia
 
       # containers-aria2 # download manager
+
+      containers-forgejo
     ]);
   };
 }
