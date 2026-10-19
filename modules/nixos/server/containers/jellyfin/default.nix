@@ -92,7 +92,7 @@ in
           jellyfin = {
             image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
             ports = [
-              "127.0.0.1:8096:8096/tcp"
+              "8096:8096/tcp"
             ];
             volumes = [
               "${directories.movies}:/media/movies:ro"
