@@ -58,6 +58,10 @@ in
       };
 
       hardware.graphics.enable = true;
+
+      networking.firewall = {
+        allowedTCPPorts = [ 8096 ];
+      };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
