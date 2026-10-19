@@ -3,6 +3,7 @@
     xdg.mimeApps.defaultApplications = {
       # "application/zip" = [ "org.kde.ark.desktop" ];
       "text/html" = [ "firefox.desktop" ];
+      "application/pdf" = [ "org.kde.okular.desktop" ];
       "x-scheme-handler/bitwarden" = [ "bitwarden.desktop" ];
       "x-scheme-handler/sgnl" = [ "signal.desktop" ];
       "x-scheme-handler/signalcaptcha" = [ "signal.desktop" ];
