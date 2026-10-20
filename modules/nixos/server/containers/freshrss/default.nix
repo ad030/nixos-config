@@ -4,15 +4,12 @@
   ...
 }:
 let
-  # directories = {
-  #   data = "/srv/config/freshrss/data";
-  #   extensions = "/srv/config/freshrss/extensions";
-  # };
   serviceName = "freshrss";
 
   uid = 2005;
-
   webPort = "8085";
+
+  image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -98,7 +95,7 @@ in
         enable = true;
         containers = {
           freshrss = {
-            image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
+            inherit image;
             ports = [
               "127.0.0.1:8085:80/tcp"
               # "8085:80/tcp"

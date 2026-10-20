@@ -8,6 +8,8 @@ let
   uid = 2004;
 
   webPort = "8082";
+
+  image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -78,7 +80,7 @@ in
         enable = true;
         containers = {
           ntfy = {
-            image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
+            inherit image;
             user = "${toString osConfig.users.users.${serviceName}.uid}:${
               toString osConfig.users.groups.${serviceName}.gid
             }";

@@ -11,6 +11,8 @@ let
   };
   webPort = "8083";
   uid = 2003;
+
+  image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -88,7 +90,7 @@ in
         enable = true;
         containers = {
           calibre-web-automated = {
-            image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
+            inherit image;
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"
               "${directories.library}:/calibre-library"

@@ -13,6 +13,8 @@ let
   };
 
   webPort = "8989";
+
+  image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -84,7 +86,7 @@ in
         enable = true;
         containers = {
           sonarr = {
-            image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
+            inherit image;
             environment = {
               PUID = "0";
               PGID = "0";

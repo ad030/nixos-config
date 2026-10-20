@@ -3,6 +3,8 @@ let
   serviceName = "vaultwarden";
   uid = 2008;
   webPort = "8222";
+
+  image = "docker.io/vaultwarden/server:1.37.3@sha256:1587c45feaa479f1f5e8af3b00eded36bff77bcf1880cf8dbf0541706dd470e0";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -69,7 +71,7 @@ in
         enable = true;
         containers = {
           vaultwarden = {
-            image = "docker.io/vaultwarden/server:1.37.3@sha256:1587c45feaa479f1f5e8af3b00eded36bff77bcf1880cf8dbf0541706dd470e0";
+            inherit image;
             ports = [
               "127.0.0.1:8222:80/tcp"
             ];

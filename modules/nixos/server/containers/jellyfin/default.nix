@@ -13,6 +13,8 @@ let
   };
 
   webPort = "8096";
+
+  image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -90,7 +92,7 @@ in
         enable = true;
         containers = {
           jellyfin = {
-            image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
+            inherit image;
             ports = [
               "8096:8096/tcp"
             ];

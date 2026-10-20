@@ -7,6 +7,8 @@ let
   serviceName = "technitium";
   uid = 2030;
   webPort = "5380";
+
+  image = "docker.io/technitium/dns-server:15.5.1@sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -106,7 +108,7 @@ in
         enable = true;
         containers = {
           technitium = {
-            image = "docker.io/technitium/dns-server:15.5.1@sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
+            inherit image;
             ports = [
               "5300:53/tcp"
               "5300:53/udp"

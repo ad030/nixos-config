@@ -12,6 +12,8 @@ let
   };
 
   webPort = "7878";
+
+  image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -83,7 +85,7 @@ in
         enable = true;
         containers = {
           radarr = {
-            image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
+            inherit image;
             environment = {
               PUID = "0";
               PGID = "0";

@@ -12,6 +12,7 @@ let
   uid = 2006;
 
   webPort = "4533";
+  image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -79,7 +80,7 @@ in
         enable = true;
         containers = {
           navidrome = {
-            image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
+            inherit image;
             ports = [
               "127.0.0.1:4533:4533/tcp"
             ];

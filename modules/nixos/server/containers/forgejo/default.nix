@@ -7,6 +7,8 @@ let
   serviceName = "forgejo";
   webPort = "8094";
   uid = 2019;
+
+  image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -78,7 +80,7 @@ in
         enable = true;
         containers = {
           forgejo = {
-            image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
+            inherit image;
             user = "1000:1000";
             userNS = "keep-id:uid=1000,gid=1000";
             volumes = [
