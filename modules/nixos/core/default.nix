@@ -14,6 +14,7 @@
     {
       imports = with config.flake.modules.nixos; [
         bootloader
+        certificates
         network
         package-caches
         nix-settings
@@ -27,7 +28,6 @@
         power-management
         printing
         tailscale
-        ssl-root-certs
         home-manager
       ];
 
