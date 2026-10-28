@@ -12,7 +12,7 @@
       neovim
       tmux
 
-      tools-database
+      tools-databases
       tools-documentation
     ];
 
