@@ -16,6 +16,7 @@
     ];
 
     programs.plasma = {
+      enable = true;
       workspace = {
         lookAndFeel = "org.kde.oxygen";
       };
