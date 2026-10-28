@@ -15,10 +15,10 @@
       oxygen-sounds
     ];
 
-    # programs.plasma = {
-    #   workspace = {
-    #     lookAndFeel = "org.kde.oxygen
-    #   };
-    # };
+    programs.plasma = {
+      workspace = {
+        lookAndFeel = "org.kde.oxygen";
+      };
+    };
   };
 }
