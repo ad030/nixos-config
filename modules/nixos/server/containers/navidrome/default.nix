@@ -51,6 +51,12 @@ in
           sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
+
+      networking.firewall = {
+        allowedTCPPorts = [
+          (lib.toIntBase10 webPort)
+        ];
+      };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -82,7 +88,7 @@ in
           navidrome = {
             inherit image;
             ports = [
-              "127.0.0.1:4533:4533/tcp"
+              "4533:4533/tcp"
             ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/data"

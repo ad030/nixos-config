@@ -13,6 +13,8 @@
       rofi
       # fuzzel
 
+      latex
+
       keepassxc
       vesktop
       signal-desktop
@@ -58,11 +60,6 @@
       obsidian # notetaking
       zettlr # notetaking
       freetube # youtube frontend
-
-      ## latex stuff
-      (texliveBasic.withPackages (ps: [ ps.latexmk ]))
-      biber
-      python314Packages.pylatexenc
 
       puddletag
       zotero
