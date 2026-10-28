@@ -39,9 +39,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # declarative kde plasma configuration
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager/trunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # TEMPORARY: zotero fails to build due to deprecated version of firefox ESR
     # add this until it is fixed
     # https://github.com/NixOS/nixpkgs/issues/568692
+    # https://github.com/NixOS/nixpkgs/pull/572466
     nixpkgs-zotero.url = "github:NixOS/nixpkgs/7a0f122f5090cf4c2ade2a13a0e229d4e19ba71f";
 
     # anime games launcher

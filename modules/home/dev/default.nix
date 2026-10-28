@@ -11,6 +11,9 @@
       core
       neovim
       tmux
+
+      tools-database
+      tools-documentation
     ];
 
     home.packages = with pkgs; [

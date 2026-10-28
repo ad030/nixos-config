@@ -14,7 +14,6 @@
       ];
 
       environment.systemPackages = with pkgs; [
-        sqlite
         man-pages
       ];
     };

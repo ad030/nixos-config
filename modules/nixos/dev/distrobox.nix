@@ -1,3 +1,4 @@
+# if i need specific distro environment
 {
   flake.modules.nixos.distrobox = { pkgs, ... }: {
     virtualisation.podman = {
