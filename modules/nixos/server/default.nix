@@ -10,7 +10,7 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
-        domain-certs
+        homelab-domain-certs
 
         networking-server
         nfs-server

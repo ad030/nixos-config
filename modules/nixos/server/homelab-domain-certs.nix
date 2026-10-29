@@ -3,7 +3,7 @@
   ...
 }:
 {
-  flake.modules.nixos.domain-certs = {
+  flake.modules.nixos.homelab-domain-certs = {
     environment.etc = {
       "nginx/ssl/homelab-domain.pem" = {
         source = "/root/home.lan+1.pem";
