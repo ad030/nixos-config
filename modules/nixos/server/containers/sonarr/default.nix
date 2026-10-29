@@ -85,7 +85,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          sonarr = {
+          ${serviceName} = {
             inherit image;
             environment = {
               PUID = "0";

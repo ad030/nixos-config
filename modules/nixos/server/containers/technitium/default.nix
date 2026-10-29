@@ -107,7 +107,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          technitium = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "5300:53/tcp"

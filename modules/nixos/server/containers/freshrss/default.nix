@@ -94,7 +94,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          freshrss = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "127.0.0.1:8085:80/tcp"

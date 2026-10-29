@@ -70,7 +70,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          vaultwarden = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "127.0.0.1:8222:80/tcp"

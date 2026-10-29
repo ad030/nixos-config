@@ -79,7 +79,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          forgejo = {
+          ${serviceName} = {
             inherit image;
             user = "1000:1000";
             userNS = "keep-id:uid=1000,gid=1000";

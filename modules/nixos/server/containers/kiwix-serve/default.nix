@@ -72,7 +72,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          kiwix-serve = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "127.0.0.1:8084:8084/tcp"

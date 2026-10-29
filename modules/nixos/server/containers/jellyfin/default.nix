@@ -91,7 +91,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          jellyfin = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "8096:8096/tcp"

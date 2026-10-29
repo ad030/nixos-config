@@ -98,7 +98,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          qbittorrent = {
+          ${serviceName} = {
             inherit image;
             userNS = "keep-id";
             volumes = [

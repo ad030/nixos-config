@@ -85,7 +85,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          navidrome = {
+          ${serviceName} = {
             inherit image;
             ports = [
               "4533:4533/tcp"

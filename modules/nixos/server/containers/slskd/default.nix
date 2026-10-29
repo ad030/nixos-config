@@ -134,7 +134,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          slskd = {
+          ${serviceName} = {
             inherit image;
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/app"

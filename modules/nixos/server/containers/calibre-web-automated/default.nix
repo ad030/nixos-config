@@ -89,7 +89,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          calibre-web-automated = {
+          ${serviceName} = {
             inherit image;
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"

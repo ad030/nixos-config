@@ -35,9 +35,6 @@ in
         self.modules.homeManager."containers-${serviceName}"
       ];
 
-      virtualisation.oci-containers.containers = {
-      };
-
       services.nginx.virtualHosts = {
         "ntfy.home.lan" = {
           locations."/" = {
@@ -79,7 +76,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          ntfy = {
+          ${serviceName} = {
             inherit image;
             user = "${toString osConfig.users.users.${serviceName}.uid}:${
               toString osConfig.users.groups.${serviceName}.gid

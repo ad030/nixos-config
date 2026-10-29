@@ -84,7 +84,7 @@ in
       services.podman = {
         enable = true;
         containers = {
-          radarr = {
+          ${serviceName} = {
             inherit image;
             environment = {
               PUID = "0";
