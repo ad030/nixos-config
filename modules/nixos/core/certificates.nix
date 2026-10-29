@@ -11,12 +11,11 @@
       (self + "/certs/rootCA.pem")
     ];
 
-    # do not use these CAs
     security.pki.caCertificateBlacklist = [
       # compromised root ca
       # https://emudhra.we-have-a-problem.com/
       "Comodo AAA Services root"
-      "emSign ECC Root CA - G3"
+      # "emSign ECC Root CA - G3"
     ];
   };
 }
