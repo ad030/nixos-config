@@ -1,4 +1,8 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  ...
+}@top:
 let
   serviceName = "vaultwarden";
   uid = 2008;
@@ -12,7 +16,7 @@ in
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

@@ -1,8 +1,9 @@
 {
   self,
   inputs,
+  config,
   ...
-}:
+}@top:
 let
   serviceName = "calibre-web-automated";
   uid = 2003;
@@ -26,7 +27,7 @@ in
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

@@ -2,7 +2,7 @@
   self,
   inputs,
   ...
-}:
+}@top:
 let
   serviceName = "jellyfin";
   uid = 2002;
@@ -26,7 +26,7 @@ in
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

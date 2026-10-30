@@ -2,7 +2,7 @@
   self,
   inputs,
   ...
-}:
+}@top:
 let
   serviceName = "sonarr";
   uid = 2010;
@@ -25,7 +25,7 @@ in
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

@@ -2,7 +2,7 @@
   self,
   inputs,
   ...
-}:
+}@top:
 let
   serviceName = "slskd";
   uid = 2001;
@@ -27,7 +27,7 @@ in
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

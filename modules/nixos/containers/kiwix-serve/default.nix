@@ -2,7 +2,7 @@
   self,
   inputs,
   ...
-}:
+}@top:
 let
   serviceName = "kiwix-serve";
   uid = 2015;
@@ -20,7 +20,7 @@ in
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

@@ -1,8 +1,9 @@
 {
   self,
   inputs,
+  config,
   ...
-}:
+}@top:
 let
   serviceName = "forgejo";
   uid = 2019;
@@ -21,7 +22,7 @@ in
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with top.config.flake.modules.nixos; [
         containers
       ];
 

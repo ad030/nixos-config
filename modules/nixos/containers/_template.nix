@@ -2,7 +2,7 @@
   self,
   inputs,
   ...
-}:
+}@top:
 let
   serviceName = "";
   uid = -1;
@@ -21,6 +21,10 @@ in
       ...
     }:
     {
+      imports = with top.config.flake.modules.nixos; [
+        containers
+      ];
+
       # needed for setting up rootless podman containers
       users = {
         users.${serviceName} = {
