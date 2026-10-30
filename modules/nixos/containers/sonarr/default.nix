@@ -76,12 +76,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -97,8 +93,9 @@ in
               TZ = "America/New_York";
             };
             volumes = [
-              "${directories.shows}:/media/shows"
               "${config.xdg.dataHome}/${serviceName}:/config"
+
+              "${directories.shows}:/media/shows"
             ];
             ports = [
               "127.0.0.1:8989:8989/tcp"

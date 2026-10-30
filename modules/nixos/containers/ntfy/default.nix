@@ -68,12 +68,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -91,8 +87,8 @@ in
               "127.0.0.1:8082:8082/tcp"
             ];
             volumes = [
-              "${config.xdg.cacheHome}/${serviceName}:/var/cache/ntfy"
               "${config.xdg.dataHome}/${serviceName}:/etc/ntfy"
+              "ntfy-cache:/var/cache/ntfy"
             ];
             environment = {
               NTFY_BASE_URL = "http://ntfy.home.lan";

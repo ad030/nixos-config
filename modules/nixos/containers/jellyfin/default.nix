@@ -83,12 +83,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -102,10 +98,11 @@ in
               "8096:8096/tcp"
             ];
             volumes = [
+              "${config.xdg.dataHome}/${serviceName}:/config:rw"
+              "jellyfin-cache:/cache:rw"
+
               "${directories.movies}:/media/movies:ro"
               "${directories.shows}:/media/shows:ro"
-              "${config.xdg.cacheHome}/${serviceName}:/cache:rw"
-              "${config.xdg.dataHome}/${serviceName}:/config:rw"
             ];
             devices = [ "/dev/dri/renderD128:/dev/dri/renderD128" ];
             extraPodmanArgs = [ "--group-add=keep-groups" ];

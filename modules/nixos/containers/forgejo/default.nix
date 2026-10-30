@@ -73,12 +73,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data, cache, directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -89,7 +85,7 @@ in
           ${serviceName} = {
             inherit image;
             user = "1000:1000";
-            userNS = "keep-id:uid=1000,gid=1000";
+            userNS = "keep-id";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/var/lib/gitea"
               "/etc/localtime:/etc/localtime:ro"

@@ -96,20 +96,13 @@ in
         text = "";
         force = true;
       };
-      xdg.cacheFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.configFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
 
       services.podman = {
         enable = true;
         containers = {
           ${serviceName} = {
             inherit image;
+            user = "0:0";
             userNS = "keep-id";
             ports = [
               "127.0.0.1:${webPort}:80"
@@ -117,13 +110,13 @@ in
             ];
             volumes = [
               "${directories.downloads}:/data"
-              "${config.xdg.dataHome}/${serviceName}:/app/conf"
-              "${config.xdg.cacheHome}/${serviceName}:/app/.cache"
+              "ariang-cache:/app/.cache"
             ];
             environment = {
-              PUID = "${toString osConfig.users.users.${serviceName}.uid}";
-              PGID = "${toString osConfig.users.groups.${serviceName}.gid}";
-              DOMAIN = "https://ariang.home.lan";
+              PUID = toString osConfig.users.users.${serviceName}.uid;
+              PGID = toString osConfig.users.groups.${serviceName}.gid;
+              DOMAIN = "http://ariang.home.lan";
+              ARIA2_EXTERNAL_PORT = "443";
             };
             environmentFile = [
               # contains RPC_SECRET, ARIA2_USER, ARIA2_PASSWORD

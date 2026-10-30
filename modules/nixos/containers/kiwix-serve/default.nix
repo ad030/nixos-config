@@ -65,12 +65,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };

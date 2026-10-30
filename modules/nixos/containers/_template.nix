@@ -70,16 +70,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.configFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -90,7 +82,9 @@ in
           ${serviceName} = {
             inherit image;
             ports = [ ];
-            volumes = [ ];
+            volumes = [
+              "${config.xdg.dataHome}/${serviceName}:" # service configuration
+            ];
             environment = { };
             environmentFile = [ ];
             autoStart = true;

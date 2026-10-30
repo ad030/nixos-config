@@ -84,12 +84,8 @@ in
       home.homeDirectory = "/home/${serviceName}";
       home.stateVersion = "26.05";
 
-      # generate data and cache directories
+      # generate xdg directories
       xdg.dataFile."${serviceName}/.empty" = {
-        text = "";
-        force = true;
-      };
-      xdg.cacheFile."${serviceName}/.empty" = {
         text = "";
         force = true;
       };
@@ -108,8 +104,6 @@ in
               "127.0.0.1:8083:8083/tcp"
             ];
             environment = {
-              PUID = uid;
-              PGID = osConfig.users.groups.media.gid;
               TZ = "America/New_York";
               CWA_PORT_OVERRIDE = "8083";
             };
