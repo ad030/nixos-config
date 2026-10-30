@@ -44,9 +44,17 @@
       };
 
       services.nginx.virtualHosts = {
-        "landing.home.lan" = {
+        "home.lan" = {
           default = true;
 
+          locations."/".return = "301 https://www.home.lan$request_uri";
+
+          forceSSL = true;
+          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
+          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+        };
+
+        "www.home.lan" = {
           locations = {
             "/" = {
               index = "index.html";
@@ -65,11 +73,6 @@
             {
               addr = "0.0.0.0";
               port = 443;
-              ssl = true;
-            }
-            {
-              addr = "0.0.0.0";
-              port = 8080;
               ssl = true;
             }
           ];
