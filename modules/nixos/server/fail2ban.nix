@@ -17,7 +17,6 @@
       ];
 
       jails = {
-        # scanners probing for wp-login.php, phpmyadmin, .env, etc. (404 spam)
         nginx-botsearch.settings = {
           enabled = true;
           filter = "nginx-botsearch";
@@ -27,7 +26,6 @@
           findtime = "10m";
         };
 
-        # malformed/garbage requests (400s)
         nginx-bad-request.settings = {
           enabled = true;
           filter = "nginx-bad-request";
@@ -37,7 +35,7 @@
           findtime = "10m";
         };
 
-        # failed tinyauth logins, matched from nginx's access log on the auth vhost
+        # failed tinyauth logins
         tinyauth = {
           settings = {
             enabled = true;
