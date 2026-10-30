@@ -6,7 +6,7 @@
       settings = {
         PermitRootLogin = "prohibit-password";
         PasswordAuthentication = false;
-        LogLevel = "verbose";
+        LogLevel = "VERBOSE";
       };
     };
 
