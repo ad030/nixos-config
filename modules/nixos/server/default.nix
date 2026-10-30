@@ -19,6 +19,7 @@
         media-dirs
         idle-server
         landing-page
+        fail2ban
       ];
 
       environment.systemPackages = with pkgs; [
