@@ -12,6 +12,8 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
+        core
+
         overlays-desktop
         display-manager
         file-manager

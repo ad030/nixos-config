@@ -10,16 +10,15 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
-        homelab-domain-certs
+        core
 
+        homelab-domain-certs
         networking-server
         nfs-server
         reverse-proxy
         media-dirs
         idle-server
         landing-page
-
-        containers-core
       ];
 
       environment.systemPackages = with pkgs; [
