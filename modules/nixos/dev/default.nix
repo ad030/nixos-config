@@ -16,6 +16,10 @@
 
       environment.systemPackages = with pkgs; [
         man-pages
+
+        # nix programming; language server, formatter
+        nil
+        nixfmt
       ];
     };
 }

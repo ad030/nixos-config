@@ -60,10 +60,6 @@
         # notifications
         libnotify
         mako
-
-        # nix programming; language server, formatter
-        nil
-        nixfmt
       ];
 
     };
