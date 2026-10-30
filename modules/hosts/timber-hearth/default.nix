@@ -27,7 +27,6 @@ in
     ++ (with config.flake.modules.nixos; [
       core
       nvidia
-      home-manager
       desktop
       gaming
       flatpak

@@ -21,7 +21,6 @@ in
     # nixos modules
     ++ (with config.flake.modules.nixos; [
       core
-      home-manager
       laptop
       desktop
       dev
