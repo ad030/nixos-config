@@ -9,7 +9,7 @@ let
 
   image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
 
-  url = "navidrome.home.lan";
+  domain = "navidrome.home.lan";
   webPort = "4533";
 
   directories = {
@@ -45,7 +45,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

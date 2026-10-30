@@ -9,7 +9,7 @@ let
 
   image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
 
-  url = "sonarr.home.lan";
+  domain = "sonarr.home.lan";
   webPort = "8989";
 
   directories = {
@@ -45,7 +45,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

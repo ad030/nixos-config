@@ -9,7 +9,7 @@ let
 
   image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
 
-  url = "freshrss.home.lan";
+  domain = "freshrss.home.lan";
   webPort = "8085";
 in
 {
@@ -42,7 +42,7 @@ in
       home-manager.users.${serviceName} = self.modules.homeManager."containers-${serviceName}";
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

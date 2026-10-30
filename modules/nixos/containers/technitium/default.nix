@@ -9,7 +9,7 @@ let
 
   image = "docker.io/technitium/dns-server:15.5.1@sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
 
-  url = "technitium.home.lan";
+  domain = "technitium.home.lan";
   webPort = "5380";
 in
 {
@@ -36,7 +36,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

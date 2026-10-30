@@ -9,7 +9,7 @@ let
 
   image = "docker.io/slskd/slskd:0.26.1@sha256:588af49abc3088d639c8f1174d3bfad6e92c093a275a593140e3ac9311ebf6c4";
 
-  url = "slskd.home.lan";
+  domain = "slskd.home.lan";
   webPort = "5030";
 
   directories = {
@@ -63,7 +63,7 @@ in
       };
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

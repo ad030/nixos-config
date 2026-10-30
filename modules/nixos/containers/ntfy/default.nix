@@ -9,7 +9,7 @@ let
 
   image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
 
-  url = "ntfy.home.lan";
+  domain = "ntfy.home.lan";
   webPort = "8082";
 in
 {
@@ -41,7 +41,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

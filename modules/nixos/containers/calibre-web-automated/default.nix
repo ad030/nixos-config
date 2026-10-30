@@ -10,7 +10,7 @@ let
 
   image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 
-  url = "calibre.home.lan";
+  domain = "calibre.home.lan";
   webPort = "8083";
 
   directories = {
@@ -50,7 +50,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

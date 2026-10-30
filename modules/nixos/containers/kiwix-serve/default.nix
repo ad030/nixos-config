@@ -9,7 +9,7 @@ let
 
   image = "ghcr.io/kiwix/kiwix-serve:3.8.2@sha256:e478554a9920412eeb5ce1d73f24e4b28445ebed233187cdd03c623c32be46a5";
 
-  url = "kiwix.home.lan";
+  domain = "kiwix.home.lan";
   webPort = "8084";
 
   directories = {
@@ -40,7 +40,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

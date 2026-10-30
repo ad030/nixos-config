@@ -9,7 +9,7 @@ let
 
   image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
 
-  url = "jellyfin.home.lan";
+  domain = "jellyfin.home.lan";
   webPort = "8096";
 
   directories = {
@@ -51,7 +51,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

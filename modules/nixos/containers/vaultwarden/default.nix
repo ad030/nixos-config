@@ -9,7 +9,7 @@ let
 
   image = "docker.io/vaultwarden/server:1.37.3@sha256:1587c45feaa479f1f5e8af3b00eded36bff77bcf1880cf8dbf0541706dd470e0";
 
-  url = "vaultwarden.home.lan";
+  domain = "vaultwarden.home.lan";
   webPort = "8222";
 in
 {
@@ -36,7 +36,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             proxyWebsockets = true;

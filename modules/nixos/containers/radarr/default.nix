@@ -9,7 +9,7 @@ let
 
   image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
 
-  url = "radarr.home.lan";
+  domain = "radarr.home.lan";
   webPort = "7878";
 
   directories = {
@@ -45,7 +45,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

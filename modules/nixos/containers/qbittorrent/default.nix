@@ -9,7 +9,7 @@ let
 
   image = "docker.io/qbittorrentofficial/qbittorrent-nox:5.2.4-1@sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
 
-  url = "qbittorrent.home.lan";
+  domain = "qbittorrent.home.lan";
   webPort = "8090";
 
   directories = {
@@ -62,7 +62,7 @@ in
       };
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

@@ -9,7 +9,7 @@ let
 
   image = "";
 
-  url = "";
+  domain = "";
   webPort = "";
 in
 {
@@ -41,7 +41,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${url} = {
+        ${domain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
