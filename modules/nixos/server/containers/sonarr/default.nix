@@ -5,16 +5,16 @@
 }:
 let
   serviceName = "sonarr";
-
   uid = 2010;
+
+  image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
+
+  url = "sonarr.home.lan";
+  webPort = "8989";
 
   directories = {
     shows = "/srv/media/tank/Shows";
   };
-
-  webPort = "8989";
-
-  image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -41,7 +41,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "sonarr.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

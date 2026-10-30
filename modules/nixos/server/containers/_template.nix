@@ -7,9 +7,10 @@ let
   serviceName = "";
   uid = -1;
 
-  webPort = "";
-
   image = "";
+
+  url = "";
+  webPort = "";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -36,7 +37,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "ntfy.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
@@ -48,6 +49,8 @@ in
           sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
+
+      systemd.tmpfiles.settings."${serviceName}-config" = { };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -72,6 +75,10 @@ in
         text = "";
         force = true;
       };
+      xdg.configFile."${serviceName}/.empty" = {
+        text = "";
+        force = true;
+      };
 
       services.podman = {
         enable = true;
@@ -79,10 +86,9 @@ in
           ${serviceName} = {
             inherit image;
             ports = [ ];
-            volumes = [
-            ];
-            environment = {
-            };
+            volumes = [ ];
+            environment = { };
+            environmentFile = [ ];
             autoStart = true;
           };
         };

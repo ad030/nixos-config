@@ -14,14 +14,12 @@
     let
       mediaGid = 3333;
 
-      downloadsDir = "/srv/media/tank/Downloads";
-
       localAddr = "10.0.0.18";
       webPort = "6800";
     in
     {
       systemd.tmpfiles.settings."media-downloads" = {
-        "${downloadsDir}/aria2".d = {
+        ${directories.downloads}.d = {
           user = "root";
           group = "media";
           mode = "2775";
@@ -58,8 +56,6 @@
           };
       };
 
-      sops.secrets."aria2/rpc-token" = { };
-
       containers.aria2 = {
         autoStart = true;
 
@@ -74,7 +70,7 @@
         bindMounts = {
           "/downloads/complete" = {
             mountPoint = "/downloads/complete:idmap";
-            hostPath = "${downloadsDir}/aria2";
+            hostPath = "${directories.downloads}";
             isReadOnly = false;
           };
         };

@@ -7,13 +7,14 @@ let
   serviceName = "radarr";
   uid = 2009;
 
+  image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
+
+  url = "radarr.home.lan";
+  webPort = "7878";
+
   directories = {
     movies = "/srv/media/tank/Movies";
   };
-
-  webPort = "7878";
-
-  image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -40,7 +41,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "radarr.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

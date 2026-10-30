@@ -5,14 +5,16 @@
 }:
 let
   serviceName = "navidrome";
+  uid = 2006;
+
+  image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
+
+  url = "navidrome.home.lan";
+  webPort = "4533";
+
   directories = {
     music = "/srv/media/tank/Music";
   };
-
-  uid = 2006;
-
-  webPort = "4533";
-  image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -39,7 +41,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "navidrome.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

@@ -7,14 +7,15 @@ let
   serviceName = "jellyfin";
   uid = 2002;
 
+  image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
+
+  url = "jellyfin.home.lan";
+  webPort = "8096";
+
   directories = {
     movies = "/srv/media/tank/Movies";
     shows = "/srv/media/tank/Shows";
   };
-
-  webPort = "8096";
-
-  image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -46,7 +47,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "jellyfin.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

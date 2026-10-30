@@ -5,11 +5,12 @@
 }:
 let
   serviceName = "freshrss";
-
   uid = 2005;
-  webPort = "8085";
 
   image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
+
+  url = "freshrss.home.lan";
+  webPort = "8085";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -37,7 +38,7 @@ in
       home-manager.users.${serviceName} = self.modules.homeManager."containers-${serviceName}";
 
       services.nginx.virtualHosts = {
-        "freshrss.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

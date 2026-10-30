@@ -5,14 +5,17 @@
 }:
 let
   serviceName = "calibre-web-automated";
+  uid = 2003;
+
+  image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
+
+  url = "calibre.home.lan";
+  webPort = "8083";
+
   directories = {
     library = "/srv/media/tank/Books/calibre-library";
     ingest = "/srv/media/tank/Books/ingest";
   };
-  webPort = "8083";
-  uid = 2003;
-
-  image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -42,7 +45,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "calibre.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

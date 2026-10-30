@@ -5,17 +5,17 @@
 }:
 let
   serviceName = "qbittorrent";
-
   uid = 2007;
+
+  image = "docker.io/qbittorrentofficial/qbittorrent-nox:5.2.4-1@sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
+
+  url = "qbittorrent.home.lan";
+  webPort = "8090";
 
   directories = {
     incompleteDownloads = "/srv/downloads/qbittorrent";
     completeDownloads = "/srv/media/tank/Downloads/qbittorrent";
   };
-
-  webPort = "8090";
-
-  image = "docker.io/qbittorrentofficial/qbittorrent-nox:5.2.4-1@sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -58,7 +58,7 @@ in
       };
 
       services.nginx.virtualHosts = {
-        "qbittorrent.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;

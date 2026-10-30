@@ -5,10 +5,12 @@
 }:
 let
   serviceName = "forgejo";
-  webPort = "8094";
   uid = 2019;
 
   image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
+
+  url = "forgejo.home.lan";
+  webPort = "8094";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -35,7 +37,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        "forgejo.home.lan" = {
+        ${url} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
