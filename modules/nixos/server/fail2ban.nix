@@ -3,10 +3,11 @@
     services.fail2ban = {
       enable = true;
 
-      bantime = "15m";
+      bantime = "1h";
       bantime-increment = {
         enable = true;
         maxtime = "168h";
+        rndtime = "8m";
       };
 
       # don't ban myself
