@@ -85,7 +85,7 @@ in
           ${serviceName} = {
             inherit image;
             user = "1000:1000";
-            userNS = "keep-id";
+            userNS = "keep-id:uid=1000,gid=1000";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/var/lib/gitea"
               "/etc/localtime:/etc/localtime:ro"
