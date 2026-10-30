@@ -97,6 +97,7 @@ in
             inherit image;
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"
+
               "${directories.library}:/calibre-library"
               "${directories.ingest}:/cwa-book-ingest"
             ];
@@ -104,6 +105,8 @@ in
               "127.0.0.1:8083:8083/tcp"
             ];
             environment = {
+              PUID = "0";
+              PGID = "0";
               TZ = "America/New_York";
               CWA_PORT_OVERRIDE = "8083";
             };
