@@ -10,7 +10,7 @@ let
 
   image = "docker.io/wahyd4/aria2-ui:6.4.0@sha256:d0896842c21e0a1fad9e9e4b8af6af258151fe79d9a82f7cff91f56285691d1a";
 
-  url = "ariang.home.lan";
+  url = "aria2.home.lan";
   webPort = "8098";
 
   directories = {
@@ -115,7 +115,7 @@ in
             environment = {
               PUID = toString osConfig.users.users.${serviceName}.uid;
               PGID = toString osConfig.users.groups.${serviceName}.gid;
-              DOMAIN = "http://ariang.home.lan";
+              DOMAIN = "http://aria2.home.lan";
               ARIA2_EXTERNAL_PORT = "443";
             };
             environmentFile = [
