@@ -9,7 +9,8 @@ let
 
   image = "ghcr.io/tinyauthapp/tinyauth:v5.2.0@sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5";
 
-  domain = "tinyauth.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "tinyauth.${domain}";
   webPort = "3000";
 in
 {
@@ -41,7 +42,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
+        ${subdomain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
@@ -49,8 +50,9 @@ in
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
+          # sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
+          # sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
 
@@ -90,7 +92,7 @@ in
             volumes = [
             ];
             environment = {
-              TINYAUTH_APPURL = "https://${domain}";
+              TINYAUTH_APPURL = "https://${subdomain}";
               TINYAUTH_AUTH_SECURECOOKIE = "true";
             };
             environmentFile = [

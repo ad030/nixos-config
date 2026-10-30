@@ -10,7 +10,8 @@ let
 
   image = "docker.io/wahyd4/aria2-ui:6.4.0@sha256:d0896842c21e0a1fad9e9e4b8af6af258151fe79d9a82f7cff91f56285691d1a";
 
-  domain = "aria2.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "aria2.${domain}";
   webPort = "8098";
 
   directories = {
@@ -46,7 +47,7 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
+        ${subdomain} = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:${webPort}";
             recommendedProxySettings = true;
@@ -60,8 +61,9 @@ in
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
+          # sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
+          # sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
 
@@ -115,7 +117,7 @@ in
             environment = {
               PUID = toString osConfig.users.users.${serviceName}.uid;
               PGID = toString osConfig.users.groups.${serviceName}.gid;
-              DOMAIN = "http://${domain}";
+              DOMAIN = "http://${subdomain}";
               ARIA2_EXTERNAL_PORT = "443";
             };
             environmentFile = [
