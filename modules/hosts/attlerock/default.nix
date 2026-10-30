@@ -23,8 +23,10 @@ in
       core
       server
 
-      # specific containers
+      # specific containers to enable
       containers-technitium # dns server
+
+      containers-tinyauth # auth server
 
       containers-ntfy # notifications
 
