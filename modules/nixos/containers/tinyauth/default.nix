@@ -53,6 +53,11 @@ in
           sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
+
+      sops.secrets."tinyauth/env" = {
+        owner = serviceName;
+      };
+
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -85,7 +90,12 @@ in
             volumes = [
             ];
             environment = {
+              TINYAUTH_APPURL = "https://${domain}";
+              TINYAUTH_AUTH_SECURECOOKIE = "true";
             };
+            environmentFile = [
+              "${osConfig.sops.secrets."tinyauth/env".path}"
+            ];
             autoStart = true;
           };
         };
