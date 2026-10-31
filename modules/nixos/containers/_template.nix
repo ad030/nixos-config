@@ -7,11 +7,9 @@ let
   serviceName = "";
   uid = -1;
 
-  registry = "";
-  repo = "";
-  tag = "";
-  digest = "";
-  image = "${registry}/${repo}:${tag}@${digest}";
+  image = ""; # e.g. docker.io/slskd/slskd
+  tag = ""; # e.g. 0.26.1
+  digest = ""; # sha256 hash
 
   domain = ""; # base domain
   subdomain = ".${domain}";
@@ -90,7 +88,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [ ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:" # service configuration

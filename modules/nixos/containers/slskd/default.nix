@@ -7,7 +7,9 @@ let
   serviceName = "slskd";
   uid = 2001;
 
-  image = "docker.io/slskd/slskd:0.26.1@sha256:588af49abc3088d639c8f1174d3bfad6e92c093a275a593140e3ac9311ebf6c4";
+  image = "docker.io/slskd/slskd";
+  tag = "0.26.1";
+  digest = "sha256:588af49abc3088d639c8f1174d3bfad6e92c093a275a593140e3ac9311ebf6c4";
 
   domain = "4384381.xyz";
   subdomain = "slskd.${domain}";
@@ -143,7 +145,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/app"
               "${configurationYaml}:/app/slskd.yml:ro"

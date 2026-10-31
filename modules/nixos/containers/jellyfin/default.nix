@@ -7,7 +7,9 @@ let
   serviceName = "jellyfin";
   uid = 2002;
 
-  image = "docker.io/jellyfin/jellyfin:12.1@sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
+  image = "docker.io/jellyfin/jellyfin";
+  tag = "12.1";
+  digest = "sha256:78d3ea1207d1322471fcac39a614f004f2ccf7e878f95ab2977d752f07e4dd7e";
 
   domain = "4384381.xyz";
   subdomain = "jellyfin.${domain}";
@@ -100,7 +102,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [
               "8096:8096/tcp"
             ];

@@ -8,7 +8,9 @@ let
   serviceName = "ariang";
   uid = 2020;
 
-  image = "docker.io/wahyd4/aria2-ui:6.4.0@sha256:d0896842c21e0a1fad9e9e4b8af6af258151fe79d9a82f7cff91f56285691d1a";
+  image = "docker.io/wahyd4/aria2-ui";
+  tag = "6.4.0";
+  digest = "sha256:d0896842c21e0a1fad9e9e4b8af6af258151fe79d9a82f7cff91f56285691d1a";
 
   domain = "4384381.xyz";
   subdomain = "aria2.${domain}";
@@ -108,7 +110,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             user = "0:0";
             userNS = "keep-id";
             ports = [

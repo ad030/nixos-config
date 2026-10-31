@@ -7,7 +7,9 @@ let
   serviceName = "qbittorrent";
   uid = 2007;
 
-  image = "docker.io/qbittorrentofficial/qbittorrent-nox:5.2.4-1@sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
+  image = "docker.io/qbittorrentofficial/qbittorrent-nox";
+  tag = "5.2.4-1";
+  digest = "sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
 
   domain = "4384381.xyz";
   subdomain = "qbittorrent.${domain}";
@@ -105,7 +107,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             userNS = "keep-id";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"

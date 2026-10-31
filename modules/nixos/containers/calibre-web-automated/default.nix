@@ -8,7 +8,9 @@ let
   serviceName = "calibre-web-automated";
   uid = 2003;
 
-  image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
+  image = "docker.io/crocodilestick/calibre-web-automated";
+  tag = "v4.0.8";
+  digest = "sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 
   domain = "4384381.xyz";
   subdomain = "calibre.${domain}";
@@ -101,7 +103,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"
 

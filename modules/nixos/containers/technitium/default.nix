@@ -7,7 +7,9 @@ let
   serviceName = "technitium";
   uid = 2030;
 
-  image = "docker.io/technitium/dns-server:15.5.1@sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
+  image = "docker.io/technitium/dns-server";
+  tag = "15.5.1";
+  digest = "sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
 
   domain = "4384381.xyz";
   subdomain = "technitium.${domain}";
@@ -117,7 +119,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [
               "5300:53/tcp"
               "5300:53/udp"

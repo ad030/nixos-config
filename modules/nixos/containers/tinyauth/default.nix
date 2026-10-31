@@ -7,7 +7,9 @@ let
   serviceName = "tinyauth";
   uid = 2050;
 
-  image = "ghcr.io/tinyauthapp/tinyauth:v5.2.0@sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5";
+  image = "ghcr.io/tinyauthapp/tinyauth";
+  tag = "v5.2.0";
+  digest = "sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5";
 
   domain = "4384381.xyz";
   subdomain = "tinyauth.${domain}";
@@ -89,7 +91,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [
               "127.0.0.1:${webPort}:3000"
             ];

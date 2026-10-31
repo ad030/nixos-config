@@ -7,7 +7,9 @@ let
   serviceName = "radarr";
   uid = 2009;
 
-  image = "lscr.io/linuxserver/radarr:6.4.4@sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
+  image = "lscr.io/linuxserver/radarr";
+  tag = "6.4.4";
+  digest = "sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
 
   domain = "4384381.xyz";
   subdomain = "radarr.${domain}";
@@ -93,7 +95,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             environment = {
               PUID = "0";
               PGID = "0";

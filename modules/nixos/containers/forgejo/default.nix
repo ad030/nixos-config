@@ -8,7 +8,9 @@ let
   serviceName = "forgejo";
   uid = 2019;
 
-  image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
+  image = "codeberg.org/forgejo/forgejo";
+  tag = "16.0.5-rootless";
+  digest = "sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
 
   domain = "4384381.xyz";
   subdomain = "forgejo.${domain}";
@@ -90,7 +92,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             user = "1000:1000";
             userNS = "keep-id:uid=1000,gid=1000";
             volumes = [

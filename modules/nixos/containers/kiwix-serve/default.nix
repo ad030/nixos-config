@@ -7,7 +7,9 @@ let
   serviceName = "kiwix-serve";
   uid = 2015;
 
-  image = "ghcr.io/kiwix/kiwix-serve:3.8.2@sha256:e478554a9920412eeb5ce1d73f24e4b28445ebed233187cdd03c623c32be46a5";
+  image = "ghcr.io/kiwix/kiwix-serve";
+  tag = "3.8.2";
+  digest = "sha256:e478554a9920412eeb5ce1d73f24e4b28445ebed233187cdd03c623c32be46a5";
 
   domain = "4384381.xyz";
   subdomain = "kiwix.${domain}";
@@ -82,7 +84,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [
               "127.0.0.1:8084:8084/tcp"
             ];

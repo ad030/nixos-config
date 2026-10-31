@@ -7,7 +7,9 @@ let
   serviceName = "navidrome";
   uid = 2006;
 
-  image = "docker.io/deluan/navidrome:0.64.2@sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
+  image = "docker.io/deluan/navidrome";
+  tag = "0.64.2";
+  digest = "sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
 
   domain = "4384381.xyz";
   subdomain = "navidrome.${domain}";
@@ -94,7 +96,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             ports = [
               "4533:4533/tcp"
             ];

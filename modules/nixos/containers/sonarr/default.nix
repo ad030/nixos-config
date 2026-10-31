@@ -7,7 +7,9 @@ let
   serviceName = "sonarr";
   uid = 2010;
 
-  image = "lscr.io/linuxserver/sonarr:4.0.20@sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
+  image = "lscr.io/linuxserver/sonarr";
+  tag = "4.0.20";
+  digest = "sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
 
   domain = "4384381.xyz";
   subdomain = "sonarr.${domain}";
@@ -93,7 +95,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             environment = {
               PUID = "0";
               PGID = "0";

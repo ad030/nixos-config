@@ -7,7 +7,9 @@ let
   serviceName = "ntfy";
   uid = 2004;
 
-  image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
+  image = "docker.io/binwiederhier/ntfy";
+  tag = "v2.28";
+  digest = "sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
 
   domain = "4384381.xyz";
   subdomain = "ntfy.${domain}";
@@ -85,7 +87,7 @@ in
         enable = true;
         containers = {
           ${serviceName} = {
-            inherit image;
+            image = "${image}:${tag}@${digest}";
             user = "${toString osConfig.users.users.${serviceName}.uid}:${
               toString osConfig.users.groups.${serviceName}.gid
             }";
