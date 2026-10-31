@@ -98,7 +98,7 @@ in
               "ntfy-cache:/var/cache/ntfy"
             ];
             environment = {
-              NTFY_BASE_URL = "http://ntfy.home.lan";
+              NTFY_BASE_URL = "http://${subdomain}";
               NTFY_LISTEN_HTTP = ":8082";
               NTFY_BEHIND_PROXY = "true";
             };

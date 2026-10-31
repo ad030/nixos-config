@@ -117,7 +117,7 @@ in
               # nix complains about multiline string here
               FRESHRSS_INSTALL = lib.concatStringsSep " " [
                 "--api-enabled"
-                "--base-url https://freshrss.home.lan"
+                "--base-url https://${subdomain}"
                 "--default-user admin"
                 "--language en"
               ];

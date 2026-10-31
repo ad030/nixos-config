@@ -92,7 +92,7 @@ in
               "${config.xdg.dataHome}/${serviceName}:/data"
             ];
             environment = {
-              DOMAIN = "https://vaultwarden.home.lan";
+              DOMAIN = "https://${subdomain}";
               ROCKET_LOG = "critical";
             };
             environmentFile = [

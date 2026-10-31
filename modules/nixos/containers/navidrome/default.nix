@@ -104,7 +104,7 @@ in
               "${directories.music}:/music:ro"
             ];
             environment = {
-              ND_BASEURL = "http://navidrome.home.lan";
+              ND_BASEURL = "http://${subdomain}";
             };
             autoStart = true;
           };

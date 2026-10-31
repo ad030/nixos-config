@@ -110,7 +110,7 @@ in
             message_webhook = {
               on = [ "PrivateMessageReceived" ];
               call = {
-                url = "https://ntfy.home.lan/slskd-message";
+                url = "https://ntfy.${domain}/slskd-message";
                 headers = [
                   {
                     name = "Title";
