@@ -8,8 +8,8 @@ let
   uid = 2008;
 
   image = "docker.io/vaultwarden/server";
-  tag = "1.37.3";
-  digest = "sha256:1587c45feaa479f1f5e8af3b00eded36bff77bcf1880cf8dbf0541706dd470e0";
+  tag = "1.37.4";
+  digest = "sha256:efb3cde962015fcc036b2ea625242248611943b27212ebf4392841fb30fad055";
 
   domain = "4384381.xyz";
   subdomain = "vaultwarden.${domain}";

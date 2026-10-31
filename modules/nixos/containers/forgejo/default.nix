@@ -9,8 +9,8 @@ let
   uid = 2019;
 
   image = "codeberg.org/forgejo/forgejo";
-  tag = "16.0.5-rootless";
-  digest = "sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
+  tag = "17.0.1-rootless";
+  digest = "sha256:fcd19ff4ebc85fb098a67e8e1d0d5a84d07dd6e8a23edcfdfd5b71a6178953be";
 
   domain = "4384381.xyz";
   subdomain = "forgejo.${domain}";

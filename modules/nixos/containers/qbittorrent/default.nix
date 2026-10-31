@@ -8,8 +8,8 @@ let
   uid = 2007;
 
   image = "docker.io/qbittorrentofficial/qbittorrent-nox";
-  tag = "5.2.4-1";
-  digest = "sha256:92bfd78d731e254ba64f62b77b0696add6447a33642ee5feda106a26b285aa7f";
+  tag = "5.3.0";
+  digest = "sha256:75ecbb1c89ab7b0a21c4bde40b4820e4f1649d2d56d83b91913422155e8d2a5f";
 
   domain = "4384381.xyz";
   subdomain = "qbittorrent.${domain}";

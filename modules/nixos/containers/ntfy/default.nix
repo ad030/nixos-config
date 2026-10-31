@@ -8,8 +8,8 @@ let
   uid = 2004;
 
   image = "docker.io/binwiederhier/ntfy";
-  tag = "v2.28";
-  digest = "sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
+  tag = "v2.35";
+  digest = "sha256:6f0c9abab7b99a978d816611cc90dabb4849b81f60c53114e91cd07931085dc0";
 
   domain = "4384381.xyz";
   subdomain = "ntfy.${domain}";

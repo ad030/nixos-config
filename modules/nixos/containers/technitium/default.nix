@@ -8,8 +8,8 @@ let
   uid = 2030;
 
   image = "docker.io/technitium/dns-server";
-  tag = "15.5.1";
-  digest = "sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
+  tag = "15.6.2";
+  digest = "sha256:eb48ac5c135f4ab936b536f74f853d53e15ab39ef37fdbc9598a089b90d9f245";
 
   domain = "4384381.xyz";
   subdomain = "technitium.${domain}";
