@@ -7,7 +7,11 @@ let
   serviceName = "";
   uid = -1;
 
-  image = "";
+  registry = "";
+  repo = "";
+  tag = "";
+  digest = "";
+  image = "${registry}/${repo}:${tag}@${digest}";
 
   domain = ""; # base domain
   subdomain = ".${domain}";

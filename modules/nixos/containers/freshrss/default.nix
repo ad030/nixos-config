@@ -7,7 +7,11 @@ let
   serviceName = "freshrss";
   uid = 2005;
 
-  image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
+  registry = "docker.io";
+  repo = "freshrss/freshrss";
+  tag = "1.30.4";
+  digest = "sha256:af44385229541bee24aa9148d0ff8f3b40e095373c63a2c0f74e09a27d3c59df";
+  image = "${registry}/${repo}:${tag}@${digest}";
 
   domain = "4384381.xyz";
   subdomain = "freshrss.${domain}";
