@@ -9,12 +9,16 @@ let
 
   image = "docker.io/technitium/dns-server:15.5.1@sha256:b8efe03a5e3bdc6e9d2baff3f6e70c382c7f98afa2a7ca66f318d4b58a8d5944";
 
-  domain = "technitium.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "technitium.${domain}";
   webPort = "5380";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -36,15 +40,18 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
+        ${subdomain} = {
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
         };
       };
 

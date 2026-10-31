@@ -9,7 +9,8 @@ let
 
   image = "docker.io/binwiederhier/ntfy:v2.28@sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da";
 
-  domain = "ntfy.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "ntfy.${domain}";
   webPort = "8082";
 in
 {
@@ -20,6 +21,9 @@ in
       lib,
       ...
     }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -41,16 +45,19 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
+        ${subdomain} = {
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
         };
       };
     };

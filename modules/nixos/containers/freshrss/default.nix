@@ -9,7 +9,8 @@ let
 
   image = "docker.io/freshrss/freshrss:1.30.0@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21";
 
-  domain = "freshrss.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "freshrss.${domain}";
   webPort = "8085";
 in
 {
@@ -20,6 +21,9 @@ in
       pkgs,
       ...
     }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -42,15 +46,18 @@ in
       home-manager.users.${serviceName} = self.modules.homeManager."containers-${serviceName}";
 
       services.nginx.virtualHosts = {
-        ${domain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
+        ${subdomain} = {
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
         };
       };
 

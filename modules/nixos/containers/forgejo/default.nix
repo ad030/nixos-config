@@ -10,7 +10,8 @@ let
 
   image = "codeberg.org/forgejo/forgejo:16.0.5-rootless@sha256:5effb7305584aca479b29fde6f9631a6dbe86ae798ae02eeea33a3666f0c0bf8";
 
-  domain = "forgejo.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "forgejo.${domain}";
   webPort = "8094";
 in
 {
@@ -21,6 +22,9 @@ in
       lib,
       ...
     }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -42,15 +46,18 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
+        ${subdomain} = {
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
         };
       };
 

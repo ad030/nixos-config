@@ -10,7 +10,8 @@ let
 
   image = "docker.io/crocodilestick/calibre-web-automated:v4.0.8@sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 
-  domain = "calibre.home.lan";
+  domain = "4384381.xyz";
+  subdomain = "calibre.${domain}";
   webPort = "8083";
 
   directories = {
@@ -26,6 +27,9 @@ in
       lib,
       ...
     }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -50,15 +54,18 @@ in
       ];
 
       services.nginx.virtualHosts = {
-        ${domain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
+        ${subdomain} = {
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
-          sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
+          useACMEHost = domain;
         };
       };
 

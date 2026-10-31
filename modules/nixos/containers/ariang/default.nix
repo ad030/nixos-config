@@ -26,6 +26,9 @@ in
       lib,
       ...
     }:
+    let
+      auth = top.config.flake.lib.nginx-tinyauth;
+    in
     {
       imports = with top.config.flake.modules.nixos; [
         containers
@@ -48,22 +51,24 @@ in
 
       services.nginx.virtualHosts = {
         ${subdomain} = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${webPort}";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-          };
-
-          locations."/jsonrpc" = {
-            proxyPass = "http://127.0.0.1:6800/jsonrpc";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/jsonrpc" = {
+              proxyPass = "http://127.0.0.1:6800/jsonrpc";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+              extraConfig = auth.appendProtect "";
+            };
+            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
           useACMEHost = domain;
-          # sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          # sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
 
