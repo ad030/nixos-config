@@ -6,7 +6,7 @@ let
   domainName = "4384381.xyz";
 in
 {
-  flake.modules.nixos.homelab-domain-certs =
+  flake.modules.nixos.domain-certs =
     {
       config,
       ...

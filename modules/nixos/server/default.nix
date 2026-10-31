@@ -12,7 +12,7 @@
       imports = with config.flake.modules.nixos; [
         core
 
-        homelab-domain-certs
+        domain-certs
         networking-server
         nfs-server
         reverse-proxy
