@@ -10,7 +10,7 @@ let
 
   image = "codeberg.org/forgejo/forgejo";
   tag = "17.0.1-rootless";
-  digest = "sha256:fcd19ff4ebc85fb098a67e8e1d0d5a84d07dd6e8a23edcfdfd5b71a6178953be";
+  digest = "sha256:5ef02fbcf22beef56b8c844952ffad58cfe177b6f98e46e6abb5df90b88dc8d3";
 
   domain = "4384381.xyz";
   subdomain = "forgejo.${domain}";
