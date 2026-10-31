@@ -94,6 +94,10 @@ in
         text = "";
         force = true;
       };
+      xdg.dataFile."freshrss-extensions/.empty" = {
+        text = "";
+        force = true;
+      };
 
       services.podman = {
         enable = true;
@@ -106,7 +110,7 @@ in
             ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/var/www/FreshRSS/data"
-              "${config.xdg.dataHome}/${serviceName}-extensions:/var/www/FreshRSS/extensions"
+              "${config.xdg.dataHome}/freshrss-extensions:/var/www/FreshRSS/extensions"
             ];
             environmentFile = [
               "${osConfig.sops.templates."freshrss.env".path}"
