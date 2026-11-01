@@ -17,6 +17,7 @@
         nfs-server
         reverse-proxy
         media-dirs
+        backup-dirs
         idle-server
         landing-page
         fail2ban
