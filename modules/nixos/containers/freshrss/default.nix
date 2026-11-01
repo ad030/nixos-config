@@ -56,6 +56,12 @@ in
               extraConfig = auth.appendProtect "";
             };
             "/tinyauth" = auth.locationConfig;
+
+            # exempt from auth protection
+            "/api" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+            };
           };
 
           forceSSL = true;

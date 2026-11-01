@@ -53,9 +53,7 @@ in
               proxyPass = "http://127.0.0.1:${webPort}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
-              extraConfig = auth.appendProtect "";
             };
-            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
