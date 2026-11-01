@@ -9,9 +9,9 @@
     }:
     {
       home.packages = with pkgs; [
-        # (texliveBasic.withPackages (ps: [ ps.latexmk ]))
-        texliveSmall
-        biber
+        texliveFull
+
+        # biber
         python314Packages.pylatexenc
       ];
     };
