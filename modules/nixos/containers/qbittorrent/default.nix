@@ -17,7 +17,8 @@ let
 
   directories = {
     incompleteDownloads = "/srv/downloads/qbittorrent";
-    completeDownloads = "/srv/media/tank/Downloads/qbittorrent";
+    completeDownloads = "/srv/media/tank/Downloads/qbittorrent/media";
+    torrentFiles = "/srv/media/tank/Downloads/qbittorrent/torrent-files";
   };
 in
 {
@@ -65,6 +66,11 @@ in
           group = "media";
           mode = "2775";
         };
+        ${directories.torrentFiles}.d = {
+          user = serviceName;
+          group = "media";
+          mode = "2775";
+        };
       };
 
       services.nginx.virtualHosts = {
@@ -73,14 +79,20 @@ in
             "/" = {
               proxyPass = "http://127.0.0.1:${webPort}";
               recommendedProxySettings = true;
-              extraConfig = auth.appendProtect "";
+              # extraConfig = auth.appendProtect "";
             };
-            "/tinyauth" = auth.locationConfig;
+            # "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
           useACMEHost = domain;
         };
+      };
+
+      networking.firewall = {
+        allowedTCPPorts = [
+          8090
+        ];
       };
     };
 
@@ -114,19 +126,21 @@ in
 
               "${directories.completeDownloads}:/downloads/complete"
               "${directories.incompleteDownloads}:/downloads/incomplete"
+              "${directories.torrentFiles}:/torrent-files"
             ];
             ports = [
+              # "127.0.0.1:${webPort}:${webPort}/tcp"
+              "${webPort}:${webPort}/tcp"
+
               "6881:6881/tcp"
               "6881:6881/udp"
-              "127.0.0.1:8090:8090/tcp"
             ];
             environment = {
               PUID = "${toString osConfig.users.users.${serviceName}.uid}";
-              PGID = "${toString osConfig.users.groups.${serviceName}.gid}";
-              PAGID = "${toString osConfig.users.groups.media.gid}";
-              QBT_LEGAL_NOTICE = "confirm";
-              QBT_TORRENTING_PORT = "6881";
-              QBT_WEBUI_PORT = "8090";
+              PGID = "${toString osConfig.users.groups.media.gid}";
+              LEGAL_NOTICE = "confirm";
+              TORRENTING_PORT = "6881";
+              WEBUI_PORT = webPort;
               TZ = "America/New_York";
             };
             autoStart = true;
