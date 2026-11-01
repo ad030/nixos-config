@@ -35,6 +35,8 @@
       ## password manager
       keepassxc
 
+      thunderbird # email client
+
       ## media
       ffmpeg
       imagemagick
