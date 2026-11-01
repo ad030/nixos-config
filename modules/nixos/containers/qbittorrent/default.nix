@@ -16,9 +16,9 @@ let
   webPort = "8090";
 
   directories = {
-    incompleteDownloads = "/srv/downloads/qbittorrent";
-    completeDownloads = "/srv/media/tank/Downloads/qbittorrent/media";
-    torrentFiles = "/srv/media/tank/Downloads/qbittorrent/torrent-files";
+    downloadsIncomplete = "/srv/downloads/qbittorrent";
+    downloadsComplete = "/srv/media/tank/Downloads/qbittorrent/media";
+    backupsTorrent = "/srv/backup/qbittorrent/torrent-files";
   };
 in
 {
@@ -56,17 +56,17 @@ in
       ];
 
       systemd.tmpfiles.settings."qbittorrent-config" = {
-        ${directories.incompleteDownloads}.d = {
+        ${directories.downloadsIncomplete}.d = {
           user = serviceName;
           group = "media";
           mode = "2775";
         };
-        ${directories.completeDownloads}.d = {
+        ${directories.downloadsComplete}.d = {
           user = serviceName;
           group = "media";
           mode = "2775";
         };
-        ${directories.torrentFiles}.d = {
+        ${directories.backupsTorrent}.d = {
           user = serviceName;
           group = "media";
           mode = "2775";
@@ -124,9 +124,9 @@ in
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config"
 
-              "${directories.completeDownloads}:/downloads/complete"
-              "${directories.incompleteDownloads}:/downloads/incomplete"
-              "${directories.torrentFiles}:/torrent-files"
+              "${directories.downloadsComplete}:/downloads/complete"
+              "${directories.downloadsIncomplete}:/downloads/incomplete"
+              "${directories.backupsTorrent}:/torrent-files"
             ];
             ports = [
               # "127.0.0.1:${webPort}:${webPort}/tcp"
@@ -138,7 +138,7 @@ in
             environment = {
               PUID = "${toString osConfig.users.users.${serviceName}.uid}";
               PGID = "${toString osConfig.users.groups.media.gid}";
-              LEGAL_NOTICE = "confirm";
+              # LEGAL_NOTICE = "confirm";
               TORRENTING_PORT = "6881";
               WEBUI_PORT = webPort;
               TZ = "America/New_York";
