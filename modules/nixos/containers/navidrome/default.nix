@@ -65,6 +65,14 @@ in
               proxyPass = "http://127.0.0.1:${webPort}";
               recommendedProxySettings = true;
             };
+            "/auth" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+            };
+            "/api" = {
+              proxyPass = "http://127.0.0.1:${webPort}";
+              recommendedProxySettings = true;
+            };
           };
 
           forceSSL = true;
