@@ -9,6 +9,7 @@
         KbdInteractiveAuthentication = false;
         LogLevel = "VERBOSE";
         X11Forwarding = false;
+        MaxAuthTries = 7;
       };
     };
 
