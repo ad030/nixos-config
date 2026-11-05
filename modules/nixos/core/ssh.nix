@@ -8,7 +8,7 @@
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
         LogLevel = "VERBOSE";
-        X11Forwarding = "false";
+        X11Forwarding = false;
       };
     };
 
