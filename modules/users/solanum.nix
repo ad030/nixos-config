@@ -70,6 +70,7 @@ in
 
         packages = with pkgs; [
           papirus-icon-theme
+          deadlock-mod-manager
         ];
 
         pointerCursor = {
