@@ -57,6 +57,12 @@
       url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # my neovim config
+    nvim-config = {
+      url = "github:ad030/nvim-config";
+      flake = false;
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

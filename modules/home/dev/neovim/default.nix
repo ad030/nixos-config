@@ -1,4 +1,8 @@
 {
+  inputs,
+  ...
+}:
+{
   flake.modules.homeManager.neovim =
     {
       pkgs,
@@ -6,7 +10,7 @@
     }:
     {
       xdg.configFile."nvim" = {
-        source = ./_config;
+        source = inputs.nvim-config;
         recursive = true;
       };
 
