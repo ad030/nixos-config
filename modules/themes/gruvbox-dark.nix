@@ -153,6 +153,15 @@ in
           };
         };
         focus-ring = {
+          active = {
+            color = palette.light1;
+          };
+          inactive = {
+            color = palette.dark1;
+          };
+          urgent = {
+            color = palette.neutral_red;
+          };
         };
         shadow = {
         };
