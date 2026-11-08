@@ -40,6 +40,7 @@
           sleek
           deno
           texlivePackages.latexindent
+          texlab
           prettierd
           pyright
           typescript-language-server
