@@ -54,6 +54,7 @@
         curl
         git
         bash
+        ripgrep
         python314
         jq
 
