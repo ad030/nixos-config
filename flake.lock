@@ -304,6 +304,22 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794156320,
+        "narHash": "sha256-yRNVexDP9sMM3unvQBNb80tl3PL1MAJ1HjQNhm+NM8Q=",
+        "owner": "ad030",
+        "repo": "nvim-config",
+        "rev": "c45745320a3c30c602661131aa5b5fbd0520c548",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ad030",
+        "repo": "nvim-config",
+        "type": "github"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": "home-manager_2",
@@ -338,6 +354,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-zotero": "nixpkgs-zotero",
+        "nvim-config": "nvim-config",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix"
       }
