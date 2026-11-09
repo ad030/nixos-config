@@ -6,7 +6,7 @@
 {
   flake.modules.homeManager.niri =
     let
-      theme = self.themes.gruvbox-dark.niri;
+      theme = self.themes.catppuccin-frappe.niri;
     in
     {
       programs.niri.settings = {

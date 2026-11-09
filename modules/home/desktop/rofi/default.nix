@@ -1,29 +1,43 @@
 {
-  flake.modules.homeManager.rofi = {
-    programs.rofi = {
-      enable = true;
+  self,
+  ...
+}:
+{
+  flake.modules.homeManager.rofi =
+    let
+      theme = self.themes.catppuccin-frappe.rofi;
+    in
+    {
+      pkgs,
+      ...
+    }:
+    {
 
-      theme = "gruvbox-dark-soft";
-      terminal = "foot";
-      font = "MesloLGM Nerd Font Mono 16";
-      # font = "Noto Nerd Font 16";
+      programs.rofi = {
+        enable = true;
 
-      modes = [
-        "window"
-        "drun"
-        "run"
-      ];
+        # theme = "gruvbox-dark-soft";
+        theme = pkgs.writeText "rofi-theme.rasi" theme.catppuccin-frappe.rofi;
+        terminal = "foot";
+        font = "MesloLGM Nerd Font Mono 16";
+        # font = "Noto Nerd Font 16";
 
-      cycle = true;
+        modes = [
+          "window"
+          "drun"
+          "run"
+        ];
 
-      location = "center";
+        cycle = true;
 
-      extraConfig = {
-        icon-theme = "Papirus";
-        show-icons = true;
-        drun-display-format = "{icon} {name}";
+        location = "center";
+
+        extraConfig = {
+          icon-theme = "Papirus";
+          show-icons = true;
+          drun-display-format = "{icon} {name}";
+        };
+
       };
-
     };
-  };
 }

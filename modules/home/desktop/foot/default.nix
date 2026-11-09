@@ -13,7 +13,8 @@
       ...
     }:
     let
-      theme = self.themes.gruvbox-dark;
+      # theme = self.themes.gruvbox-dark.foot;
+      theme = self.themes.catppuccin-frappe.foot;
     in
     {
       programs.foot = {
@@ -26,7 +27,7 @@
             # font = "Noto Sans Mono:size=14";
           };
 
-          colors-dark = theme.foot;
+          colors-dark = theme;
 
           mouse = {
             hide-when-typing = "yes";
