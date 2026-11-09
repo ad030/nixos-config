@@ -63,6 +63,12 @@
       url = "github:ad030/nvim-config";
       flake = false;
     };
+
+    # my quickshell config
+    quickshell-config = {
+      url = "github:ad030/quickshell-config";
+      flake = false;
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
