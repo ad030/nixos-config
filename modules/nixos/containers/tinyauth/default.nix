@@ -11,7 +11,7 @@ let
   tag = "v5.2.0";
   digest = "sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "tinyauth.${domain}";
   webPort = "3000";
   backend = "http://127.0.0.1:${webPort}";

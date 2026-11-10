@@ -5,7 +5,7 @@
   ...
 }@top:
 let
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
 in
 {
   flake.modules.nixos.landing-page =
