@@ -11,9 +11,10 @@ let
   tag = "5.3.0";
   digest = "sha256:75ecbb1c89ab7b0a21c4bde40b4820e4f1649d2d56d83b91913422155e8d2a5f";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "qbittorrent.${domain}";
   webPort = "8090";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     downloadsIncomplete = "/srv/downloads/qbittorrent";
@@ -77,7 +78,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               # extraConfig = auth.appendProtect "";
             };

@@ -12,9 +12,10 @@ let
   tag = "6.4.0";
   digest = "sha256:d0896842c21e0a1fad9e9e4b8af6af258151fe79d9a82f7cff91f56285691d1a";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "aria2.${domain}";
   webPort = "8098";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     downloads = "/srv/media/tank/Downloads/aria2";
@@ -55,7 +56,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               proxyWebsockets = true;
               extraConfig = auth.appendProtect "";

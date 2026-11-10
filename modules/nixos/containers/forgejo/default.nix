@@ -12,9 +12,10 @@ let
   tag = "17.0.1-rootless";
   digest = "sha256:5ef02fbcf22beef56b8c844952ffad58cfe177b6f98e46e6abb5df90b88dc8d3";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "forgejo.${domain}";
   webPort = "8094";
+  backend = "http://127.0.0.1:${webPort}";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -51,7 +52,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               extraConfig = auth.appendProtect "";
             };

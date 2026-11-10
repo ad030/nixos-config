@@ -11,9 +11,10 @@ let
   tag = "3.8.2";
   digest = "sha256:e478554a9920412eeb5ce1d73f24e4b28445ebed233187cdd03c623c32be46a5";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "kiwix.${domain}";
   webPort = "8084";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     zimFiles = "/srv/media/tank/zim_files";
@@ -49,7 +50,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               extraConfig = auth.appendProtect "";
             };

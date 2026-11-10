@@ -12,9 +12,10 @@ let
   tag = "v4.0.8";
   digest = "sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "calibre.${domain}";
   webPort = "8083";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     library = "/srv/media/tank/Books/calibre-library";
@@ -59,7 +60,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
             };
           };

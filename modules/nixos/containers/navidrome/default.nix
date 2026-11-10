@@ -11,9 +11,10 @@ let
   tag = "0.64.2";
   digest = "sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "navidrome.${domain}";
   webPort = "4533";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     music = "/srv/media/tank/Music";
@@ -54,7 +55,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               extraConfig = auth.appendProtect "";
             };

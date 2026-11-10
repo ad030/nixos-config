@@ -11,9 +11,10 @@ let
   tag = "4.0.20";
   digest = "sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "sonarr.${domain}";
   webPort = "8989";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     shows = "/srv/media/tank/Shows";
@@ -54,7 +55,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               proxyWebsockets = true;
               extraConfig = auth.appendProtect "";

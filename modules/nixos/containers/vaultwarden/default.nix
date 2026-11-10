@@ -11,9 +11,10 @@ let
   tag = "1.37.4";
   digest = "sha256:efb3cde962015fcc036b2ea625242248611943b27212ebf4392841fb30fad055";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "vaultwarden.${domain}";
   webPort = "8222";
+  backend = "http://127.0.0.1:${webPort}";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -45,7 +46,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               proxyWebsockets = true;
             };

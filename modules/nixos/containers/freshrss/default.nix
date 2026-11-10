@@ -11,9 +11,10 @@ let
   tag = "1.30.4";
   digest = "sha256:af44385229541bee24aa9148d0ff8f3b40e095373c63a2c0f74e09a27d3c59df";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "freshrss.${domain}";
   webPort = "8085";
+  backend = "http://127.0.0.1:${webPort}";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -51,7 +52,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               extraConfig = auth.appendProtect "";
             };

@@ -29,13 +29,25 @@ in
       security.acme = {
         acceptTerms = true;
         defaults.email = "darwinism_bagel013@simplelogin.com";
-        certs.${domainName} = {
-          dnsProvider = "porkbun";
-          group = config.services.nginx.group;
-          environmentFile = config.sops.secrets."acme/porkbun".path;
-          extraDomainNames = [
-            "*.${domainName}"
-          ];
+        certs = {
+          ${domainName} = {
+            dnsProvider = "porkbun";
+            group = config.services.nginx.group;
+            environmentFile = config.sops.secrets."acme/porkbun".path;
+            extraDomainNames = [
+              "*.${domainName}"
+            ];
+          };
+
+          # subdomains under this should not be exposed to internet
+          "home.${domainName}" = {
+            dnsProvider = "porkbun";
+            group = config.services.nginx.group;
+            environmentFile = config.sops.secrets."acme/porkbun".path;
+            extraDomainNames = [
+              "*.home.${domainName}"
+            ];
+          };
         };
       };
     };

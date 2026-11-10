@@ -11,9 +11,10 @@ let
   tag = "6.4.4";
   digest = "sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "radarr.${domain}";
   webPort = "7878";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     movies = "/srv/media/tank/Movies";
@@ -54,7 +55,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               proxyWebsockets = true;
               extraConfig = auth.appendProtect "";

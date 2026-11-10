@@ -11,9 +11,10 @@ let
   tag = "12.4";
   digest = "sha256:fea863d0cd9ec445985d9c75fc6ed64e38a1d2766cf0c250a33d553f4fc1b771";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "jellyfin.${domain}";
   webPort = "8096";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     movies = "/srv/media/tank/Movies";
@@ -60,7 +61,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               proxyWebsockets = true;
             };

@@ -11,9 +11,10 @@ let
   tag = "0.26.2";
   digest = "sha256:d0963a3e5b16facd295bf4f2156dad0182f246b1b21a032cae12f5494c694843";
 
-  domain = "4384381.xyz";
+  domain = "home.4384381.xyz";
   subdomain = "slskd.${domain}";
   webPort = "5030";
+  backend = "http://127.0.0.1:${webPort}";
 
   directories = {
     music = "/srv/media/tank/Music/Music";
@@ -72,7 +73,7 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
               extraConfig = auth.appendProtect "";
             };
