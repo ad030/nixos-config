@@ -107,6 +107,10 @@ in
             environment = {
               USER_UID = 1000;
               USER_GID = 1000;
+
+              FORGEJO__server__DOMAIN = subdomain;
+              FORGEJO__server__SSH_DOMAIN = subdomain;
+              FORGEJO__server__ROOT_URL = "https://${subdomain}$";
             };
             autoStart = true;
           };

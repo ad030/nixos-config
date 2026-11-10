@@ -5,7 +5,7 @@
 
     {
       programs.tmux = {
-        enable = true;
+        # enable = true;
         clock24 = true;
         keyMode = "vi";
       };

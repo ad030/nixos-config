@@ -36,6 +36,7 @@
           enable = true;
           defaultEditor = true;
         };
+        tmux.enable = true;
       };
 
       environment.systemPackages = with pkgs; [
@@ -49,7 +50,6 @@
 
         lshw
 
-        neovim
         wget
         curl
         git
