@@ -14,6 +14,7 @@ let
   domain = ""; # base domain
   subdomain = ".${domain}";
   webPort = "";
+  backend = "http://127.0.0.1:${webPort}";
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -50,11 +51,9 @@ in
         ${subdomain} = {
           locations = {
             "/" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = backend;
               recommendedProxySettings = true;
-              extraConfig = auth.appendProtect "";
             };
-            "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
