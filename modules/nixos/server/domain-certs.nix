@@ -28,7 +28,10 @@ in
 
       security.acme = {
         acceptTerms = true;
-        defaults.email = "darwinism_bagel013@simplelogin.com";
+        defaults = {
+          dnsResolver = "1.1.1.1:53";
+          email = "darwinism_bagel013@simplelogin.com";
+        };
         certs = {
           ${domainName} = {
             dnsProvider = "porkbun";
