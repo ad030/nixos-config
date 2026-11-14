@@ -16,7 +16,7 @@
       latex
 
       keepassxc
-      vesktop
+      discord
       signal-desktop
       obs-studio
       yt-dlp

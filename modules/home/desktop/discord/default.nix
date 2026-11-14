@@ -5,9 +5,13 @@
 }:
 
 {
-  flake.modules.homeManager.vesktop = {
-    programs.vesktop = {
+  flake.modules.homeManager.discord = {
+    programs.discord = {
       enable = true;
+    };
+
+    programs.vesktop = {
+      enable = false;
 
       settings = {
         arRPC = true;
