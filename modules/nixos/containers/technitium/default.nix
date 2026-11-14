@@ -7,6 +7,7 @@ let
   serviceName = "technitium";
   uid = 2030;
 
+  # https://hub.docker.com/r/technitium/dns-server
   image = "docker.io/technitium/dns-server";
   tag = "15.6.2";
   digest = "sha256:eb48ac5c135f4ab936b536f74f853d53e15ab39ef37fdbc9598a089b90d9f245";

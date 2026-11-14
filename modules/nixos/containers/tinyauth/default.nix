@@ -7,6 +7,7 @@ let
   serviceName = "tinyauth";
   uid = 2050;
 
+  # https://github.com/tinyauthapp/tinyauth/pkgs/container/tinyauth
   image = "ghcr.io/tinyauthapp/tinyauth";
   tag = "v5.2.0";
   digest = "sha256:220aa235c76393a73fece831d7ba967b8698d3907fd8e3c4c952f699c7b142a5";

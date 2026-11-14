@@ -7,6 +7,7 @@ let
   serviceName = "navidrome";
   uid = 2006;
 
+  # https://hub.docker.com/r/deluan/navidrome
   image = "docker.io/deluan/navidrome";
   tag = "0.64.2";
   digest = "sha256:38dc2727bfcfd5ede290f8ada114fc90368146f265ae4701ddddbcbe2a44ee52";

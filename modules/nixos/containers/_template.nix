@@ -7,6 +7,7 @@ let
   serviceName = "";
   uid = -1;
 
+  # ADD LINK TO IMAGES PAGE HERE #
   image = ""; # e.g. docker.io/slskd/slskd
   tag = ""; # e.g. 0.26.1
   digest = ""; # sha256 hash

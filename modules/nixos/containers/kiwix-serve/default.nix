@@ -7,6 +7,7 @@ let
   serviceName = "kiwix-serve";
   uid = 2015;
 
+  # https://github.com/kiwix/kiwix-tools/pkgs/container/kiwix-serve
   image = "ghcr.io/kiwix/kiwix-serve";
   tag = "3.8.2";
   digest = "sha256:e478554a9920412eeb5ce1d73f24e4b28445ebed233187cdd03c623c32be46a5";

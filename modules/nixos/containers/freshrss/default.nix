@@ -7,6 +7,7 @@ let
   serviceName = "freshrss";
   uid = 2005;
 
+  # https://hub.docker.com/r/freshrss/freshrss
   image = "docker.io/freshrss/freshrss";
   tag = "1.30.4";
   digest = "sha256:af44385229541bee24aa9148d0ff8f3b40e095373c63a2c0f74e09a27d3c59df";

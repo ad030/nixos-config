@@ -7,9 +7,10 @@ let
   serviceName = "vaultwarden";
   uid = 2008;
 
+  # https://hub.docker.com/r/vaultwarden/server
   image = "docker.io/vaultwarden/server";
-  tag = "1.37.4";
-  digest = "sha256:efb3cde962015fcc036b2ea625242248611943b27212ebf4392841fb30fad055";
+  tag = "1.37.5";
+  digest = "sha256:4fe17f415f90087377d37c755e0ea3cf189dcc6794e49cdd2a9adbb4937d9e1f";
 
   domain = "home.4384381.xyz";
   subdomain = "vaultwarden.${domain}";

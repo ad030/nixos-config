@@ -7,6 +7,7 @@ let
   serviceName = "slskd";
   uid = 2001;
 
+  # https://hub.docker.com/r/slskd/slskd
   image = "docker.io/slskd/slskd";
   tag = "0.26.2";
   digest = "sha256:d0963a3e5b16facd295bf4f2156dad0182f246b1b21a032cae12f5494c694843";

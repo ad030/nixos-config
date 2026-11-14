@@ -7,9 +7,10 @@ let
   serviceName = "ntfy";
   uid = 2004;
 
+  # https://hub.docker.com/r/binwiederhier/ntfy
   image = "docker.io/binwiederhier/ntfy";
-  tag = "v2.35";
-  digest = "sha256:6f0c9abab7b99a978d816611cc90dabb4849b81f60c53114e91cd07931085dc0";
+  tag = "v2.38.0";
+  digest = "sha256:771309aecfce18d8fe2bfb8069994ddd6be6ca6ccdd7badace3d791a0045ff0d";
 
   domain = "home.4384381.xyz";
   subdomain = "ntfy.${domain}";

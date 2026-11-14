@@ -7,6 +7,7 @@ let
   serviceName = "radarr";
   uid = 2009;
 
+  # https://hub.docker.com/r/linuxserver/radarr
   image = "lscr.io/linuxserver/radarr";
   tag = "6.4.4";
   digest = "sha256:adb6c09d6b729ea5e642c99cea35af72702ef476bf4763f153299ac5db9f0b4f";

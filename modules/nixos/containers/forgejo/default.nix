@@ -8,6 +8,7 @@ let
   serviceName = "forgejo";
   uid = 2019;
 
+  # https://codeberg.org/forgejo/-/packages/container/forgejo
   image = "codeberg.org/forgejo/forgejo";
   tag = "17.0.1-rootless";
   digest = "sha256:5ef02fbcf22beef56b8c844952ffad58cfe177b6f98e46e6abb5df90b88dc8d3";

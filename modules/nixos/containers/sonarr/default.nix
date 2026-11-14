@@ -7,6 +7,7 @@ let
   serviceName = "sonarr";
   uid = 2010;
 
+  # https://hub.docker.com/r/linuxserver/sonarr
   image = "lscr.io/linuxserver/sonarr";
   tag = "4.0.20";
   digest = "sha256:f247545d23ba8b233d6604575347e48a623fe6ad75dda02348bf81917f3b5c06";

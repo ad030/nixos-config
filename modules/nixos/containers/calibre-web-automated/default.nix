@@ -8,6 +8,7 @@ let
   serviceName = "calibre-web-automated";
   uid = 2003;
 
+  # https://hub.docker.com/r/crocodilestick/calibre-web-automated
   image = "docker.io/crocodilestick/calibre-web-automated";
   tag = "v4.0.8";
   digest = "sha256:5e00373854247750cc3e4479b492ae09293ff5e06ed10177f226634d97888679";

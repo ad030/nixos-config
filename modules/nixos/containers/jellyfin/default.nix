@@ -7,6 +7,7 @@ let
   serviceName = "jellyfin";
   uid = 2002;
 
+  # https://hub.docker.com/r/jellyfin/jellyfin
   image = "docker.io/jellyfin/jellyfin";
   tag = "12.4";
   digest = "sha256:fea863d0cd9ec445985d9c75fc6ed64e38a1d2766cf0c250a33d553f4fc1b771";
