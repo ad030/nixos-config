@@ -43,8 +43,18 @@
 
       # force niri to use gtk desktop portal rather than gnome portal
       # https://wiki.nixos.org/wiki/Niri#File_picker_not_working
-      xdg.portal.config.niri = {
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+      xdg.portal = {
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-gnome
+        ];
+        config.niri = {
+          default = [
+            "gnome"
+            "gtk"
+          ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+        };
       };
 
       programs = {

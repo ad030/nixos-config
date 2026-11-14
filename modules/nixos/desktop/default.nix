@@ -39,10 +39,10 @@
         enable = true;
         wlr.enable = true;
 
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-gnome
-        ];
+        # extraPortals = with pkgs; [
+        #   xdg-desktop-portal-gtk
+        #   xdg-desktop-portal-gnome
+        # ];
       };
 
       environment.systemPackages = with pkgs; [
