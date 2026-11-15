@@ -24,6 +24,10 @@
         publicKey = "2lmEwMzdoOlXJAQao4dl7yGvj4CcDELY3XY7jM5YbWc=";
         ip = "10.101.0.3";
       };
+      phone-s23 = {
+        publicKey = "H8eernH23Y6yMerA7GZP+WhbeRYQHR+i3xRu2suB7j8=";
+        ip = "10.101.0.4";
+      };
     };
   };
 
