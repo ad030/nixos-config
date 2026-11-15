@@ -1,5 +1,9 @@
 # shared wireguard data
 {
+  self,
+  ...
+}@top:
+{
   flake.lib.wireguard = {
     subnet = "10.101.0.0/24";
     port = 51820;
@@ -22,4 +26,19 @@
       };
     };
   };
+
+  flake.modules.nixos.wireguard-common =
+    {
+      lib,
+      ...
+    }:
+    let
+      wg = top.config.flake.lib.wireguard;
+    in
+    {
+      networking.hosts = {
+        ${wg.hub.ip} = [ wg.hub.name ];
+      }
+      // lib.mapAttrs' (n: c: lib.nameValuePair c.ip [ n ]) wg.clients;
+    };
 }

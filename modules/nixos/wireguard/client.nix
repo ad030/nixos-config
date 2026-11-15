@@ -16,6 +16,8 @@
       hostname = config.networking.hostName;
     in
     {
+      imports = [ config.flake.modules.nixos.wireguard-common ];
+
       sops.secrets."wireguard/private-key" = {
         sopsFile = "${self}/secrets/wireguard/${hostname}.yaml";
         key = "private-key";
@@ -35,7 +37,10 @@
             peers = [
               {
                 publicKey = wg.hub.publicKey;
-                allowedIPs = [ wg.subnet ];
+                allowedIPs = [
+                  # wg.subnet
+                  "${wg.hub.ip}/32"
+                ];
                 endpoint = "${wg.endpoint}:${toString wg.port}";
 
                 # Send keepalives every 25 seconds. Important to keep NAT tables alive.

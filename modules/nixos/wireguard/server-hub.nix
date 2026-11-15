@@ -13,10 +13,13 @@
     }:
     let
       wg = top.config.flake.lib.wireguard;
+      hostname = config.networking.hostName;
     in
     {
+      imports = [ config.flake.modules.nixos.wireguard-common ];
+
       sops.secrets."wireguard/private-key" = {
-        sopsFile = "${self}/secrets/wireguard/${wg.hub.name}.yaml";
+        sopsFile = "${self}/secrets/wireguard/${hostname}.yaml";
         key = "private-key";
       };
 
