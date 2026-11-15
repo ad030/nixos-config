@@ -16,8 +16,9 @@
       hostname = config.networking.hostName;
     in
     {
-      sops.secrets."wireguard/private-keys/${hostname}" = {
-        sopsFile = "${self}/secrets/wireguard.yaml";
+      sops.secrets."wireguard/private-key" = {
+        sopsFile = "${self}/secrets/wireguard/${hostname}.yaml";
+        key = "private-key";
       };
 
       networking.wireguard = {
@@ -29,7 +30,7 @@
               "${wg.clients.${hostname}.ip}/24"
             ];
 
-            privateKeyFile = config.sops.secrets."wireguard/private-keys/${hostname}".path;
+            privateKeyFile = config.sops.secrets."wireguard/private-key".path;
 
             peers = [
               {

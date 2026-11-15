@@ -15,8 +15,9 @@
       wg = top.config.flake.lib.wireguard;
     in
     {
-      sops.secrets."wireguard/private-keys/${wg.hub.name}" = {
-        sopsFile = "${self}/secrets/wireguard.yaml";
+      sops.secrets."wireguard/private-key" = {
+        sopsFile = "${self}/secrets/wireguard/${wg.hub.name}.yaml";
+        key = "private-key";
       };
 
       networking.firewall.allowedUDPPorts = [ wg.port ];
@@ -34,7 +35,7 @@
             # Must be accessible by peers
             listenPort = wg.port;
 
-            privateKeyFile = config.sops.secrets."wireguard/private-keys/${wg.hub.name}".path;
+            privateKeyFile = config.sops.secrets."wireguard/private-key".path;
 
             peers = lib.mapAttrsToList (_: c: {
               publicKey = c.publicKey;
