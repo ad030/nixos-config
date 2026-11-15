@@ -9,10 +9,10 @@
       inputs.plasma-manager.homeModules.plasma-manager
     ];
 
-    home.packages = with pkgs.kdePackages; [
-      oxygen
-      oxygen-icons
-      oxygen-sounds
+    home.packages = [
+      pkgs.kdePackages.oxygen
+      pkgs.kdePackages.oxygen-icons
+      pkgs.kdePackages.oxygen-sounds
     ];
 
     programs.plasma = {
