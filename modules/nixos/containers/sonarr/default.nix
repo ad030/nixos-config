@@ -70,6 +70,7 @@ in
       };
 
       sops.secrets."sonarr/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
     };

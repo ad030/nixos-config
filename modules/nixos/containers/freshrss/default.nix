@@ -71,8 +71,14 @@ in
         };
       };
 
-      sops.secrets."freshrss/env/ADMIN_PASSWORD" = { };
-      sops.secrets."freshrss/env/ADMIN_API_PASSWORD" = { };
+      sops.secrets."freshrss/env/ADMIN_PASSWORD" = {
+        sopsFile = "${self}/secrets/containers.yaml";
+        owner = serviceName;
+      };
+      sops.secrets."freshrss/env/ADMIN_API_PASSWORD" = {
+        sopsFile = "${self}/secrets/containers.yaml";
+        owner = serviceName;
+      };
 
       sops.templates."freshrss.env" = {
         owner = serviceName;

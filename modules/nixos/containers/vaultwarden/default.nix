@@ -59,6 +59,7 @@ in
       };
 
       sops.secrets."vaultwarden/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
     };

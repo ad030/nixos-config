@@ -70,6 +70,7 @@ in
       };
 
       sops.secrets."radarr/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
     };

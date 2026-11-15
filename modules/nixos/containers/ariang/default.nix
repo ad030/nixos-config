@@ -77,6 +77,7 @@ in
       };
 
       sops.secrets."ariang/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
 

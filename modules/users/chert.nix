@@ -16,7 +16,10 @@ in
     }:
     {
       # use sops for user password
-      sops.secrets."passwords/${username}".neededForUsers = true;
+      sops.secrets."passwords/${username}" = {
+        sopsFile = "${self}/secrets/users.yaml";
+        neededForUsers = true;
+      };
 
       users.users.${username} =
         let

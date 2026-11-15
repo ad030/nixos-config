@@ -87,6 +87,7 @@ in
       };
 
       sops.secrets."slskd/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
 

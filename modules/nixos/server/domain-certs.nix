@@ -24,7 +24,9 @@ in
       #   };
       # };
 
-      sops.secrets."acme/porkbun" = { };
+      sops.secrets."porkbun" = {
+        sopsFile = "${self}/secrets/api-keys.yaml";
+      };
 
       security.acme = {
         acceptTerms = true;

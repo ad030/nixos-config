@@ -63,6 +63,7 @@ in
       };
 
       sops.secrets."tinyauth/env" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
 

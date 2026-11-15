@@ -13,7 +13,25 @@ keys:
   - &age_solanum age1s8ly302w2jnlm86tsk0hn2f05dk4lg6h7dn43j0u6j2qsewupdqq2hp7xc
 
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets/containers.yaml$
+    key_groups:
+      - age:
+          - *age_recovery
+          - *age_brittle-hollow
+          - *age_attlerock
+          - *age_timber-hearth
+
+          - *age_solanum
+  - path_regex: secrets/users.yaml$
+    key_groups:
+      - age:
+          - *age_recovery
+          - *age_brittle-hollow
+          - *age_attlerock
+          - *age_timber-hearth
+
+          - *age_solanum
+  - path_regex: secrets/api-keys.yaml$
     key_groups:
       - age:
           - *age_recovery

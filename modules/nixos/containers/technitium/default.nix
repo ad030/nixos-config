@@ -89,6 +89,7 @@ in
       };
 
       sops.secrets."technitium/admin-password" = {
+        sopsFile = "${self}/secrets/containers.yaml";
         owner = serviceName;
       };
 
