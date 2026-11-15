@@ -34,6 +34,8 @@ in
 
       desktop-environment
       window-manager
+
+      wireguard-client
     ])
     # users in nixos configuration
     ++ (map (user: config.flake.modules.nixos."users-${user}") systemUsers);

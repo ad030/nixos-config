@@ -23,6 +23,8 @@ in
       core
       server
 
+      wireguard-server-hub
+
       # specific containers to enable
       containers-technitium # dns server
 
