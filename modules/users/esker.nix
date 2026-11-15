@@ -63,6 +63,39 @@ in
         username = username;
         homeDirectory = "/home/${username}";
         stateVersion = "26.05";
+        pointerCursor = {
+          enable = true;
+          name = "Bibata-Modern-Ice";
+          size = 24;
+          package = pkgs.bibata-cursors;
+          gtk.enable = true;
+          x11.enable = true;
+        };
+      };
+
+      gtk = {
+        enable = true;
+        gtk2.enable = false; # fixes ~/.config/gtk-2.0/gtkrc file clobbering issue
+
+        colorScheme = "light";
+        theme = {
+          name = "catppuccin";
+          package = pkgs.catppuccin-gtk;
+        };
+        iconTheme = {
+          name = "Papirus";
+          package = pkgs.papirus-icon-theme;
+        };
+        cursorTheme = {
+          name = "Bibata-Modern-Ice";
+          size = 24;
+          package = pkgs.bibata-cursors;
+        };
+        font = {
+          name = "Noto Nerd Font";
+          package = pkgs.nerd-fonts.noto;
+          size = 12;
+        };
       };
 
       services = {

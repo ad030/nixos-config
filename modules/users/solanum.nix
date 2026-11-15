@@ -69,7 +69,6 @@ in
         stateVersion = "26.05";
 
         packages = with pkgs; [
-          papirus-icon-theme
           deadlock-mod-manager
         ];
 
@@ -89,14 +88,16 @@ in
 
         colorScheme = "light";
         theme = {
-          name = "Gruvbox";
-          package = pkgs.gruvbox-dark-gtk;
+          name = "catppuccin";
+          package = pkgs.catppuccin-gtk;
+          # name = "Gruvbox";
+          # package = pkgs.gruvbox-dark-gtk;
         };
         iconTheme = {
-          # name = "Papirus";
-          # package = pkgs.papirus-icon-theme;
-          name = "Gruvbox-Plus-Dark";
-          package = pkgs.gruvbox-plus-icons;
+          name = "Papirus";
+          package = pkgs.papirus-icon-theme;
+          # name = "Gruvbox-Plus-Dark";
+          # package = pkgs.gruvbox-plus-icons;
         };
         cursorTheme = {
           name = "Bibata-Modern-Ice";
