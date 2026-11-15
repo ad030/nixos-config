@@ -20,8 +20,9 @@
 >    `--extra-files ./extra-files` and run from the root of this repo so that
 >    the new system uses this host key and can decrypt the secrets.
 
-```
-```
+> [NOTE] If decryption fails, it is impossible to log into any user because user
+> passwords are also stored in `secrets/secrets.yaml`. As a last resort, the
+> root user can be used to log in and fix it.
 
 3. Inside the nixos-anywhere CLI arguments, add `--extra-files ./extra-files`
    and
