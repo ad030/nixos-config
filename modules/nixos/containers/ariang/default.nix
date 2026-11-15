@@ -5,7 +5,7 @@
   ...
 }@top:
 let
-  serviceName = "ariang";
+  serviceName = "aria2";
   uid = 2020;
 
   # https://hub.docker.com/r/wahyd4/aria2-ui
