@@ -13,7 +13,7 @@ let
   digest = "sha256:3e2aa558946b5a293def4d73008fa4651c072b2c12932cecd02126fb23979831"; # sha256 hash
 
   domain = "home.4384381.xyz"; # base domain
-  subdomain = "ddns-updater.${domain}";
+  subdomain = "ddns.${domain}";
   webPort = "8000";
   backend = "http://127.0.0.1:${webPort}";
 in
@@ -117,9 +117,11 @@ in
             ports = [
               "127.0.0.1:${webPort}:8000"
             ];
+            user = "${toString osConfig.users.users.${serviceName}.uid}";
+            userNS = "keep-id";
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/updater/data" # service configuration
-              "${osConfig.sops.templates."ddns-updater.json".path}:/updater/data/config.json"
+              "${osConfig.sops.templates."ddns-updater.json".path}:/updater/data/config.json:ro"
             ];
             environment = {
               DATADIR = "/updater/data";
