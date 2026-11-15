@@ -24,7 +24,7 @@ in
       #   };
       # };
 
-      sops.secrets."porkbun" = {
+      sops.secrets."acme/porkbun" = {
         sopsFile = "${self}/secrets/api-keys.yaml";
       };
 
