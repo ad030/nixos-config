@@ -16,7 +16,7 @@
       hostname = config.networking.hostName;
     in
     {
-      imports = [ config.flake.modules.nixos.wireguard-common ];
+      imports = [ top.config.flake.modules.nixos.wireguard-common ];
 
       sops.secrets."wireguard/private-key" = {
         sopsFile = "${self}/secrets/wireguard/${hostname}.yaml";
