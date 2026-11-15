@@ -42,7 +42,7 @@ in
 
       containers-kiwix-serve # local wikipedia
 
-      containers-ariang # download manager
+      containers-aria2 # download manager
 
       containers-forgejo
     ])
