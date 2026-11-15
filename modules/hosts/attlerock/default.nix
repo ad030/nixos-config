@@ -45,6 +45,8 @@ in
       containers-aria2 # download manager
 
       containers-forgejo
+
+      containers-ddns-updater
     ])
     # generate shared stub users on this system for each regular user
     # >> NECESSARY FOR NFS PERMISSIONS TO WORK! <<
