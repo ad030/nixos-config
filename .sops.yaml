@@ -40,3 +40,24 @@ creation_rules:
           - *age_timber-hearth
 
           - *age_solanum
+
+  - path_regex: secrets/wireguard/brittle-hollow.yaml$
+    key_groups:
+      - age:
+          - *age_recovery
+          - *age_brittle-hollow
+          - *age_solanum
+
+  - path_regex: secrets/wireguard/attlerock.yaml$
+    key_groups:
+      - age:
+          - *age_recovery
+          - *age_attlerock
+          - *age_solanum
+
+  - path_regex: secrets/wireguard/timber-hearth.yaml$
+    key_groups:
+      - age:
+          - *age_recovery
+          - *age_timber-hearth
+          - *age_solanum

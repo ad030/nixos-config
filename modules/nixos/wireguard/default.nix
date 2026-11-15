@@ -1,40 +1,25 @@
-# shared wireguard config
+# shared wireguard data
 {
   flake.lib.wireguard = {
     subnet = "10.101.0.0/24";
     port = 51820;
-    hub = "attlerock";
+    endpoint = "vpn.4384381.xyz";
 
-    peers = {
-      attlerock = {
-        publicKey = "";
-        tunnelIPs = [ "10.101.0.1" ];
-        endpoint = "";
-      };
+    hub = {
+      name = "attlerock";
+      publicKey = "GChJD1ldH7+QlGMdixbuq3tp0wtEdInyzqiAUI6pBX4=";
+      ip = "10.101.0.1";
+    };
+
+    clients = {
       timber-hearth = {
-        publicKey = "";
-        tunnelIPs = [ "10.101.0.2" ];
-        endpoint = null;
+        publicKey = "MfczO2sBtEDyFIAU1fo+1bsOiG7m8sTW4cQN0Jb+4XA=";
+        ip = "10.101.0.2";
       };
       brittle-hollow = {
-        publicKey = "";
-        tunnelIPs = [ "10.101.0.3" ];
-        endpoint = null;
+        publicKey = "2lmEwMzdoOlXJAQao4dl7yGvj4CcDELY3XY7jM5YbWc=";
+        ip = "10.101.0.3";
       };
     };
   };
-
-  flake.modules.nixos.wireguard =
-    {
-      config,
-      ...
-    }:
-    {
-      networking.firewall.allowedUDPPorts = [ 51820 ];
-
-      networking.wireguard = {
-        enable = true;
-        interfaces.wg0.listenPort = 51820;
-      };
-    };
 }
