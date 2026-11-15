@@ -24,9 +24,17 @@ in
       #   };
       # };
 
-      sops.secrets."acme/porkbun" = {
+      sops.secrets."porkbun/api_key" = {
         sopsFile = "${self}/secrets/api-keys.yaml";
       };
+      sops.secrets."porkbun/secret_api_key" = {
+        sopsFile = "${self}/secrets/api-keys.yaml";
+      };
+
+      sops.templates."acme-porkbun-keys.env".content = ''
+        PORKBUN_API_KEY=${config.sops.placeholder."porkbun/api_key"}
+        PORKBUN_SECRET_API_KEY=${config.sops.placeholder."porkbun/secret_api_key"}
+      '';
 
       security.acme = {
         acceptTerms = true;
@@ -38,7 +46,7 @@ in
           ${domainName} = {
             dnsProvider = "porkbun";
             group = config.services.nginx.group;
-            environmentFile = config.sops.secrets."acme/porkbun".path;
+            environmentFile = config.sops.templates."acme-porkbun-keys.env".path;
             extraDomainNames = [
               "*.${domainName}"
             ];
@@ -48,7 +56,7 @@ in
           "home.${domainName}" = {
             dnsProvider = "porkbun";
             group = config.services.nginx.group;
-            environmentFile = config.sops.secrets."acme/porkbun".path;
+            environmentFile = config.sops.templates."acme-porkbun-keys.env".path;
             extraDomainNames = [
               "*.home.${domainName}"
             ];

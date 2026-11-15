@@ -5,7 +5,7 @@
 }@top:
 let
   serviceName = "ddns-updater";
-  uid = -1;
+  uid = 2055;
 
   # https://hub.docker.com/r/qmcgaw/ddns-updater
   image = "docker.io/qmcgaw/ddns-updater"; # e.g. docker.io/slskd/slskd
@@ -64,8 +64,12 @@ in
 
       systemd.tmpfiles.settings."${serviceName}-config" = { };
 
-      sops.secrets."porkbun/api_key" = { };
-      sops.secrets."porkbun/secret_api_key" = { };
+      sops.secrets."porkbun/api_key" = {
+        sopsFile = "${self}/secrets/api-keys.yaml";
+      };
+      sops.secrets."porkbun/secret_api_key" = {
+        sopsFile = "${self}/secrets/api-keys.yaml";
+      };
 
       sops.templates."ddns-updater.json" = {
         owner = serviceName;
