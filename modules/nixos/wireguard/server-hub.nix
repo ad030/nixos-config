@@ -14,6 +14,8 @@
     let
       wg = top.config.flake.lib.wireguard;
       hostname = config.networking.hostName;
+
+      interfaceName = "wg0";
     in
     {
       imports = [ top.config.flake.modules.nixos.wireguard-common ];
@@ -31,7 +33,7 @@
       networking.wireguard = {
         enable = true;
         interfaces = {
-          wg0 = {
+          ${interfaceName} = {
             ips = [ "${wg.hub.ip}/24" ];
 
             # WireGuard Port
@@ -46,6 +48,18 @@
             }) wg.clients;
           };
         };
+      };
+
+      networking.firewall.interfaces.${interfaceName} = {
+        allowedTCPPorts = [
+          5300
+          80
+          443
+        ];
+        allowedUDPPorts = [
+          5300
+        ];
+
       };
     };
 }
