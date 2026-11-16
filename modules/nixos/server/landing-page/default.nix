@@ -69,8 +69,6 @@ in
 
           forceSSL = true;
           useACMEHost = domain;
-          # sslCertificate = "/etc/nginx/ssl/homelab-domain.pem";
-          # sslCertificateKey = "/etc/nginx/ssl/homelab-domain-key.pem";
         };
       };
     };
