@@ -49,6 +49,8 @@ in
       containers-forgejo
 
       containers-ddns-updater
+
+      containers-llama-cpp
     ])
     # generate shared stub users on this system for each regular user
     # >> NECESSARY FOR NFS PERMISSIONS TO WORK! <<
