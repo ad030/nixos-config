@@ -108,8 +108,9 @@ in
             environment = {
               LLAMA_ARG_PORT = "8080";
               LLAMA_ARG_HOST = "0.0.0.0";
+              LLAMA_ARG_MODELS_DIR = "/models";
             };
-            exec = "-m /models/qwen2.5-1.5b-instruct-q4_k_m.gguf -c 4096 -t 2";
+            exec = "-c 4096 -t 2";
             environmentFile = [ ];
             autoStart = true;
           };
