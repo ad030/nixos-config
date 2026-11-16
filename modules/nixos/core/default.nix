@@ -38,6 +38,8 @@
           defaultEditor = true;
         };
         tmux.enable = true;
+        git.enable = true;
+        bash.enable = true;
       };
 
       environment.systemPackages = with pkgs; [
@@ -53,8 +55,6 @@
 
         wget
         curl
-        git
-        bash
         ripgrep
         python314
         jq
