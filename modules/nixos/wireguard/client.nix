@@ -9,6 +9,7 @@
     {
       config,
       lib,
+      pkgs,
       ...
     }:
     let
@@ -22,6 +23,9 @@
         sopsFile = "${self}/secrets/wireguard/${hostname}.yaml";
         key = "private-key";
       };
+
+      # for dns
+      services.resolved.enable = true;
 
       networking.wireguard = {
         enable = true;
@@ -48,6 +52,12 @@
                 dynamicEndpointRefreshSeconds = 300;
               }
             ];
+
+            # for dns resolution
+            postSetup = ''
+              ${pkgs.systemd}/bin/resolvectl dns wg0 ${toString wg.hub.ip} 
+              ${pkgs.systemd}/bin/resolvectl domain wg0 '~home.${wg.domain}'
+            '';
           };
         };
       };

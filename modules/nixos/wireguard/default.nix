@@ -4,32 +4,38 @@
   ...
 }@top:
 {
-  flake.lib.wireguard = {
-    subnet = "10.100.0.0/24";
-    port = 51820;
-    endpoint = "vpn.4384381.xyz";
+  flake.lib.wireguard =
+    let
+      domain = "4384381.xyz";
+    in
+    {
+      subnet = "10.100.0.0/24";
+      port = 51820;
 
-    hub = {
-      name = "attlerock";
-      publicKey = "GChJD1ldH7+QlGMdixbuq3tp0wtEdInyzqiAUI6pBX4=";
-      ip = "10.100.0.1";
-    };
+      inherit domain;
+      endpoint = "vpn.${domain}";
 
-    clients = {
-      timber-hearth = {
-        publicKey = "MfczO2sBtEDyFIAU1fo+1bsOiG7m8sTW4cQN0Jb+4XA=";
-        ip = "10.100.0.2";
+      hub = {
+        name = "attlerock";
+        publicKey = "GChJD1ldH7+QlGMdixbuq3tp0wtEdInyzqiAUI6pBX4=";
+        ip = "10.100.0.1";
       };
-      brittle-hollow = {
-        publicKey = "2lmEwMzdoOlXJAQao4dl7yGvj4CcDELY3XY7jM5YbWc=";
-        ip = "10.100.0.3";
-      };
-      phone-s23 = {
-        publicKey = "H8eernH23Y6yMerA7GZP+WhbeRYQHR+i3xRu2suB7j8=";
-        ip = "10.100.0.4";
+
+      clients = {
+        timber-hearth = {
+          publicKey = "MfczO2sBtEDyFIAU1fo+1bsOiG7m8sTW4cQN0Jb+4XA=";
+          ip = "10.100.0.2";
+        };
+        brittle-hollow = {
+          publicKey = "2lmEwMzdoOlXJAQao4dl7yGvj4CcDELY3XY7jM5YbWc=";
+          ip = "10.100.0.3";
+        };
+        phone-s23 = {
+          publicKey = "H8eernH23Y6yMerA7GZP+WhbeRYQHR+i3xRu2suB7j8=";
+          ip = "10.100.0.4";
+        };
       };
     };
-  };
 
   flake.modules.nixos.wireguard-common =
     {
