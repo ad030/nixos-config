@@ -16,6 +16,10 @@ let
   subdomain = "llama.${domain}";
   webPort = "9931";
   backend = "http://127.0.0.1:${webPort}";
+
+  directories = {
+    models = "/srv/ai-models";
+  };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -62,7 +66,13 @@ in
         };
       };
 
-      systemd.tmpfiles.settings."${serviceName}-config" = { };
+      systemd.tmpfiles.settings."${serviceName}-config" = {
+        "${directories.models}".d = {
+          user = serviceName;
+          group = serviceName;
+          mode = "2775";
+        };
+      };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -93,10 +103,11 @@ in
               "127.0.0.1:${webPort}:8080"
             ];
             volumes = [
-              "${config.xdg.dataHome}/${serviceName}:/models" # service configuration
+              "${directories.models}:/models" # service configuration
             ];
             environment = {
               LLAMA_ARG_PORT = "8080";
+              LLAMA_ARG_HOST = "0.0.0.0";
             };
             environmentFile = [ ];
             autoStart = true;

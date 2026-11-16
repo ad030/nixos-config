@@ -16,6 +16,8 @@ let
   subdomain = ".${domain}";
   webPort = "";
   backend = "http://127.0.0.1:${webPort}";
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
