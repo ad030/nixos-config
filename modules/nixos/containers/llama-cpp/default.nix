@@ -103,7 +103,7 @@ in
               "127.0.0.1:${webPort}:8080"
             ];
             volumes = [
-              "${directories.models}:/models" # service configuration
+              "${directories.models}:/models:ro"
             ];
             environment = {
               LLAMA_ARG_PORT = "8080";
