@@ -27,8 +27,9 @@
         filesystem
         power-management
         printing
-        tailscale
         home-manager
+
+        # tailscale
       ];
 
       programs = {
