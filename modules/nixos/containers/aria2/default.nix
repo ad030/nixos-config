@@ -66,7 +66,7 @@ in
               proxyPass = "http://127.0.0.1:6800/jsonrpc";
               recommendedProxySettings = true;
               proxyWebsockets = true;
-              extraConfig = auth.appendProtect "";
+              # extraConfig = auth.appendProtect "";
             };
             "/tinyauth" = auth.locationConfig;
           };
