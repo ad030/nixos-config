@@ -28,6 +28,10 @@ in
     let
       auth = top.config.flake.lib.nginx-tinyauth;
 
+      # requires networking.interfaces.<name> to be set
+      # but setting a static ip requires you to set networking.interfaces.<name>.ipv4.addresses anyway
+      # probably shouldn't be using this dns server without a static ip
+      # so this is a reasonable assumption
       interfaces = {
         lan = builtins.attrNames config.networking.interfaces;
         wg = builtins.attrNames config.networking.wireguard.interfaces;
