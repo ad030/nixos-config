@@ -129,6 +129,8 @@ in
               PGID = toString osConfig.users.groups.${serviceName}.gid;
               DOMAIN = "http://${subdomain}";
               ARIA2_EXTERNAL_PORT = "443";
+              ENABLE_FILEBROWSER = "false";
+              ENABLE_RCLONE = "false";
             };
             environmentFile = [
               # contains RPC_SECRET, ARIA2_USER, ARIA2_PASSWORD
