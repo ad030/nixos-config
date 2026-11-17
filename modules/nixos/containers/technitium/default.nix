@@ -16,12 +16,22 @@ let
   subdomain = "technitium.${domain}";
   webPort = "5380";
   backend = "http://127.0.0.1:${webPort}";
+
+  ports = {
+    web = 5380;
+    dns = 5300;
+  };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
     let
       auth = top.config.flake.lib.nginx-tinyauth;
+
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
     in
     {
       imports = with top.config.flake.modules.nixos; [
@@ -60,29 +70,27 @@ in
       };
 
       networking.firewall = {
-        allowedTCPPorts = [
-          5300
-        ];
-        allowedUDPPorts = [
-          5300
-        ];
+        interfaces = lib.genAttrs (interfaces.lan ++ interfaces.wg) (_: {
+          allowedTCPPorts = [ ports.dns ];
+          allowedUDPPorts = [ ports.dns ];
+        });
       };
 
-      # redirect port 53 traffic to unprivileged 5353
+      # redirect port 53 traffic to unprivileged 5300
       networking.nftables.tables = {
         "dns-redirect" = {
           family = "inet";
           content = ''
             chain prerouting {
               type nat hook prerouting priority -100; policy accept;
-              fib daddr type local tcp dport 53 redirect to :5300
-              fib daddr type local udp dport 53 redirect to :5300
+              fib daddr type local tcp dport 53 redirect to :${toString ports.dns}
+              fib daddr type local udp dport 53 redirect to :${toString ports.dns}
             }
 
             chain output {
               type nat hook output priority -100; policy accept;
-              fib daddr type local tcp dport 53 redirect to :5300
-              fib daddr type local udp dport 53 redirect to :5300
+              fib daddr type local tcp dport 53 redirect to :${toString ports.dns}
+              fib daddr type local udp dport 53 redirect to :${toString ports.dns}
             }
           '';
         };
@@ -93,10 +101,10 @@ in
         owner = serviceName;
       };
 
-      services.resolved = {
-        # needs to be set in order to access port 53
-        settings.Resolve.DNSStubListener = "no";
-      };
+      # services.resolved = {
+      #   # needs to be set in order to access port 53
+      #   settings.Resolve.DNSStubListener = "no";
+      # };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -124,9 +132,9 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "5300:53/tcp"
-              "5300:53/udp"
-              "127.0.0.1:5380:5380/tcp"
+              "${toString ports.dns}:53/tcp"
+              "${toString ports.dns}:53/udp"
+              "127.0.0.1:${toString ports.web}:5380/tcp"
               "127.0.0.1:53443:53443/tcp"
             ];
             volumes = [
