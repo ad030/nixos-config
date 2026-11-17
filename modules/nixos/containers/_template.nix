@@ -56,7 +56,9 @@ in
             "/" = {
               proxyPass = backend;
               recommendedProxySettings = true;
+              # extraConfig = auth.appendProtect "";
             };
+            # "/tinyauth" = auth.locationConfig;
           };
 
           forceSSL = true;
