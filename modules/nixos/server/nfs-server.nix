@@ -9,13 +9,18 @@
         mountd = {
           manage-gids = true;
         };
+
+        nfsd = {
+          vers3 = false;
+          vers4 = true;
+        };
       };
     };
 
-    networking.firewall.allowedTCPPorts = [
-      111
-      2049
-    ];
+    # open only for wireguard interface
+    networking.firewall.interfaces = {
+      wg0.allowedTCPPorts = [ 2049 ];
+    };
 
     systemd.tmpfiles.settings."nfs-server" = {
       "/export".d = {

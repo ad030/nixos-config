@@ -13,6 +13,9 @@
       };
     };
 
-    networking.firewall.allowedTCPPorts = [ 22 ];
+    # open only for wireguard interface
+    networking.firewall.interfaces = {
+      wg0.allowedTCPPorts = [ 22 ];
+    };
   };
 }
