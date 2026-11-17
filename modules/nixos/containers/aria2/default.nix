@@ -63,7 +63,7 @@ in
               extraConfig = auth.appendProtect "";
             };
             "/jsonrpc" = {
-              proxyPass = "http://127.0.0.1:6800/jsonrpc";
+              proxyPass = "${backend}/jsonrpc";
               recommendedProxySettings = true;
               proxyWebsockets = true;
               # extraConfig = auth.appendProtect "";
@@ -114,11 +114,11 @@ in
         containers = {
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
-            user = "0:0";
-            userNS = "keep-id";
+            # user = "0:0";
+            # userNS = "keep-id";
             ports = [
               "127.0.0.1:${webPort}:80"
-              "127.0.0.1:6800:6800"
+              # "127.0.0.1:6800:6800"
             ];
             volumes = [
               "${directories.downloads}:/data"
