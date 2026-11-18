@@ -116,33 +116,8 @@ in
       ...
     }:
     let
-      # need to do this in order to set up webhooks declaratively
-      # following the nixpkgs config
-      # https://github.com/nixos/nixpkgs/blob/master/nixos/modules/services/web-apps/slskd.nix
-      settingsFormat = pkgs.formats.yaml { };
-      configurationYaml = settingsFormat.generate "slskd.yml" {
-        integrations = {
-          webhooks = {
-            message_webhook = {
-              on = [ "PrivateMessageReceived" ];
-              call = {
-                url = "https://ntfy.${domain}/slskd-message";
-                headers = [
-                  {
-                    name = "Title";
-                    value = "slskd: New message";
-                  }
-                  {
-                    name = "Priority";
-                    value = "default";
-                  }
-                ];
-                ignore_certificate_errors = true;
-              };
-            };
-          };
-        };
-      };
+      configurationYaml = import ./_slskd-yml.nix { inherit pkgs domain; };
+      # configurationYaml = ./slskd.yml;
     in
     {
       home.username = serviceName;
