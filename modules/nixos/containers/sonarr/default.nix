@@ -14,8 +14,11 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "sonarr.${domain}";
-  webPort = "8989";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8989;
+  };
 
   directories = {
     shows = "/srv/media/tank/Shows";
@@ -30,6 +33,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -110,7 +117,7 @@ in
               "${directories.shows}:/media/shows"
             ];
             ports = [
-              "127.0.0.1:8989:8989/tcp"
+              "127.0.0.1:${toString ports.web}:8989/tcp"
             ];
             environmentFile = [
               "${osConfig.sops.secrets."sonarr/env".path}"

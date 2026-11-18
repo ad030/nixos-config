@@ -14,13 +14,22 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "vaultwarden.${domain}";
-  webPort = "8222";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8222;
+  };
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -89,7 +98,7 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "127.0.0.1:8222:80/tcp"
+              "127.0.0.1:${toString ports.web}:80/tcp"
             ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/data"

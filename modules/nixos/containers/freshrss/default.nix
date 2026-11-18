@@ -14,8 +14,13 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "freshrss.${domain}";
-  webPort = "8085";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8085;
+  };
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -26,6 +31,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -61,7 +70,7 @@ in
 
             # exempt from auth protection
             "/api" = {
-              proxyPass = "http://127.0.0.1:${webPort}";
+              proxyPass = "http://127.0.0.1:${toString ports.web}";
               recommendedProxySettings = true;
             };
           };
@@ -121,7 +130,7 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "127.0.0.1:8085:80/tcp"
+              "127.0.0.1:${toString ports.web}:80/tcp"
               # "8085:80/tcp"
             ];
             volumes = [

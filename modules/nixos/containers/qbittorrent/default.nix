@@ -14,8 +14,12 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "qbittorrent.${domain}";
-  webPort = "8090";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8090;
+    torrent = 6881;
+  };
 
   directories = {
     downloadsIncomplete = "/srv/downloads/qbittorrent";
@@ -32,6 +36,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -93,7 +101,10 @@ in
 
       networking.firewall = {
         allowedTCPPorts = [
-          8090
+          ports.torrent
+        ];
+        allowedUDPPorts = [
+          ports.torrent
         ];
       };
     };
@@ -131,18 +142,18 @@ in
               "${directories.backupsTorrent}:/torrent-files"
             ];
             ports = [
-              # "127.0.0.1:${webPort}:${webPort}/tcp"
-              "${webPort}:${webPort}/tcp"
+              "127.0.0.1:${toString ports.web}:8080/tcp"
+              # "${toString ports.web}:8080/tcp"
 
-              "6881:6881/tcp"
-              "6881:6881/udp"
+              "${toString ports.torrent}:6881/tcp"
+              "${toString ports.torrent}:6881/udp"
             ];
             environment = {
               PUID = "${toString osConfig.users.users.${serviceName}.uid}";
               PGID = "${toString osConfig.users.groups.media.gid}";
               # LEGAL_NOTICE = "confirm";
               TORRENTING_PORT = "6881";
-              WEBUI_PORT = webPort;
+              WEBUI_PORT = "8080";
               TZ = "America/New_York";
             };
             autoStart = true;

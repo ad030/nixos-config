@@ -14,20 +14,19 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "technitium.${domain}";
-  webPort = "5380";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
 
   ports = {
     web = 5380;
     dns = 5300;
   };
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
     { config, lib, ... }:
     let
-      auth = top.config.flake.lib.nginx-tinyauth;
-
       # requires networking.interfaces.<name> to be set
       # but setting a static ip requires you to set networking.interfaces.<name>.ipv4.addresses anyway
       # probably shouldn't be using this dns server without a static ip
@@ -36,6 +35,9 @@ in
         lan = builtins.attrNames config.networking.interfaces;
         wg = builtins.attrNames config.networking.wireguard.interfaces;
       };
+
+      auth = top.config.flake.lib.nginx-tinyauth;
+
     in
     {
       imports = with top.config.flake.modules.nixos; [

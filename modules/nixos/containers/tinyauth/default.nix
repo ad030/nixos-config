@@ -14,8 +14,13 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "tinyauth.${domain}";
-  webPort = "3000";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 3000;
+  };
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -26,6 +31,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -94,7 +103,7 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "127.0.0.1:${webPort}:3000"
+              "127.0.0.1:${toString ports.web}:3000"
             ];
             volumes = [
             ];

@@ -14,8 +14,11 @@ let
 
   domain = ""; # base domain
   subdomain = ".${domain}";
-  webPort = "";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = -1;
+  };
 
   directories = { };
 in
@@ -28,6 +31,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -67,6 +74,16 @@ in
       };
 
       systemd.tmpfiles.settings."${serviceName}-config" = { };
+
+      # open ports to lan and wireguard interfaces
+      networking.firewall = {
+        allowedTCPPorts = [ ];
+        allowedUDPPorts = [ ];
+        interfaces = lib.genAttrs (interfaces.lan ++ interfaces.wg) (_: {
+          allowedTCPPorts = [ ];
+          allowedUDPPorts = [ ];
+        });
+      };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =

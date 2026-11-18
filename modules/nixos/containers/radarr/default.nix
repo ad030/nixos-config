@@ -14,8 +14,11 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "radarr.${domain}";
-  webPort = "7878";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 7878;
+  };
 
   directories = {
     movies = "/srv/media/tank/Movies";
@@ -30,6 +33,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -110,7 +117,7 @@ in
               "${directories.movies}:/media/movies"
             ];
             ports = [
-              "127.0.0.1:7878:7878/tcp"
+              "127.0.0.1:${toString ports.web}:7878/tcp"
             ];
             environmentFile = [
               "${osConfig.sops.secrets."radarr/env".path}"

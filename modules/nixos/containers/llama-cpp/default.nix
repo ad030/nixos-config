@@ -14,8 +14,11 @@ let
 
   domain = "home.4384381.xyz"; # base domain
   subdomain = "llama.${domain}";
-  webPort = "9931";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 9931;
+  };
 
   directories = {
     models = "/srv/ai-models";
@@ -30,6 +33,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -102,7 +109,7 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "127.0.0.1:${webPort}:8080"
+              "127.0.0.1:${toString ports.web}:8080"
             ];
             volumes = [
               "${directories.models}:/models:ro"

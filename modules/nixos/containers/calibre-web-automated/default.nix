@@ -15,8 +15,11 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "calibre.${domain}";
-  webPort = "8083";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8083;
+  };
 
   directories = {
     library = "/srv/media/tank/Books/calibre-library";
@@ -32,6 +35,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -111,7 +118,7 @@ in
               "${directories.ingest}:/cwa-book-ingest"
             ];
             ports = [
-              "127.0.0.1:8083:8083/tcp"
+              "127.0.0.1:${toString ports.web}:8083/tcp"
             ];
             environment = {
               PUID = "0";

@@ -14,8 +14,12 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "slskd.${domain}";
-  webPort = "5030";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 5030;
+    soulseek = 50300;
+  };
 
   directories = {
     music = "/srv/media/tank/Music/Music";
@@ -32,6 +36,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -91,9 +99,12 @@ in
         owner = serviceName;
       };
 
-      networking.firewall.allowedTCPPorts = [
-        50300
-      ];
+      networking.firewall = {
+        allowedTCPPorts = [
+          ports.soulseek
+        ];
+        allowedUDPPorts = [ ];
+      };
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -158,8 +169,8 @@ in
               "${directories.completeDownloads}:/downloads/complete"
             ];
             ports = [
-              "127.0.0.1:5030:5030/tcp"
-              "50300:50300/tcp"
+              "127.0.0.1:${toString ports.web}:5030/tcp"
+              "${toString ports.soulseek}:50300/tcp"
             ];
             environmentFile = [
               "${osConfig.sops.secrets."slskd/env".path}"

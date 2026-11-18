@@ -14,8 +14,11 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "jellyfin.${domain}";
-  webPort = "8096";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8096;
+  };
 
   directories = {
     movies = "/srv/media/tank/Movies";
@@ -31,6 +34,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -75,9 +82,12 @@ in
 
       hardware.graphics.enable = true;
 
-      networking.firewall = {
-        allowedTCPPorts = [ 8096 ];
-      };
+      networking.firewall.interfaces = lib.genAttrs (interfaces.lan ++ interfaces.wg) (_: {
+        allowedTCPPorts = [
+          ports.web
+        ];
+        allowedUDPPorts = [ ];
+      });
     };
 
   flake.modules.homeManager."containers-${serviceName}" =
@@ -104,7 +114,7 @@ in
           ${serviceName} = {
             image = "${image}:${tag}@${digest}";
             ports = [
-              "8096:8096/tcp"
+              "${toString ports.web}:8096/tcp"
             ];
             volumes = [
               "${config.xdg.dataHome}/${serviceName}:/config:rw"

@@ -15,8 +15,14 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "forgejo.${domain}";
-  webPort = "8094";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8094;
+    sshUnprivileged = 2222;
+  };
+
+  directories = { };
 in
 {
   flake.modules.nixos."containers-${serviceName}" =
@@ -27,6 +33,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -65,9 +75,12 @@ in
         };
       };
 
-      networking.firewall.allowedTCPPorts = [
-        2222
-      ];
+      networking.firewall.interfaces = lib.genAttrs (interfaces.lan ++ interfaces.wg) (_: {
+        allowedTCPPorts = [
+          ports.sshUnprivileged
+        ];
+        allowedUDPPorts = [ ];
+      });
 
     };
 
@@ -102,8 +115,8 @@ in
               "/etc/localtime:/etc/localtime:ro"
             ];
             ports = [
-              "127.0.0.1:${webPort}:3000/tcp"
-              "2222:2222/tcp"
+              "127.0.0.1:${toString ports.web}:3000/tcp"
+              "${toString ports.sshUnprivileged}:2222/tcp"
             ];
             environment = {
               USER_UID = 1000;

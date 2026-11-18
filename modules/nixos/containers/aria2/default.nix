@@ -15,8 +15,11 @@ let
 
   domain = "home.4384381.xyz";
   subdomain = "aria2.${domain}";
-  webPort = "8098";
-  backend = "http://127.0.0.1:${webPort}";
+  backend = "http://127.0.0.1:${toString ports.web}";
+
+  ports = {
+    web = 8098;
+  };
 
   directories = {
     downloads = "/srv/media/tank/Downloads/aria2";
@@ -31,6 +34,10 @@ in
       ...
     }:
     let
+      interfaces = {
+        lan = builtins.attrNames config.networking.interfaces;
+        wg = builtins.attrNames config.networking.wireguard.interfaces;
+      };
       auth = top.config.flake.lib.nginx-tinyauth;
     in
     {
@@ -117,7 +124,7 @@ in
             # user = "0:0";
             # userNS = "keep-id";
             ports = [
-              "127.0.0.1:${webPort}:80"
+              "127.0.0.1:${toString ports.web}:80"
               # "127.0.0.1:6800:6800"
             ];
             volumes = [
