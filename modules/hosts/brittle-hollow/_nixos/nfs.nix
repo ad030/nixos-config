@@ -7,10 +7,10 @@
 
 {
   boot.supportedFilesystems = [ "nfs" ];
-  services.rpcbind.enable = true;
+  # services.rpcbind.enable = true;
 
   fileSystems."/mnt/tank" = {
-    device = "192.168.8.201:/tank";
+    device = "10.100.0.1:/tank";
     fsType = "nfs";
     options = [
       "defaults"
