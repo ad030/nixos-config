@@ -12,8 +12,6 @@
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
 
-        open-sans
-
         # nerd fonts
         nerd-fonts.noto
         nerd-fonts.fira-mono
