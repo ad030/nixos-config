@@ -61,7 +61,7 @@ in
         gaming
         art
 
-        plasma-oxygen
+        # plasma-oxygen
 
         nemo
       ];
